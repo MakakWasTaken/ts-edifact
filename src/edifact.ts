@@ -1982,7 +1982,7 @@ export class MarketSalesChannelInformation implements Segment {
     constructor(data: ResultType) {
         this.marketSaleChannelIdentificationCodeQualifier = data.elements[0][0];
         this.marketSaleChannelSalesDetails = new MarketSalesChannelDetails(data.elements[1]);
-        this.marketSaleChannelActionRequestNotificationDescriptionCode = data.elements[2][0];
+        this.marketSaleChannelActionRequestNotificationDescriptionCode = data.elements[2]?.[0];
     }
 }
 
