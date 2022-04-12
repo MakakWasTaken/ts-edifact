@@ -111,6 +111,8 @@ export function toSegmentObject(data: ResultType, version: string, decimalSepara
             return new LocationIdentification(data);
         case "MEA":
             return new Measurements(data);
+        case "MKS":
+            return new MarketSalesChannelInformation(data);
         case "MOA":
             return new MonetaryAmount(data, decimalSeparator);
         case "MTD":
@@ -1951,6 +1953,36 @@ export class Measurements implements Segment {
         if (data.elements.length > 3) {
             this.surfaceOrLayerCode = data.elements[3][0];
         }
+    }
+}
+
+// MKS
+
+class MarketSalesChannelDetails {
+
+    salesChannelIdentifier: string | undefined;
+    codeListIdentificationCode: string | undefined;
+    codeListResponsibleAgencyCode: string | undefined;
+
+    constructor (data: string[]) {
+        this.salesChannelIdentifier = data[0];
+        this.codeListIdentificationCode = data[1];
+        this.codeListResponsibleAgencyCode = data[2];
+    }
+}
+
+export class MarketSalesChannelInformation implements Segment {
+
+    tag = "MKS";
+
+    marketSaleChannelIdentificationCodeQualifier: string | undefined;
+    marketSaleChannelSalesDetails: MarketSalesChannelDetails | undefined;
+    marketSaleChannelActionRequestNotificationDescriptionCode: string | undefined;
+
+    constructor(data: ResultType) {
+        this.marketSaleChannelIdentificationCodeQualifier = data.elements[0][0];
+        this.marketSaleChannelSalesDetails = new MarketSalesChannelDetails(data.elements[1]);
+        this.marketSaleChannelActionRequestNotificationDescriptionCode = data.elements[2][0];
     }
 }
 
