@@ -2557,26 +2557,20 @@ export class PaymentTerms implements Segment {
 
 // QTY
 
-class QuantityDetails {
-    quantityTypeCodeQualifier: string;
-    quantity: string;
-    measurementUnitCode: string | undefined;
-
-    constructor(data: string[]) {
-        this.quantityTypeCodeQualifier = data[0];
-        this.quantity = data[1];
-        this.measurementUnitCode = data[2];
-    }
-}
-
 export class Quantity implements Segment {
 
     tag = "QTY";
 
-    quantityDetails: QuantityDetails;
+    quantityTypeCodeQualifier: string;
+    quantity: string;
+    measurementUnitCode: string | undefined;
 
     constructor(data: ResultType) {
-        this.quantityDetails = new QuantityDetails(data.elements[0]);
+        const elements = data.elements[0];
+
+        this.quantityTypeCodeQualifier = elements[0];
+        this.quantity = elements[1];
+        this.measurementUnitCode = elements[2];
     }
 }
 

@@ -3,9 +3,6 @@
       "description": "Edifact parser library",
       "version": "0.0.14",
       "type": "commonjs",
-      "engines": {
-            "vscode": "^1.51.0"
-      },
       "main": "lib/index.js",
       "types": "lib/index.d.ts",
       "keywords": [
@@ -54,13 +51,14 @@
             "@types/node": "^16.7.10",
             "@typescript-eslint/eslint-plugin": "^4.30.0",
             "@typescript-eslint/parser": "^4.30.0",
+            "domhandler": "^5.0.2",
             "edifact": "^1.2.8",
             "eslint": "^7.32.0",
             "eslint-plugin-import": "^2.22.0",
             "eslint-plugin-jsdoc": "^36.0.8",
             "events": "^3.1.0",
             "glob-parent": "^6.0.1",
-            "htmlparser2": "^7.1.1",
+            "htmlparser2": "^7.2.0",
             "inspect-brk": "^0.1.2",
             "jasmine": "^3.5.0",
             "jasmine-core": "^3.9.0",
