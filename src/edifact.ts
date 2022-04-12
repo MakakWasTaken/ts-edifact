@@ -2648,7 +2648,9 @@ export class RequirementsAndConditions implements Segment {
 
 // RFF
 
-class ReferenceData {
+export class Reference implements Segment {
+
+    tag = "RFF";
 
     referenceCodeQualifier: string;
     referenceIdentifier: string | undefined;
@@ -2656,23 +2658,12 @@ class ReferenceData {
     referenceVersionIdentifier: string | undefined;
     revisionIdentifier: string | undefined;
 
-    constructor(data: string[]) {
-        this.referenceCodeQualifier = data[0];
-        this.referenceIdentifier = data[1];
-        this.documentLineIdentifier = data[2];
-        this.referenceVersionIdentifier = data[3];
-        this.revisionIdentifier = data[4];
-    }
-}
-
-export class Reference implements Segment {
-
-    tag = "RFF";
-
-    reference: ReferenceData;
-
     constructor(data: ResultType) {
-        this.reference = new ReferenceData(data.elements[0]);
+        this.referenceCodeQualifier = data.elements[0][0];
+        this.referenceIdentifier = data.elements[0][1];
+        this.documentLineIdentifier = data.elements[0][2];
+        this.referenceVersionIdentifier = data.elements[0][3];
+        this.revisionIdentifier = data.elements[0][4];
     }
 }
 
