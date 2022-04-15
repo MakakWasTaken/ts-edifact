@@ -74,7 +74,7 @@ export class UNECEStructurePageParser extends UNECEPageParser {
     protected setupHandler(): UNECEDomHandler {
         const helper: UNECEDomHandler = super.setupHandler();
 
-        let index: number = 0;
+        let index = 0;
         const stack: MessageType[][] = [];
         const resetStack = () => {
             for (; index > 0; index--) {
@@ -82,7 +82,7 @@ export class UNECEStructurePageParser extends UNECEPageParser {
             }
         };
 
-        let isSegmentGroupEnd: boolean = false;
+        let isSegmentGroupEnd = false;
         let section: string | undefined;
         let name: string;
 
@@ -119,7 +119,7 @@ export class UNECEStructurePageParser extends UNECEPageParser {
                         const level: number = this.parseSegmentGroupLevel(text);
                         const delta: number = level - index;
                         if (delta <= 0) {
-                            for (let i: number = 0; i < (delta * -1 + 1); i++) {
+                            for (let i = 0; i < (delta * -1 + 1); i++) {
                                 stack.pop();
                                 index--;
                             }
@@ -195,7 +195,7 @@ export class UNECEStructurePageParser extends UNECEPageParser {
     }
 
     private parseSegmentGroup(section: string | undefined, descriptionString: string): MessageType {
-        const regex: RegExp = /^.* (Segment group \d*).*\s*([M|C])\s*(\d*).*/g;
+        const regex = /^.* (Segment group \d*).*\s*([M|C])\s*(\d*).*/g;
         const matches: RegExpExecArray | null = regex.exec(descriptionString);
         if (!matches) {
             throw new Error('Invalid segment description string');
@@ -216,7 +216,7 @@ export class UNECEStructurePageParser extends UNECEPageParser {
     }
 
     private parseSegment(name: string, section: string | undefined, descriptionString: string): MessageType {
-        const regex: RegExp = /^([a-zA-Z /\\-]*)\s*?([M|C])\s*?([0-9]*?)([^0-9]*)$/g;
+        const regex = /^([a-zA-Z /\\-]*)\s*?([M|C])\s*?([0-9]*?)([^0-9]*)$/g;
         const matches: RegExpExecArray | null = regex.exec(descriptionString);
         if (!matches) {
             throw new Error(`${name}: Invalid segment description string: ${descriptionString}`);
@@ -235,7 +235,7 @@ export class UNECEStructurePageParser extends UNECEPageParser {
     }
 
     private parseSegmentGroupLevel(descriptionString: string): number {
-        const regex: RegExp = /^.*[0-9]+([^0-9]*)$/g;
+        const regex = /^.*[0-9]+([^0-9]*)$/g;
         const matches: RegExpExecArray | null = regex.exec(descriptionString);
         if (!matches) {
             throw new Error('Invalid segment description string');
@@ -243,7 +243,7 @@ export class UNECEStructurePageParser extends UNECEPageParser {
 
         // Create the "level string" by reversing the segment group description.
         const levelString: string = Array.from(matches[1]).reverse().join('');
-        let normalization: number = 0;
+        let normalization = 0;
 
         // In some message type specifications the segment group description
         // ends with LF and sometimes with CRLF.
@@ -258,7 +258,7 @@ export class UNECEStructurePageParser extends UNECEPageParser {
     }
 
     private isSegmentGroupEnd(descriptionString: string): boolean {
-        const regex: RegExp = /\d+�+/g;
+        const regex = /\d+�+/g;
         return !!regex.exec(descriptionString);
     }
 

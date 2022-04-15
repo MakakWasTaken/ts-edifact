@@ -160,13 +160,13 @@ export class ValidatorImpl implements Validator {
     private element: ElementEntry | undefined = undefined;
     private component: FormatType | undefined = undefined;
 
-    private required: number = 0;
-    private minimum: number = 0;
-    private maximum: number = 0;
+    private required = 0;
+    private minimum = 0;
+    private maximum = 0;
 
     private throwOnMissingDefinitions: boolean;
 
-    constructor(throwOnMissingDefinitions: boolean = false) {
+    constructor(throwOnMissingDefinitions = false) {
         this.state = ValidatorStates.ALL;
         this.throwOnMissingDefinitions = throwOnMissingDefinitions;
     }
@@ -210,8 +210,8 @@ export class ValidatorImpl implements Validator {
             if ((parts = /^(a|an|n)(\.\.)?([1-9][0-9]*)?$/.exec(formatString))) {
                 const max: number = parseInt(parts[3]);
                 const min: number = parts[2] === ".." ? 0 : max;
-                let alpha: boolean = false;
-                let numeric: boolean = false;
+                let alpha = false;
+                let numeric = false;
                 switch (parts[1]) {
                     case "a":
                         alpha = true;
@@ -446,7 +446,7 @@ export class ValidatorImpl implements Validator {
             let start: string = type + " " + name;
             let end: string;
 
-            let length: number = 0;
+            let length = 0;
             if (type === "Segment") {
                 array = "elements";
                 const entry: SegmentEntry = definition as SegmentEntry;
@@ -466,11 +466,11 @@ export class ValidatorImpl implements Validator {
             return new Error(start + ` got ${count} ` + array + end);
         },
         missingElementStart: function(segment: string): Error {
-            const message: string = `Active open element expected on segment ${segment}`;
+            const message = `Active open element expected on segment ${segment}`;
             return new Error(message);
         },
         missingElementDefinition: function(element: string): Error {
-            const message: string = `No definition found for element ${element}`;
+            const message = `No definition found for element ${element}`;
             return new Error(message);
         },
         missingSegmentStart: function(segment?: string, throwOnMissingDefinitions?: boolean): Error | undefined {
