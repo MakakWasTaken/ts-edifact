@@ -63,7 +63,6 @@ export {
 } from './edi/messageStructureParser';
 
 export { SegmentTableBuilder } from './segments';
-export { ElementTableBuilder } from './elements';
 
 // default D01B message specifications
 

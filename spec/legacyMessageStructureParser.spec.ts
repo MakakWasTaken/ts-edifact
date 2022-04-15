@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 /**
  * @author Stefan Partheymüller
  * @copyright 2021 Stefan Partheymüller
@@ -20,13 +21,16 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 
-import { readFileSync } from "fs";
-import { join } from "path";
+import { readFileSync } from 'fs';
+import { join } from 'path';
 
-import { UNECELegacyMessageStructureParser } from "../src/edi/legacyMessageStructureParser";
-import { EdifactMessageSpecificationImpl, EdifactMessageSpecification } from "../src/edi/messageStructureParser";
-import { MessageType } from "../src/tracker";
-import { Dictionary, ElementEntry, SegmentEntry } from "../src/validator";
+import { UNECELegacyMessageStructureParser } from '../src/edi/legacyMessageStructureParser';
+import {
+    EdifactMessageSpecificationImpl,
+    EdifactMessageSpecification
+} from '../src/edi/messageStructureParser';
+import { MessageType } from '../src/tracker';
+import { Dictionary, SegmentEntry } from '../src/validator';
 
 const D99A_INVOIC_METADATA_PAGE = `
 <HTML><PRE><body bgcolor=ffffff><TITLE>UNTDID - D.99A - Message INVOIC</title>
@@ -81,30 +85,47 @@ SOURCE: Joint Rapporteurs Message Design Group JM2
 </html>
 `;
 
-const D99A_INVOIC_STRUCTURE_PAGE: string =
-    readFileSync(join(__dirname, 'data', 'd99a_invoic_s.html'), 'utf-8');
-const D99A_APERAK_STRUCTURE_PAGE: string =
-    readFileSync(join(__dirname, 'data', 'd99a_aperak_s.html'), 'utf-8');
-const D96A_ORDERS_STRUCTURE_PAGE: string =
-    readFileSync(join(__dirname, 'data', 'd96a_orders_s.html'), 'utf-8');
+const D99A_INVOIC_STRUCTURE_PAGE: string = readFileSync(
+    join(__dirname, 'data', 'd99a_invoic_s.html'),
+    'utf-8'
+);
+const D99A_APERAK_STRUCTURE_PAGE: string = readFileSync(
+    join(__dirname, 'data', 'd99a_aperak_s.html'),
+    'utf-8'
+);
+const D96A_ORDERS_STRUCTURE_PAGE: string = readFileSync(
+    join(__dirname, 'data', 'd96a_orders_s.html'),
+    'utf-8'
+);
 
 describe('UNECELegacyMessageStructureParser', () => {
-
     let sut: UNECELegacyMessageStructureParser;
 
     const expectedBGMEntry: MessageType = {
-        content: "BGM",
+        content: 'BGM',
         mandatory: true,
         repetition: 1,
         data: undefined,
-        section: "header"
+        section: 'header'
     };
 
     const expectedSegmentGroup27Entry: MessageType = {
-        name: "Segment group 27",
+        name: 'Segment group 27',
         content: [
-            { content: "MOA", mandatory: true, repetition: 1, data: undefined, section: undefined },
-            { content: "CUX", mandatory: false, repetition: 1, data: undefined, section: undefined }
+            {
+                content: 'MOA',
+                mandatory: true,
+                repetition: 1,
+                data: undefined,
+                section: undefined
+            },
+            {
+                content: 'CUX',
+                mandatory: false,
+                repetition: 1,
+                data: undefined,
+                section: undefined
+            }
         ],
         mandatory: false,
         repetition: 99,
@@ -113,11 +134,11 @@ describe('UNECELegacyMessageStructureParser', () => {
     };
 
     const expectedUNSEntry: MessageType = {
-        content: "UNS",
+        content: 'UNS',
         mandatory: true,
         repetition: 1,
         data: undefined,
-        section: "summary"
+        section: 'summary'
     };
 
     beforeAll(() => {
@@ -125,61 +146,120 @@ describe('UNECELegacyMessageStructureParser', () => {
     });
 
     describe('parseMetaDataPage', () => {
-
-        it("should extract meta data correctly from D99A INVOIC meta data page", () => {
+        it('should extract meta data correctly from D99A INVOIC meta data page', () => {
             const expectedSpec: EdifactMessageSpecificationImpl =
                 new EdifactMessageSpecificationImpl('INVOIC', 'D', '99A', 'UN');
 
             // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-            const spec: EdifactMessageSpecificationImpl = (sut as any).parseMetaDataPage(D99A_INVOIC_METADATA_PAGE);
+            const spec: EdifactMessageSpecificationImpl = (
+                sut as any
+            ).parseMetaDataPage(D99A_INVOIC_METADATA_PAGE);
             expect(spec).toEqual(expectedSpec);
         });
-
     });
 
     describe('parseStructurePage', () => {
-
-        it("should extract message structure correctly from D99A INVOIC structure page", () => {
+        it('should extract message structure correctly from D99A INVOIC structure page', () => {
             const expectedSegmentNames: string[] = [
-                'BGM', 'DTM', 'PAI', 'ALI',
-                'IMD', 'FTX', 'LOC', 'GIS', 'DGS',
-                'RFF', 'GIR', 'MEA', 'QTY', 'MOA',
-                'NAD', 'FII', 'DOC', 'CTA', 'COM',
-                'TAX', 'CUX', 'PAT', 'PCD', 'TDT',
-                'TSR', 'TOD', 'EQD', 'SEL', 'PAC',
-                'PCI', 'GIN', 'ALC', 'RNG', 'RTE',
-                'RCS', 'AJT', 'INP', 'LIN', 'PIA',
-                'QVR', 'PRI', 'APR', 'CNT'
+                'BGM',
+                'DTM',
+                'PAI',
+                'ALI',
+                'IMD',
+                'FTX',
+                'LOC',
+                'GIS',
+                'DGS',
+                'RFF',
+                'GIR',
+                'MEA',
+                'QTY',
+                'MOA',
+                'NAD',
+                'FII',
+                'DOC',
+                'CTA',
+                'COM',
+                'TAX',
+                'CUX',
+                'PAT',
+                'PCD',
+                'TDT',
+                'TSR',
+                'TOD',
+                'EQD',
+                'SEL',
+                'PAC',
+                'PCI',
+                'GIN',
+                'ALC',
+                'RNG',
+                'RTE',
+                'RCS',
+                'AJT',
+                'INP',
+                'LIN',
+                'PIA',
+                'QVR',
+                'PRI',
+                'APR',
+                'CNT'
             ];
             const spec: EdifactMessageSpecification =
                 new EdifactMessageSpecificationImpl('INVOIC', 'D', '99A', 'UN');
 
-            const segmentNames: string[] = sut.parseStructurePage(D99A_INVOIC_STRUCTURE_PAGE, spec);
+            const segmentNames: string[] = sut.parseStructurePage(
+                D99A_INVOIC_STRUCTURE_PAGE,
+                spec
+            );
 
             expect(segmentNames).toEqual(expectedSegmentNames);
             expect(spec.messageStructureDefinition).toContain(expectedBGMEntry);
             expect(spec.messageStructureDefinition).toContain(expectedUNSEntry);
             const sg26: MessageType | undefined =
-                spec.messageStructureDefinition.find(item => item.name === 'Segment group 26');
+                spec.messageStructureDefinition.find(
+                    (item) => item.name === 'Segment group 26'
+                );
             expect(sg26).toBeDefined();
-            expect((sg26 as any).content).toContain(expectedSegmentGroup27Entry);
+            expect((sg26 as any).content).toContain(
+                expectedSegmentGroup27Entry
+            );
         });
 
-        it("should correctly parse D99A APERAK structure page (no header section)", () => {
+        it('should correctly parse D99A APERAK structure page (no header section)', () => {
             const expectedSegmentNames: string[] = [
-                'BGM', 'DTM', 'FTX',
-                'CNT', 'DOC', 'RFF', 'NAD',
-                'CTA', 'COM', 'ERC'
+                'BGM',
+                'DTM',
+                'FTX',
+                'CNT',
+                'DOC',
+                'RFF',
+                'NAD',
+                'CTA',
+                'COM',
+                'ERC'
             ];
             const expectedBGMEntry_APERAK: MessageType = {
                 ...expectedBGMEntry,
                 section: undefined
             };
             const expectedSegmentGroup5Entry: MessageType = {
-                name: "Segment group 5",
+                name: 'Segment group 5',
                 content: [
-                    { content: "RFF", mandatory: true, repetition: 1, data: undefined, section: undefined },
-                    { content: "FTX", mandatory: false, repetition: 9, data: undefined, section: undefined }
+                    {
+                        content: 'RFF',
+                        mandatory: true,
+                        repetition: 1,
+                        data: undefined,
+                        section: undefined
+                    },
+                    {
+                        content: 'FTX',
+                        mandatory: false,
+                        repetition: 9,
+                        data: undefined,
+                        section: undefined
+                    }
                 ],
                 mandatory: false,
                 repetition: 9,
@@ -190,39 +270,52 @@ describe('UNECELegacyMessageStructureParser', () => {
             const spec: EdifactMessageSpecification =
                 new EdifactMessageSpecificationImpl('APERAK', 'D', '99A', 'UN');
 
-            const segmentNames: string[] = sut.parseStructurePage(D99A_APERAK_STRUCTURE_PAGE, spec);
+            const segmentNames: string[] = sut.parseStructurePage(
+                D99A_APERAK_STRUCTURE_PAGE,
+                spec
+            );
 
             expect(segmentNames).toEqual(expectedSegmentNames);
 
-            expect(spec.messageStructureDefinition).toContain(expectedBGMEntry_APERAK);
+            expect(spec.messageStructureDefinition).toContain(
+                expectedBGMEntry_APERAK
+            );
             const sg4: MessageType | undefined =
-                spec.messageStructureDefinition.find(item => item.name === 'Segment group 4');
+                spec.messageStructureDefinition.find(
+                    (item) => item.name === 'Segment group 4'
+                );
             expect(sg4).toBeDefined();
             expect((sg4 as any).content).toContain(expectedSegmentGroup5Entry);
         });
 
-        it("should correctly parse D96A ORDERS structure page", () => {
+        it('should correctly parse D96A ORDERS structure page', () => {
             const spec: EdifactMessageSpecification =
                 new EdifactMessageSpecificationImpl('ORDERS', 'D', '96A', 'UN');
             sut.parseStructurePage(D96A_ORDERS_STRUCTURE_PAGE, spec);
 
-            expect(spec.messageStructureDefinition).toContain({ ...expectedBGMEntry, section: 'header' });
+            expect(spec.messageStructureDefinition).toContain({
+                ...expectedBGMEntry,
+                section: 'header'
+            });
             expect(spec.messageStructureDefinition).toContain(expectedUNSEntry);
             expect(spec.messageStructureDefinition[7]).toBeDefined();
-            expect(spec.messageStructureDefinition[7].name).toBe('Segment group 1');
+            expect(spec.messageStructureDefinition[7].name).toBe(
+                'Segment group 1'
+            );
             expect(spec.messageStructureDefinition[8]).toBeDefined();
-            expect(spec.messageStructureDefinition[8].name).toBe('Segment group 2');
-            const sg25: MessageType | undefined = spec.messageStructureDefinition
-                .find(item => item.name === 'Segment group 25');
+            expect(spec.messageStructureDefinition[8].name).toBe(
+                'Segment group 2'
+            );
+            const sg25: MessageType | undefined =
+                spec.messageStructureDefinition.find(
+                    (item) => item.name === 'Segment group 25'
+                );
             expect(sg25).toBeDefined();
         });
-
     });
 
     describe('parseSegmentDefinitionPage', () => {
-
-        it("should parse segment definition page", (done) => {
-
+        it('should parse segment definition page', (done) => {
             const page = `
 <HTML><title>UNTDID - D.99A - Segment MEA</title>
 <! --- This document was created by Viorel Iordache - UN/ECE on 4/2/99 ----->
@@ -256,28 +349,53 @@ describe('UNECELegacyMessageStructureParser', () => {
 
             const spec: EdifactMessageSpecification =
                 new EdifactMessageSpecificationImpl('INVOIC', 'D', '99A', 'UN');
-            (sut as any).parseSegmentDefinitionPage("MEA", page, spec)
+            (sut as any)
+                .parseSegmentDefinitionPage('MEA', page, spec)
                 .then(() => {
-                    const segments: Dictionary<SegmentEntry> = spec.segmentTable;
-                    const elements: Dictionary<ElementEntry> = spec.elementTable;
+                    const segments: Dictionary<SegmentEntry> =
+                        spec.segmentTable;
 
-                    expect(segments.get("MEA")?.elements).toEqual(jasmine.arrayContaining(["6311", "C502", "C174", "7383"]));
-                    expect(segments.get("MEA")?.requires).toEqual(1);
+                    expect(Object.keys(segments.get('MEA')!.elements)).toEqual(
+                        jasmine.arrayContaining([
+                            '6311',
+                            'C502',
+                            'C174',
+                            '7383'
+                        ])
+                    );
+                    expect(segments.get('MEA')?.requires).toEqual(1);
 
-                    expect(elements.get("6311")?.components).toEqual(jasmine.arrayContaining(["an..3"]));
-                    expect(elements.get("6311")?.requires).toEqual(1);
-                    expect(elements.get("C174")?.components).toEqual(jasmine.arrayContaining(["an..3", "an..18", "n..18", "n..18", "n..2"]));
-                    expect(elements.get("C174")?.requires).toEqual(1);
+                    expect(
+                        segments.get('MEA')?.elements['6311']?.components
+                    ).toEqual(jasmine.arrayContaining(['an..3']));
+                    expect(
+                        segments.get('MEA')?.elements['6311']?.requires
+                    ).toEqual(1);
+                    expect(
+                        segments.get('MEA')?.elements['C174']?.components
+                    ).toEqual(
+                        jasmine.arrayContaining([
+                            'an..3',
+                            'an..18',
+                            'n..18',
+                            'n..18',
+                            'n..2'
+                        ])
+                    );
+                    expect(
+                        segments.get('MEA')?.elements['C174']?.requires
+                    ).toEqual(1);
 
                     // sub-components should not be stored
-                    expect(elements.get("6411")).toBeUndefined();
+                    expect(
+                        segments.get('MEA')?.elements['6411']
+                    ).toBeUndefined();
 
                     done();
                 });
         });
 
-
-        it("should add multiple element definitions only once", (done) => {
+        it('should add multiple element definitions only once', (done) => {
             const page = `
 <HTML><title>UNTDID - D.99A - Segment CUX</title>
 <! --- This document was created by Viorel Iordache - UN/ECE on 4/2/99 ----->
@@ -311,29 +429,45 @@ describe('UNECELegacyMessageStructureParser', () => {
             const spec: EdifactMessageSpecification =
                 new EdifactMessageSpecificationImpl('INVOIC', 'D', '99A', 'UN');
 
-            (sut as any).parseSegmentDefinitionPage("CUX", page, spec)
+            (sut as any)
+                .parseSegmentDefinitionPage('CUX', page, spec)
                 .then(() => {
-                    const segments: Dictionary<SegmentEntry> = spec.segmentTable;
-                    const elements: Dictionary<ElementEntry> = spec.elementTable;
+                    const segments: Dictionary<SegmentEntry> =
+                        spec.segmentTable;
 
-                    expect(segments.get("CUX")?.elements).toEqual(jasmine.arrayContaining(["C504", "C504", "5402", "6341"]));
-                    expect(segments.get("CUX")?.requires).toEqual(0);
+                    expect(Object.keys(segments.get('CUX')!.elements)).toEqual(
+                        jasmine.arrayContaining([
+                            'C504',
+                            'C504',
+                            '5402',
+                            '6341'
+                        ])
+                    );
+                    expect(segments.get('CUX')?.requires).toEqual(0);
 
-                    expect(elements.get("C504")?.components.length).toEqual(4);
-                    expect(elements.get("C504")?.components).toEqual(jasmine.arrayContaining(["an..3", "an..3", "an..3", "n..4"]));
+                    expect(
+                        segments.get('CUX')?.elements['C504']?.components.length
+                    ).toEqual(4);
+                    expect(
+                        segments.get('CUX')?.elements['C504']?.components
+                    ).toEqual(
+                        jasmine.arrayContaining([
+                            'an..3',
+                            'an..3',
+                            'an..3',
+                            'n..4'
+                        ])
+                    );
 
                     done();
                 });
         });
-
     });
 
     describe('loadTypeSpec', () => {
-
-        it("should parse remote UNECE specification", async () => {
+        it('should parse remote UNECE specification', async () => {
             const spec: EdifactMessageSpecification = await sut.loadTypeSpec();
             const segments: Dictionary<SegmentEntry> = spec.segmentTable;
-            const elements: Dictionary<ElementEntry> = spec.elementTable;
 
             // check meta-data
             expect(spec.controllingAgency).toBe('UN');
@@ -342,32 +476,52 @@ describe('UNECELegacyMessageStructureParser', () => {
             expect(spec.messageType).toBe('INVOIC');
 
             // check segments
-            expect(segments.get("MEA")?.elements).toEqual(jasmine.arrayContaining(["6311", "C502", "C174", "7383"]));
-            expect(segments.get("MEA")?.requires).toEqual(1);
-            expect(segments.get("CUX")?.elements).toEqual(jasmine.arrayContaining(["C504", "C504", "5402", "6341"]));
-            expect(segments.get("CUX")?.requires).toEqual(0);
+            expect(Object.keys(segments.get('MEA')!.elements)).toEqual(
+                jasmine.arrayContaining(['6311', 'C502', 'C174', '7383'])
+            );
+            expect(segments.get('MEA')?.requires).toEqual(1);
+            expect(Object.keys(segments.get('CUX')!.elements)).toEqual(
+                jasmine.arrayContaining(['C504', 'C504', '5402', '6341'])
+            );
+            expect(segments.get('CUX')?.requires).toEqual(0);
 
             // check elements
             // elements for segment MEA
-            expect(elements.get("6311")?.components).toEqual(jasmine.arrayContaining(["an..3"]));
-            expect(elements.get("6311")?.requires).toEqual(1);
-            expect(elements.get("C174")?.components).toEqual(jasmine.arrayContaining(["an..3", "an..18", "n..18", "n..18", "n..2"]));
-            expect(elements.get("C174")?.requires).toEqual(1);
+            expect(segments.get('MEA')?.elements['6311']?.components).toEqual(
+                jasmine.arrayContaining(['an..3'])
+            );
+            expect(segments.get('MEA')?.elements['6311']?.requires).toEqual(1);
+            expect(segments.get('MEA')?.elements['C174']?.components).toEqual(
+                jasmine.arrayContaining([
+                    'an..3',
+                    'an..18',
+                    'n..18',
+                    'n..18',
+                    'n..2'
+                ])
+            );
+            expect(segments.get('MEA')?.elements['C174']?.requires).toEqual(1);
             // elements for segment CUX
-            expect(elements.get("C504")?.components.length).toEqual(4);
-            expect(elements.get("C504")?.components).toEqual(jasmine.arrayContaining(["an..3", "an..3", "an..3", "n..4"]));
+            expect(
+                segments.get('CUX')?.elements['C504']?.components.length
+            ).toEqual(4);
+            expect(segments.get('CUX')?.elements['C504']?.components).toEqual(
+                jasmine.arrayContaining(['an..3', 'an..3', 'an..3', 'n..4'])
+            );
             // sub-components should not be stored
-            expect(elements.get("6411")).toBeUndefined();
+            expect(segments.get('MEA')?.elements['6411']).toBeUndefined();
 
             // check message structure
             expect(spec.messageStructureDefinition).toContain(expectedBGMEntry);
             expect(spec.messageStructureDefinition).toContain(expectedUNSEntry);
             const sg26: MessageType | undefined =
-                spec.messageStructureDefinition.find(item => item.name === 'Segment group 26');
+                spec.messageStructureDefinition.find(
+                    (item) => item.name === 'Segment group 26'
+                );
             expect(sg26).toBeDefined();
-            expect((sg26 as any).content).toContain(expectedSegmentGroup27Entry);
+            expect((sg26 as any).content).toContain(
+                expectedSegmentGroup27Entry
+            );
         });
-
     });
-
 });

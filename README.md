@@ -235,7 +235,6 @@ Keep in mind that this avoids any `openSegment` events to be produced and as suc
 | [InterchangeBuilder](#InterchangeBuilder)| The `InterchangeBuilder` class will use the parsed result obtained by either the reader or the parser and convert the array of segments, by using a corresponding message version definition, into a JavaScript object structure containing the respective messages contained in the parsed Edifact as well as respective segment groups which are further subgrouped by the iteration count on respective segments. I.e. if multiple LIN and accompanying segments are found, they are grouped in their own subgroup and any accompanying segment belonging to that segment group will be added to that subgroup as well. |
 | [UNECEMessageStructureParser](#UNECEMessageStructureParser) | A helper class to parse the online version of the UNECE hompeage for the respective Edifact message type structure as well as the admissible segments and elements for the respective message type |
 | [SegmentTableBuilder](#SegmentTableBuilder) | A builder for segment definition objects used by the validator and tracker classes |
-| [ElementTableBuilder](#ElementTableBuilder) | A builder for element definition objects used by the validator and tracker classes |
 
 ## Reference
 
@@ -370,19 +369,3 @@ new SegmentTableBuilder(type: string);
 | `forVersion(version: string): TableBuilder<SegmentEntry>` | Sets the version of the Edifact document this builder should fetch. |
 | `specLocation(location: string): TableBuilder<SegmentEntry>` | Sets the path where to look for the segment definition files. |
 | `build(): Dictionary<SegmentEntry>` | Attempts to load the `*.segments.json` definition file of the specified message type (and version if specified) and returns a dictionary object with the loaded data. If no file could be found only the basic `UNB`, `UNH`, `UNS`, `UNT` and `UNZ` segment definitions are loaded. |
-
-<a name="ElementTableBuilder"></a>
-
-### ElementTableBuilder
-
-A helper class to load the respective element definition files, from either the local directory or a specified one, and convert them to a usable data structure needed by the validator and tracker classes.
-
-```typescript
-new ElementTableBuilder(type: string);
-```
-
-| Function | Description |
-| -------- | ----------- |
-| `forVersion(version: string): TableBuilder<ElementEntry>` | Sets the version of the Edifact document this builder should fetch. |
-| `specLocation(location: string): TableBuilder<ElementEntry>` | Sets the path where to look for the element definition files. |
-| `build(): Dictionary<ElementEntry>` | Attempts to load the `*.elements.json` definition file of the specified message type (and version if specified) and returns a dictionary object with the loaded data. If no file could be found only the basic element definitions used by the `UNB`, `UNH`, `UNS`, `UNT` and `UNZ` segments are loaded. |

@@ -16,7 +16,12 @@
  * limitations under the License.
  */
 
-import { Dictionary, SegmentEntry, ElementEntry } from '../validator';
+import {
+    Dictionary,
+    SegmentEntry,
+    ElementEntry,
+    ElementName
+} from '../validator';
 import { MessageType } from '../tracker';
 import { HttpClient } from '../httpClient';
 import { Parser, DomHandler } from 'htmlparser2';
@@ -33,11 +38,6 @@ export interface EdifactMessageSpecification {
      * a segment contains as well as the mandatory count as value
      */
     readonly segmentTable: Dictionary<SegmentEntry>;
-    /**
-     * Contains the respective element ID as key and the type definition of
-     * the respective components as value
-     */
-    readonly elementTable: Dictionary<ElementEntry>;
     /**
      * Contains the actual message structure generatedby this parser
      */
@@ -136,6 +136,27 @@ export class UNECEMessageStructureParser implements MessageStructureParser {
         return data;
     }
 
+    protected formatElementName(name?: string): ElementName | undefined {
+        if (!name) {
+            return undefined;
+        }
+        const formattedName: string = name.replace(/\/|&|,/g, ' ');
+        const split = formattedName.split(' ');
+        if (split.length > 0) {
+            const formattedNames = split.map(
+                (part: string) =>
+                    part.charAt(0).toUpperCase() + part.slice(1).toLowerCase()
+            );
+            const result =
+                formattedNames[0].toLowerCase() +
+                formattedNames.slice(1).join('');
+
+            return { name: result, header: name === name.toUpperCase() };
+        } else {
+            return { name: name, header: name === name.toUpperCase() };
+        }
+    }
+
     protected async parseSegmentDefinitionPage(
         segment: string,
         page: string,
@@ -145,7 +166,7 @@ export class UNECEMessageStructureParser implements MessageStructureParser {
             return Promise.resolve(definition);
         }
 
-        const segEntry: SegmentEntry = { requires: 0, elements: [] };
+        const segEntry: SegmentEntry = { requires: 0, elements: {} };
         let state: SegmentPart = SegmentPart.BeforeStructureDef;
 
         // only relevant for legacy UNECE segment specification pages:
@@ -183,12 +204,18 @@ export class UNECEMessageStructureParser implements MessageStructureParser {
                         arr[1] === '' ? undefined : arr[1];
                     // const deprecated: boolean = arr[2] === "X" ? true : false;
                     const id: string = arr[3];
-                    // const name: string = arr[4].trim();
+                    const name = this.formatElementName(arr[4]?.trim());
                     const mandatory: boolean = arr[5] === 'M' ? true : false;
                     // const repetition: number | undefined = isDefined(arr[6]) ? parseInt(arr[6]) : undefined;
                     const elementDef: string | undefined =
                         arr[7] === '' ? undefined : arr[7];
 
+                    const eleEntry: ElementEntry = {
+                        id,
+                        requires: 0,
+                        components: [],
+                        name
+                    };
                     if (segGroupId) {
                         if (id === '') {
                             console.warn(
@@ -196,7 +223,7 @@ export class UNECEMessageStructureParser implements MessageStructureParser {
                             );
                             continue;
                         }
-                        segEntry.elements.push(id);
+                        segEntry.elements[id] = eleEntry;
                         skipAddingElement = false;
 
                         if (mandatory) {
@@ -207,42 +234,34 @@ export class UNECEMessageStructureParser implements MessageStructureParser {
                                 complexEleEntry !== null &&
                                 complexEleId !== null
                             ) {
-                                definition.elementTable.add(
-                                    complexEleId,
-                                    complexEleEntry
-                                );
+                                segEntry.elements[complexEleId] =
+                                    complexEleEntry;
                             }
                             complexEleId = null;
                             complexEleEntry = null;
 
-                            if (definition.elementTable.contains(id)) {
+                            if (segEntry.elements[id].components.includes(id)) {
                                 continue;
                             }
-                            const eleEntry: ElementEntry = {
-                                requires: 0,
-                                components: []
-                            };
                             if (mandatory) {
                                 eleEntry.requires = eleEntry.requires + 1;
                             }
                             eleEntry.components.push(elementDef);
-                            definition.elementTable.add(id, eleEntry);
+                            segEntry.elements[id] = eleEntry;
                         } else {
                             if (
                                 complexEleEntry !== null &&
                                 complexEleId !== null
                             ) {
-                                definition.elementTable.add(
-                                    complexEleId,
-                                    complexEleEntry
-                                );
+                                segEntry.elements[complexEleId] =
+                                    complexEleEntry;
                             }
-                            if (definition.elementTable.contains(id)) {
+                            if (segEntry.elements[id].components.includes(id)) {
                                 skipAddingElement = true;
                                 continue;
                             }
                             complexEleId = id;
-                            complexEleEntry = { requires: 0, components: [] };
+                            complexEleEntry = eleEntry;
                         }
                     } else {
                         if (!skipAddingElement) {
@@ -253,22 +272,20 @@ export class UNECEMessageStructureParser implements MessageStructureParser {
                                     : complexEleEntry.requires;
                             } else {
                                 // simple element definition
-                                if (definition.elementTable.contains(id)) {
+                                if (
+                                    segEntry.elements[id].components.includes(
+                                        id
+                                    )
+                                ) {
                                     continue;
                                 }
-
-                                const eleEntry: ElementEntry = {
-                                    requires: 0,
-                                    components: []
-                                };
-
                                 if (mandatory) {
                                     eleEntry.requires = eleEntry.requires + 1;
                                 }
                                 if (elementDef) {
                                     eleEntry.components.push(elementDef);
                                 }
-                                definition.elementTable.add(id, eleEntry);
+                                segEntry.elements[id] = eleEntry;
                             }
                         }
                     }
@@ -286,7 +303,7 @@ export class UNECEMessageStructureParser implements MessageStructureParser {
             }
         }
         if (complexEleEntry !== null && complexEleId !== null) {
-            definition.elementTable.add(complexEleId, complexEleEntry);
+            segEntry.elements[complexEleId] = complexEleEntry;
         }
         if (segment !== '') {
             definition.segmentTable.add(segment, segEntry);

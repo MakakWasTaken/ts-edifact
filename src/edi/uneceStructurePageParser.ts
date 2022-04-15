@@ -231,6 +231,13 @@ export class UNECEStructurePageParser extends UNECEPageParser {
         };
     }
 
+    /**
+     * Parses a segment (e.g. UNH, UNT, UNS)
+     * @param name The name of the segment (e.g. UNH)
+     * @param section The section as a whole (e.g. UNH+123+123+[...])
+     * @param descriptionString The description of the segment
+     * @returns The parsed segment
+     */
     private parseSegment(
         name: string,
         section: string | undefined,

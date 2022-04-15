@@ -20,7 +20,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 
 import * as fs from 'fs';
-import { Suffix } from './tableBuilder';
 import {
     EdifactMessageSpecification,
     MessageStructureParser,
@@ -53,23 +52,17 @@ export function persist(
 
     const segments: string = toString((data.segmentTable as any).entries);
     const segmentsFileName: string =
-        data.version +
-        data.release +
-        '_' +
-        data.messageType +
-        '.' +
-        Suffix.Segments +
-        '.json';
+        data.version + data.release + '_' + data.messageType + '.segments.json';
 
-    const elements: string = toString((data.elementTable as any).entries);
-    const elementsFileName: string =
-        data.version +
-        data.release +
-        '_' +
-        data.messageType +
-        '.' +
-        Suffix.Elements +
-        '.json';
+    // const elements: string = toString((data.elementTable as any).entries);
+    // const elementsFileName: string =
+    //     data.version +
+    //     data.release +
+    //     '_' +
+    //     data.messageType +
+    //     '.' +
+    //     Suffix.Elements +
+    //     '.json';
 
     let p: string = path;
     if (!p.endsWith('/')) {
@@ -78,7 +71,7 @@ export function persist(
 
     fs.writeFileSync(p + messageStructDefFileName, messageStructDef);
     fs.writeFileSync(p + segmentsFileName, segments);
-    fs.writeFileSync(p + elementsFileName, elements);
+    // fs.writeFileSync(p + elementsFileName, elements);
 }
 
 export function storeAllDefaultSpecs(version: string, location: string): void {

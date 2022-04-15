@@ -20,20 +20,13 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { Dictionary } from './validator';
 
-export enum Suffix {
-    Elements = 'elements',
-    Segments = 'segments'
-}
-
 export abstract class TableBuilder<T> {
     private type: string;
     private version?: string;
     private location?: string;
-    protected fileSuffix: Suffix;
 
-    constructor(type: string, suffix: Suffix) {
+    constructor(type: string) {
         this.type = type;
-        this.fileSuffix = suffix;
     }
 
     forVersion(version: string): TableBuilder<T> {
@@ -59,26 +52,20 @@ export abstract class TableBuilder<T> {
         }
 
         const baseFileName: string =
-            defaultFilePath +
-            this.type.toUpperCase() +
-            '.' +
-            this.fileSuffix +
-            '.json';
+            defaultFilePath + this.type.toUpperCase() + '.segments.json';
         if (this.version) {
             const versionedFileName: string =
                 defaultFilePath +
                 this.version.toUpperCase() +
                 '_' +
                 this.type.toUpperCase() +
-                '.' +
-                this.fileSuffix +
-                '.json';
+                '.segments.json';
 
             if (fs.existsSync(versionedFileName)) {
                 return versionedFileName;
             } else if (fs.existsSync(baseFileName)) {
                 console.warn(
-                    `No ${this.fileSuffix} definition file found for message type ${this.type} of version ${this.version}. Falling back to default version`
+                    `No segments definition file found for message type ${this.type} of version ${this.version}. Falling back to default version`
                 );
                 return baseFileName;
             }
@@ -89,7 +76,7 @@ export abstract class TableBuilder<T> {
         }
 
         console.error(
-            `No ${this.fileSuffix} definition file found for message type ${this.type}`
+            `No segments definition file found for message type ${this.type}`
         );
         return undefined;
     }

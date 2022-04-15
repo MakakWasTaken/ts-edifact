@@ -61,8 +61,20 @@ export class Dictionary<T> {
     }
 }
 
-export type SegmentEntry = { requires: number; elements: string[] };
-export type ElementEntry = { requires: number; components: string[] };
+export type ElementName = {
+    header: boolean;
+    name: string;
+};
+export type SegmentEntry = {
+    requires: number;
+    elements: { [key: string]: ElementEntry };
+};
+export type ElementEntry = {
+    id: string;
+    requires: number;
+    components: string[];
+    name?: ElementName;
+};
 
 interface FormatType {
     alpha: boolean;
@@ -294,7 +306,7 @@ export class ValidatorImpl implements Validator {
                         return;
                     }
                 }
-                name = this.segment.elements[this.counts.element];
+                name = this.segment.elements[this.counts.element]?.id;
                 if (this.element === undefined) {
                     throw this.errors.missingElementStart(name);
                 }
@@ -329,7 +341,9 @@ export class ValidatorImpl implements Validator {
                     }
                 }
                 // eslint-disable-next-line no-case-declarations
-                const key: string = this.segment.elements[this.counts.element];
+                const key = Object.keys(this.segment.elements)[
+                    this.counts.element
+                ];
                 if ((this.element = this.elements.get(key))) {
                     this.state = ValidatorStates.ALL;
                 } else {
@@ -366,9 +380,10 @@ export class ValidatorImpl implements Validator {
         switch (this.state) {
             case ValidatorStates.ALL:
                 // eslint-disable-next-line no-case-declarations
-                const name: string = this.segment.elements[this.counts.element];
+                const currentElement: ElementEntry =
+                    this.segment.elements[this.counts.element];
                 if (this.element === undefined) {
-                    throw this.errors.missingElementStart(name);
+                    throw this.errors.missingElementStart(currentElement?.id);
                 }
 
                 // Retrieve a component definition if validation is set to all
@@ -411,9 +426,9 @@ export class ValidatorImpl implements Validator {
                 // Component validation is only needed when validation is set to all
                 length = buffer.length();
                 // eslint-disable-next-line no-case-declarations
-                let name: string;
+                let currentElement: ElementEntry;
                 if (this.segment) {
-                    name = this.segment.elements[this.counts.element];
+                    currentElement = this.segment.elements[this.counts.element];
                 } else {
                     const error: Error | undefined =
                         this.errors.missingSegmentStart(
@@ -432,14 +447,14 @@ export class ValidatorImpl implements Validator {
                 if (this.required >= this.counts.component || length > 0) {
                     if (length < this.minimum) {
                         throw this.errors.invalidData(
-                            name,
+                            currentElement?.id,
                             `'${buffer.content()}' length is less than minimum length ${
                                 this.minimum
                             }`
                         );
                     } else if (length > this.maximum) {
                         throw this.errors.invalidData(
-                            name,
+                            currentElement?.id,
                             `'${buffer.content()} exceeds maximum length ${
                                 this.maximum
                             }`
@@ -477,7 +492,7 @@ export class ValidatorImpl implements Validator {
                     this.counts.component < this.element.requires ||
                     this.counts.component > this.element.components.length
                 ) {
-                    name = this.segment.elements[this.counts.element];
+                    name = this.segment.elements[this.counts.element]?.id;
                     throw this.errors.countError(
                         'Element',
                         name,
@@ -502,7 +517,8 @@ export class ValidatorImpl implements Validator {
 
                 if (
                     this.counts.element < this.segment.requires ||
-                    this.counts.element > this.segment.elements.length
+                    this.counts.element >
+                        Object.keys(this.segment.elements).length
                 ) {
                     name = segment;
                     throw this.errors.countError(
@@ -538,7 +554,7 @@ export class ValidatorImpl implements Validator {
             if (type === 'Segment') {
                 array = 'elements';
                 const entry: SegmentEntry = definition as SegmentEntry;
-                length = entry.elements.length;
+                length = Object.keys(entry.elements).length;
             } else {
                 array = 'components';
                 const entry: ElementEntry = definition as ElementEntry;

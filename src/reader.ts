@@ -26,7 +26,6 @@ import {
 } from './validator';
 
 import { SegmentTableBuilder } from './segments';
-import { ElementTableBuilder } from './elements';
 import { Separators } from './edi/separators';
 import { isDefined } from './util';
 import { Cache } from './cache';
@@ -36,19 +35,6 @@ export type ResultType = {
     name: string;
     elements: string[][];
 };
-
-class DefinitionTables {
-    segmentTable: Dictionary<SegmentEntry>;
-    elementTable: Dictionary<ElementEntry>;
-
-    constructor(
-        segmentTable: Dictionary<SegmentEntry>,
-        elementTable: Dictionary<ElementEntry>
-    ) {
-        this.segmentTable = segmentTable;
-        this.elementTable = elementTable;
-    }
-}
 
 /**
  * The `Reader` class is included for backwards compatibility. It translates an
@@ -71,7 +57,7 @@ export class Reader {
         | Dictionary<ElementEntry>
     )[] = [];
 
-    private definitionCache: Cache<DefinitionTables> = new Cache(15);
+    private definitionCache: Cache<Dictionary<SegmentEntry>> = new Cache(15);
     private unbCharsetDefined = false;
 
     separators: Separators;
@@ -122,15 +108,12 @@ export class Reader {
                     const key: string =
                         messageVersion + messageRelease + '_' + messageType;
                     if (this.definitionCache.contains(key)) {
-                        const tables: DefinitionTables =
+                        const segmentTable: Dictionary<SegmentEntry> =
                             this.definitionCache.get(key);
-                        this.validator.define(tables.segmentTable);
-                        this.validator.define(tables.elementTable);
+                        this.validator.define(segmentTable);
                     } else {
                         let segmentTableBuilder: SegmentTableBuilder =
                             new SegmentTableBuilder(messageType);
-                        let elementTableBuilder: ElementTableBuilder =
-                            new ElementTableBuilder(messageType);
 
                         const version: string = (
                             messageVersion + messageRelease
@@ -138,34 +121,21 @@ export class Reader {
                         segmentTableBuilder = segmentTableBuilder.forVersion(
                             version
                         ) as SegmentTableBuilder;
-                        elementTableBuilder = elementTableBuilder.forVersion(
-                            version
-                        ) as ElementTableBuilder;
 
                         if (messageSpecDir) {
                             segmentTableBuilder =
                                 segmentTableBuilder.specLocation(
                                     messageSpecDir
                                 );
-                            elementTableBuilder =
-                                elementTableBuilder.specLocation(
-                                    messageSpecDir
-                                );
                         } else {
                             segmentTableBuilder =
                                 segmentTableBuilder.specLocation('./');
-                            elementTableBuilder =
-                                elementTableBuilder.specLocation('./');
                         }
+                        const segmentTable: Dictionary<SegmentEntry> =
+                            segmentTableBuilder.build();
+                        this.validator.define(segmentTable);
 
-                        const tables: DefinitionTables = new DefinitionTables(
-                            segmentTableBuilder.build(),
-                            elementTableBuilder.build()
-                        );
-                        this.validator.define(tables.segmentTable);
-                        this.validator.define(tables.elementTable);
-
-                        this.definitionCache.insert(key, tables);
+                        this.definitionCache.insert(key, segmentTable);
                     }
                 }
                 activeSegment = null;
@@ -199,11 +169,6 @@ export class Reader {
                 this.validator.define(
                     SegmentTableBuilder.enrichWithDefaultSegments(
                         new Dictionary<SegmentEntry>()
-                    )
-                );
-                this.validator.define(
-                    ElementTableBuilder.enrichWithDefaultElements(
-                        new Dictionary<ElementEntry>()
                     )
                 );
             }

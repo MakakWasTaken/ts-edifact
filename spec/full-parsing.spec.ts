@@ -16,33 +16,32 @@
  * limitations under the License.
  */
 
-import { Dictionary, SegmentEntry, ElementEntry } from "../src/validator";
-import { Parser } from "../src/parser";
-import { SegmentTableBuilder } from "../src/segments";
-import { ElementTableBuilder } from "../src/elements";
-import { Configuration } from "../src/configuration";
+import { Dictionary, SegmentEntry } from '../src/validator';
+import { Parser } from '../src/parser';
+import { SegmentTableBuilder } from '../src/segments';
+import { Configuration } from '../src/configuration';
 
 // issue #1 - Differences between ts-edifact and edifact libraries
-describe("Parsing edifact document", () => {
-
-    describe("should complete without any errors", () => {
+describe('Parsing edifact document', () => {
+    describe('should complete without any errors', () => {
         let parser: Parser;
 
-        it("should parse original sample document", () => {
-            const segments: Dictionary<SegmentEntry> =
-                new SegmentTableBuilder("INVOIC").specLocation("./src/messageSpec").build();
-            const elements: Dictionary<ElementEntry> =
-                new ElementTableBuilder("INVOIC").specLocation("./src/messageSpec").build();
+        it('should parse original sample document', () => {
+            const segments: Dictionary<SegmentEntry> = new SegmentTableBuilder(
+                'INVOIC'
+            )
+                .specLocation('./src/messageSpec')
+                .build();
 
             const config: Configuration = new Configuration();
             config.validator.define(segments);
-            config.validator.define(elements);
 
             parser = new Parser(config);
 
-            let document = "";
+            let document = '';
 
-            document += "UNB+UNOA:1+005435656:1+006415160:1+060515:1434+00000000000778'";
+            document +=
+                "UNB+UNOA:1+005435656:1+006415160:1+060515:1434+00000000000778'";
             document += "UNH+00000000000117+INV\n\rOIC:D:97B:UN'";
             document += "BGM+380+342459+9'";
             document += "DTM+3:20060515:102'";
@@ -72,20 +71,19 @@ describe("Parsing edifact document", () => {
             expect(() => parser.write(document)).not.toThrow();
         });
 
-        it("should parse issue #1 document", () => {
-
-            const segments: Dictionary<SegmentEntry> =
-            new SegmentTableBuilder("IFTMIN").specLocation("./src/messageSpec").build();
-            const elements: Dictionary<ElementEntry> =
-                new ElementTableBuilder("IFTMIN").specLocation("./src/messageSpec").build();
+        it('should parse issue #1 document', () => {
+            const segments: Dictionary<SegmentEntry> = new SegmentTableBuilder(
+                'IFTMIN'
+            )
+                .specLocation('./src/messageSpec')
+                .build();
 
             const config: Configuration = new Configuration();
             config.validator.define(segments);
-            config.validator.define(elements);
 
             parser = new Parser(config);
 
-            let document = "";
+            let document = '';
             document += "UNA:+.? '";
             document += "UNH+ME000001+IFTMIN:D:01B:UN:EAN004'";
             document += "BGM+610+569952+9'";
