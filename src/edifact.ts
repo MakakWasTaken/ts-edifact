@@ -142,7 +142,7 @@ export function toSegmentObject(
         case 'PYT':
             return new PaymentTerms(data);
         case 'QTY':
-            return new Quantity(data);
+            return new Quantity(data, decimalSeparator);
         case 'QVR':
             return new QuantityVariances(data, decimalSeparator);
         case 'RCS':
@@ -2678,19 +2678,29 @@ export class PaymentTerms implements Segment {
 
 // QTY
 
+class QuantityDetails {
+    quantityTypeCodeQualifier: string;
+    quantity: number | undefined;
+    measurementUnitCode: string | undefined;
+
+    constructor(data: string[], decimalSeparator: string) {
+        this.quantityTypeCodeQualifier = data[0];
+        if (data.length > 1) {
+            this.quantity = sanitizeFloat(data[1], decimalSeparator);
+        }
+        this.measurementUnitCode = data[2];
+    }
+}
+
 export class Quantity implements Segment {
     tag = 'QTY';
 
-    quantityTypeCodeQualifier: string;
-    quantity: string;
-    measurementUnitCode: string | undefined;
+    quantityDetails: QuantityDetails;
 
-    constructor(data: ResultType) {
+    constructor(data: ResultType, decimalSeperator: string) {
         const elements = data.elements[0];
 
-        this.quantityTypeCodeQualifier = elements[0];
-        this.quantity = elements[1];
-        this.measurementUnitCode = elements[2];
+        this.quantityDetails = new QuantityDetails(elements, decimalSeperator);
     }
 }
 

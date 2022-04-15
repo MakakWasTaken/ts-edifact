@@ -18,13 +18,13 @@
 
 // Run this sample with: npx ts-node examples/definitions.ts
 
-import { Reader, ResultType } from "../src/reader";
-import { Tracker, MessageType } from "../src/tracker";
-import * as path from "path";
+import { Reader, ResultType } from '../src/reader';
+import { Tracker, MessageType } from '../src/tracker';
+import * as path from 'path';
 
-import * as fs from "fs";
+import * as fs from 'fs';
 
-let document = "";
+let document = '';
 document += "UNB+UNOA:1+005435656:1+006415160:1+060515:1434+00000000000778'";
 document += "UNH+00000000000117+INV\n\rOIC:D:01B:UN'";
 document += "BGM+380+342459+9'";
@@ -52,18 +52,24 @@ document += "MOA+8:525'";
 document += "UNT+23+00000000000117'";
 document += "UNZ+1+00000000000778'";
 
-function _validateDocument(doc: string, callback?: (numChecked: number) => void): number | undefined {
+function _validateDocument(
+    doc: string,
+    callback?: (numChecked: number) => void
+): number | undefined {
     const reader: Reader = new Reader();
     const result: ResultType[] = reader.parse(doc);
 
     let checked = 0;
-    const data: string = fs.readFileSync(path.resolve("./src/messageSpec/INVOIC.struct.json"), { encoding: "utf-8"});
+    const data: string = fs.readFileSync(
+        path.resolve('./src/messageSpec/INVOIC.struct.json'),
+        { encoding: 'utf-8' }
+    );
     const msgStruct: MessageType[] = JSON.parse(data) as MessageType[];
     const tracker: Tracker = new Tracker(msgStruct);
 
     for (const obj of result) {
-        if (obj.name !== "UNA" && obj.name !== "UNB" && obj.name !== "UNZ") {
-            console.log("Checking " + obj.name);
+        if (obj.name !== 'UNA' && obj.name !== 'UNB' && obj.name !== 'UNZ') {
+            console.log('Checking ' + obj.name);
             tracker.accept(obj.name);
             checked++;
         }
@@ -84,7 +90,7 @@ function validateDocumentSync(doc: string): void {
 validateDocumentSync(document);
 
 async function validateDocumentAsync(doc: string): Promise<number> {
-    const promise: Promise<number> = new Promise(resolve => {
+    const promise: Promise<number> = new Promise((resolve) => {
         _validateDocument(doc, resolve);
     });
     const result: number = await promise;
@@ -103,7 +109,7 @@ function validateDocumentAsync2(doc: string): number | undefined {
 validateDocumentAsync2(document);
 
 function sleep(ms: number): Promise<void> {
-    return new Promise(resolve => setTimeout(resolve, ms));
+    return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 void sleep(500);
