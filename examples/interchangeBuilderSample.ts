@@ -26,7 +26,7 @@ import { MessageStructureParser, UNECEMessageStructureParser, EdifactMessageSpec
 import { persist } from "../src/util";
 import { ItemDescription, LineItem, Quantity, PriceDetails, MonetaryAmount } from "../src/edifact";
 
-let document: string = "";
+let document = "";
 document += "UNB+UNOA:1+005435656:1+006415160:1+060515:1434+00000000000778'";
 document += "UNH+00000000000117+INVOIC:D:01B:UN'";
 document += "BGM+380+342459+9'";
@@ -55,7 +55,7 @@ document += "UNT+23+00000000000117'";
 document += "UNZ+1+00000000000778'";
 
 async function parseDocument(doc: string): Promise<Edifact> {
-    const specDir: string = "./";
+    const specDir = "./";
     const specParser: MessageStructureParser = new UNECEMessageStructureParser("D01B", "INVOIC");
     const edifact: Edifact = await specParser.loadTypeSpec()
         .then((data: EdifactMessageSpecification) => {

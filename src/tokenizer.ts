@@ -35,7 +35,7 @@ export abstract class Charset implements RegExType {
     numeric: RegExp;
     decimal: RegExp;
 
-    constructor(name: string, configuration: Configuration, admissibleAlphabet: string[][], unicode: boolean = false) {
+    constructor(name: string, configuration: Configuration, admissibleAlphabet: string[][], unicode = false) {
         this.name = name;
         const exclude: number[] = configuration.delimiters();
         const alphas: RegExp[] = this.compile(admissibleAlphabet, exclude, unicode);
@@ -54,11 +54,11 @@ export abstract class Charset implements RegExType {
         }
     }
 
-    private compile(admissibleAlphabet: string[][], excludes: number[], unicode: boolean = false): RegExp[] {
+    private compile(admissibleAlphabet: string[][], excludes: number[], unicode = false): RegExp[] {
         // String.fromCharCode(parseInt("\u002F".codePointAt(0).toString(16), 16)) --> '/'
         const flag: string = unicode ? "gu" : "g";
 
-        let output: string = "";
+        let output = "";
         for (const seq of admissibleAlphabet) {
             if (seq.length > 1) {
                 const start: number | undefined = seq[0].codePointAt(0); // '/' --> 47 as the 47 character in the codepage
@@ -360,7 +360,7 @@ export class Tokenizer {
     }
 
     decimal(chunk: string, index: number): void {
-        let result: string = ".";
+        let result = ".";
 
         switch (this.regex) {
             case this.regexes.numeric:

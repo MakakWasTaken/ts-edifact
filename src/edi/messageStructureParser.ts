@@ -114,7 +114,7 @@ export class UNECEMessageStructureParser implements MessageStructureParser {
         this.httpClient = new HttpClient(baseUrl);
     }
 
-    private extractTextValue(text: string, regex: RegExp, index: number = 0): string {
+    private extractTextValue(text: string, regex: RegExp, index = 0): string {
         const arr: RegExpExecArray | null = regex.exec(text);
         if (isDefined(arr)) {
             return arr[index];
@@ -136,9 +136,9 @@ export class UNECEMessageStructureParser implements MessageStructureParser {
         let state: SegmentPart = SegmentPart.BeforeStructureDef;
 
         // only relevant for legacy UNECE segment specification pages:
-        let dataSection: boolean = false;
+        let dataSection = false;
 
-        let skipAddingElement: boolean = false;
+        let skipAddingElement = false;
         let overflowLine: string | null = null;
         let complexEleId: string | null = null;
         let complexEleEntry: ElementEntry | null = null;
@@ -159,7 +159,7 @@ export class UNECEMessageStructureParser implements MessageStructureParser {
             ) {
                 state = SegmentPart.Data;
             } else if (state === SegmentPart.Data && !line.includes("<P>")) {
-                const regexp: RegExp = /^([\d]*)\s*?([X|\\*]?)\s*<A.*>([a-zA-Z0-9]*)<\/A>([a-zA-Z0-9 ,\-\\/&]{44,})([M|C])\s*([\d]*)\s*([a-zA-Z0-9\\.]*).*$/g;
+                const regexp = /^([\d]*)\s*?([X|\\*]?)\s*<A.*>([a-zA-Z0-9]*)<\/A>([a-zA-Z0-9 ,\-\\/&]{44,})([M|C])\s*([\d]*)\s*([a-zA-Z0-9\\.]*).*$/g;
                 const arr: RegExpExecArray | null = regexp.exec(line);
                 if (isDefined(arr)) {
                     const segGroupId: string | undefined = arr[1] === "" ? undefined : arr[1];
@@ -232,7 +232,7 @@ export class UNECEMessageStructureParser implements MessageStructureParser {
                         }
                     }
                 } else {
-                    const regexpAlt: RegExp = /^([\d]*)\s*([X|\\*]?)\s*<A.*>([a-zA-Z0-9]*)<\/A>\s*([a-zA-Z0-9 \\-\\/&]*)/g;
+                    const regexpAlt = /^([\d]*)\s*([X|\\*]?)\s*<A.*>([a-zA-Z0-9]*)<\/A>\s*([a-zA-Z0-9 \\-\\/&]*)/g;
                     const arrAlt: RegExpExecArray | null = regexpAlt.exec(line);
                     if (isDefined(arrAlt)) {
                         overflowLine = line;
@@ -295,7 +295,7 @@ export class UNECEMessageStructureParser implements MessageStructureParser {
                 } else if (state === Part.Deprecated) {
 
                     if (text.includes("- Segment group")) {
-                        const regex: RegExp = /^[\s*+-]*-* (Segment group \d*)\s*-*\s*([M|C])\s*(\d*)([-|\\+|\\|]*).*/g;
+                        const regex = /^[\s*+-]*-* (Segment group \d*)\s*-*\s*([M|C])\s*(\d*)([-|\\+|\\|]*).*/g;
                         const arr: RegExpExecArray | null = regex.exec(text);
                         if (isDefined(arr)) {
                             const groupArray: MessageType[] = [];
@@ -338,7 +338,7 @@ export class UNECEMessageStructureParser implements MessageStructureParser {
                     section = null;
                 } else if (state === Part.Name) {
                     // console.debug(`Name: ${text}`);
-                    const regex: RegExp = /^([a-zA-Z /\\-]*)\s*?([M|C])\s*?([0-9]*?)([^0-9]*)$/g;
+                    const regex = /^([a-zA-Z /\\-]*)\s*?([M|C])\s*?([0-9]*?)([^0-9]*)$/g;
                     const arr: RegExpExecArray | null = regex.exec(text);
                     if (isDefined(arr)) {
                         // const name: string = arr[1].trim();
@@ -355,7 +355,7 @@ export class UNECEMessageStructureParser implements MessageStructureParser {
 
                         // check whether the remainder contains a closing hint for a subgroup: -...-++
                         if (remainder.includes("-") && remainder.includes("+")) {
-                            for (let i: number = 0; i < remainder.split("+").length - 1; i++) {
+                            for (let i = 0; i < remainder.split("+").length - 1; i++) {
                                 segStack.pop();
                             }
                         }

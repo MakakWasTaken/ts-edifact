@@ -57,7 +57,7 @@ export abstract class UNECEPageParser {
         }();
     }
 
-    protected extractTextValue(text: string, regex: RegExp, index: number = 0): string {
+    protected extractTextValue(text: string, regex: RegExp, index = 0): string {
         const arr: RegExpExecArray | null = regex.exec(text);
         if (isDefined(arr)) {
             return arr[index];

@@ -112,14 +112,14 @@ describe("Parser", () => {
         });
 
         it("should read characters preceded by the release character as data", () => {
-            let component: string = "";
+            let component = "";
             parser.onComponent = (data: string) => component = data;
             parser.write("SEG+??'");
             expect(component).toEqual("?");
         });
 
         it("should accept sample message with two parsers & same encodings (config is cached)", () => {
-            const msg: string = "UNB+UNOC:3+123:14+123:14+180813:0806+404114++LG'UNH+404114+MSCONS:D:04B:UN:2.1a'";
+            const msg = "UNB+UNOC:3+123:14+123:14+180813:0806+404114++LG'UNH+404114+MSCONS:D:04B:UN:2.1a'";
 
             const config: Configuration = new Configuration({ charset: "UNOC" });
             const parser1: Parser = new Parser(config);

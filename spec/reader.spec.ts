@@ -22,7 +22,7 @@ describe("Edifact Reader", () => {
 
     it("should read document with custom decimal separator", () => {
 
-        let document: string = "";
+        let document = "";
         // custom decimal character in UNA segment!
         document += "UNA:+,? '";
         document += "UNB+UNOA:1+005435656:1+006415160:1+060515:1434+00000000000778'";
@@ -63,7 +63,7 @@ describe("Edifact Reader", () => {
     it("should read document with reported issues", () => {
         const sut: Reader = new Reader("./src/messageSpec");
 
-        let doc: string = "";
+        let doc = "";
         doc += "UNA:+.? '";
         doc += "UNB+UNOC:3+SENDER:ZZZ+RECEIVER:ZZZ+200921:1518+7++++++1'";
         doc += "UNH+1+INVOIC:D:07A:UN:GAVA23'";
