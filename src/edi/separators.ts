@@ -21,7 +21,6 @@ interface Builder {
 }
 
 export class Separators {
-
     componentSeparator: string;
     elementSeparator: string;
     decimalSeparator: string;
@@ -39,14 +38,14 @@ export class Separators {
         releaseIndicator: string | undefined,
         blankSapce: string | undefined,
         segmentTagDelimiter: string | undefined,
-        repetitionElementSeparator: string | undefined) {
-
+        repetitionElementSeparator: string | undefined
+    ) {
         this.componentSeparator = componentSeparator;
         this.elementSeparator = elementSeparator;
         if (decimalSeparator) {
             this.decimalSeparator = decimalSeparator;
         } else {
-            this.decimalSeparator = ".";
+            this.decimalSeparator = '.';
         }
         this.segmentTerminator = segmentTerminator;
         if (releaseIndicator) {
@@ -65,10 +64,24 @@ export class Separators {
 
     public static escapeIfNeeded(separator: string): string {
         let sep: string = separator;
-        if (separator === "+" || separator === "*" || separator === "\\" || separator === "~" || separator === "$"
-            || separator === "(" || separator === ")" || separator === "^" || separator === "?" || separator === "."
-            || separator === "|" || separator === "{" || separator === "}" || separator === "[" || separator === "]") {
-            sep = "\\" + sep;
+        if (
+            separator === '+' ||
+            separator === '*' ||
+            separator === '\\' ||
+            separator === '~' ||
+            separator === '$' ||
+            separator === '(' ||
+            separator === ')' ||
+            separator === '^' ||
+            separator === '?' ||
+            separator === '.' ||
+            separator === '|' ||
+            separator === '{' ||
+            separator === '}' ||
+            separator === '[' ||
+            separator === ']'
+        ) {
+            sep = '\\' + sep;
         }
 
         return sep;
@@ -76,30 +89,37 @@ export class Separators {
 }
 
 export class EdifactSeparatorsBuilder implements Builder {
-
-    private _componentSeparator = ":";
-    private _elementSeparator = "+";
-    private _decimalSeparator = ".";
-    private _releaseIndicator = "?";
-    private _blankSpace = " ";
+    private _componentSeparator = ':';
+    private _elementSeparator = '+';
+    private _decimalSeparator = '.';
+    private _releaseIndicator = '?';
+    private _blankSpace = ' ';
     private _segmentTerminator = "'";
 
-    public componentSeparator(componentSeparator: string): EdifactSeparatorsBuilder {
+    public componentSeparator(
+        componentSeparator: string
+    ): EdifactSeparatorsBuilder {
         this._componentSeparator = componentSeparator;
         return this;
     }
 
-    public elementSeparator(elementSeparator: string): EdifactSeparatorsBuilder {
+    public elementSeparator(
+        elementSeparator: string
+    ): EdifactSeparatorsBuilder {
         this._elementSeparator = elementSeparator;
         return this;
     }
 
-    public decimalSeparator(decimalSeparator: string): EdifactSeparatorsBuilder {
+    public decimalSeparator(
+        decimalSeparator: string
+    ): EdifactSeparatorsBuilder {
         this._decimalSeparator = decimalSeparator;
         return this;
     }
 
-    public releaseIndicator(releaseIndicator: string): EdifactSeparatorsBuilder {
+    public releaseIndicator(
+        releaseIndicator: string
+    ): EdifactSeparatorsBuilder {
         this._releaseIndicator = releaseIndicator;
         return this;
     }
@@ -109,7 +129,9 @@ export class EdifactSeparatorsBuilder implements Builder {
         return this;
     }
 
-    public segmentTerminator(segmentTerminator: string): EdifactSeparatorsBuilder {
+    public segmentTerminator(
+        segmentTerminator: string
+    ): EdifactSeparatorsBuilder {
         this._segmentTerminator = segmentTerminator;
         return this;
     }
@@ -123,40 +145,51 @@ export class EdifactSeparatorsBuilder implements Builder {
             this._releaseIndicator,
             this._blankSpace,
             undefined,
-            undefined);
+            undefined
+        );
 
         return separators;
     }
 }
 
 export class TradacomsSeparatorsBuilder implements Builder {
-    private _componentSeparator = ":";
-    private _elementSeparator = "+";
-    private _decimalSeparator = ".";
-    private _segmentTagDelimiter = "=";
+    private _componentSeparator = ':';
+    private _elementSeparator = '+';
+    private _decimalSeparator = '.';
+    private _segmentTagDelimiter = '=';
     private _segmentTerminator = "'";
 
-    public componentSeparator(componentSeparator: string): TradacomsSeparatorsBuilder {
+    public componentSeparator(
+        componentSeparator: string
+    ): TradacomsSeparatorsBuilder {
         this._componentSeparator = componentSeparator;
         return this;
     }
 
-    public elementSeparator(elementSeparator: string): TradacomsSeparatorsBuilder {
+    public elementSeparator(
+        elementSeparator: string
+    ): TradacomsSeparatorsBuilder {
         this._elementSeparator = elementSeparator;
         return this;
     }
 
-    public decimalSeparator(decimalSeparator: string): TradacomsSeparatorsBuilder {
+    public decimalSeparator(
+        decimalSeparator: string
+    ): TradacomsSeparatorsBuilder {
         this._decimalSeparator = decimalSeparator;
         return this;
     }
 
-    public segmentTagDelimiter(segmentTagDelimiter: string): TradacomsSeparatorsBuilder {
+    public segmentTagDelimiter(
+        segmentTagDelimiter: string
+    ): TradacomsSeparatorsBuilder {
         this._segmentTagDelimiter = segmentTagDelimiter;
         return this;
     }
 
-    public segmentTerminator(segmentTerminator: string): TradacomsSeparatorsBuilder {
+    public segmentTerminator(
+        segmentTerminator: string
+    ): TradacomsSeparatorsBuilder {
         this._segmentTerminator = segmentTerminator;
         return this;
     }
@@ -170,34 +203,43 @@ export class TradacomsSeparatorsBuilder implements Builder {
             undefined,
             undefined,
             this._segmentTagDelimiter,
-            undefined);
+            undefined
+        );
 
         return separators;
     }
 }
 
 export class AnsiX12SeparatorsBuilder implements Builder {
-    private _componentSeparator = ":";
-    private _elementSeparator = "*";
-    private _repetitionElementSeparator = "^";
+    private _componentSeparator = ':';
+    private _elementSeparator = '*';
+    private _repetitionElementSeparator = '^';
     private _segmentTerminator = "'";
 
-    public componentSeparator(componentSeparator: string): AnsiX12SeparatorsBuilder {
+    public componentSeparator(
+        componentSeparator: string
+    ): AnsiX12SeparatorsBuilder {
         this._componentSeparator = componentSeparator;
         return this;
     }
 
-    public elementSeparator(elementSeparator: string): AnsiX12SeparatorsBuilder {
+    public elementSeparator(
+        elementSeparator: string
+    ): AnsiX12SeparatorsBuilder {
         this._elementSeparator = elementSeparator;
         return this;
     }
 
-    public repetitionElementSeparator(repetitionElementSeparator: string): AnsiX12SeparatorsBuilder {
+    public repetitionElementSeparator(
+        repetitionElementSeparator: string
+    ): AnsiX12SeparatorsBuilder {
         this._repetitionElementSeparator = repetitionElementSeparator;
         return this;
     }
 
-    public segmentTerminator(segmentTerminator: string): AnsiX12SeparatorsBuilder {
+    public segmentTerminator(
+        segmentTerminator: string
+    ): AnsiX12SeparatorsBuilder {
         this._segmentTerminator = segmentTerminator;
         return this;
     }
@@ -211,7 +253,8 @@ export class AnsiX12SeparatorsBuilder implements Builder {
             undefined,
             undefined,
             undefined,
-            this._repetitionElementSeparator);
+            this._repetitionElementSeparator
+        );
 
         return separators;
     }

@@ -16,12 +16,12 @@
  * limitations under the License.
  */
 
-import { Configuration } from "./configuration";
-import { Tokenizer } from "./tokenizer";
-import { Validator } from "./validator";
+import { Configuration } from './configuration';
+import { Tokenizer } from './tokenizer';
+import { Validator } from './validator';
 
-import { EventEmitter } from "events";
-import { Separators, EdifactSeparatorsBuilder } from "./edi/separators";
+import { EventEmitter } from 'events';
+import { Separators, EdifactSeparatorsBuilder } from './edi/separators';
 
 enum States {
     EMPTY = 0,
@@ -30,11 +30,10 @@ enum States {
     COMPONENT = 3,
     MODESET = 4,
     DATA = 5,
-    CONTINUED = 6,
+    CONTINUED = 6
 }
 
 export class Parser extends EventEmitter {
-
     private validator: Validator;
     configuration: Configuration;
     private tokenizer: Tokenizer;
@@ -56,29 +55,42 @@ export class Parser extends EventEmitter {
     }
 
     separators(): Separators {
-        const builder: EdifactSeparatorsBuilder = new EdifactSeparatorsBuilder();
-        builder.elementSeparator(String.fromCharCode(this.configuration.config.dataElementSeparator));
-        builder.componentSeparator(String.fromCharCode(this.configuration.config.componentDataSeparator));
-        builder.decimalSeparator(String.fromCharCode(this.configuration.config.decimalMark));
-        builder.releaseIndicator(String.fromCharCode(this.configuration.config.releaseCharacter));
-        builder.segmentTerminator(String.fromCharCode(this.configuration.config.segmentTerminator));
+        const builder: EdifactSeparatorsBuilder =
+            new EdifactSeparatorsBuilder();
+        builder.elementSeparator(
+            String.fromCharCode(this.configuration.config.dataElementSeparator)
+        );
+        builder.componentSeparator(
+            String.fromCharCode(
+                this.configuration.config.componentDataSeparator
+            )
+        );
+        builder.decimalSeparator(
+            String.fromCharCode(this.configuration.config.decimalMark)
+        );
+        builder.releaseIndicator(
+            String.fromCharCode(this.configuration.config.releaseCharacter)
+        );
+        builder.segmentTerminator(
+            String.fromCharCode(this.configuration.config.segmentTerminator)
+        );
         return builder.build();
     }
 
     onOpenSegment(segment: string): void {
-        this.emit("openSegment", segment);
+        this.emit('openSegment', segment);
     }
 
     onCloseSegment(): void {
-        this.emit("closeSegment");
+        this.emit('closeSegment');
     }
 
     onElement(): void {
-        this.emit("element");
+        this.emit('element');
     }
 
     onComponent(data: string): void {
-        this.emit("component", data);
+        this.emit('component', data);
     }
 
     /**
@@ -102,7 +114,7 @@ export class Parser extends EventEmitter {
         // The stream can only be closed if the last segment is complete. This
         // means the parser is currently in a state accepting segment data, but no
         // data was read so far.
-        if (this.state !== States.SEGMENT || this.tokenizer.buffer !== "") {
+        if (this.state !== States.SEGMENT || this.tokenizer.buffer !== '') {
             throw this.errors.incompleteMessage();
         } else {
             this.state = States.EMPTY;
@@ -111,11 +123,13 @@ export class Parser extends EventEmitter {
 
     private una(chunk: string): boolean {
         if (/^UNA.... ./g.test(chunk)) {
-            this.configuration.config.componentDataSeparator = chunk.charCodeAt(3);
-            this.configuration.config.dataElementSeparator   = chunk.charCodeAt(4);
-            this.configuration.config.decimalMark            = chunk.charCodeAt(5);
-            this.configuration.config.releaseCharacter       = chunk.charCodeAt(6);
-            this.configuration.config.segmentTerminator      = chunk.charCodeAt(8);
+            this.configuration.config.componentDataSeparator =
+                chunk.charCodeAt(3);
+            this.configuration.config.dataElementSeparator =
+                chunk.charCodeAt(4);
+            this.configuration.config.decimalMark = chunk.charCodeAt(5);
+            this.configuration.config.releaseCharacter = chunk.charCodeAt(6);
+            this.configuration.config.segmentTerminator = chunk.charCodeAt(8);
 
             return true;
         } else {
@@ -138,33 +152,39 @@ export class Parser extends EventEmitter {
                     // want the parser to detect another UNA header, in such a case, we put it
                     // in the segment state.
                     this.state = States.SEGMENT;
-                    // Continue to read the first segment, otherwise the index increment add
-                    // the end of the loop would cause the parser to skip the first character.
+                // Continue to read the first segment, otherwise the index increment add
+                // the end of the loop would cause the parser to skip the first character.
                 // eslint-disable-next-line no-fallthrough
                 case States.SEGMENT:
                     index = this.tokenizer.segment(chunk, index);
                     // Determine the next parser state
-                    switch (chunk.charCodeAt(index) || this.configuration.config.endOfTag) {
+                    switch (
+                        chunk.charCodeAt(index) ||
+                        this.configuration.config.endOfTag
+                    ) {
                         case this.configuration.config.dataElementSeparator:
                             this.validator.onOpenSegment(this.tokenizer.buffer);
                             this.onOpenSegment(this.tokenizer.buffer);
                             this.state = States.ELEMENT;
-                            this.tokenizer.buffer = "";
+                            this.tokenizer.buffer = '';
                             break;
                         case this.configuration.config.segmentTerminator:
                             this.validator.onOpenSegment(this.tokenizer.buffer);
                             this.onOpenSegment(this.tokenizer.buffer);
-                            this.validator.onCloseSegment("");
+                            this.validator.onCloseSegment('');
                             this.onCloseSegment();
                             this.state = States.SEGMENT;
-                            this.tokenizer.buffer = "";
+                            this.tokenizer.buffer = '';
                             break;
                         case this.configuration.config.endOfTag:
                         case this.configuration.config.carriageReturn:
                         case this.configuration.config.lineFeed:
                             break;
                         default:
-                            throw this.errors.invalidControlAfterSegment(this.tokenizer.buffer, chunk.charAt(index));
+                            throw this.errors.invalidControlAfterSegment(
+                                this.tokenizer.buffer,
+                                chunk.charAt(index)
+                            );
                     }
                     break;
                 case States.ELEMENT:
@@ -175,31 +195,34 @@ export class Parser extends EventEmitter {
                 case States.COMPONENT:
                     // Start reading a new component
                     this.validator.onOpenComponent(this.tokenizer);
-                    // Fall through to process the available component data
+                // Fall through to process the available component data
                 case States.MODESET:
                 case States.DATA:
                     index = this.tokenizer.data(chunk, index);
                     // Determine the next parser state
-                    switch (chunk.charCodeAt(index) || this.configuration.config.endOfTag) {
+                    switch (
+                        chunk.charCodeAt(index) ||
+                        this.configuration.config.endOfTag
+                    ) {
                         case this.configuration.config.componentDataSeparator:
                             this.validator.onCloseComponent(this.tokenizer);
                             this.onComponent(this.tokenizer.buffer);
                             this.state = States.COMPONENT;
-                            this.tokenizer.buffer = "";
+                            this.tokenizer.buffer = '';
                             break;
                         case this.configuration.config.dataElementSeparator:
                             this.validator.onCloseComponent(this.tokenizer);
                             this.onComponent(this.tokenizer.buffer);
                             this.state = States.ELEMENT;
-                            this.tokenizer.buffer = "";
+                            this.tokenizer.buffer = '';
                             break;
                         case this.configuration.config.segmentTerminator:
                             this.validator.onCloseComponent(this.tokenizer);
                             this.onComponent(this.tokenizer.buffer);
-                            this.validator.onCloseSegment("");
+                            this.validator.onCloseSegment('');
                             this.onCloseSegment();
                             this.state = States.SEGMENT;
-                            this.tokenizer.buffer = "";
+                            this.tokenizer.buffer = '';
                             break;
                         case this.configuration.config.decimalMark:
                             this.tokenizer.decimal(chunk, index);
@@ -216,7 +239,10 @@ export class Parser extends EventEmitter {
                             this.state = States.DATA;
                             break;
                         default:
-                            throw this.errors.invalidCharacter(chunk.charAt(index), index);
+                            throw this.errors.invalidCharacter(
+                                chunk.charAt(index),
+                                index
+                            );
                     }
             }
             // Consume the control character
@@ -225,17 +251,20 @@ export class Parser extends EventEmitter {
     }
 
     private errors = {
-        incompleteMessage: function(): Error {
-            return new Error("Cannot close an incomplete message");
+        incompleteMessage: function (): Error {
+            return new Error('Cannot close an incomplete message');
         },
-        invalidCharacter: function(character: string, index: number): Error {
-            let message: string = "";
-            message += "Invalid character " + character;
+        invalidCharacter: function (character: string, index: number): Error {
+            let message: string = '';
+            message += 'Invalid character ' + character;
             message += ` at position ${index}`;
             return new Error(message);
         },
-        invalidControlAfterSegment: function (segment: string, character: string): Error {
-            let message: string = "";
+        invalidControlAfterSegment: function (
+            segment: string,
+            character: string
+        ): Error {
+            let message: string = '';
             message += "Invalid character '" + character;
             message += "' after reading segment name " + segment;
             return new Error(message);

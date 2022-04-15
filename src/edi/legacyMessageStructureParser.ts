@@ -20,35 +20,52 @@ import {
     EdifactMessageSpecification,
     ParsingResultType,
     UNECEMessageStructureParser
-} from "./messageStructureParser";
+} from './messageStructureParser';
 import { UNECEMetaDataPageParser } from './uneceMetaDataPageParser';
 import { UNECEStructurePageParser } from './uneceStructurePageParser';
 
 export class UNECELegacyMessageStructureParser extends UNECEMessageStructureParser {
-
     parseMetaDataPage(page: string): EdifactMessageSpecification {
         const parser: UNECEMetaDataPageParser = new UNECEMetaDataPageParser();
         parser.parse(page);
         return parser.spec;
     }
 
-    parseStructurePage(page: string, spec: EdifactMessageSpecification): string[] {
-        const parser: UNECEStructurePageParser = new UNECEStructurePageParser(spec);
+    parseStructurePage(
+        page: string,
+        spec: EdifactMessageSpecification
+    ): string[] {
+        const parser: UNECEStructurePageParser = new UNECEStructurePageParser(
+            spec
+        );
         parser.parse(page);
         return parser.segmentNames;
     }
 
     loadTypeSpec(): Promise<EdifactMessageSpecification> {
-        const url: string = "./" + this.type + "_c.htm";
+        const url: string = './' + this.type + '_c.htm';
         return this.loadPage(url)
             .then(async (metaDataPage: string) => {
-                const spec: EdifactMessageSpecification = this.parseMetaDataPage(metaDataPage);
-                const structurePage: string = await this.loadPage(`./${this.type}_s.htm`);
-                const segmentNames: string[] = this.parseStructurePage(structurePage, spec);
-                const promises: Promise<EdifactMessageSpecification>[] = segmentNames.map(async name => {
-                    const page: string = await this.loadPage(`../trsd/trsd${name.toLowerCase()}.htm`);
-                    return this.parseSegmentDefinitionPage(name, page, spec);
-                });
+                const spec: EdifactMessageSpecification =
+                    this.parseMetaDataPage(metaDataPage);
+                const structurePage: string = await this.loadPage(
+                    `./${this.type}_s.htm`
+                );
+                const segmentNames: string[] = this.parseStructurePage(
+                    structurePage,
+                    spec
+                );
+                const promises: Promise<EdifactMessageSpecification>[] =
+                    segmentNames.map(async (name) => {
+                        const page: string = await this.loadPage(
+                            `../trsd/trsd${name.toLowerCase()}.htm`
+                        );
+                        return this.parseSegmentDefinitionPage(
+                            name,
+                            page,
+                            spec
+                        );
+                    });
                 return {
                     specObj: spec,
                     promises
@@ -58,10 +75,11 @@ export class UNECELegacyMessageStructureParser extends UNECEMessageStructurePars
                 Promise.all(result.promises)
                     .then(() => result.specObj)
                     .catch((error: Error) => {
-                        console.warn(`Error while processing segment definition promises: Reason ${error.message}`);
+                        console.warn(
+                            `Error while processing segment definition promises: Reason ${error.message}`
+                        );
                         return result.specObj;
                     })
             );
     }
-
 }

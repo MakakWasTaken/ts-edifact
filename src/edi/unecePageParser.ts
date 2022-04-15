@@ -16,15 +16,14 @@
  * limitations under the License.
  */
 
-import { Parser } from "htmlparser2";
-import { UNECEDomHandler } from "./uneceDomHandler";
-import { StateMachine, StateMachineDefinition } from "@initics/tsm";
+import { Parser } from 'htmlparser2';
+import { UNECEDomHandler } from './uneceDomHandler';
+import { StateMachine, StateMachineDefinition } from '@initics/tsm';
 
-import { isDefined } from "../util";
-import { EdifactMessageSpecification } from "./messageStructureParser";
+import { isDefined } from '../util';
+import { EdifactMessageSpecification } from './messageStructureParser';
 
 export abstract class UNECEPageParser {
-
     protected sm: StateMachine;
     protected _spec?: EdifactMessageSpecification;
 
@@ -46,7 +45,7 @@ export abstract class UNECEPageParser {
     }
 
     protected setupHandler(): UNECEDomHandler {
-        return new class extends UNECEDomHandler {
+        return new (class extends UNECEDomHandler {
             public override onOpenTag(): void {
                 //
             }
@@ -54,15 +53,19 @@ export abstract class UNECEPageParser {
             public override onText(): void {
                 //
             }
-        }();
+        })();
     }
 
-    protected extractTextValue(text: string, regex: RegExp, index: number = 0): string {
+    protected extractTextValue(
+        text: string,
+        regex: RegExp,
+        index: number = 0
+    ): string {
         const arr: RegExpExecArray | null = regex.exec(text);
         if (isDefined(arr)) {
             return arr[index];
         }
-        return "";
+        return '';
     }
 
     protected throwInvalidParserState(state: string): void {
@@ -72,5 +75,4 @@ export abstract class UNECEPageParser {
     protected throwCouldNotParsePage(): void {
         throw new Error('Could not parse page');
     }
-
 }

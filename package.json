@@ -1,84 +1,84 @@
 {
-      "name": "ts-edifact",
-      "description": "Edifact parser library",
-      "version": "0.0.14",
-      "type": "commonjs",
-      "main": "lib/index.js",
-      "types": "lib/index.d.ts",
-      "keywords": [
-            "edi",
-            "edifact",
-            "parser"
-      ],
-      "publisher": "Roman Vottner",
-      "preview": true,
-      "readme": "README.md",
-      "author": {
-            "name": "Roman Vottner"
-      },
-      "repository": {
-            "type": "git",
-            "url": "https://github.com/RovoMe/ts-edifact.git"
-      },
-      "homepage": "https://github.com/RovoMe/ts-edifact/README.md",
-      "bugs": {
-            "url": "https://github.com/RovoMe/ts-edifact/-/issues",
-            "email": "rovo@gmx.at"
-      },
-      "scripts": {
-            "clean": "rm -rf ./lib ./dist",
-            "lint": "eslint ./src --ext .ts,.tsx",
-            "build": "tsc -p .",
-            "build:watch": "tsc -p . --watch",
-            "check": "npm run check:tsc",
-            "check:tsc": "tsc -p . --noEmit",
-            "pretest": "npm run lint && npm run build",
-            "test": "jasmine-ts --config=spec/support/jasmine.json",
-            "coverage": "nyc -r lcov -e .ts -x \"*.spec.ts\" jasmine-ts JASMINE_CONFIG_PATH=spec/support/jasmine.json",
-            "prepackage-dev": "npm run test && webpack --mode development",
-            "prepackage": "npm run test && webpack --mode production",
-            "prepare": "npm run build",
-            "prepublishOnly": "npm test && npm run lint",
-            "preversion": "npm run lint",
-            "version": "git add -A src",
-            "postversion": "git push && git push -- tags"
-      },
-      "devDependencies": {
-            "@initics/tsm": "^1.0.2",
-            "@types/events": "3.0.0",
-            "@types/htmlparser2": "^3.10.1",
-            "@types/jasmine": "^3.5.11",
-            "@types/node": "^16.7.10",
-            "@typescript-eslint/eslint-plugin": "^4.30.0",
-            "@typescript-eslint/parser": "^4.30.0",
-            "domhandler": "^5.0.2",
-            "edifact": "^1.2.8",
-            "eslint": "^7.32.0",
-            "eslint-plugin-import": "^2.22.0",
-            "eslint-plugin-jsdoc": "^39.2.1",
-            "events": "^3.1.0",
-            "glob-parent": "^6.0.1",
-            "htmlparser2": "^7.2.0",
-            "inspect-brk": "^0.1.2",
-            "jasmine": "^3.5.0",
-            "jasmine-core": "^3.9.0",
-            "jasmine-node": "^3.0.0",
-            "jasmine-spec-reporter": "^7.0.0",
-            "jasmine-ts": "^0.4.0",
-            "jasmine-ts-console-reporter": "^3.1.1",
-            "nyc": "^15.1.0",
-            "ts-loader": "^9.2.5",
-            "ts-node": "^10.2.1",
-            "tsconfig-paths": "^3.9.0",
-            "typescript": "^4.4.2",
-            "underscore": "^1.13.1",
-            "webpack": "^5.52.0",
-            "webpack-cli": "^4.8.0"
-      },
-      "dependencies": {
-            "axios": "^0.21.1"
-      },
-      "files": [
-            "lib/**/*"
-      ]
+    "name": "ts-edifact",
+    "description": "Edifact parser library",
+    "version": "0.0.14",
+    "type": "commonjs",
+    "main": "lib/index.js",
+    "types": "lib/index.d.ts",
+    "keywords": [
+        "edi",
+        "edifact",
+        "parser"
+    ],
+    "publisher": "Roman Vottner",
+    "preview": true,
+    "readme": "README.md",
+    "author": {
+        "name": "Roman Vottner"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/RovoMe/ts-edifact.git"
+    },
+    "homepage": "https://github.com/RovoMe/ts-edifact/README.md",
+    "bugs": {
+        "url": "https://github.com/RovoMe/ts-edifact/-/issues",
+        "email": "rovo@gmx.at"
+    },
+    "scripts": {
+        "clean": "rm -rf ./lib ./dist",
+        "lint": "eslint ./src --ext .ts,.tsx",
+        "build": "tsc -p .",
+        "build:watch": "tsc -p . --watch",
+        "check": "npm run check:tsc",
+        "check:tsc": "tsc -p . --noEmit",
+        "pretest": "npm run lint && npm run build",
+        "test": "jasmine-ts --config=spec/support/jasmine.json",
+        "coverage": "nyc -r lcov -e .ts -x \"*.spec.ts\" jasmine-ts JASMINE_CONFIG_PATH=spec/support/jasmine.json",
+        "prepackage-dev": "npm run test && webpack --mode development",
+        "prepackage": "npm run test && webpack --mode production",
+        "prepare": "npm run build",
+        "prepublishOnly": "npm test && npm run lint",
+        "preversion": "npm run lint",
+        "version": "git add -A src",
+        "postversion": "git push && git push -- tags"
+    },
+    "devDependencies": {
+        "@initics/tsm": "^1.0.2",
+        "@types/events": "3.0.0",
+        "@types/htmlparser2": "^3.10.1",
+        "@types/jasmine": "^3.5.11",
+        "@types/node": "^16.7.10",
+        "@typescript-eslint/eslint-plugin": "^4.30.0",
+        "@typescript-eslint/parser": "^4.30.0",
+        "domhandler": "^5.0.2",
+        "edifact": "^1.2.8",
+        "eslint": "^7.32.0",
+        "eslint-plugin-import": "^2.22.0",
+        "eslint-plugin-jsdoc": "^39.2.1",
+        "events": "^3.1.0",
+        "glob-parent": "^6.0.1",
+        "htmlparser2": "^7.2.0",
+        "inspect-brk": "^0.1.2",
+        "jasmine": "^3.5.0",
+        "jasmine-core": "^3.9.0",
+        "jasmine-node": "^3.0.0",
+        "jasmine-spec-reporter": "^7.0.0",
+        "jasmine-ts": "^0.4.0",
+        "jasmine-ts-console-reporter": "^3.1.1",
+        "nyc": "^15.1.0",
+        "ts-loader": "^9.2.5",
+        "ts-node": "^10.2.1",
+        "tsconfig-paths": "^3.9.0",
+        "typescript": "^4.4.2",
+        "underscore": "^1.13.1",
+        "webpack": "^5.52.0",
+        "webpack-cli": "^4.8.0"
+    },
+    "dependencies": {
+        "axios": "^0.21.1"
+    },
+    "files": [
+        "lib/**/*"
+    ]
 }

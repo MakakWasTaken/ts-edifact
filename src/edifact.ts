@@ -16,10 +16,10 @@
  * limitations under the License.
  */
 
-import { ResultType } from "./reader";
+import { ResultType } from './reader';
 
 export function sanitizeFloat(str: string, decimalSymbol: string): number {
-    const updatedStr: string = str.replace(decimalSymbol, ".");
+    const updatedStr: string = str.replace(decimalSymbol, '.');
     return parseFloat(updatedStr);
 }
 
@@ -27,178 +27,203 @@ export interface Segment {
     tag: string;
 }
 
-export function toSegmentObject(data: ResultType, version: string, decimalSeparator: string): Segment {
+export function toSegmentObject(
+    data: ResultType,
+    version: string,
+    decimalSeparator: string
+): Segment {
     switch (data.name) {
-        case "AJT":
+        case 'AJT':
             return new AdjustmentDetails(data);
-        case "ALC":
+        case 'ALC':
             return new AllowanceOrCharge(data);
-        case "ALI":
+        case 'ALI':
             return new AdditionalInformation(data);
-        case "APR":
+        case 'APR':
             return new AdditionalPriceInformation(data, decimalSeparator);
-        case "ARD":
+        case 'ARD':
             return new MonetaryAmountFunction(data);
-        case "AUT":
+        case 'AUT':
             return new AuthenticationResult(data);
-        case "BGM":
+        case 'BGM':
             return new BeginOfMessage(data);
-        case "BUS":
+        case 'BUS':
             return new BusinessFunction(data);
-        case "CAV":
+        case 'CAV':
             return new CharacteristicValue(data);
-        case "CCI":
+        case 'CCI':
             return new CharacteristicClassID(data);
-        case "CED":
+        case 'CED':
             return new ComputerEnvironmentDetails(data);
-        case "CNT":
+        case 'CNT':
             return new ControlTotal(data, decimalSeparator);
-        case "COD":
+        case 'COD':
             return new ComponentDetails(data);
-        case "COM":
+        case 'COM':
             return new CommunicationContact(data);
-        case "CPS":
+        case 'CPS':
             return new ConsignmentPackingSequence(data);
-        case "CTA":
+        case 'CTA':
             return new ContactInformation(data);
-        case "CUX":
+        case 'CUX':
             return new Currencies(data, decimalSeparator);
-        case "DGS":
+        case 'DGS':
             return new DangerousGoods(data);
-        case "DLM":
+        case 'DLM':
             return new DeliveryLimitations(data);
-        case "DMS":
+        case 'DMS':
             return new MessageSummary(data);
-        case "DOC":
+        case 'DOC':
             return new MessageDetails(data);
-        case "DTM":
+        case 'DTM':
             return new DateTimePeriod(data);
-        case "EFI":
+        case 'EFI':
             return new ExternalFileLinkIdentification(data);
-        case "EQA":
+        case 'EQA':
             return new AttachedEquipment(data);
-        case "EQD":
+        case 'EQD':
             return new EquipmentDetails(data);
-        case "ERC":
+        case 'ERC':
             return new ApplicationErrorInformation(data);
-        case "FII":
+        case 'FII':
             return new FinancialInstitutionInformation(data);
-        case "FTX":
+        case 'FTX':
             return new FreeText(data);
-        case "GEI":
+        case 'GEI':
             return new ProcessingInformation(data);
-        case "GIN":
+        case 'GIN':
             return new GoodsIdentityNumber(data);
-        case "GIR":
+        case 'GIR':
             return new RelatedInformationNumbers(data);
-        case "GIS": // removed since D02B
+        case 'GIS': // removed since D02B
             return new GeneralIndicator(data);
-        case "HAN":
+        case 'HAN':
             return new HandlingInstructions(data);
-        case "HYN":
+        case 'HYN':
             return new HierarchyInformation(data);
-        case "IDE":
+        case 'IDE':
             return new Identity(data);
-        case "IMD":
+        case 'IMD':
             return new ItemDescription(data);
-        case "INP":
+        case 'INP':
             return new PartiesAndInstruction(data);
-        case "IRQ":
+        case 'IRQ':
             return new InformationRequired(data);
-        case "LIN":
+        case 'LIN':
             return new LineItem(data);
-        case "LOC":
+        case 'LOC':
             return new LocationIdentification(data);
-        case "MEA":
+        case 'MEA':
             return new Measurements(data);
-        case "MKS":
+        case 'MKS':
             return new MarketSalesChannelInformation(data);
-        case "MOA":
+        case 'MOA':
             return new MonetaryAmount(data, decimalSeparator);
-        case "MTD":
+        case 'MTD':
             return new MaintenanceOperationDetails(data);
-        case "NAD":
+        case 'NAD':
             return new NameAndAddress(data);
-        case "PAC":
+        case 'PAC':
             return new Package(data);
-        case "PAI":
+        case 'PAI':
             return new PaymentInstructions(data);
-        case "PAT": // removed since D02B
+        case 'PAT': // removed since D02B
             return new PaymentTermsBasis(data);
-        case "PCD":
+        case 'PCD':
             return new PercentageDetails(data, decimalSeparator);
-        case "PCI":
+        case 'PCI':
             return new PackageIdentification(data);
-        case "PGI":
+        case 'PGI':
             return new ProductGroupInformation(data);
-        case "PIA":
+        case 'PIA':
             return new AdditionalProductId(data);
-        case "PRI":
+        case 'PRI':
             return new PriceDetails(data, decimalSeparator);
-        case "PYT":
+        case 'PYT':
             return new PaymentTerms(data);
-        case "QTY":
+        case 'QTY':
             return new Quantity(data);
-        case "QVR":
+        case 'QVR':
             return new QuantityVariances(data, decimalSeparator);
-        case "RCS":
+        case 'RCS':
             return new RequirementsAndConditions(data);
-        case "RFF":
+        case 'RFF':
             return new Reference(data);
-        case "RJL":
+        case 'RJL':
             return new AccountingJournalIdentification(data);
-        case "RNG":
+        case 'RNG':
             return new RangeDetails(data, decimalSeparator);
-        case "RTE":
+        case 'RTE':
             return new RateDetails(data, decimalSeparator);
-        case "SEL":
+        case 'SEL':
             return new SealNumber(data);
-        case "SCC":
+        case 'SCC':
             return new SchedulingConditions(data);
-        case "SEQ":
+        case 'SEQ':
             return new SequenceDetails(data);
-        case "SGP":
+        case 'SGP':
             return new SplitGoodsPlacement(data);
-        case "STS":
+        case 'STS':
             return new Status(data);
-        case "TAX":
+        case 'TAX':
             return new TaxDetails(data);
-        case "TDT":
+        case 'TDT':
             // eslint-disable-next-line no-case-declarations
             const lversion: string = version.toLowerCase();
-            if (lversion === "d18b" || lversion === "d18a"
-            || lversion === "d17b" || lversion === "d17a"
-            || lversion === "d16b" || lversion === "d16a"
-            || lversion === "d15b" || lversion === "d15a"
-            || lversion === "d14b" || lversion === "d14a"
-            || lversion === "d13b" || lversion === "d13a"
-            || lversion === "d12b" || lversion === "d12a"
-            || lversion === "d11b" || lversion === "d11a") {
+            if (
+                lversion === 'd18b' ||
+                lversion === 'd18a' ||
+                lversion === 'd17b' ||
+                lversion === 'd17a' ||
+                lversion === 'd16b' ||
+                lversion === 'd16a' ||
+                lversion === 'd15b' ||
+                lversion === 'd15a' ||
+                lversion === 'd14b' ||
+                lversion === 'd14a' ||
+                lversion === 'd13b' ||
+                lversion === 'd13a' ||
+                lversion === 'd12b' ||
+                lversion === 'd12a' ||
+                lversion === 'd11b' ||
+                lversion === 'd11a'
+            ) {
                 return new TransportInformationD11a(data);
-            } else if (version === "d10b" || version === "d10a"
-            || lversion === "d09b" || lversion === "d09a"
-            || lversion === "d08b" || lversion === "d08a"
-            || lversion === "d07b" || lversion === "d07a"
-            || lversion === "d06b" || lversion === "d06a"
-            || lversion === "d05b" || lversion === "d05a"
-            || lversion === "d04b" || lversion === "d04a"
-            || lversion === "d03b" || lversion === "d03a"
-            || lversion === "d02b" || lversion === "d02a") {
+            } else if (
+                version === 'd10b' ||
+                version === 'd10a' ||
+                lversion === 'd09b' ||
+                lversion === 'd09a' ||
+                lversion === 'd08b' ||
+                lversion === 'd08a' ||
+                lversion === 'd07b' ||
+                lversion === 'd07a' ||
+                lversion === 'd06b' ||
+                lversion === 'd06a' ||
+                lversion === 'd05b' ||
+                lversion === 'd05a' ||
+                lversion === 'd04b' ||
+                lversion === 'd04a' ||
+                lversion === 'd03b' ||
+                lversion === 'd03a' ||
+                lversion === 'd02b' ||
+                lversion === 'd02a'
+            ) {
                 return new TransportInformationD02b(data);
             } else {
                 return new DetailsOfTransport(data);
             }
-        case "TMD":
+        case 'TMD':
             return new TransportMovementDetails(data);
-        case "TOD":
+        case 'TOD':
             return new TermsOfDeliveryOrTransport(data);
-        case "TSR":
+        case 'TSR':
             return new TransportServiceRequirements(data);
-        case "UNH":
+        case 'UNH':
             return new MessageHeader(data);
-        case "UNS":
+        case 'UNS':
             return new SectionControl(data);
-        case "UNT":
+        case 'UNT':
             return new MessageTrailer(data);
         default:
             throw new Error(`Unsupported segment: ${data.name}`);
@@ -212,8 +237,7 @@ export function toSegmentObject(data: ResultType, version: string, decimalSepara
 // AJT
 
 export class AdjustmentDetails implements Segment {
-
-    tag = "AJT";
+    tag = 'AJT';
 
     adjustmentReasonDescriptionCode: string;
     lineItemIdentifier: string | undefined;
@@ -255,8 +279,7 @@ class SpecialServicesIdentification {
 }
 
 export class AllowanceOrCharge implements Segment {
-
-    tag = "ALC";
+    tag = 'ALC';
 
     allowanceOrChargeCodeQualifier: string;
     allowanceOrChargeInformation: AllowanceOrChargeInformation | undefined;
@@ -266,8 +289,9 @@ export class AllowanceOrCharge implements Segment {
 
     constructor(data: ResultType) {
         this.allowanceOrChargeCodeQualifier = data.elements[0][0];
-        if  (data.elements.length > 1) {
-            this.allowanceOrChargeInformation = new AllowanceOrChargeInformation(data.elements[1]);
+        if (data.elements.length > 1) {
+            this.allowanceOrChargeInformation =
+                new AllowanceOrChargeInformation(data.elements[1]);
         }
         if (data.elements.length > 2) {
             this.settlementMeansCode = data.elements[2][0];
@@ -276,7 +300,8 @@ export class AllowanceOrCharge implements Segment {
             this.calculationSequenceCode = data.elements[3][0];
         }
         if (data.elements.length > 4) {
-            this.specialServicesIdentification = new SpecialServicesIdentification(data.elements[4]);
+            this.specialServicesIdentification =
+                new SpecialServicesIdentification(data.elements[4]);
         }
     }
 }
@@ -284,8 +309,7 @@ export class AllowanceOrCharge implements Segment {
 // ALI
 
 export class AdditionalInformation implements Segment {
-
-    tag = "ALI";
+    tag = 'ALI';
 
     countryOfOriginIdentifier: string | undefined;
     dutyRegimeTypeCode: string | undefined;
@@ -347,8 +371,7 @@ class ReasonForChange {
 }
 
 export class AdditionalPriceInformation implements Segment {
-
-    tag = "APR";
+    tag = 'APR';
 
     tradeClassCode: string | undefined;
     priceMultiplierInformation: PriceMultiplierInformation | undefined;
@@ -359,7 +382,10 @@ export class AdditionalPriceInformation implements Segment {
             this.tradeClassCode = data.elements[0][0];
         }
         if (data.elements.length > 1) {
-            this.priceMultiplierInformation = new PriceMultiplierInformation(data.elements[1], decimalSeparator);
+            this.priceMultiplierInformation = new PriceMultiplierInformation(
+                data.elements[1],
+                decimalSeparator
+            );
         }
         if (data.elements.length > 2) {
             this.reasonForChange = new ReasonForChange(data.elements[2]);
@@ -398,18 +424,20 @@ class MonetaryAmountFunctionDetail {
 }
 
 export class MonetaryAmountFunction implements Segment {
-
-    tag = "ARD";
+    tag = 'ARD';
 
     monetaryAmountFunction: MonetaryAmountFunctionData | undefined;
     monetaryAmountFunctionDetail: MonetaryAmountFunctionDetail | undefined;
 
     constructor(data: ResultType) {
         if (data.elements.length > 0) {
-            this.monetaryAmountFunction = new MonetaryAmountFunctionData(data.elements[0]);
+            this.monetaryAmountFunction = new MonetaryAmountFunctionData(
+                data.elements[0]
+            );
         }
         if (data.elements.length > 1) {
-            this.monetaryAmountFunctionDetail = new MonetaryAmountFunctionDetail(data.elements[1]);
+            this.monetaryAmountFunctionDetail =
+                new MonetaryAmountFunctionDetail(data.elements[1]);
         }
     }
 }
@@ -417,8 +445,7 @@ export class MonetaryAmountFunction implements Segment {
 // AUT
 
 export class AuthenticationResult implements Segment {
-
-    tag = "AUT";
+    tag = 'AUT';
 
     validationResultText: string;
     validationKeyIdentifier: string | undefined;
@@ -460,8 +487,7 @@ class MessageIdentification {
 }
 
 export class BeginOfMessage implements Segment {
-
-    tag = "BGM";
+    tag = 'BGM';
 
     messageName: MessageName | undefined;
     messageIdentification: MessageIdentification | undefined;
@@ -475,7 +501,9 @@ export class BeginOfMessage implements Segment {
             this.messageName = new MessageName(data.elements[0]);
         }
         if (data.elements.length > 1) {
-            this.messageIdentification = new MessageIdentification(data.elements[1]);
+            this.messageIdentification = new MessageIdentification(
+                data.elements[1]
+            );
         }
         if (data.elements.length > 2) {
             this.messageFunctionCode = data.elements[2][0];
@@ -523,8 +551,7 @@ class BankOperation {
 }
 
 export class BusinessFunction implements Segment {
-
-    tag = "BUS";
+    tag = 'BUS';
 
     businessFunction: BusinessFunctionData | undefined;
     geographicAreaCode: string | undefined;
@@ -570,13 +597,14 @@ class CharacteristicValueData {
 }
 
 export class CharacteristicValue implements Segment {
-
-    tag = "CAV";
+    tag = 'CAV';
 
     characteristicValue: CharacteristicValueData;
 
     constructor(data: ResultType) {
-        this.characteristicValue = new CharacteristicValueData(data.elements[0]);
+        this.characteristicValue = new CharacteristicValueData(
+            data.elements[0]
+        );
     }
 }
 
@@ -599,8 +627,7 @@ class CharacteristicDescription {
 }
 
 export class CharacteristicClassID implements Segment {
-
-    tag = "CCI";
+    tag = 'CCI';
 
     classTypeCode: string | undefined;
     measurementDetails: MeasurementDetails | undefined;
@@ -615,7 +642,9 @@ export class CharacteristicClassID implements Segment {
             this.measurementDetails = new MeasurementDetails(data.elements[1]);
         }
         if (data.elements.length > 2) {
-            this.characteristicDescription = new CharacteristicDescription(data.elements[2]);
+            this.characteristicDescription = new CharacteristicDescription(
+                data.elements[2]
+            );
         }
         if (data.elements.length > 3) {
             this.characteristicRelevanceCode = data.elements[3][0];
@@ -626,7 +655,6 @@ export class CharacteristicClassID implements Segment {
 // CED
 
 class ComputerEnviornmentIdentification {
-
     computerEnvironmentNameCode: string | undefined;
     codeListIdentificationCode: string | undefined;
     codeListResponsibleAgencyCode: string | undefined;
@@ -647,8 +675,7 @@ class ComputerEnviornmentIdentification {
 }
 
 export class ComputerEnvironmentDetails implements Segment {
-
-    tag = "CED";
+    tag = 'CED';
 
     computerEnvironmentDetailsCodeQualifier: string;
     computerEnviornmentIdentification: ComputerEnviornmentIdentification;
@@ -656,7 +683,8 @@ export class ComputerEnvironmentDetails implements Segment {
 
     constructor(data: ResultType) {
         this.computerEnvironmentDetailsCodeQualifier = data.elements[0][0];
-        this.computerEnviornmentIdentification = new ComputerEnviornmentIdentification(data.elements[1]);
+        this.computerEnviornmentIdentification =
+            new ComputerEnviornmentIdentification(data.elements[1]);
         if (data.elements.length > 3) {
             this.fileGenerationCommandName = data.elements[3][0];
         }
@@ -678,8 +706,7 @@ class Control {
 }
 
 export class ControlTotal implements Segment {
-
-    tag = "CNT";
+    tag = 'CNT';
 
     control: Control;
 
@@ -719,8 +746,7 @@ class ComponentMaterial {
 }
 
 export class ComponentDetails implements Segment {
-
-    tag = "COD";
+    tag = 'COD';
 
     typeOfUnit: TypeOfUnit | undefined;
     componentMaterial: ComponentMaterial | undefined;
@@ -748,21 +774,21 @@ class CommunicationContactData {
 }
 
 export class CommunicationContact implements Segment {
-
-    tag = "COM";
+    tag = 'COM';
 
     communicationContact: CommunicationContactData;
 
     constructor(data: ResultType) {
-        this.communicationContact = new CommunicationContactData(data.elements[0]);
+        this.communicationContact = new CommunicationContactData(
+            data.elements[0]
+        );
     }
 }
 
 // CPS
 
 export class ConsignmentPackingSequence implements Segment {
-
-    tag = "CPS";
+    tag = 'CPS';
 
     hierarchicalStructureLevelIdentifier: string;
     hierarchicalStructureParentIdentifier: string | undefined;
@@ -792,8 +818,7 @@ class DepartmentOrEmployeeDetails {
 }
 
 export class ContactInformation implements Segment {
-
-    tag = "CTA";
+    tag = 'CTA';
 
     contactFunctionCode: string | undefined;
     departmentOrEmployeeDetails: DepartmentOrEmployeeDetails | undefined;
@@ -803,7 +828,9 @@ export class ContactInformation implements Segment {
             this.contactFunctionCode = data.elements[0][0];
         }
         if (data.elements.length > 1) {
-            this.departmentOrEmployeeDetails = new DepartmentOrEmployeeDetails(data.elements[1]);
+            this.departmentOrEmployeeDetails = new DepartmentOrEmployeeDetails(
+                data.elements[1]
+            );
         }
     }
 }
@@ -827,8 +854,7 @@ class CurrencyDetails {
 }
 
 export class Currencies implements Segment {
-
-    tag = "CUX";
+    tag = 'CUX';
 
     currencyDetails1: CurrencyDetails | undefined;
     currencyDetails2: CurrencyDetails | undefined;
@@ -843,7 +869,10 @@ export class Currencies implements Segment {
             this.currencyDetails2 = new CurrencyDetails(data.elements[1]);
         }
         if (data.elements.length > 2) {
-            this.currencyExchangeRate = sanitizeFloat(data.elements[2][0], decimalSymbol);
+            this.currencyExchangeRate = sanitizeFloat(
+                data.elements[2][0],
+                decimalSymbol
+            );
         }
         if (data.elements.length > 3) {
             this.exchangeRateCurrencyMarketIdentifier = data.elements[3][0];
@@ -912,18 +941,21 @@ class DangerousGoodsLabel {
 }
 
 export class DangerousGoods implements Segment {
-
-    tag = "DGS";
+    tag = 'DGS';
 
     dangerousGoodsRegulationsCode: string;
     hazardCode: HazardCode | undefined;
     undgInformation: UnitedNationsDagneoursGoodsInformation | undefined;
-    dangerousGoodsShipmentFlashpoint: DangerousGoodsShipmentFlashpoint | undefined;
+    dangerousGoodsShipmentFlashpoint:
+        | DangerousGoodsShipmentFlashpoint
+        | undefined;
     packagingDangerLevelCode: string | undefined;
     emergencyProcedureForShipsIdentifier: string | undefined;
     hazardMedicalFirstAidGuideIdentifier: string | undefined;
     transportEmergencyCardIdentifier: string | undefined;
-    hazardIdentificationPlacardDetails: HazardIdentificationPlacardDetails | undefined;
+    hazardIdentificationPlacardDetails:
+        | HazardIdentificationPlacardDetails
+        | undefined;
     dangerousGoodsLabel: DangerousGoodsLabel | undefined;
     packingInstructionTypeCode: string | undefined;
     hazardousMeansOfTransportCategoryCode: string | undefined;
@@ -935,10 +967,13 @@ export class DangerousGoods implements Segment {
             this.hazardCode = new HazardCode(data.elements[1]);
         }
         if (data.elements.length > 2) {
-            this.undgInformation = new UnitedNationsDagneoursGoodsInformation(data.elements[2]);
+            this.undgInformation = new UnitedNationsDagneoursGoodsInformation(
+                data.elements[2]
+            );
         }
         if (data.elements.length > 3) {
-            this.dangerousGoodsShipmentFlashpoint = new DangerousGoodsShipmentFlashpoint(data.elements[3]);
+            this.dangerousGoodsShipmentFlashpoint =
+                new DangerousGoodsShipmentFlashpoint(data.elements[3]);
         }
         if (data.elements.length > 4) {
             this.packagingDangerLevelCode = data.elements[4][0];
@@ -953,10 +988,13 @@ export class DangerousGoods implements Segment {
             this.transportEmergencyCardIdentifier = data.elements[7][0];
         }
         if (data.elements.length > 8) {
-            this.hazardIdentificationPlacardDetails = new HazardIdentificationPlacardDetails(data.elements[8]);
+            this.hazardIdentificationPlacardDetails =
+                new HazardIdentificationPlacardDetails(data.elements[8]);
         }
         if (data.elements.length > 9) {
-            this.dangerousGoodsLabel = new DangerousGoodsLabel(data.elements[9]);
+            this.dangerousGoodsLabel = new DangerousGoodsLabel(
+                data.elements[9]
+            );
         }
         if (data.elements.length > 10) {
             this.packingInstructionTypeCode = data.elements[10][0];
@@ -965,7 +1003,8 @@ export class DangerousGoods implements Segment {
             this.hazardousMeansOfTransportCategoryCode = data.elements[11][0];
         }
         if (data.elements.length > 12) {
-            this.hazardousCargoTransportAuthorizationCode = data.elements[12][0];
+            this.hazardousCargoTransportAuthorizationCode =
+                data.elements[12][0];
         }
     }
 }
@@ -973,8 +1012,7 @@ export class DangerousGoods implements Segment {
 // DLM
 
 export class DeliveryLimitations implements Segment {
-
-    tag = "DLM";
+    tag = 'DLM';
 
     backOrderArrangementTypeCode: string | undefined;
     instruction: Instruction | undefined;
@@ -989,7 +1027,8 @@ export class DeliveryLimitations implements Segment {
             this.instruction = new Instruction(data.elements[1]);
         }
         if (data.elements.length > 2) {
-            this.specialServicesIdentification = new SpecialServicesIdentification(data.elements[2]);
+            this.specialServicesIdentification =
+                new SpecialServicesIdentification(data.elements[2]);
         }
         if (data.elements.length > 3) {
             this.substitutionConditionCode = data.elements[3][0];
@@ -1000,8 +1039,7 @@ export class DeliveryLimitations implements Segment {
 // DMS
 
 export class MessageSummary implements Segment {
-
-    tag = "DMS";
+    tag = 'DMS';
 
     messageIdentification: MessageIdentification | undefined;
     messageName: MessageName | undefined;
@@ -1009,10 +1047,12 @@ export class MessageSummary implements Segment {
 
     constructor(data: ResultType) {
         if (data.elements.length > 0) {
-            this.messageIdentification = new MessageIdentification(data.elements[0]);
+            this.messageIdentification = new MessageIdentification(
+                data.elements[0]
+            );
         }
         if (data.elements.length > 1) {
-            this.messageName = new MessageName (data.elements[1]);
+            this.messageName = new MessageName(data.elements[1]);
         }
         if (data.elements.length > 2) {
             this.itemTotalQuantity = parseInt(data.elements[2][0]);
@@ -1041,8 +1081,7 @@ class MessageDetailsData {
 }
 
 export class MessageDetails implements Segment {
-
-    tag = "DOC";
+    tag = 'DOC';
 
     messageName: MessageName;
     messageDetails: MessageDetailsData | undefined;
@@ -1062,7 +1101,9 @@ export class MessageDetails implements Segment {
             this.documentCopiesRequiredQuantity = parseInt(data.elements[3][0]);
         }
         if (data.elements.length > 4) {
-            this.doucmentOriginalsRequiredQuantity =  parseInt(data.elements[4][0]);
+            this.doucmentOriginalsRequiredQuantity = parseInt(
+                data.elements[4][0]
+            );
         }
     }
 }
@@ -1070,8 +1111,7 @@ export class MessageDetails implements Segment {
 // DTM
 
 export class DateTimePeriod implements Segment {
-
-    tag = "DTM";
+    tag = 'DTM';
 
     dateTimeOrPeriodFunctionCodeQualifier: string;
     dateTimeOrPeriodText: string | undefined;
@@ -1091,7 +1131,6 @@ export class DateTimePeriod implements Segment {
 // EFI
 
 class FileIdentification {
-
     fileName: string | undefined;
     itemDescription: string | undefined;
 
@@ -1102,7 +1141,6 @@ class FileIdentification {
 }
 
 class FileDetails {
-
     fileFormatName: string;
     versionIdentifier: string | undefined;
     dataFormatDescriptionCode: string | undefined;
@@ -1112,13 +1150,12 @@ class FileDetails {
         this.fileFormatName = data[0];
         this.versionIdentifier = data[1];
         this.dataFormatDescriptionCode = data[2];
-        this.dataFormatDescription =  data[3];
+        this.dataFormatDescription = data[3];
     }
 }
 
 export class ExternalFileLinkIdentification implements Segment {
-
-    tag = "EFI";
+    tag = 'EFI';
 
     fileIdentification: FileIdentification;
     fileDetails: FileDetails | undefined;
@@ -1142,8 +1179,7 @@ export class ExternalFileLinkIdentification implements Segment {
 // EQA
 
 export class AttachedEquipment implements Segment {
-
-    tag = "EQA";
+    tag = 'EQA';
 
     equipmentTypeCodeQualifier: string;
     equipmentIdentification: EquipmentIdentification | undefined;
@@ -1151,7 +1187,9 @@ export class AttachedEquipment implements Segment {
     constructor(data: ResultType) {
         this.equipmentTypeCodeQualifier = data.elements[0][0];
         if (data.elements.length > 1) {
-            this.equipmentIdentification = new EquipmentIdentification(data.elements[1]);
+            this.equipmentIdentification = new EquipmentIdentification(
+                data.elements[1]
+            );
         }
     }
 }
@@ -1187,8 +1225,7 @@ class EquipmentSizeAndType {
 }
 
 export class EquipmentDetails implements Segment {
-
-    tag = "EQD";
+    tag = 'EQD';
 
     equipmentTypeCodeQualifier: string;
     equipmentIdentification: EquipmentIdentification | undefined;
@@ -1200,10 +1237,14 @@ export class EquipmentDetails implements Segment {
     constructor(data: ResultType) {
         this.equipmentTypeCodeQualifier = data.elements[0][0];
         if (data.elements.length > 1) {
-            this.equipmentIdentification = new EquipmentIdentification(data.elements[1]);
+            this.equipmentIdentification = new EquipmentIdentification(
+                data.elements[1]
+            );
         }
         if (data.elements.length > 2) {
-            this.equipmentSizeAndType = new EquipmentSizeAndType(data.elements[2]);
+            this.equipmentSizeAndType = new EquipmentSizeAndType(
+                data.elements[2]
+            );
         }
         if (data.elements.length > 3) {
             this.equipmentSupplierCode = data.elements[3][0];
@@ -1232,13 +1273,14 @@ class ApplicationErrorDetail {
 }
 
 export class ApplicationErrorInformation implements Segment {
-
-    tag = "ERC";
+    tag = 'ERC';
 
     applicationErrorDetail: ApplicationErrorDetail;
 
     constructor(data: ResultType) {
-        this.applicationErrorDetail = new ApplicationErrorDetail(data.elements[0]);
+        this.applicationErrorDetail = new ApplicationErrorDetail(
+            data.elements[0]
+        );
     }
 }
 
@@ -1281,8 +1323,7 @@ class InstitutionIdentification {
 }
 
 export class FinancialInstitutionInformation implements Segment {
-
-    tag = "FII";
+    tag = 'FII';
 
     partyFunctionCodeQualifier: string;
     accountHolderIdentification: AccountHolderIdentification | undefined;
@@ -1292,10 +1333,14 @@ export class FinancialInstitutionInformation implements Segment {
     constructor(data: ResultType) {
         this.partyFunctionCodeQualifier = data.elements[0][0];
         if (data.elements.length > 1) {
-            this.accountHolderIdentification = new AccountHolderIdentification(data.elements[1]);
+            this.accountHolderIdentification = new AccountHolderIdentification(
+                data.elements[1]
+            );
         }
         if (data.elements.length > 2) {
-            this.institutionIdentification = new InstitutionIdentification(data.elements[2]);
+            this.institutionIdentification = new InstitutionIdentification(
+                data.elements[2]
+            );
         }
         if (data.elements.length > 3) {
             this.countryNameCode = data.elements[3][0];
@@ -1334,8 +1379,7 @@ class TextLiteral {
 }
 
 export class FreeText implements Segment {
-
-    tag = "FTX";
+    tag = 'FTX';
 
     textSubjectCodeQualifier: string;
     freeTextFunctionCode: string | undefined;
@@ -1379,17 +1423,18 @@ class ProcessingIndicator {
 }
 
 export class ProcessingInformation implements Segment {
-
-    tag = "GEI";
+    tag = 'GEI';
 
     processingInformationCodeQualifier: string;
     processingIndicator: ProcessingIndicator | undefined;
     processTypeDescriptionCode: string | undefined;
 
     constructor(data: ResultType) {
-        this. processingInformationCodeQualifier = data.elements[0][0];
+        this.processingInformationCodeQualifier = data.elements[0][0];
         if (data.elements.length > 1) {
-            this.processingIndicator = new ProcessingIndicator(data.elements[1]);
+            this.processingIndicator = new ProcessingIndicator(
+                data.elements[1]
+            );
         }
         if (data.elements.length > 2) {
             this.processTypeDescriptionCode = data.elements[2][0];
@@ -1410,8 +1455,7 @@ class IdentityNumberRange {
 }
 
 export class GoodsIdentityNumber implements Segment {
-
-    tag = "GIN";
+    tag = 'GIN';
 
     objectIdentificationCodeQualifier: string;
     identityNumberRange1: IdentityNumberRange;
@@ -1424,16 +1468,24 @@ export class GoodsIdentityNumber implements Segment {
         this.objectIdentificationCodeQualifier = data.elements[0][0];
         this.identityNumberRange1 = new IdentityNumberRange(data.elements[1]);
         if (data.elements.length > 2) {
-            this.identityNumberRange2 = new IdentityNumberRange(data.elements[2]);
+            this.identityNumberRange2 = new IdentityNumberRange(
+                data.elements[2]
+            );
         }
         if (data.elements.length > 3) {
-            this.identityNumberRange3 = new IdentityNumberRange(data.elements[3]);
+            this.identityNumberRange3 = new IdentityNumberRange(
+                data.elements[3]
+            );
         }
         if (data.elements.length > 4) {
-            this.identityNumberRange4 = new IdentityNumberRange(data.elements[4]);
+            this.identityNumberRange4 = new IdentityNumberRange(
+                data.elements[4]
+            );
         }
         if (data.elements.length > 5) {
-            this.identityNumberRange5 = new IdentityNumberRange(data.elements[5]);
+            this.identityNumberRange5 = new IdentityNumberRange(
+                data.elements[5]
+            );
         }
     }
 }
@@ -1453,8 +1505,7 @@ class IdentificationNumber {
 }
 
 export class RelatedInformationNumbers implements Segment {
-
-    tag = "GIR";
+    tag = 'GIR';
 
     setTypeCodeQualifier: string;
     identificationNumber1: IdentificationNumber;
@@ -1467,16 +1518,24 @@ export class RelatedInformationNumbers implements Segment {
         this.setTypeCodeQualifier = data.elements[0][0];
         this.identificationNumber1 = new IdentificationNumber(data.elements[1]);
         if (data.elements.length > 2) {
-            this.identificationNumber2 = new IdentificationNumber(data.elements[2]);
+            this.identificationNumber2 = new IdentificationNumber(
+                data.elements[2]
+            );
         }
         if (data.elements.length > 3) {
-            this.identificationNumber3 = new IdentificationNumber(data.elements[3]);
+            this.identificationNumber3 = new IdentificationNumber(
+                data.elements[3]
+            );
         }
         if (data.elements.length > 4) {
-            this.identificationNumber4 = new IdentificationNumber(data.elements[4]);
+            this.identificationNumber4 = new IdentificationNumber(
+                data.elements[4]
+            );
         }
         if (data.elements.length > 5) {
-            this.identificationNumber5 = new IdentificationNumber(data.elements[5]);
+            this.identificationNumber5 = new IdentificationNumber(
+                data.elements[5]
+            );
         }
     }
 }
@@ -1484,8 +1543,7 @@ export class RelatedInformationNumbers implements Segment {
 // GIS - removed with D02B
 
 export class GeneralIndicator implements Segment {
-
-    tag = "GIS";
+    tag = 'GIS';
 
     processingIndicator: ProcessingIndicator;
 
@@ -1525,18 +1583,19 @@ class HazardousMaterial {
 }
 
 export class HandlingInstructions implements Segment {
-
-    tag = "HAN";
+    tag = 'HAN';
 
     handlingInstructions: HandlingInstructionsData | undefined;
     hazardousMaterial: HazardousMaterial | undefined;
 
     constructor(data: ResultType) {
         if (data.elements.length > 0) {
-            this.handlingInstructions = new HandlingInstructionsData(data.elements[0]);
+            this.handlingInstructions = new HandlingInstructionsData(
+                data.elements[0]
+            );
         }
         if (data.elements.length > 1) {
-            this.hazardousMaterial =  new HazardousMaterial(data.elements[1]);
+            this.hazardousMaterial = new HazardousMaterial(data.elements[1]);
         }
     }
 }
@@ -1544,8 +1603,7 @@ export class HandlingInstructions implements Segment {
 // HYN
 
 export class HierarchyInformation implements Segment {
-
-    tag = "HYN";
+    tag = 'HYN';
 
     hierarchyObjectCodeQualifier: string;
     hierarchicalStructureRelationshipCode: string | undefined;
@@ -1562,7 +1620,9 @@ export class HierarchyInformation implements Segment {
             this.actionCode = data.elements[2][0];
         }
         if (data.elements.length > 3) {
-            this.itemNumberIdentification = new ItemNumberIdentification(data.elements[3]);
+            this.itemNumberIdentification = new ItemNumberIdentification(
+                data.elements[3]
+            );
         }
         if (data.elements.length > 4) {
             this.hierarchicalStructureParentIdentifier = data.elements[4][0];
@@ -1583,8 +1643,7 @@ class PositionIdentification {
 }
 
 export class Identity implements Segment {
-
-    tag = "IDE";
+    tag = 'IDE';
 
     objectTypeCodeQualifier: string;
     identificationNumber: IdentificationNumber | undefined;
@@ -1597,10 +1656,14 @@ export class Identity implements Segment {
     constructor(data: ResultType) {
         this.objectTypeCodeQualifier = data.elements[0][0];
         if (data.elements.length > 1) {
-            this.identificationNumber = new IdentificationNumber(data.elements[1]);
+            this.identificationNumber = new IdentificationNumber(
+                data.elements[1]
+            );
         }
         if (data.elements.length > 2) {
-            this.partyIdentificationDetails = new PartyIdentificationDetails(data.elements[2]);
+            this.partyIdentificationDetails = new PartyIdentificationDetails(
+                data.elements[2]
+            );
         }
         if (data.elements.length > 3) {
             this.statusDescriptionCode = data.elements[3][0];
@@ -1609,10 +1672,14 @@ export class Identity implements Segment {
             this.configurationLevelNumber = parseInt(data.elements[4][0]);
         }
         if (data.elements.length > 5) {
-            this.positionIdentification = new PositionIdentification(data.elements[5]);
+            this.positionIdentification = new PositionIdentification(
+                data.elements[5]
+            );
         }
         if (data.elements.length > 6) {
-            this.characteristicDescription = new CharacteristicDescription(data.elements[6]);
+            this.characteristicDescription = new CharacteristicDescription(
+                data.elements[6]
+            );
         }
     }
 }
@@ -1642,7 +1709,7 @@ class ItemDescriptionData {
     constructor(data: string[]) {
         this.itemDescriptionCode = data[0];
         this.codeListIdentificationCode = data[1];
-        this.codeListResponsibleAgencyCode =  data[2];
+        this.codeListResponsibleAgencyCode = data[2];
         this.itemDescription = data[3];
         this.itemDescription2 = data[4];
         this.languageNameCode = data[5];
@@ -1650,13 +1717,12 @@ class ItemDescriptionData {
 }
 
 export class ItemDescription implements Segment {
-
-    tag = "IMD";
+    tag = 'IMD';
 
     descriptionFormatCode: string | undefined;
     itemCharacteristic: ItemCharacteristic | undefined;
     itemDescription: ItemDescriptionData | undefined;
-    surfaceOrLayerCode:  string | undefined;
+    surfaceOrLayerCode: string | undefined;
 
     constructor(data: ResultType) {
         if (data.elements.length > 0) {
@@ -1713,8 +1779,7 @@ class StatusOfInstruction {
 }
 
 export class PartiesAndInstruction implements Segment {
-
-    tag = "INP";
+    tag = 'INP';
 
     partiesToInstruction: PartiesToInstruction | undefined;
     instruction: Instruction | undefined;
@@ -1723,13 +1788,17 @@ export class PartiesAndInstruction implements Segment {
 
     constructor(data: ResultType) {
         if (data.elements.length > 0) {
-            this.partiesToInstruction = new PartiesToInstruction(data.elements[0]);
+            this.partiesToInstruction = new PartiesToInstruction(
+                data.elements[0]
+            );
         }
         if (data.elements.length > 1) {
             this.instruction = new Instruction(data.elements[1]);
         }
         if (data.elements.length > 2) {
-            this.statusOfInstruction = new StatusOfInstruction(data.elements[2]);
+            this.statusOfInstruction = new StatusOfInstruction(
+                data.elements[2]
+            );
         }
         if (data.elements.length > 3) {
             this.actionRequestNotificationDescriptionCode = data.elements[3][0];
@@ -1754,8 +1823,7 @@ class InformationRequest {
 }
 
 export class InformationRequired implements Segment {
-
-    tag = "IRQ";
+    tag = 'IRQ';
 
     informationRequest: InformationRequest;
 
@@ -1767,7 +1835,6 @@ export class InformationRequired implements Segment {
 // LIN
 
 class ItemNumberIdentification {
-
     itemIdentifier: string | undefined;
     itemTypeIdentificationCode: string | undefined;
     codeListIdentificationCode: string | undefined;
@@ -1792,8 +1859,7 @@ class SubLineInformation {
 }
 
 export class LineItem implements Segment {
-
-    tag = "LIN";
+    tag = 'LIN';
 
     lineItemIdendifier: string | undefined;
     actionRequestNotificationDescriptionCode: string | undefined; // renamed to action code in D06a
@@ -1810,7 +1876,9 @@ export class LineItem implements Segment {
             this.actionRequestNotificationDescriptionCode = data.elements[1][0];
         }
         if (data.elements.length > 2) {
-            this.itemNumberIdentification = new ItemNumberIdentification(data.elements[2]);
+            this.itemNumberIdentification = new ItemNumberIdentification(
+                data.elements[2]
+            );
         }
         if (data.elements.length > 3) {
             this.subLineInformatin = new SubLineInformation(data.elements[3]);
@@ -1848,7 +1916,7 @@ class RelatedLocationOneIdentification {
 
     constructor(data: string[]) {
         this.firstRelatedLocationNameCode = data[0];
-        this.codeListIdentificationCode =  data[1];
+        this.codeListIdentificationCode = data[1];
         this.codeListResponsibleAgencyCode = data[2];
         this.firstRelatedLocationName = data[3];
     }
@@ -1862,32 +1930,39 @@ class RelatedLocationTwoIdentification {
 
     constructor(data: string[]) {
         this.secondRelatedLocationNameCode = data[0];
-        this.codeListIdentificationCode =  data[1];
+        this.codeListIdentificationCode = data[1];
         this.codeListResponsibleAgencyCode = data[2];
         this.secondRelatedLocationName = data[3];
     }
 }
 
 export class LocationIdentification implements Segment {
-
-    tag = "LOC";
+    tag = 'LOC';
 
     locationFunctionCodeQualifier: string;
     locationIdentification: LocationIdentificationData | undefined;
-    relatedLocationOneIdentification: RelatedLocationOneIdentification | undefined;
-    relatedLocationTwoIdentification: RelatedLocationTwoIdentification | undefined;
+    relatedLocationOneIdentification:
+        | RelatedLocationOneIdentification
+        | undefined;
+    relatedLocationTwoIdentification:
+        | RelatedLocationTwoIdentification
+        | undefined;
     relationCode: string | undefined;
 
     constructor(data: ResultType) {
         this.locationFunctionCodeQualifier = data.elements[0][0];
         if (data.elements.length > 1) {
-            this.locationIdentification = new LocationIdentificationData(data.elements[1]);
+            this.locationIdentification = new LocationIdentificationData(
+                data.elements[1]
+            );
         }
         if (data.elements.length > 2) {
-            this.relatedLocationOneIdentification = new RelatedLocationOneIdentification(data.elements[2]);
+            this.relatedLocationOneIdentification =
+                new RelatedLocationOneIdentification(data.elements[2]);
         }
         if (data.elements.length > 3) {
-            this.relatedLocationTwoIdentification = new RelatedLocationTwoIdentification(data.elements[3]);
+            this.relatedLocationTwoIdentification =
+                new RelatedLocationTwoIdentification(data.elements[3]);
         }
         if (data.elements.length > 4) {
             this.relationCode = data.elements[4][0];
@@ -1934,8 +2009,7 @@ class ValueRange {
 }
 
 export class Measurements implements Segment {
-
-    tag = "MEA";
+    tag = 'MEA';
 
     measurementPurposeCodeQualifier: string;
     measurementDetails: MeasurementDetails | undefined;
@@ -1959,12 +2033,11 @@ export class Measurements implements Segment {
 // MKS
 
 class MarketSalesChannelDetails {
-
     salesChannelIdentifier: string | undefined;
     codeListIdentificationCode: string | undefined;
     codeListResponsibleAgencyCode: string | undefined;
 
-    constructor (data: string[]) {
+    constructor(data: string[]) {
         this.salesChannelIdentifier = data[0];
         this.codeListIdentificationCode = data[1];
         this.codeListResponsibleAgencyCode = data[2];
@@ -1972,17 +2045,21 @@ class MarketSalesChannelDetails {
 }
 
 export class MarketSalesChannelInformation implements Segment {
-
-    tag = "MKS";
+    tag = 'MKS';
 
     marketSaleChannelIdentificationCodeQualifier: string | undefined;
     marketSaleChannelSalesDetails: MarketSalesChannelDetails | undefined;
-    marketSaleChannelActionRequestNotificationDescriptionCode: string | undefined;
+    marketSaleChannelActionRequestNotificationDescriptionCode:
+        | string
+        | undefined;
 
     constructor(data: ResultType) {
         this.marketSaleChannelIdentificationCodeQualifier = data.elements[0][0];
-        this.marketSaleChannelSalesDetails = new MarketSalesChannelDetails(data.elements[1]);
-        this.marketSaleChannelActionRequestNotificationDescriptionCode = data.elements[2]?.[0];
+        this.marketSaleChannelSalesDetails = new MarketSalesChannelDetails(
+            data.elements[1]
+        );
+        this.marketSaleChannelActionRequestNotificationDescriptionCode =
+            data.elements[2]?.[0];
     }
 }
 
@@ -2007,21 +2084,22 @@ class MonetaryAmountData {
 }
 
 export class MonetaryAmount implements Segment {
-
-    tag = "MOA";
+    tag = 'MOA';
 
     monetaryAmount: MonetaryAmountData;
 
     constructor(data: ResultType, decimalSeparator: string) {
-        this.monetaryAmount = new MonetaryAmountData(data.elements[0], decimalSeparator);
+        this.monetaryAmount = new MonetaryAmountData(
+            data.elements[0],
+            decimalSeparator
+        );
     }
 }
 
 // MTD
 
 export class MaintenanceOperationDetails implements Segment {
-
-    tag = "MTD";
+    tag = 'MTD';
 
     objectTypeCodeQualifier: string;
     maintenanceOperationCode: string | undefined;
@@ -2119,8 +2197,7 @@ class CountrySubEntityDetails {
 }
 
 export class NameAndAddress implements Segment {
-
-    tag = "NAD";
+    tag = 'NAD';
 
     partyFunctionCodeQualifier: string;
     partyIdentificationDetails: PartyIdentificationDetails | undefined;
@@ -2135,7 +2212,9 @@ export class NameAndAddress implements Segment {
     constructor(data: ResultType) {
         this.partyFunctionCodeQualifier = data.elements[0][0];
         if (data.elements.length > 1) {
-            this.partyIdentificationDetails = new PartyIdentificationDetails(data.elements[1]);
+            this.partyIdentificationDetails = new PartyIdentificationDetails(
+                data.elements[1]
+            );
         }
         if (data.elements.length > 2) {
             this.nameAndAddress = new NameAndAddressData(data.elements[2]);
@@ -2150,7 +2229,9 @@ export class NameAndAddress implements Segment {
             this.cityName = data.elements[5][0];
         }
         if (data.elements.length > 6) {
-            this.countrySubEntityDetails = new CountrySubEntityDetails(data.elements[6]);
+            this.countrySubEntityDetails = new CountrySubEntityDetails(
+                data.elements[6]
+            );
         }
         if (data.elements.length > 7) {
             this.postalIdentificationCode = data.elements[7][0];
@@ -2164,7 +2245,6 @@ export class NameAndAddress implements Segment {
 // PAC
 
 class PackagingDetails {
-
     packagingLevelCode: string | undefined;
     packagingRelatedDescriptionCode: string | undefined;
     packagingTermsAndConditionsCode: string | undefined;
@@ -2191,7 +2271,6 @@ class PackageType {
 }
 
 class PackageTypeIdentification {
-
     descriptionFormatCode: string;
     typeOfPackages: string;
     itemTypeIdentificationCode: string | undefined;
@@ -2208,7 +2287,6 @@ class PackageTypeIdentification {
 }
 
 class ReturnablePackageDetails {
-
     returnablePackageFreightPaymentResponsibilityCode: string | undefined;
     returnablePackageLoadContentsCode: string | undefined;
 
@@ -2219,8 +2297,7 @@ class ReturnablePackageDetails {
 }
 
 export class Package implements Segment {
-
-    tag = "PAC";
+    tag = 'PAC';
 
     packageQuantity: number | undefined;
     packagingDetails: PackagingDetails | undefined;
@@ -2239,10 +2316,14 @@ export class Package implements Segment {
             this.packageType = new PackageType(data.elements[2]);
         }
         if (data.elements.length > 3) {
-            this.packageTypeIdentification = new PackageTypeIdentification(data.elements[3]);
+            this.packageTypeIdentification = new PackageTypeIdentification(
+                data.elements[3]
+            );
         }
         if (data.elements.length > 4) {
-            this.returnablePackageDetails = new ReturnablePackageDetails(data.elements[4]);
+            this.returnablePackageDetails = new ReturnablePackageDetails(
+                data.elements[4]
+            );
         }
     }
 }
@@ -2250,8 +2331,7 @@ export class Package implements Segment {
 // PAI
 
 export class PaymentInstructions implements Segment {
-
-    tag = "PAI";
+    tag = 'PAI';
 
     paymendConditionsCode: string | undefined;
     paymentGuaranteeMeansCode: string | undefined;
@@ -2317,8 +2397,7 @@ class TermsTimeInformation {
 }
 
 export class PaymentTermsBasis implements Segment {
-
-    tag = "PAT";
+    tag = 'PAT';
 
     paymentTermsTypeCodeQualifier: string;
     paymentTerms: PATPaymentTerms | undefined;
@@ -2330,7 +2409,9 @@ export class PaymentTermsBasis implements Segment {
             this.paymentTerms = new PATPaymentTerms(data.elements[1]);
         }
         if (data.elements.length > 2) {
-            this.termsTimeInformation = new TermsTimeInformation(data.elements[2]);
+            this.termsTimeInformation = new TermsTimeInformation(
+                data.elements[2]
+            );
         }
     }
 }
@@ -2356,14 +2437,16 @@ class PercentageDetailsData {
 }
 
 export class PercentageDetails implements Segment {
-
-    tag = "PCD";
+    tag = 'PCD';
 
     percentageDetails: PercentageDetailsData;
     statusDescriptionCode: string | undefined;
 
     constructor(data: ResultType, decimalSeparator: string) {
-        this.percentageDetails = new PercentageDetailsData(data.elements[0], decimalSeparator);
+        this.percentageDetails = new PercentageDetailsData(
+            data.elements[0],
+            decimalSeparator
+        );
         if (data.elements.length > 1) {
             this.statusDescriptionCode = data.elements[1][0];
         }
@@ -2411,8 +2494,7 @@ class TypeOfMarking {
 }
 
 export class PackageIdentification implements Segment {
-
-    tag = "PCI";
+    tag = 'PCI';
 
     markingInstructionCode: string | undefined;
     marksAndLabels: MarksAndLabels | undefined;
@@ -2436,7 +2518,6 @@ export class PackageIdentification implements Segment {
 // PGI
 
 class ProductGroup {
-
     productGroupNameCode: string | undefined;
     codeListIdentificationCode: string | undefined;
     codeListResponsibleAgencyCode: string | undefined;
@@ -2451,8 +2532,7 @@ class ProductGroup {
 }
 
 export class ProductGroupInformation implements Segment {
-
-    tag = "PGI";
+    tag = 'PGI';
 
     productGroupTypeCode: string;
     productGroup: ProductGroup | undefined;
@@ -2468,8 +2548,7 @@ export class ProductGroupInformation implements Segment {
 // PIA
 
 export class AdditionalProductId implements Segment {
-
-    tag = "PIA";
+    tag = 'PIA';
 
     productIdentifierCodeQualifier: string;
 
@@ -2482,18 +2561,28 @@ export class AdditionalProductId implements Segment {
     constructor(data: ResultType) {
         this.productIdentifierCodeQualifier = data.elements[0][0];
 
-        this.itemNumberIdentification1 = new ItemNumberIdentification(data.elements[1]);
+        this.itemNumberIdentification1 = new ItemNumberIdentification(
+            data.elements[1]
+        );
         if (data.elements.length > 2) {
-            this.itemNumberIdentification2 = new ItemNumberIdentification(data.elements[2]);
+            this.itemNumberIdentification2 = new ItemNumberIdentification(
+                data.elements[2]
+            );
         }
         if (data.elements.length > 3) {
-            this.itemNumberIdentification3 = new ItemNumberIdentification(data.elements[3]);
+            this.itemNumberIdentification3 = new ItemNumberIdentification(
+                data.elements[3]
+            );
         }
         if (data.elements.length > 4) {
-            this.itemNumberIdentification4 = new ItemNumberIdentification(data.elements[4]);
+            this.itemNumberIdentification4 = new ItemNumberIdentification(
+                data.elements[4]
+            );
         }
         if (data.elements.length > 5) {
-            this.itemNumberIdentification5 = new ItemNumberIdentification(data.elements[5]);
+            this.itemNumberIdentification5 = new ItemNumberIdentification(
+                data.elements[5]
+            );
         }
     }
 }
@@ -2501,7 +2590,6 @@ export class AdditionalProductId implements Segment {
 // PRI
 
 class PriceInformation {
-
     priceCodeQualifier: string;
     priceAmount: number | undefined;
     priceTypeCode: string | undefined;
@@ -2524,15 +2612,17 @@ class PriceInformation {
 }
 
 export class PriceDetails implements Segment {
-
-    tag = "PRI";
+    tag = 'PRI';
 
     priceInformation: PriceInformation | undefined;
     subLineItemPriceChangeOperationCode: string | undefined;
 
     constructor(data: ResultType, decimalSeparator: string) {
         if (data.elements.length > 0) {
-            this.priceInformation = new PriceInformation(data.elements[0], decimalSeparator);
+            this.priceInformation = new PriceInformation(
+                data.elements[0],
+                decimalSeparator
+            );
         }
         if (data.elements.length > 1) {
             this.subLineItemPriceChangeOperationCode = data.elements[1][0];
@@ -2557,8 +2647,7 @@ class PaymentTermsData {
 }
 
 export class PaymentTerms implements Segment {
-
-    tag = "PYT";
+    tag = 'PYT';
 
     paymentTermsTypeCodeQualifier: string;
     paymentTerms: PaymentTermsData | undefined;
@@ -2570,7 +2659,7 @@ export class PaymentTerms implements Segment {
     constructor(data: ResultType) {
         this.paymentTermsTypeCodeQualifier = data.elements[0][0];
         if (data.elements.length > 1) {
-            this.paymentTerms =  new PaymentTermsData(data.elements[1]);
+            this.paymentTerms = new PaymentTermsData(data.elements[1]);
         }
         if (data.elements.length > 2) {
             this.eventTimeReferenceCode = data.elements[2][0];
@@ -2590,8 +2679,7 @@ export class PaymentTerms implements Segment {
 // QTY
 
 export class Quantity implements Segment {
-
-    tag = "QTY";
+    tag = 'QTY';
 
     quantityTypeCodeQualifier: string;
     quantity: string;
@@ -2619,8 +2707,7 @@ class QuantityDifferenceInformation {
 }
 
 export class QuantityVariances implements Segment {
-
-    tag = "QVR";
+    tag = 'QVR';
 
     quantityDifferenceInformation: QuantityDifferenceInformation | undefined;
     discrepancyNatureIdentificationCode: string | undefined;
@@ -2628,7 +2715,11 @@ export class QuantityVariances implements Segment {
 
     constructor(data: ResultType, decimalSeparator: string) {
         if (data.elements.length > 0) {
-            this.quantityDifferenceInformation = new QuantityDifferenceInformation(data.elements[0], decimalSeparator);
+            this.quantityDifferenceInformation =
+                new QuantityDifferenceInformation(
+                    data.elements[0],
+                    decimalSeparator
+                );
         }
         if (data.elements.length > 1) {
             this.discrepancyNatureIdentificationCode = data.elements[1][0];
@@ -2656,18 +2747,20 @@ class RequirementOrConditionIdentification {
 }
 
 export class RequirementsAndConditions implements Segment {
-
-    tag = "RCS";
+    tag = 'RCS';
 
     sectorAreaIdentificationCodeQualifier: string;
-    requirementOrConditionIdentification: RequirementOrConditionIdentification | undefined;
+    requirementOrConditionIdentification:
+        | RequirementOrConditionIdentification
+        | undefined;
     actionRequestNotificationDescriptionCode: string | undefined;
     countryNameCode: string | undefined;
 
     constructor(data: ResultType) {
         this.sectorAreaIdentificationCodeQualifier = data.elements[0][0];
         if (data.elements.length > 1) {
-            this.requirementOrConditionIdentification = new RequirementOrConditionIdentification(data.elements[1]);
+            this.requirementOrConditionIdentification =
+                new RequirementOrConditionIdentification(data.elements[1]);
         }
         if (data.elements.length > 2) {
             this.actionRequestNotificationDescriptionCode = data.elements[2][0];
@@ -2681,8 +2774,7 @@ export class RequirementsAndConditions implements Segment {
 // RFF
 
 export class Reference implements Segment {
-
-    tag = "RFF";
+    tag = 'RFF';
 
     referenceCodeQualifier: string;
     referenceIdentifier: string | undefined;
@@ -2730,18 +2822,22 @@ class AccountingEntryTypeDetails {
 }
 
 export class AccountingJournalIdentification implements Segment {
+    tag = 'RJL';
 
-    tag = "RJL";
-
-    accountingJournalIdentification: AccountingJournalIdentificationData | undefined;
+    accountingJournalIdentification:
+        | AccountingJournalIdentificationData
+        | undefined;
     accountingEntryTypeDetails: AccountingEntryTypeDetails | undefined;
 
     constructor(data: ResultType) {
         if (data.elements.length > 0) {
-            this.accountingJournalIdentification = new AccountingJournalIdentificationData(data.elements[0]);
+            this.accountingJournalIdentification =
+                new AccountingJournalIdentificationData(data.elements[0]);
         }
         if (data.elements.length > 1) {
-            this.accountingEntryTypeDetails = new AccountingEntryTypeDetails(data.elements[1]);
+            this.accountingEntryTypeDetails = new AccountingEntryTypeDetails(
+                data.elements[1]
+            );
         }
     }
 }
@@ -2761,8 +2857,7 @@ class Range {
 }
 
 export class RangeDetails implements Segment {
-
-    tag = "RNG";
+    tag = 'RNG';
 
     rangeTypeCodeQualifier: string;
     range: Range | undefined;
@@ -2792,14 +2887,16 @@ class RateDetailsData {
 }
 
 export class RateDetails implements Segment {
-
-    tag = "RTE";
+    tag = 'RTE';
 
     rateDetails: RateDetailsData;
     statusDescriptionCode: string | undefined;
 
     constructor(data: ResultType, decimalSeparator: string) {
-        this.rateDetails = new RateDetailsData(data.elements[0], decimalSeparator);
+        this.rateDetails = new RateDetailsData(
+            data.elements[0],
+            decimalSeparator
+        );
         if (data.elements.length > 1) {
             this.statusDescriptionCode = data.elements[1][0];
         }
@@ -2823,8 +2920,7 @@ class SealIssuer {
 }
 
 export class SealNumber implements Segment {
-
-    tag = "SEL";
+    tag = 'SEL';
 
     sealIdentifier: string | undefined;
     sealIssuer: SealIssuer | undefined;
@@ -2840,7 +2936,9 @@ export class SealNumber implements Segment {
             this.sealConditionCode = data.elements[2][0];
         }
         if (data.elements.length > 3) {
-            this.identityNumberRange = new IdentityNumberRange(data.elements[3]);
+            this.identityNumberRange = new IdentityNumberRange(
+                data.elements[3]
+            );
         }
     }
 }
@@ -2860,8 +2958,7 @@ class PatternDescription {
 }
 
 export class SchedulingConditions implements Segment {
-
-    tag = "SCC";
+    tag = 'SCC';
 
     deliveryPlanCommitmentLevelCode: string;
     deliveryInstructionCode: string | undefined;
@@ -2895,8 +2992,7 @@ class SequenceInformation {
 }
 
 export class SequenceDetails implements Segment {
-
-    tag = "SEQ";
+    tag = 'SEQ';
 
     actionCode: string | undefined;
     sequenceInformation: SequenceInformation | undefined;
@@ -2906,7 +3002,9 @@ export class SequenceDetails implements Segment {
             this.actionCode = data.elements[0][0];
         }
         if (data.elements.length > 1) {
-            this.sequenceInformation = new SequenceInformation(data.elements[1]);
+            this.sequenceInformation = new SequenceInformation(
+                data.elements[1]
+            );
         }
     }
 }
@@ -2914,14 +3012,15 @@ export class SequenceDetails implements Segment {
 // SGP
 
 export class SplitGoodsPlacement implements Segment {
-
-    tag = "SGP";
+    tag = 'SGP';
 
     equipmentIdentification: EquipmentIdentification;
     packageQuantity: number | undefined;
 
     constructor(data: ResultType) {
-        this.equipmentIdentification = new EquipmentIdentification(data.elements[0]);
+        this.equipmentIdentification = new EquipmentIdentification(
+            data.elements[0]
+        );
         if (data.elements.length > 1) {
             this.packageQuantity = parseInt(data.elements[1][0]);
         }
@@ -2971,8 +3070,7 @@ class StatusReason {
 }
 
 export class Status implements Segment {
-
-    tag = "STS";
+    tag = 'STS';
 
     statusCategory: StatusCategory | undefined;
     status: StatusData | undefined;
@@ -3010,7 +3108,6 @@ export class Status implements Segment {
 // TAX
 
 class DutyTaxOrFeeType {
-
     dutyTaxOrFeeTypeNameCode: string | undefined;
     codeListIdentificationCode: string | undefined;
     codeListResponsibleAgencyCode: string | undefined;
@@ -3057,8 +3154,7 @@ class DutyTaxOrFeeDetail {
 }
 
 export class TaxDetails implements Segment {
-
-    tag = "TAX";
+    tag = 'TAX';
 
     dutyTaxOrFeeFunctionCodeQualifier: string;
     dutyTaxOrFeeType: DutyTaxOrFeeType | undefined;
@@ -3070,13 +3166,14 @@ export class TaxDetails implements Segment {
     calculationSequenceCode: string | undefined;
 
     constructor(data: ResultType) {
-
         this.dutyTaxOrFeeFunctionCodeQualifier = data.elements[0][0];
         if (data.elements.length > 1) {
             this.dutyTaxOrFeeType = new DutyTaxOrFeeType(data.elements[1]);
         }
         if (data.elements.length > 2) {
-            this.dutyTaxOrFeeAcountDetail = new DutyTaxOrFeeAccountDetail(data.elements[2]);
+            this.dutyTaxOrFeeAcountDetail = new DutyTaxOrFeeAccountDetail(
+                data.elements[2]
+            );
         }
         this.dutyTaxOrFreeAssessmentBasisValue = data.elements[3][0];
         if (data.elements.length > 4) {
@@ -3188,8 +3285,7 @@ class PowerType {
 }
 
 export class DetailsOfTransport implements Segment {
-
-    tag = "TDT";
+    tag = 'TDT';
 
     transportStageCodeQualifier: string;
     meansOfTransportJourneyIdentifier: string | undefined;
@@ -3197,7 +3293,9 @@ export class DetailsOfTransport implements Segment {
     transportMeans: TransportMeans | undefined;
     carrier: Carrier | undefined;
     transitDirectionIndicatorCode: string | undefined;
-    excessTransportationInformation: ExcessTransportationInformation | undefined;
+    excessTransportationInformation:
+        | ExcessTransportationInformation
+        | undefined;
     transportIdentification: TransportIdentification | undefined;
     transportMeansOwnershipIndicatorCode: string | undefined;
 
@@ -3219,10 +3317,13 @@ export class DetailsOfTransport implements Segment {
             this.transitDirectionIndicatorCode = data.elements[5][0];
         }
         if (data.elements.length > 6) {
-            this.excessTransportationInformation = new ExcessTransportationInformation(data.elements[6]);
+            this.excessTransportationInformation =
+                new ExcessTransportationInformation(data.elements[6]);
         }
         if (data.elements.length > 7) {
-            this.transportIdentification = new TransportIdentification(data.elements[7]);
+            this.transportIdentification = new TransportIdentification(
+                data.elements[7]
+            );
         }
         if (data.elements.length > 8) {
             this.transportMeansOwnershipIndicatorCode = data.elements[8][0];
@@ -3231,8 +3332,7 @@ export class DetailsOfTransport implements Segment {
 }
 
 export class TransportInformationD02b implements Segment {
-
-    tag = "TDT";
+    tag = 'TDT';
 
     transportStageCodeQualifier: string;
     meansOfTransportJourneyIdentifier: string | undefined;
@@ -3240,7 +3340,9 @@ export class TransportInformationD02b implements Segment {
     transportMeans: TransportMeansD02b | undefined;
     carrier: Carrier | undefined;
     transitDirectionIndicatorCode: string | undefined;
-    excessTransportationInformation: ExcessTransportationInformation | undefined;
+    excessTransportationInformation:
+        | ExcessTransportationInformation
+        | undefined;
     transportIdentification: TransportIdentification | undefined;
     transportMeansOwnershipIndicatorCode: string | undefined;
 
@@ -3262,10 +3364,13 @@ export class TransportInformationD02b implements Segment {
             this.transitDirectionIndicatorCode = data.elements[5][0];
         }
         if (data.elements.length > 6) {
-            this.excessTransportationInformation = new ExcessTransportationInformation(data.elements[6]);
+            this.excessTransportationInformation =
+                new ExcessTransportationInformation(data.elements[6]);
         }
         if (data.elements.length > 7) {
-            this.transportIdentification = new TransportIdentification(data.elements[7]);
+            this.transportIdentification = new TransportIdentification(
+                data.elements[7]
+            );
         }
         if (data.elements.length > 8) {
             this.transportMeansOwnershipIndicatorCode = data.elements[8][0];
@@ -3274,8 +3379,7 @@ export class TransportInformationD02b implements Segment {
 }
 
 export class TransportInformationD11a implements Segment {
-
-    tag = "TDT";
+    tag = 'TDT';
 
     transportStageCodeQualifier: string;
     meansOfTransportJourneyIdentifier: string | undefined;
@@ -3283,7 +3387,9 @@ export class TransportInformationD11a implements Segment {
     transportMeans: TransportMeansD02b | undefined;
     carrier: Carrier | undefined;
     transitDirectionIndicatorCode: string | undefined;
-    excessTransportationInformation: ExcessTransportationInformation | undefined;
+    excessTransportationInformation:
+        | ExcessTransportationInformation
+        | undefined;
     transportIdentification: TransportIdentification | undefined;
     transportMeansOwnershipIndicatorCode: string | undefined;
     powerTypeDescription: PowerType | undefined;
@@ -3306,10 +3412,13 @@ export class TransportInformationD11a implements Segment {
             this.transitDirectionIndicatorCode = data.elements[5][0];
         }
         if (data.elements.length > 6) {
-            this.excessTransportationInformation = new ExcessTransportationInformation(data.elements[6]);
+            this.excessTransportationInformation =
+                new ExcessTransportationInformation(data.elements[6]);
         }
         if (data.elements.length > 7) {
-            this.transportIdentification = new TransportIdentification(data.elements[7]);
+            this.transportIdentification = new TransportIdentification(
+                data.elements[7]
+            );
         }
         if (data.elements.length > 8) {
             this.transportMeansOwnershipIndicatorCode = data.elements[8][0];
@@ -3333,8 +3442,7 @@ class MovementType {
 }
 
 export class TransportMovementDetails implements Segment {
-
-    tag = "TMD";
+    tag = 'TMD';
 
     movementType: MovementType | undefined;
     equipmentPlanDescription: string | undefined;
@@ -3372,8 +3480,7 @@ class TermsOfDeliveryOrTransportData {
 }
 
 export class TermsOfDeliveryOrTransport implements Segment {
-
-    tag = "TOD";
+    tag = 'TOD';
 
     deliveryOrTransportTermsFunctionCode: string | undefined;
     transportChargesPaymentMethodCode: string | undefined;
@@ -3387,7 +3494,8 @@ export class TermsOfDeliveryOrTransport implements Segment {
             this.transportChargesPaymentMethodCode = data.elements[1][0];
         }
         if (data.elements.length > 2) {
-            this.termsOfDeliveryOrTransport = new TermsOfDeliveryOrTransportData(data.elements[2]);
+            this.termsOfDeliveryOrTransport =
+                new TermsOfDeliveryOrTransportData(data.elements[2]);
         }
     }
 }
@@ -3449,8 +3557,7 @@ class NatureOfCargo {
 }
 
 export class TransportServiceRequirements implements Segment {
-
-    tag = "TSR";
+    tag = 'TSR';
 
     contractAndCarriageCondition: ContractAndCarriageCondition | undefined;
     service: Service | undefined;
@@ -3459,7 +3566,8 @@ export class TransportServiceRequirements implements Segment {
 
     constructor(data: ResultType) {
         if (data.elements.length > 0) {
-            this.contractAndCarriageCondition = new ContractAndCarriageCondition(data.elements[0]);
+            this.contractAndCarriageCondition =
+                new ContractAndCarriageCondition(data.elements[0]);
         }
         if (data.elements.length > 1) {
             this.service = new Service(data.elements[1]);
@@ -3548,15 +3656,16 @@ class ScenarioIdentification {
 }
 
 export class MessageHeader implements Segment {
-
-    tag = "UNH";
+    tag = 'UNH';
 
     messageReferenceNumber: string;
     messageIdentifier: MessageIdentifier;
     commonAccessReference: string | undefined;
     statusOfTransfer: StatusOfTransfer | undefined;
     messageSubsetIdentification: MessageSubsetIdentification | undefined;
-    messageImplementationGuidelineIdentification: MessageImplementationGuidelineIdentification | undefined;
+    messageImplementationGuidelineIdentification:
+        | MessageImplementationGuidelineIdentification
+        | undefined;
     scenarioIdentification: ScenarioIdentification | undefined;
 
     constructor(data: ResultType) {
@@ -3569,13 +3678,20 @@ export class MessageHeader implements Segment {
             this.statusOfTransfer = new StatusOfTransfer(data.elements[3]);
         }
         if (data.elements.length > 4) {
-            this.messageSubsetIdentification = new MessageSubsetIdentification(data.elements[4]);
+            this.messageSubsetIdentification = new MessageSubsetIdentification(
+                data.elements[4]
+            );
         }
         if (data.elements.length > 5) {
-            this.messageImplementationGuidelineIdentification = new MessageImplementationGuidelineIdentification(data.elements[5]);
+            this.messageImplementationGuidelineIdentification =
+                new MessageImplementationGuidelineIdentification(
+                    data.elements[5]
+                );
         }
         if (data.elements.length > 6) {
-            this.scenarioIdentification = new ScenarioIdentification(data.elements[6]);
+            this.scenarioIdentification = new ScenarioIdentification(
+                data.elements[6]
+            );
         }
     }
 }
@@ -3583,8 +3699,7 @@ export class MessageHeader implements Segment {
 // UNS
 
 export class SectionControl implements Segment {
-
-    tag = "UNS";
+    tag = 'UNS';
 
     sectionIdentification: string;
 
@@ -3596,8 +3711,7 @@ export class SectionControl implements Segment {
 // UNT
 
 export class MessageTrailer implements Segment {
-
-    tag = "UNT";
+    tag = 'UNT';
 
     numberOfSegmentsInAMessage: number;
     messageReferenceNumber: string;

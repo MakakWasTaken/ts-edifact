@@ -16,17 +16,16 @@
  * limitations under the License.
  */
 
-import * as fs from "fs";
-import * as path from "path";
-import { Dictionary } from "./validator";
+import * as fs from 'fs';
+import * as path from 'path';
+import { Dictionary } from './validator';
 
 export enum Suffix {
-    Elements = "elements",
-    Segments = "segments"
+    Elements = 'elements',
+    Segments = 'segments'
 }
 
 export abstract class TableBuilder<T> {
-
     private type: string;
     private version?: string;
     private location?: string;
@@ -51,22 +50,36 @@ export abstract class TableBuilder<T> {
         let defaultFilePath: string;
 
         if (this.location) {
-            defaultFilePath = path.resolve("./", this.location);
-            if (!defaultFilePath.endsWith("/")) {
-                defaultFilePath += "/";
+            defaultFilePath = path.resolve('./', this.location);
+            if (!defaultFilePath.endsWith('/')) {
+                defaultFilePath += '/';
             }
         } else {
-            defaultFilePath = "./";
+            defaultFilePath = './';
         }
 
-        const baseFileName: string = defaultFilePath + this.type.toUpperCase() + "." + this.fileSuffix + ".json";
+        const baseFileName: string =
+            defaultFilePath +
+            this.type.toUpperCase() +
+            '.' +
+            this.fileSuffix +
+            '.json';
         if (this.version) {
-            const versionedFileName: string = defaultFilePath + this.version.toUpperCase() + "_" + this.type.toUpperCase() + "." + this.fileSuffix + ".json";
+            const versionedFileName: string =
+                defaultFilePath +
+                this.version.toUpperCase() +
+                '_' +
+                this.type.toUpperCase() +
+                '.' +
+                this.fileSuffix +
+                '.json';
 
             if (fs.existsSync(versionedFileName)) {
                 return versionedFileName;
             } else if (fs.existsSync(baseFileName)) {
-                console.warn(`No ${this.fileSuffix} definition file found for message type ${this.type} of version ${this.version}. Falling back to default version`);
+                console.warn(
+                    `No ${this.fileSuffix} definition file found for message type ${this.type} of version ${this.version}. Falling back to default version`
+                );
                 return baseFileName;
             }
         } else {
@@ -75,7 +88,9 @@ export abstract class TableBuilder<T> {
             }
         }
 
-        console.error(`No ${this.fileSuffix} definition file found for message type ${this.type}`);
+        console.error(
+            `No ${this.fileSuffix} definition file found for message type ${this.type}`
+        );
         return undefined;
     }
 

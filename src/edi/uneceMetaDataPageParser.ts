@@ -16,11 +16,11 @@
  * limitations under the License.
  */
 
-import { StateMachineDefinition } from "@initics/tsm";
-import { UNECEDomHandler } from "./uneceDomHandler";
+import { StateMachineDefinition } from '@initics/tsm';
+import { UNECEDomHandler } from './uneceDomHandler';
 
-import { EdifactMessageSpecificationImpl } from "./messageStructureParser";
-import { UNECEPageParser } from "./unecePageParser";
+import { EdifactMessageSpecificationImpl } from './messageStructureParser';
+import { UNECEPageParser } from './unecePageParser';
 
 enum State {
     initial = 'initial',
@@ -41,7 +41,6 @@ const SM_DEFINITION: StateMachineDefinition = {
 };
 
 export class UNECEMetaDataPageParser extends UNECEPageParser {
-
     private messageType?: string;
 
     constructor() {
@@ -68,10 +67,27 @@ export class UNECEMetaDataPageParser extends UNECEPageParser {
                     if (!this.messageType) {
                         this.throwCouldNotParsePage();
                     } else {
-                        if (text.includes('Version') && text.includes('Release') && text.includes('Contr. Agency')) {
-                            const version: string = this.extractTextValue(text, /Version\s*: ([A-Z]*)\s/g, 1);
-                            const release: string = this.extractTextValue(text, /Release\s*: ([0-9A-Z]*)\s/g, 1);
-                            const controllingAgency: string = this.extractTextValue(text, /Contr. Agency\s*: ([0-9A-Z]*)\s/g, 1);
+                        if (
+                            text.includes('Version') &&
+                            text.includes('Release') &&
+                            text.includes('Contr. Agency')
+                        ) {
+                            const version: string = this.extractTextValue(
+                                text,
+                                /Version\s*: ([A-Z]*)\s/g,
+                                1
+                            );
+                            const release: string = this.extractTextValue(
+                                text,
+                                /Release\s*: ([0-9A-Z]*)\s/g,
+                                1
+                            );
+                            const controllingAgency: string =
+                                this.extractTextValue(
+                                    text,
+                                    /Contr. Agency\s*: ([0-9A-Z]*)\s/g,
+                                    1
+                                );
                             this._spec = new EdifactMessageSpecificationImpl(
                                 this.messageType,
                                 version,
@@ -82,11 +98,11 @@ export class UNECEMetaDataPageParser extends UNECEPageParser {
                     }
                     break;
 
-                default: this.throwInvalidParserState(this.sm.state);
+                default:
+                    this.throwInvalidParserState(this.sm.state);
             }
         };
 
         return handler;
     }
-
 }

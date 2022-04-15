@@ -21,7 +21,6 @@ type Entry<T> = {
 };
 
 export class Cache<T> {
-
     private data: Entry<T>;
     private queue: string[];
     private begin: number;

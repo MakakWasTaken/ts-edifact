@@ -16,15 +16,21 @@
  * limitations under the License.
  */
 
-import { Parser } from "./parser";
-import { Validator, Dictionary, SegmentEntry, ElementEntry, ValidatorImpl } from "./validator";
+import { Parser } from './parser';
+import {
+    Validator,
+    Dictionary,
+    SegmentEntry,
+    ElementEntry,
+    ValidatorImpl
+} from './validator';
 
-import { SegmentTableBuilder } from "./segments";
-import { ElementTableBuilder} from "./elements";
-import { Separators } from "./edi/separators";
-import { isDefined } from "./util";
-import { Cache } from "./cache";
-import { Configuration } from "./configuration";
+import { SegmentTableBuilder } from './segments';
+import { ElementTableBuilder } from './elements';
+import { Separators } from './edi/separators';
+import { isDefined } from './util';
+import { Cache } from './cache';
+import { Configuration } from './configuration';
 
 export type ResultType = {
     name: string;
@@ -35,7 +41,10 @@ class DefinitionTables {
     segmentTable: Dictionary<SegmentEntry>;
     elementTable: Dictionary<ElementEntry>;
 
-    constructor(segmentTable: Dictionary<SegmentEntry>, elementTable: Dictionary<ElementEntry>) {
+    constructor(
+        segmentTable: Dictionary<SegmentEntry>,
+        elementTable: Dictionary<ElementEntry>
+    ) {
         this.segmentTable = segmentTable;
         this.elementTable = elementTable;
     }
@@ -49,7 +58,6 @@ class DefinitionTables {
  * string.
  */
 export class Reader {
-
     private result: ResultType[];
     private elements: string[][];
     private components: string[];
@@ -58,7 +66,10 @@ export class Reader {
     private parser: Parser;
 
     private defined: boolean = false;
-    private validationTables: (Dictionary<SegmentEntry> | Dictionary<ElementEntry>)[] = [];
+    private validationTables: (
+        | Dictionary<SegmentEntry>
+        | Dictionary<ElementEntry>
+    )[] = [];
 
     private definitionCache: Cache<DefinitionTables> = new Cache(15);
     private unbCharsetDefined = false;
@@ -66,7 +77,9 @@ export class Reader {
     separators: Separators;
 
     constructor(messageSpecDir?: string) {
-        const config: Configuration = new Configuration({ validator: new ValidatorImpl() });
+        const config: Configuration = new Configuration({
+            validator: new ValidatorImpl()
+        });
         this.parser = new Parser(config);
         this.validator = config.validator;
 
@@ -83,7 +96,7 @@ export class Reader {
 
         this.parser.onOpenSegment = (segment: string): void => {
             elements = [];
-            result.push({ name: segment, elements:  elements });
+            result.push({ name: segment, elements: elements });
             activeSegment = segment;
         };
         this.parser.onElement = (): void => {
@@ -91,7 +104,7 @@ export class Reader {
             elements.push(components);
         };
         this.parser.onComponent = (value: string): void => {
-            if (activeSegment === "UNB" && !this.unbCharsetDefined) {
+            if (activeSegment === 'UNB' && !this.unbCharsetDefined) {
                 this.parser.updateCharset(value);
                 this.unbCharsetDefined = true;
             }
@@ -101,33 +114,54 @@ export class Reader {
             if (isDefined(activeSegment)) {
                 // Update the respective segment and element definitions once we know the exact version
                 // of the document
-                if (activeSegment === "UNH") {
+                if (activeSegment === 'UNH') {
                     const messageType: string = elements[1][0];
                     const messageVersion: string = elements[1][1];
                     const messageRelease: string = elements[1][2];
 
-                    const key: string = messageVersion + messageRelease + "_" + messageType;
+                    const key: string =
+                        messageVersion + messageRelease + '_' + messageType;
                     if (this.definitionCache.contains(key)) {
-                        const tables: DefinitionTables = this.definitionCache.get(key);
+                        const tables: DefinitionTables =
+                            this.definitionCache.get(key);
                         this.validator.define(tables.segmentTable);
                         this.validator.define(tables.elementTable);
                     } else {
-                        let segmentTableBuilder: SegmentTableBuilder = new SegmentTableBuilder(messageType);
-                        let elementTableBuilder: ElementTableBuilder = new ElementTableBuilder(messageType);
+                        let segmentTableBuilder: SegmentTableBuilder =
+                            new SegmentTableBuilder(messageType);
+                        let elementTableBuilder: ElementTableBuilder =
+                            new ElementTableBuilder(messageType);
 
-                        const version: string = (messageVersion + messageRelease).toUpperCase();
-                        segmentTableBuilder = segmentTableBuilder.forVersion(version) as SegmentTableBuilder;
-                        elementTableBuilder = elementTableBuilder.forVersion(version) as ElementTableBuilder;
+                        const version: string = (
+                            messageVersion + messageRelease
+                        ).toUpperCase();
+                        segmentTableBuilder = segmentTableBuilder.forVersion(
+                            version
+                        ) as SegmentTableBuilder;
+                        elementTableBuilder = elementTableBuilder.forVersion(
+                            version
+                        ) as ElementTableBuilder;
 
                         if (messageSpecDir) {
-                            segmentTableBuilder = segmentTableBuilder.specLocation(messageSpecDir);
-                            elementTableBuilder = elementTableBuilder.specLocation(messageSpecDir);
+                            segmentTableBuilder =
+                                segmentTableBuilder.specLocation(
+                                    messageSpecDir
+                                );
+                            elementTableBuilder =
+                                elementTableBuilder.specLocation(
+                                    messageSpecDir
+                                );
                         } else {
-                            segmentTableBuilder = segmentTableBuilder.specLocation("./");
-                            elementTableBuilder = elementTableBuilder.specLocation("./");
+                            segmentTableBuilder =
+                                segmentTableBuilder.specLocation('./');
+                            elementTableBuilder =
+                                elementTableBuilder.specLocation('./');
                         }
 
-                        const tables: DefinitionTables = new DefinitionTables(segmentTableBuilder.build(), elementTableBuilder.build());
+                        const tables: DefinitionTables = new DefinitionTables(
+                            segmentTableBuilder.build(),
+                            elementTableBuilder.build()
+                        );
                         this.validator.define(tables.segmentTable);
                         this.validator.define(tables.elementTable);
 
@@ -148,7 +182,9 @@ export class Reader {
      * @summary Define segment and element structures.
      * @param definitions An object containing the definitions.
      */
-    define(definitions: (Dictionary<SegmentEntry> | Dictionary<ElementEntry>)): void {
+    define(
+        definitions: Dictionary<SegmentEntry> | Dictionary<ElementEntry>
+    ): void {
         this.validator.define(definitions);
     }
 
@@ -160,8 +196,16 @@ export class Reader {
                 }
             } else {
                 // basic Edifact envelop validation, i.e. UNB, UNH, UNS and UNZ
-                this.validator.define(SegmentTableBuilder.enrichWithDefaultSegments(new Dictionary<SegmentEntry>()));
-                this.validator.define(ElementTableBuilder.enrichWithDefaultElements(new Dictionary<ElementEntry>()));
+                this.validator.define(
+                    SegmentTableBuilder.enrichWithDefaultSegments(
+                        new Dictionary<SegmentEntry>()
+                    )
+                );
+                this.validator.define(
+                    ElementTableBuilder.enrichWithDefaultElements(
+                        new Dictionary<ElementEntry>()
+                    )
+                );
             }
             this.defined = true;
         }

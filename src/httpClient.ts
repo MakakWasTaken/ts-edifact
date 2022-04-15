@@ -19,11 +19,10 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 
-import * as url from "url";
-import * as axios from "axios";
+import * as url from 'url';
+import * as axios from 'axios';
 
 export class HttpClient {
-
     baseUrl: string;
 
     constructor(baseUrl: string) {
@@ -33,16 +32,19 @@ export class HttpClient {
     async get(target: string): Promise<string> {
         const uri: string = url.resolve(this.baseUrl, target);
 
-        const request: Promise<string> = axios.default.get<string, axios.AxiosResponse<string>>(uri)
-            .then(axiosResponse => {
+        const request: Promise<string> = axios.default
+            .get<string, axios.AxiosResponse<string>>(uri)
+            .then((axiosResponse) => {
                 if (axiosResponse.status === 200) {
                     const response: string = axiosResponse.data;
                     // console.log(`Response: ${response}`);
                     return response;
                 } else {
-                    console.error(`Unexpected response ${axiosResponse.status}: ${axiosResponse.data}`);
+                    console.error(
+                        `Unexpected response ${axiosResponse.status}: ${axiosResponse.data}`
+                    );
                 }
-                return "";
+                return '';
             });
 
         try {

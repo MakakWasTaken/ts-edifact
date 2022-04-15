@@ -29,7 +29,6 @@ export type MessageType = {
  * A utility class representing the current position in a segment group.
  */
 export class Pointer {
-
     array: MessageType[];
     position: number;
     count: number;
@@ -65,7 +64,6 @@ export class Pointer {
 }
 
 export class Tracker {
-
     stack: Pointer[];
 
     /**
@@ -75,7 +73,7 @@ export class Tracker {
      * @param table The segment table to track against.
      */
     constructor(table: MessageType[]) {
-        this.stack = [ new Pointer(table, 0) ];
+        this.stack = [new Pointer(table, 0)];
     }
 
     /**
@@ -101,8 +99,14 @@ export class Tracker {
         let optionals: number[] = [];
         let probe: number = 0;
 
-        while (segment !== current.content() || current.count === current.repetition()) {
-            if (Array.isArray(current.content()) && current.count < current.repetition()) {
+        while (
+            segment !== current.content() ||
+            current.count === current.repetition()
+        ) {
+            if (
+                Array.isArray(current.content()) &&
+                current.count < current.repetition()
+            ) {
                 // Enter the subgroup.
                 probe++;
                 if (!current.mandatory()) {
@@ -118,7 +122,11 @@ export class Tracker {
                     if (optionals.length === 0) {
                         // We will never encounter groups here, so we can safely use the
                         // name of the segment stored in it's content property
-                        throw new Error(`A mandatory segment ${current.content() as string} is missing`);
+                        throw new Error(
+                            `A mandatory segment ${
+                                current.content() as string
+                            } is missing`
+                        );
                     } else {
                         // If we are omitting mandatory content inside a conditional group,
                         // we just skip the entire group
@@ -135,7 +143,7 @@ export class Tracker {
                     this.stack.pop();
                     current = this.stack[this.stack.length - 1];
                     if (this.stack.length === 0) {
-                        throw new Error("Reached the end of the segment table");
+                        throw new Error('Reached the end of the segment table');
                     }
                     if (probe === 0 && current.count < current.repetition()) {
                         // If we are not currently probing (meaning the tracker actually
@@ -144,7 +152,10 @@ export class Tracker {
                         probe++;
                         optionals = [this.stack.length];
                         current.count++;
-                        current = new Pointer(current.content() as MessageType[], 0);
+                        current = new Pointer(
+                            current.content() as MessageType[],
+                            0
+                        );
                         this.stack.push(current);
                     } else {
                         if (!current.mandatory() || current.count > 1) {

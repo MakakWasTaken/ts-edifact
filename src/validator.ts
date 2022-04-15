@@ -16,18 +16,17 @@
  * limitations under the License.
  */
 
-import { Tokenizer } from "./tokenizer";
+import { Tokenizer } from './tokenizer';
 
 export class Dictionary<T> {
-
     private entries: { [key: string]: T };
 
-    constructor(data?: { [key: string]: T}) {
+    constructor(data?: { [key: string]: T }) {
         this.entries = {};
 
         if (data) {
             for (const key in data) {
-                if (key !== "") {
+                if (key !== '') {
                     this.add(key, data[key]);
                 }
             }
@@ -97,7 +96,7 @@ export enum ValidatorStates {
      */
     ALL = 3,
     ENTER = 4,
-    ENABLE = 5,
+    ENABLE = 5
 }
 
 export interface Validator {
@@ -109,7 +108,9 @@ export interface Validator {
 
     disable(): void;
     enable(): void;
-    define(definitions: (Dictionary<SegmentEntry> | Dictionary<ElementEntry>)): void;
+    define(
+        definitions: Dictionary<SegmentEntry> | Dictionary<ElementEntry>
+    ): void;
     format(formatString: string): FormatType | undefined;
 }
 
@@ -131,7 +132,9 @@ export class NullValidator implements Validator {
     enable(): void {}
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     define(): void {}
-    format(): FormatType | undefined { return undefined; }
+    format(): FormatType | undefined {
+        return undefined;
+    }
 }
 
 /**
@@ -145,7 +148,6 @@ export class NullValidator implements Validator {
  * * Checking components against they're required format.
  */
 export class ValidatorImpl implements Validator {
-
     private segments: Dictionary<SegmentEntry> = new Dictionary<SegmentEntry>();
     private elements: Dictionary<ElementEntry> = new Dictionary<ElementEntry>();
     private formats: Dictionary<FormatType> = new Dictionary<FormatType>();
@@ -185,13 +187,22 @@ export class ValidatorImpl implements Validator {
         this.state = ValidatorStates.SEGMENTS;
     }
 
-    public define(definitions: (Dictionary<SegmentEntry> | Dictionary<ElementEntry>)): void {
+    public define(
+        definitions: Dictionary<SegmentEntry> | Dictionary<ElementEntry>
+    ): void {
         for (const key of definitions.keys()) {
-            const entry: (SegmentEntry | ElementEntry | undefined) = definitions.get(key);
-            if (entry && Object.prototype.hasOwnProperty.call(entry, "elements")) {
+            const entry: SegmentEntry | ElementEntry | undefined =
+                definitions.get(key);
+            if (
+                entry &&
+                Object.prototype.hasOwnProperty.call(entry, 'elements')
+            ) {
                 this.segments.add(key, entry as SegmentEntry);
             }
-            if (entry && Object.prototype.hasOwnProperty.call(entry, "components")) {
+            if (
+                entry &&
+                Object.prototype.hasOwnProperty.call(entry, 'components')
+            ) {
                 this.elements.add(key, entry as ElementEntry);
             }
         }
@@ -207,25 +218,32 @@ export class ValidatorImpl implements Validator {
             return this.formats.get(formatString);
         } else {
             let parts: RegExpExecArray | null;
-            if ((parts = /^(a|an|n)(\.\.)?([1-9][0-9]*)?$/.exec(formatString))) {
+            if (
+                (parts = /^(a|an|n)(\.\.)?([1-9][0-9]*)?$/.exec(formatString))
+            ) {
                 const max: number = parseInt(parts[3]);
-                const min: number = parts[2] === ".." ? 0 : max;
+                const min: number = parts[2] === '..' ? 0 : max;
                 let alpha: boolean = false;
                 let numeric: boolean = false;
                 switch (parts[1]) {
-                    case "a":
+                    case 'a':
                         alpha = true;
                         break;
-                    case "n":
+                    case 'n':
                         numeric = true;
                         break;
-                    case "an":
+                    case 'an':
                         alpha = true;
                         numeric = true;
                         break;
                 }
 
-                return this.formats.add(formatString, { alpha: alpha, numeric: numeric, minimum: min, maximum: max });
+                return this.formats.add(formatString, {
+                    alpha: alpha,
+                    numeric: numeric,
+                    minimum: min,
+                    maximum: max
+                });
             } else {
                 throw this.errors.invalidFormatString(formatString);
             }
@@ -245,7 +263,11 @@ export class ValidatorImpl implements Validator {
                     // the validator in the elements state.
                     this.state = ValidatorStates.ELEMENTS;
                 } else {
-                    const error: Error | undefined = this.errors.missingSegmentDefinition(segment, this.throwOnMissingDefinitions);
+                    const error: Error | undefined =
+                        this.errors.missingSegmentDefinition(
+                            segment,
+                            this.throwOnMissingDefinitions
+                        );
                     if (error) {
                         throw error;
                     }
@@ -261,7 +283,11 @@ export class ValidatorImpl implements Validator {
         switch (this.state) {
             case ValidatorStates.ALL:
                 if (this.segment === undefined) {
-                    const error: Error | undefined = this.errors.missingSegmentStart(undefined, this.throwOnMissingDefinitions);
+                    const error: Error | undefined =
+                        this.errors.missingSegmentStart(
+                            undefined,
+                            this.throwOnMissingDefinitions
+                        );
                     if (error) {
                         throw error;
                     } else {
@@ -274,16 +300,28 @@ export class ValidatorImpl implements Validator {
                 }
 
                 // Check component of the previous enter
-                if (this.counts.component < this.element.requires || this.counts.component > this.element.components.length) {
-                    throw this.errors.countError("Element", name, this.element, this.counts.component);
+                if (
+                    this.counts.component < this.element.requires ||
+                    this.counts.component > this.element.components.length
+                ) {
+                    throw this.errors.countError(
+                        'Element',
+                        name,
+                        this.element,
+                        this.counts.component
+                    );
                 }
-                // Fall through to continue with element count validation
+            // Fall through to continue with element count validation
             case ValidatorStates.ENTER:
-                // Skip component count checks for the first element
+            // Skip component count checks for the first element
             // eslint-disable-next-line no-fallthrough
             case ValidatorStates.ELEMENTS:
                 if (this.segment === undefined) {
-                    const error: Error | undefined = this.errors.missingSegmentStart(undefined, this.throwOnMissingDefinitions);
+                    const error: Error | undefined =
+                        this.errors.missingSegmentStart(
+                            undefined,
+                            this.throwOnMissingDefinitions
+                        );
                     if (error) {
                         throw error;
                     } else {
@@ -314,7 +352,10 @@ export class ValidatorImpl implements Validator {
      */
     onOpenComponent(buffer: Tokenizer): void {
         if (this.segment === undefined) {
-            const error: Error | undefined = this.errors.missingSegmentStart(undefined, this.throwOnMissingDefinitions);
+            const error: Error | undefined = this.errors.missingSegmentStart(
+                undefined,
+                this.throwOnMissingDefinitions
+            );
             if (error) {
                 throw error;
             } else {
@@ -331,7 +372,9 @@ export class ValidatorImpl implements Validator {
                 }
 
                 // Retrieve a component definition if validation is set to all
-                this.component = this.format(this.element.components[this.counts.component]);
+                this.component = this.format(
+                    this.element.components[this.counts.component]
+                );
                 if (this.component === undefined) {
                     return;
                 }
@@ -372,7 +415,11 @@ export class ValidatorImpl implements Validator {
                 if (this.segment) {
                     name = this.segment.elements[this.counts.element];
                 } else {
-                    const error: Error | undefined = this.errors.missingSegmentStart(this.segment, this.throwOnMissingDefinitions);
+                    const error: Error | undefined =
+                        this.errors.missingSegmentStart(
+                            this.segment,
+                            this.throwOnMissingDefinitions
+                        );
                     if (error) {
                         throw error;
                     } else {
@@ -384,9 +431,19 @@ export class ValidatorImpl implements Validator {
                 // or equal to the current component count or if a non-empty value was found
                 if (this.required >= this.counts.component || length > 0) {
                     if (length < this.minimum) {
-                        throw this.errors.invalidData(name, `'${buffer.content()}' length is less than minimum length ${this.minimum}`);
+                        throw this.errors.invalidData(
+                            name,
+                            `'${buffer.content()}' length is less than minimum length ${
+                                this.minimum
+                            }`
+                        );
                     } else if (length > this.maximum) {
-                        throw this.errors.invalidData(name, `'${buffer.content()} exceeds maximum length ${this.maximum}`);
+                        throw this.errors.invalidData(
+                            name,
+                            `'${buffer.content()} exceeds maximum length ${
+                                this.maximum
+                            }`
+                        );
                     }
                 }
         }
@@ -401,7 +458,11 @@ export class ValidatorImpl implements Validator {
         switch (this.state) {
             case ValidatorStates.ALL:
                 if (this.segment === undefined) {
-                    const error: Error | undefined = this.errors.missingSegmentStart(segment, this.throwOnMissingDefinitions);
+                    const error: Error | undefined =
+                        this.errors.missingSegmentStart(
+                            segment,
+                            this.throwOnMissingDefinitions
+                        );
                     if (error) {
                         throw error;
                     } else {
@@ -412,14 +473,26 @@ export class ValidatorImpl implements Validator {
                     throw this.errors.missingElementStart(segment);
                 }
 
-                if (this.counts.component < this.element.requires || this.counts.component > this.element.components.length) {
+                if (
+                    this.counts.component < this.element.requires ||
+                    this.counts.component > this.element.components.length
+                ) {
                     name = this.segment.elements[this.counts.element];
-                    throw this.errors.countError("Element", name, this.element, this.counts.component);
+                    throw this.errors.countError(
+                        'Element',
+                        name,
+                        this.element,
+                        this.counts.component
+                    );
                 }
-                // Fall through to continue with element cound validation
+            // Fall through to continue with element cound validation
             case ValidatorStates.ELEMENTS:
                 if (this.segment === undefined) {
-                    const error: Error | undefined = this.errors.missingSegmentStart(segment, this.throwOnMissingDefinitions);
+                    const error: Error | undefined =
+                        this.errors.missingSegmentStart(
+                            segment,
+                            this.throwOnMissingDefinitions
+                        );
                     if (error) {
                         throw error;
                     } else {
@@ -427,53 +500,71 @@ export class ValidatorImpl implements Validator {
                     }
                 }
 
-                if (this.counts.element < this.segment.requires || this.counts.element > this.segment.elements.length) {
+                if (
+                    this.counts.element < this.segment.requires ||
+                    this.counts.element > this.segment.elements.length
+                ) {
                     name = segment;
-                    throw this.errors.countError("Segment", name, this.segment, this.counts.element);
+                    throw this.errors.countError(
+                        'Segment',
+                        name,
+                        this.segment,
+                        this.counts.element
+                    );
                 }
         }
     }
 
     private errors = {
-        invalidData: function(element: string, msg: string): Error {
-            return new Error(`Could not accept data on element ${element}: ${msg}`);
+        invalidData: function (element: string, msg: string): Error {
+            return new Error(
+                `Could not accept data on element ${element}: ${msg}`
+            );
         },
-        invalidFormatString: function(formatString: string): Error {
-            return new Error("Invalid format string " + formatString);
+        invalidFormatString: function (formatString: string): Error {
+            return new Error('Invalid format string ' + formatString);
         },
-        countError: function(type: string, name: string, definition: (ElementEntry | SegmentEntry), count: number): Error {
+        countError: function (
+            type: string,
+            name: string,
+            definition: ElementEntry | SegmentEntry,
+            count: number
+        ): Error {
             let array: string;
-            let start: string = type + " " + name;
+            let start: string = type + ' ' + name;
             let end: string;
 
             let length: number = 0;
-            if (type === "Segment") {
-                array = "elements";
+            if (type === 'Segment') {
+                array = 'elements';
                 const entry: SegmentEntry = definition as SegmentEntry;
                 length = entry.elements.length;
             } else {
-                array = "components";
+                array = 'components';
                 const entry: ElementEntry = definition as ElementEntry;
                 length = entry.components.length;
             }
 
             if (count < definition.requires) {
-                start += " only";
+                start += ' only';
                 end = ` but requires at least ${definition.requires}`;
             } else {
                 end = ` but accepts at most ${length}`;
             }
             return new Error(start + ` got ${count} ` + array + end);
         },
-        missingElementStart: function(segment: string): Error {
+        missingElementStart: function (segment: string): Error {
             const message: string = `Active open element expected on segment ${segment}`;
             return new Error(message);
         },
-        missingElementDefinition: function(element: string): Error {
+        missingElementDefinition: function (element: string): Error {
             const message: string = `No definition found for element ${element}`;
             return new Error(message);
         },
-        missingSegmentStart: function(segment?: string, throwOnMissingDefinitions?: boolean): Error | undefined {
+        missingSegmentStart: function (
+            segment?: string,
+            throwOnMissingDefinitions?: boolean
+        ): Error | undefined {
             if (!throwOnMissingDefinitions) {
                 return undefined;
             }
@@ -484,13 +575,22 @@ export class ValidatorImpl implements Validator {
             } else {
                 name = "''";
             }
-            return new Error(`Active open segment ${name} expected. Found none`);
+            return new Error(
+                `Active open segment ${name} expected. Found none`
+            );
         },
-        missingSegmentDefinition: function(segment: string, throwOnMissingDefinitions?: boolean): Error | undefined {
+        missingSegmentDefinition: function (
+            segment: string,
+            throwOnMissingDefinitions?: boolean
+        ): Error | undefined {
             if (throwOnMissingDefinitions) {
-                return new Error(`No segment definition found for segment name ${segment}`);
+                return new Error(
+                    `No segment definition found for segment name ${segment}`
+                );
             } else {
-                console.warn(`No segment definition found for segment name ${segment}`);
+                console.warn(
+                    `No segment definition found for segment name ${segment}`
+                );
                 return undefined;
             }
         }

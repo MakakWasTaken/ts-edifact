@@ -16,12 +16,12 @@
  * limitations under the License.
  */
 
-import { StateMachineDefinition } from "@initics/tsm";
-import { UNECEDomHandler } from "./uneceDomHandler";
-import { MessageType } from "../tracker";
+import { StateMachineDefinition } from '@initics/tsm';
+import { UNECEDomHandler } from './uneceDomHandler';
+import { MessageType } from '../tracker';
 
-import { EdifactMessageSpecification } from "./messageStructureParser";
-import { UNECEPageParser } from "./unecePageParser";
+import { EdifactMessageSpecification } from './messageStructureParser';
+import { UNECEPageParser } from './unecePageParser';
 
 enum State {
     initial = 'initial',
@@ -34,7 +34,7 @@ enum State {
     segmentPosition = 'segmentPosition',
     segmentGroup = 'segmentGroup',
     segmentName = 'segmentName',
-    segmentDescription = 'segmentDescription',
+    segmentDescription = 'segmentDescription'
 }
 
 const SM_DEFINITION: StateMachineDefinition = {
@@ -62,7 +62,6 @@ const SM_DEFINITION: StateMachineDefinition = {
  * pages from UNECE up to version D99A.
  */
 export class UNECEStructurePageParser extends UNECEPageParser {
-
     readonly segmentNames: string[];
 
     constructor(spec: EdifactMessageSpecification) {
@@ -115,11 +114,14 @@ export class UNECEStructurePageParser extends UNECEPageParser {
                 case State.segmentGroup:
                     if (text.includes('Segment group')) {
                         isSegmentGroupEnd = false;
-                        const group: MessageType = this.parseSegmentGroup(section, text);
+                        const group: MessageType = this.parseSegmentGroup(
+                            section,
+                            text
+                        );
                         const level: number = this.parseSegmentGroupLevel(text);
                         const delta: number = level - index;
                         if (delta <= 0) {
-                            for (let i: number = 0; i < (delta * -1 + 1); i++) {
+                            for (let i: number = 0; i < delta * -1 + 1; i++) {
                                 stack.pop();
                                 index--;
                             }
@@ -150,18 +152,24 @@ export class UNECEStructurePageParser extends UNECEPageParser {
                     break;
 
                 case State.segmentDescription: {
-                    const item: MessageType = this.parseSegment(name, section, text);
+                    const item: MessageType = this.parseSegment(
+                        name,
+                        section,
+                        text
+                    );
                     stack[index].push(item);
 
                     isSegmentGroupEnd = this.isSegmentGroupEnd(text);
 
-                    const detailSection: boolean = text.includes('DETAIL SECTION');
-                    const summarySection: boolean = text.includes('SUMMARY SECTION');
+                    const detailSection: boolean =
+                        text.includes('DETAIL SECTION');
+                    const summarySection: boolean =
+                        text.includes('SUMMARY SECTION');
                     if (detailSection || summarySection) {
                         // reset the stack if a new section begins
                         resetStack();
                         if (detailSection) {
-                            section = 'detial';
+                            section = 'detail';
                             this.sm.transition(State.detailSection);
                         } else {
                             section = 'summary';
@@ -173,12 +181,14 @@ export class UNECEStructurePageParser extends UNECEPageParser {
                     break;
                 }
 
-                case State.messageStructureEnd: break;
+                case State.messageStructureEnd:
+                    break;
 
-                default: this.throwInvalidParserState(this.sm.state);
+                default:
+                    this.throwInvalidParserState(this.sm.state);
             }
         };
-        helper.onOpenTag = name => {
+        helper.onOpenTag = (name) => {
             if (this.sm.state === State.messageStructureStart && name === 'a') {
                 this.sm.transition(State.segmentPosition);
             }
@@ -189,12 +199,18 @@ export class UNECEStructurePageParser extends UNECEPageParser {
 
     private addSegmentName(name: string): void {
         const excludeSegmentNames: string[] = ['UNH', 'UNS', 'UNT'];
-        if (!excludeSegmentNames.includes(name) && !this.segmentNames.includes(name)) {
+        if (
+            !excludeSegmentNames.includes(name) &&
+            !this.segmentNames.includes(name)
+        ) {
             this.segmentNames.push(name);
         }
     }
 
-    private parseSegmentGroup(section: string | undefined, descriptionString: string): MessageType {
+    private parseSegmentGroup(
+        section: string | undefined,
+        descriptionString: string
+    ): MessageType {
         const regex: RegExp = /^.* (Segment group \d*).*\s*([M|C])\s*(\d*).*/g;
         const matches: RegExpExecArray | null = regex.exec(descriptionString);
         if (!matches) {
@@ -215,11 +231,18 @@ export class UNECEStructurePageParser extends UNECEPageParser {
         };
     }
 
-    private parseSegment(name: string, section: string | undefined, descriptionString: string): MessageType {
-        const regex: RegExp = /^([a-zA-Z /\\-]*)\s*?([M|C])\s*?([0-9]*?)([^0-9]*)$/g;
+    private parseSegment(
+        name: string,
+        section: string | undefined,
+        descriptionString: string
+    ): MessageType {
+        const regex: RegExp =
+            /^([a-zA-Z /\\-]*)\s*?([M|C])\s*?([0-9]*?)([^0-9]*)$/g;
         const matches: RegExpExecArray | null = regex.exec(descriptionString);
         if (!matches) {
-            throw new Error(`${name}: Invalid segment description string: ${descriptionString}`);
+            throw new Error(
+                `${name}: Invalid segment description string: ${descriptionString}`
+            );
         }
 
         const mandatoryString: string = matches[2];
@@ -249,7 +272,11 @@ export class UNECEStructurePageParser extends UNECEPageParser {
         // ends with LF and sometimes with CRLF.
         // Make sure both cases are covered:
         if (levelString.charCodeAt(0) !== 10) {
-            console.warn(`Unrecognized character in level string: ${levelString[0]} (${levelString.charCodeAt(0)})`);
+            console.warn(
+                `Unrecognized character in level string: ${
+                    levelString[0]
+                } (${levelString.charCodeAt(0)})`
+            );
         } else if (levelString.charCodeAt(1) === 13) {
             normalization = 1;
         }
@@ -258,8 +285,8 @@ export class UNECEStructurePageParser extends UNECEPageParser {
     }
 
     private isSegmentGroupEnd(descriptionString: string): boolean {
+        console.log(descriptionString);
         const regex: RegExp = /\d+�+/g;
         return !!regex.exec(descriptionString);
     }
-
 }

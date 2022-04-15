@@ -16,8 +16,8 @@
  * limitations under the License.
  */
 
-import { DomHandler, DomHandlerOptions } from "htmlparser2";
-import { Node, Element } from "htmlparser2/node_modules/domhandler";
+import { DomHandler, DomHandlerOptions } from 'htmlparser2';
+import { Node, Element } from 'htmlparser2/node_modules/domhandler';
 
 type Callback = (error: Error | null, dom: Node[]) => void;
 type ElementCallback = (element: Element) => void;
@@ -39,10 +39,11 @@ type ElementCallback = (element: Element) => void;
  * after the parent methods got called.
  */
 export abstract class UNECEDomHandler extends DomHandler {
-
-    constructor(callback?: Callback | null,
+    constructor(
+        callback?: Callback | null,
         options?: DomHandlerOptions | null,
-        elementCB?: ElementCallback) {
+        elementCB?: ElementCallback
+    ) {
         super(callback, options, elementCB);
     }
 
@@ -90,5 +91,8 @@ export abstract class UNECEDomHandler extends DomHandler {
      * @param name The name of the opening tag found
      * @param attribs Any attributes attached to this tag
      */
-    public abstract onOpenTag(name: string, attribs: { [key: string]: string }): void;
+    public abstract onOpenTag(
+        name: string,
+        attribs: { [key: string]: string }
+    ): void;
 }

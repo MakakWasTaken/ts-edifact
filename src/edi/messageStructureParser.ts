@@ -16,11 +16,11 @@
  * limitations under the License.
  */
 
-import { Dictionary, SegmentEntry, ElementEntry } from "../validator";
-import { MessageType } from "../tracker";
-import { HttpClient } from "../httpClient";
-import { Parser, DomHandler } from "htmlparser2";
-import { isDefined } from "../util";
+import { Dictionary, SegmentEntry, ElementEntry } from '../validator';
+import { MessageType } from '../tracker';
+import { HttpClient } from '../httpClient';
+import { Parser, DomHandler } from 'htmlparser2';
+import { isDefined } from '../util';
 
 export interface EdifactMessageSpecification {
     readonly messageType: string;
@@ -47,8 +47,9 @@ export interface EdifactMessageSpecification {
     versionAbbr(): string;
 }
 
-export class EdifactMessageSpecificationImpl implements EdifactMessageSpecification {
-
+export class EdifactMessageSpecificationImpl
+    implements EdifactMessageSpecification
+{
     messageType: string;
     version: string;
     release: string;
@@ -58,7 +59,12 @@ export class EdifactMessageSpecificationImpl implements EdifactMessageSpecificat
     elementTable: Dictionary<ElementEntry> = new Dictionary<ElementEntry>();
     messageStructureDefinition: MessageType[] = [];
 
-    constructor(messageType: string, version: string, release: string, controllingAgency: string) {
+    constructor(
+        messageType: string,
+        version: string,
+        release: string,
+        controllingAgency: string
+    ) {
         this.messageType = messageType;
         this.version = version;
         this.release = release;
@@ -66,7 +72,7 @@ export class EdifactMessageSpecificationImpl implements EdifactMessageSpecificat
     }
 
     public type(): string {
-        return this.version + this.release + "_" + this.messageType;
+        return this.version + this.release + '_' + this.messageType;
     }
 
     public versionAbbr(): string {
@@ -96,12 +102,10 @@ export type ParsingResultType = {
 };
 
 export interface MessageStructureParser {
-
     loadTypeSpec(): Promise<EdifactMessageSpecification>;
 }
 
 export class UNECEMessageStructureParser implements MessageStructureParser {
-
     readonly version: string;
     readonly type: string;
     readonly httpClient: HttpClient;
@@ -110,16 +114,25 @@ export class UNECEMessageStructureParser implements MessageStructureParser {
         this.version = version.toLowerCase();
         this.type = type.toLowerCase();
 
-        const baseUrl: string = "https://service.unece.org/trade/untdid/" + this.version + "/trmd/" + this.type + "_c.htm";
+        const baseUrl: string =
+            'https://service.unece.org/trade/untdid/' +
+            this.version +
+            '/trmd/' +
+            this.type +
+            '_c.htm';
         this.httpClient = new HttpClient(baseUrl);
     }
 
-    private extractTextValue(text: string, regex: RegExp, index: number = 0): string {
+    private extractTextValue(
+        text: string,
+        regex: RegExp,
+        index: number = 0
+    ): string {
         const arr: RegExpExecArray | null = regex.exec(text);
         if (isDefined(arr)) {
             return arr[index];
         }
-        return "";
+        return '';
     }
 
     protected async loadPage(page: string): Promise<string> {
@@ -127,12 +140,16 @@ export class UNECEMessageStructureParser implements MessageStructureParser {
         return data;
     }
 
-    protected async parseSegmentDefinitionPage(segment: string, page: string, definition: EdifactMessageSpecification): Promise<EdifactMessageSpecification> {
+    protected async parseSegmentDefinitionPage(
+        segment: string,
+        page: string,
+        definition: EdifactMessageSpecification
+    ): Promise<EdifactMessageSpecification> {
         if (definition.segmentTable.contains(segment)) {
             return Promise.resolve(definition);
         }
 
-        const segEntry: SegmentEntry = { "requires": 0, "elements": [] };
+        const segEntry: SegmentEntry = { requires: 0, elements: [] };
         let state: SegmentPart = SegmentPart.BeforeStructureDef;
 
         // only relevant for legacy UNECE segment specification pages:
@@ -142,48 +159,62 @@ export class UNECEMessageStructureParser implements MessageStructureParser {
         let overflowLine: string | null = null;
         let complexEleId: string | null = null;
         let complexEleEntry: ElementEntry | null = null;
-        for (let line of page.split("\n")) {
+        for (let line of page.split('\n')) {
             line = line.trimRight();
             if (overflowLine !== null) {
-                line = overflowLine.trimRight() + " " + line.trim();
-                overflowLine =  null;
+                line = overflowLine.trimRight() + ' ' + line.trim();
+                overflowLine = null;
             }
 
-            if (state === SegmentPart.BeforeStructureDef && line.includes('<HR>')) {
+            if (
+                state === SegmentPart.BeforeStructureDef &&
+                line.includes('<HR>')
+            ) {
                 dataSection = true;
             } else if (
                 state === SegmentPart.BeforeStructureDef &&
                 // checking dataSection and <B> tag only relevant for legacy
                 // UNECE segment specification pages:
-                (line.includes("<H3>") || (dataSection && line.includes('<B>')))
+                (line.includes('<H3>') || (dataSection && line.includes('<B>')))
             ) {
                 state = SegmentPart.Data;
-            } else if (state === SegmentPart.Data && !line.includes("<P>")) {
-                const regexp: RegExp = /^([\d]*)\s*?([X|\\*]?)\s*<A.*>([a-zA-Z0-9]*)<\/A>([a-zA-Z0-9 ,\-\\/&]{44,})([M|C])\s*([\d]*)\s*([a-zA-Z0-9\\.]*).*$/g;
+            } else if (state === SegmentPart.Data && !line.includes('<P>')) {
+                const regexp: RegExp =
+                    /^([\d]*)\s*?([X|\\*]?)\s*<A.*>([a-zA-Z0-9]*)<\/A>([a-zA-Z0-9 ,\-\\/&]{44,})([M|C])\s*([\d]*)\s*([a-zA-Z0-9\\.]*).*$/g;
                 const arr: RegExpExecArray | null = regexp.exec(line);
                 if (isDefined(arr)) {
-                    const segGroupId: string | undefined = arr[1] === "" ? undefined : arr[1];
+                    const segGroupId: string | undefined =
+                        arr[1] === '' ? undefined : arr[1];
                     // const deprecated: boolean = arr[2] === "X" ? true : false;
                     const id: string = arr[3];
                     // const name: string = arr[4].trim();
-                    const mandatory: boolean = arr[5] === "M" ? true : false;
+                    const mandatory: boolean = arr[5] === 'M' ? true : false;
                     // const repetition: number | undefined = isDefined(arr[6]) ? parseInt(arr[6]) : undefined;
-                    const elementDef: string | undefined = arr[7] === "" ? undefined :  arr[7];
+                    const elementDef: string | undefined =
+                        arr[7] === '' ? undefined : arr[7];
 
                     if (segGroupId) {
-                        if (id === "") {
-                            console.warn(`Could not determine element ID based on line ${line}`);
+                        if (id === '') {
+                            console.warn(
+                                `Could not determine element ID based on line ${line}`
+                            );
                             continue;
                         }
                         segEntry.elements.push(id);
                         skipAddingElement = false;
 
                         if (mandatory) {
-                            segEntry.requires = segEntry.requires +  1;
+                            segEntry.requires = segEntry.requires + 1;
                         }
                         if (elementDef) {
-                            if (complexEleEntry !== null && complexEleId !== null) {
-                                definition.elementTable.add(complexEleId, complexEleEntry);
+                            if (
+                                complexEleEntry !== null &&
+                                complexEleId !== null
+                            ) {
+                                definition.elementTable.add(
+                                    complexEleId,
+                                    complexEleEntry
+                                );
                             }
                             complexEleId = null;
                             complexEleEntry = null;
@@ -191,35 +222,49 @@ export class UNECEMessageStructureParser implements MessageStructureParser {
                             if (definition.elementTable.contains(id)) {
                                 continue;
                             }
-                            const eleEntry: ElementEntry = { "requires": 0, "components": [] };
+                            const eleEntry: ElementEntry = {
+                                requires: 0,
+                                components: []
+                            };
                             if (mandatory) {
                                 eleEntry.requires = eleEntry.requires + 1;
                             }
                             eleEntry.components.push(elementDef);
                             definition.elementTable.add(id, eleEntry);
                         } else {
-                            if (complexEleEntry !== null && complexEleId !== null) {
-                                definition.elementTable.add(complexEleId, complexEleEntry);
+                            if (
+                                complexEleEntry !== null &&
+                                complexEleId !== null
+                            ) {
+                                definition.elementTable.add(
+                                    complexEleId,
+                                    complexEleEntry
+                                );
                             }
                             if (definition.elementTable.contains(id)) {
                                 skipAddingElement = true;
                                 continue;
                             }
-                            complexEleId =  id;
-                            complexEleEntry = { "requires": 0, "components": [] };
+                            complexEleId = id;
+                            complexEleEntry = { requires: 0, components: [] };
                         }
                     } else {
                         if (!skipAddingElement) {
                             if (complexEleEntry !== null && elementDef) {
                                 complexEleEntry.components.push(elementDef);
-                                complexEleEntry.requires = mandatory ? complexEleEntry.requires + 1 : complexEleEntry.requires;
+                                complexEleEntry.requires = mandatory
+                                    ? complexEleEntry.requires + 1
+                                    : complexEleEntry.requires;
                             } else {
                                 // simple element definition
                                 if (definition.elementTable.contains(id)) {
                                     continue;
                                 }
 
-                                const eleEntry: ElementEntry = { "requires": 0, "components": [] };
+                                const eleEntry: ElementEntry = {
+                                    requires: 0,
+                                    components: []
+                                };
 
                                 if (mandatory) {
                                     eleEntry.requires = eleEntry.requires + 1;
@@ -232,13 +277,14 @@ export class UNECEMessageStructureParser implements MessageStructureParser {
                         }
                     }
                 } else {
-                    const regexpAlt: RegExp = /^([\d]*)\s*([X|\\*]?)\s*<A.*>([a-zA-Z0-9]*)<\/A>\s*([a-zA-Z0-9 \\-\\/&]*)/g;
+                    const regexpAlt: RegExp =
+                        /^([\d]*)\s*([X|\\*]?)\s*<A.*>([a-zA-Z0-9]*)<\/A>\s*([a-zA-Z0-9 \\-\\/&]*)/g;
                     const arrAlt: RegExpExecArray | null = regexpAlt.exec(line);
                     if (isDefined(arrAlt)) {
                         overflowLine = line;
                     }
                 }
-            } else if (state === SegmentPart.Data && line.includes("<P>")) {
+            } else if (state === SegmentPart.Data && line.includes('<P>')) {
                 state = SegmentPart.AfterStructureDef;
                 break;
             }
@@ -246,7 +292,7 @@ export class UNECEMessageStructureParser implements MessageStructureParser {
         if (complexEleEntry !== null && complexEleId !== null) {
             definition.elementTable.add(complexEleId, complexEleEntry);
         }
-        if (segment !== "") {
+        if (segment !== '') {
             definition.segmentTable.add(segment, segEntry);
         }
 
@@ -258,9 +304,10 @@ export class UNECEMessageStructureParser implements MessageStructureParser {
         const handler: DomHandler = new DomHandler();
 
         let state: Part = Part.BeforeStructureDef;
-        let section: string | null = "header";
+        let section: string | null = 'header';
         const segStack: MessageType[][] = [];
-        const lookupSegmentPromises: Promise<EdifactMessageSpecification>[] = [];
+        const lookupSegmentPromises: Promise<EdifactMessageSpecification>[] =
+            [];
 
         const nextState = () => {
             if (state === Part.RefLink) {
@@ -277,34 +324,64 @@ export class UNECEMessageStructureParser implements MessageStructureParser {
         };
 
         handler.ontext = (text: string) => {
-            if (text.includes("Message Type") && text.includes("Version") && text.includes("Release")) {
-                const messageType: string = this.extractTextValue(text, /Message Type\s*: ([A-Z]*)\s/g, 1);
-                const version: string = this.extractTextValue(text, /Version\s*: ([A-Z]*)\s/g, 1);
-                const release: string = this.extractTextValue(text, /Release\s*: ([0-9A-Z]*)\s/g, 1);
-                const controllingAgency: string = this.extractTextValue(text, /Contr. Agency\s*: ([0-9A-Z]*)\s/g, 1);
-                definition = new EdifactMessageSpecificationImpl(messageType, version, release, controllingAgency);
+            if (
+                text.includes('Message Type') &&
+                text.includes('Version') &&
+                text.includes('Release')
+            ) {
+                const messageType: string = this.extractTextValue(
+                    text,
+                    /Message Type\s*: ([A-Z]*)\s/g,
+                    1
+                );
+                const version: string = this.extractTextValue(
+                    text,
+                    /Version\s*: ([A-Z]*)\s/g,
+                    1
+                );
+                const release: string = this.extractTextValue(
+                    text,
+                    /Release\s*: ([0-9A-Z]*)\s/g,
+                    1
+                );
+                const controllingAgency: string = this.extractTextValue(
+                    text,
+                    /Contr. Agency\s*: ([0-9A-Z]*)\s/g,
+                    1
+                );
+                definition = new EdifactMessageSpecificationImpl(
+                    messageType,
+                    version,
+                    release,
+                    controllingAgency
+                );
                 segStack.push(definition.messageStructureDefinition);
-            } else if (text.includes("Message structure")) {
+            } else if (text.includes('Message structure')) {
                 state = Part.RefLink;
-            } else if (state !== Part.BeforeStructureDef && state !== Part.AfterStructureDef) {
+            } else if (
+                state !== Part.BeforeStructureDef &&
+                state !== Part.AfterStructureDef
+            ) {
                 if (state === Part.RefLink) {
                     // ignored
                     // console.debug(`RefLink: ${text}`);
                 } else if (state === Part.Pos) {
                     // console.debug(`Pos: ${text}`);
                 } else if (state === Part.Deprecated) {
-
-                    if (text.includes("- Segment group")) {
-                        const regex: RegExp = /^[\s*+-]*-* (Segment group \d*)\s*-*\s*([M|C])\s*(\d*)([-|\\+|\\|]*).*/g;
+                    if (text.includes('- Segment group')) {
+                        const regex: RegExp =
+                            /^[\s*+-]*-* (Segment group \d*)\s*-*\s*([M|C])\s*(\d*)([-|\\+|\\|]*).*/g;
                         const arr: RegExpExecArray | null = regex.exec(text);
                         if (isDefined(arr)) {
                             const groupArray: MessageType[] = [];
                             const group: MessageType = {
                                 content: groupArray,
-                                mandatory: arr[2] === "M" ? true : false,
+                                mandatory: arr[2] === 'M' ? true : false,
                                 repetition: parseInt(arr[3]),
                                 name: arr[1],
-                                section: isDefined(section) ? section : undefined
+                                section: isDefined(section)
+                                    ? section
+                                    : undefined
                             };
                             section = null;
                             // add the group to the end of the current top segments
@@ -320,10 +397,17 @@ export class UNECEMessageStructureParser implements MessageStructureParser {
                     }
                 } else if (state === Part.Tag) {
                     // console.debug(`Tag: ${text}`);
-                    const _section: string | undefined = section !== null ? section : undefined;
+                    const _section: string | undefined =
+                        section !== null ? section : undefined;
                     let _data: string[] | undefined;
                     if (definition) {
-                        _data = text === "UNH" ? [ definition.versionAbbr(), definition.messageType ] : undefined;
+                        _data =
+                            text === 'UNH'
+                                ? [
+                                      definition.versionAbbr(),
+                                      definition.messageType
+                                  ]
+                                : undefined;
                     }
                     const segment: MessageType = {
                         content: text,
@@ -338,7 +422,8 @@ export class UNECEMessageStructureParser implements MessageStructureParser {
                     section = null;
                 } else if (state === Part.Name) {
                     // console.debug(`Name: ${text}`);
-                    const regex: RegExp = /^([a-zA-Z /\\-]*)\s*?([M|C])\s*?([0-9]*?)([^0-9]*)$/g;
+                    const regex: RegExp =
+                        /^([a-zA-Z /\\-]*)\s*?([M|C])\s*?([0-9]*?)([^0-9]*)$/g;
                     const arr: RegExpExecArray | null = regex.exec(text);
                     if (isDefined(arr)) {
                         // const name: string = arr[1].trim();
@@ -348,47 +433,73 @@ export class UNECEMessageStructureParser implements MessageStructureParser {
                         // console.debug(`Processing segment: ${name}`);
 
                         // update the last element on the top-most stack with the respective data
-                        const segArr: MessageType[] = segStack[segStack.length - 1];
+                        const segArr: MessageType[] =
+                            segStack[segStack.length - 1];
                         const segData: MessageType = segArr[segArr.length - 1];
-                        segData.mandatory = sMandatory === "M" ? true : false;
+                        segData.mandatory = sMandatory === 'M' ? true : false;
                         segData.repetition = parseInt(sRepetition);
 
                         // check whether the remainder contains a closing hint for a subgroup: -...-++
-                        if (remainder.includes("-") && remainder.includes("+")) {
-                            for (let i: number = 0; i < remainder.split("+").length - 1; i++) {
+                        if (
+                            remainder.includes('-') &&
+                            remainder.includes('+')
+                        ) {
+                            for (
+                                let i: number = 0;
+                                i < remainder.split('+').length - 1;
+                                i++
+                            ) {
                                 segStack.pop();
                             }
                         }
 
                         nextState();
                     }
-                    if (text.includes("DETAIL SECTION")) {
-                        section = "detail";
-                    } else if (text.includes("SUMMARY SECTION")) {
-                        section = "summary";
+                    if (text.includes('DETAIL SECTION')) {
+                        section = 'detail';
+                    } else if (text.includes('SUMMARY SECTION')) {
+                        section = 'summary';
                     }
                 } else {
                     console.warn(`Unknown part: ${text}`);
                 }
             }
         };
-        handler.onopentag = (name: string, attribs: { [key: string]: string }) => {
-            if (name === "p" && state !== Part.BeforeStructureDef && state !== Part.AfterStructureDef) {
+        handler.onopentag = (
+            name: string,
+            attribs: { [key: string]: string }
+        ) => {
+            if (
+                name === 'p' &&
+                state !== Part.BeforeStructureDef &&
+                state !== Part.AfterStructureDef
+            ) {
                 state = Part.AfterStructureDef;
             }
             if (state === Part.Tag && attribs.href !== undefined) {
                 if (definition) {
-                    const end: number = attribs.href.indexOf(".htm");
-                    const curSeg: string = attribs.href.substring(end - 3, end).toUpperCase();
+                    const end: number = attribs.href.indexOf('.htm');
+                    const curSeg: string = attribs.href
+                        .substring(end - 3, end)
+                        .toUpperCase();
 
                     // skip segments that do not point to the right segment definition page
-                    if (curSeg !== "UNH" && curSeg !== "UNS" && curSeg !== "UNT") {
-
+                    if (
+                        curSeg !== 'UNH' &&
+                        curSeg !== 'UNS' &&
+                        curSeg !== 'UNT'
+                    ) {
                         // console.debug(`Adding promise to lookup segment definition for segment ${curSeg} for URI ${attribs.href}`);
 
                         const def: EdifactMessageSpecification = definition;
-                        lookupSegmentPromises.push(this.loadPage(attribs.href)
-                            .then(result => this.parseSegmentDefinitionPage(curSeg, result, def))
+                        lookupSegmentPromises.push(
+                            this.loadPage(attribs.href).then((result) =>
+                                this.parseSegmentDefinitionPage(
+                                    curSeg,
+                                    result,
+                                    def
+                                )
+                            )
                         );
                     }
                 }
@@ -402,20 +513,27 @@ export class UNECEMessageStructureParser implements MessageStructureParser {
         parser.end();
 
         if (definition) {
-            return Promise.resolve({ specObj: definition, promises: lookupSegmentPromises });
+            return Promise.resolve({
+                specObj: definition,
+                promises: lookupSegmentPromises
+            });
         }
-        return Promise.reject(new Error("Could not extract values from read page successfully"));
+        return Promise.reject(
+            new Error('Could not extract values from read page successfully')
+        );
     }
 
     loadTypeSpec(): Promise<EdifactMessageSpecification> {
-        const url: string = "./" + this.type + "_c.htm";
+        const url: string = './' + this.type + '_c.htm';
         return this.loadPage(url)
             .then((page: string) => this.parsePage(page))
             .then((result: ParsingResultType) =>
                 Promise.all(result.promises)
                     .then(() => result.specObj)
                     .catch((error: Error) => {
-                        console.warn(`Error while processing segment definition promises: Reason ${error.message}`);
+                        console.warn(
+                            `Error while processing segment definition promises: Reason ${error.message}`
+                        );
                         return result.specObj;
                     })
             );

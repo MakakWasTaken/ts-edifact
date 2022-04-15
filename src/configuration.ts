@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-import { Validator, ValidatorImpl } from "./validator";
+import { Validator, ValidatorImpl } from './validator';
 
 type PropConfig = {
     segmentTerminator?: number;
@@ -56,7 +56,6 @@ const DEFAULT_CONFIG: Config = {
 };
 
 export class Configuration {
-
     readonly config: Config;
     charset: string;
     validator: Validator;
@@ -100,7 +99,7 @@ export class Configuration {
         if (config && config.charset) {
             this.charset = config.charset;
         } else {
-            this.charset = "UNOA";
+            this.charset = 'UNOA';
         }
         this.validator = this.config.validator;
     }
@@ -110,7 +109,11 @@ export class Configuration {
      * used by this configuration.
      */
     public delimiters(): number[] {
-        const compareAndSwap = function(array: number[], a: number, b: number): void {
+        const compareAndSwap = function (
+            array: number[],
+            a: number,
+            b: number
+        ): void {
             if (array[a] > array[b]) {
                 // eslint-disable-next-line no-bitwise
                 array[a] = array[a] ^ array[b];
@@ -121,7 +124,12 @@ export class Configuration {
             }
         };
 
-        const exclude: number[] = [this.config.segmentTerminator, this.config.dataElementSeparator, this.config.componentDataSeparator, this. config.releaseCharacter];
+        const exclude: number[] = [
+            this.config.segmentTerminator,
+            this.config.dataElementSeparator,
+            this.config.componentDataSeparator,
+            this.config.releaseCharacter
+        ];
 
         // Sort the array of excluded characters using a sorting network.
         compareAndSwap(exclude, 1, 2);
@@ -139,7 +147,12 @@ export class Configuration {
 
     public toString(): string {
         let result: string = this.charset;
-        result += String.fromCharCode(this.config.componentDataSeparator, this.config.decimalMark, this.config.releaseCharacter, this.config.segmentTerminator);
+        result += String.fromCharCode(
+            this.config.componentDataSeparator,
+            this.config.decimalMark,
+            this.config.releaseCharacter,
+            this.config.segmentTerminator
+        );
         return result;
     }
 

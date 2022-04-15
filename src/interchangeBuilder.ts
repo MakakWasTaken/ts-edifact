@@ -16,12 +16,27 @@
  * limitations under the License.
  */
 
-import { ResultType } from "./reader";
-import { MessageType, Pointer } from "./tracker";
-import * as fs from "fs";
-import { MessageHeader, Segment, toSegmentObject } from "./edifact";
-import { Separators } from "./edi/separators";
-import { APERAK, AUTHOR, BALANC, DESADV, GENRAL, IFTMIN, INVOIC, INVRPT, ORDERS, OSTENQ, OSTRPT, PARTIN, TAXCON, VATDEC } from "./index";
+import { ResultType } from './reader';
+import { MessageType, Pointer } from './tracker';
+import * as fs from 'fs';
+import { MessageHeader, Segment, toSegmentObject } from './edifact';
+import { Separators } from './edi/separators';
+import {
+    APERAK,
+    AUTHOR,
+    BALANC,
+    DESADV,
+    GENRAL,
+    IFTMIN,
+    INVOIC,
+    INVRPT,
+    ORDERS,
+    OSTENQ,
+    OSTRPT,
+    PARTIN,
+    TAXCON,
+    VATDEC
+} from './index';
 
 export class Group {
     name: string;
@@ -71,7 +86,6 @@ export class Group {
 }
 
 export class Message {
-
     messageHeader: MessageHeader;
     header: (Group | Segment)[] = [];
     detail: (Group | Segment)[] = [];
@@ -90,11 +104,11 @@ export class Message {
     }
 
     private section(name?: string): (Group | Segment)[] {
-        if (name === "header") {
+        if (name === 'header') {
             return this.header;
-        } else if (name === "detail") {
+        } else if (name === 'detail') {
             return this.detail;
-        } else if (name === "summary") {
+        } else if (name === 'summary') {
             return this.summary;
         } else {
             return this.header.concat(this.detail).concat(this.summary);
@@ -131,7 +145,6 @@ export class Message {
 }
 
 export class SyntaxIdentifier {
-
     syntaxIdentifer: string;
     version: string;
     serviceCodeListDirectoryVersionNumber: string | undefined;
@@ -150,7 +163,6 @@ export class SyntaxIdentifier {
 }
 
 abstract class Participant {
-
     id: string;
     codeQualifier: string | undefined;
     internalId: string | undefined;
@@ -171,21 +183,18 @@ abstract class Participant {
 }
 
 export class Sender extends Participant {
-
     constructor(compnenets: string[]) {
         super(compnenets);
     }
 }
 
 export class Receiver extends Participant {
-
     constructor(components: string[]) {
         super(components);
     }
 }
 
 export class RecipientsRef {
-
     password: string;
     passwordQualifier: string | undefined;
 
@@ -248,11 +257,10 @@ export class Edifact {
 }
 
 export class InterchangeBuilder {
-
     interchange: Edifact;
 
     private stack: Pointer[] = [];
-    private curSection: string = "header";
+    private curSection: string = 'header';
 
     /**
      * Uses the provided parsing result to create an Edifact interchange structure. This
@@ -269,50 +277,73 @@ export class InterchangeBuilder {
      * @param basePath The base location the Edifact message structure definition files
      *                 in JSON format can be found
      */
-    constructor(parsingResult: ResultType[], separators: Separators, basePath: string) {
-
+    constructor(
+        parsingResult: ResultType[],
+        separators: Separators,
+        basePath: string
+    ) {
         if (!parsingResult || parsingResult.length === 0) {
-            throw Error("Invalid list of parsed segments provided");
+            throw Error('Invalid list of parsed segments provided');
         }
 
         let interchange: Edifact | undefined;
         for (const segment of parsingResult) {
             switch (segment.name) {
-                case "UNB":
+                case 'UNB':
                     interchange = new Edifact(segment.elements);
                     break;
-                case "UNZ":
+                case 'UNZ':
                     // nothing to do
                     break;
-                case "UNT":
+                case 'UNT':
                     this.reset();
                     break;
                 default:
-                    if (segment.name === "UNH") {
+                    if (segment.name === 'UNH') {
                         const message: Message = new Message(segment);
                         // lookup the message definition for the respective edifact version, i.e. D96A => INVOIC
-                        const messageVersion: string = message.messageHeader.messageIdentifier.messageVersionNumber
-                                + message.messageHeader.messageIdentifier.messageReleaseNumber;
-                        const messageType: string = message.messageHeader.messageIdentifier.messageType;
-                        const table: MessageType[] = this.getMessageStructureDefForMessage(basePath, messageVersion, messageType);
-                        this.stack = [ new Pointer(table, 0) ];
-                        this.curSection = "header";
+                        const messageVersion: string =
+                            message.messageHeader.messageIdentifier
+                                .messageVersionNumber +
+                            message.messageHeader.messageIdentifier
+                                .messageReleaseNumber;
+                        const messageType: string =
+                            message.messageHeader.messageIdentifier.messageType;
+                        const table: MessageType[] =
+                            this.getMessageStructureDefForMessage(
+                                basePath,
+                                messageVersion,
+                                messageType
+                            );
+                        this.stack = [new Pointer(table, 0)];
+                        this.curSection = 'header';
 
                         if (interchange) {
                             interchange.addMessage(message);
                         } else {
-                            throw Error("");
+                            throw Error('');
                         }
                     }
 
                     /* eslint-disable no-case-declarations */
-                    const message: Message | undefined = interchange?.messages[interchange.messages.length - 1];
+                    const message: Message | undefined =
+                        interchange?.messages[interchange.messages.length - 1];
                     if (message) {
-                        const messageVersion: string = message.messageHeader.messageIdentifier.messageVersionNumber
-                                + message.messageHeader.messageIdentifier.messageReleaseNumber;
-                        this.accept(segment, message, messageVersion, separators.decimalSeparator);
+                        const messageVersion: string =
+                            message.messageHeader.messageIdentifier
+                                .messageVersionNumber +
+                            message.messageHeader.messageIdentifier
+                                .messageReleaseNumber;
+                        this.accept(
+                            segment,
+                            message,
+                            messageVersion,
+                            separators.decimalSeparator
+                        );
                     } else {
-                        throw Error(`Couldn't process ${segment.name} segment as no message was found.`);
+                        throw Error(
+                            `Couldn't process ${segment.name} segment as no message was found.`
+                        );
                     }
             }
         }
@@ -320,7 +351,7 @@ export class InterchangeBuilder {
         if (interchange) {
             this.interchange = interchange;
         } else {
-            throw Error("Could not generate EDIFACT interchange structure");
+            throw Error('Could not generate EDIFACT interchange structure');
         }
     }
 
@@ -330,13 +361,24 @@ export class InterchangeBuilder {
         this.stack[0].count = 0;
     }
 
-    private accept(segment: ResultType, obj: Message, version: string, decimalSeparator: string): void {
+    private accept(
+        segment: ResultType,
+        obj: Message,
+        version: string,
+        decimalSeparator: string
+    ): void {
         let current: Pointer = this.stack[this.stack.length - 1];
         let optionals: number[] = [];
         let probe: number = 0;
 
-        while (segment.name !== current.content() || current.count === current.repetition()) {
-            if (Array.isArray(current.content()) && current.count < current.repetition()) {
+        while (
+            segment.name !== current.content() ||
+            current.count === current.repetition()
+        ) {
+            if (
+                Array.isArray(current.content()) &&
+                current.count < current.repetition()
+            ) {
                 // Enter the subgroup
                 probe++;
                 if (!current.mandatory()) {
@@ -352,11 +394,19 @@ export class InterchangeBuilder {
                     if (optionals.length === 0) {
                         const segName: string | undefined = current.name();
                         if (segName) {
-                            throw new Error(`A mandatory segment ${current.content() as string} defined in segment group '${segName}' is missing`);
+                            throw new Error(
+                                `A mandatory segment ${
+                                    current.content() as string
+                                } defined in segment group '${segName}' is missing`
+                            );
                         } else {
                             // We will never encounter groups here, so we can safely use the
                             // name of the segment stored in it's content property
-                            throw new Error(`A mandatory segment ${current.content() as string} is missing`);
+                            throw new Error(
+                                `A mandatory segment ${
+                                    current.content() as string
+                                } is missing`
+                            );
                         }
                     } else {
                         // If we are omitting mandatory content inside a conditional group,
@@ -378,16 +428,21 @@ export class InterchangeBuilder {
                     this.stack.pop();
                     current = this.stack[this.stack.length - 1];
                     if (this.stack.length === 0) {
-                        throw new Error(`Reached the end of the segment table while processing segment ${segment.name}`);
+                        throw new Error(
+                            `Reached the end of the segment table while processing segment ${segment.name}`
+                        );
                     }
                     if (probe === 0 && current.count < current.repetition()) {
                         // If we are not currently probing (meaning the tracker actually
                         // accepted the group), we should retry the current group, except if
                         // the maximum number of repetition was reached
                         probe++;
-                        optionals = [ this.stack.length ];
+                        optionals = [this.stack.length];
                         current.count++;
-                        current = new Pointer(current.content() as MessageType[], 0);
+                        current = new Pointer(
+                            current.content() as MessageType[],
+                            0
+                        );
                         this.stack.push(current);
                     } else {
                         if (!current.mandatory() || current.count > 1) {
@@ -410,14 +465,15 @@ export class InterchangeBuilder {
             let curObj: Message | Group = obj;
             for (let idx: number = 0; idx < this.stack.length; idx++) {
                 const pointer: Pointer = this.stack[idx];
-                const groupName: string | undefined =  pointer.name();
+                const groupName: string | undefined = pointer.name();
                 if (groupName) {
                     if (!curObj.containsGroup(groupName)) {
                         const group: Group = new Group(groupName, curObj);
                         curObj.addGroup(group, this.curSection);
                         curObj = group;
                     } else {
-                        const group: Group | undefined = curObj.groupByName(groupName);
+                        const group: Group | undefined =
+                            curObj.groupByName(groupName);
                         if (group) {
                             curObj = group;
                             // check wheter the stack count is larger than 1, if so, we know that
@@ -430,7 +486,10 @@ export class InterchangeBuilder {
                                 // group. We can assume that the first entry to a group will never
                                 // be a group itself but a segment
                                 if (!(group.data[0] instanceof Group)) {
-                                    const subGroup: Group = new Group("0", group);
+                                    const subGroup: Group = new Group(
+                                        '0',
+                                        group
+                                    );
                                     for (const data of group.data) {
                                         if (data instanceof Group) {
                                             subGroup.addGroup(data);
@@ -441,82 +500,103 @@ export class InterchangeBuilder {
                                     group.data = [];
                                     group.addGroup(subGroup);
                                 }
-                                const subGroup: Group | undefined = group.groupByName(`${pointer.count - 1}`);
+                                const subGroup: Group | undefined =
+                                    group.groupByName(`${pointer.count - 1}`);
                                 if (subGroup) {
                                     curObj = subGroup;
                                 } else {
-                                    const sg: Group = new Group(`${group.groupCount()}`, group);
+                                    const sg: Group = new Group(
+                                        `${group.groupCount()}`,
+                                        group
+                                    );
                                     group.addGroup(sg);
                                     curObj = sg;
                                 }
                             }
                         } else {
-                            throw Error(`Could not find group ${groupName} as part of ${curObj.toString()}`);
+                            throw Error(
+                                `Could not find group ${groupName} as part of ${curObj.toString()}`
+                            );
                         }
                     }
                 } else {
-                    const seg: Segment = toSegmentObject(segment, version, decimalSeparator);
+                    const seg: Segment = toSegmentObject(
+                        segment,
+                        version,
+                        decimalSeparator
+                    );
                     curObj.addSegment(seg, this.curSection);
                 }
             }
         } else {
             // UNH is already converted to a Message object, so we don't need to store
             // that data again
-            if (segment.name !== "UNH") {
-                const seg: Segment = toSegmentObject(segment, version, decimalSeparator);
+            if (segment.name !== 'UNH') {
+                const seg: Segment = toSegmentObject(
+                    segment,
+                    version,
+                    decimalSeparator
+                );
                 obj.addSegment(seg, this.curSection);
             }
         }
     }
 
-    private getMessageStructureDefForMessage(basePath: string, messageVersion: string, messageType: string): MessageType[] {
-        let path: string = basePath + messageVersion + "_" + messageType + ".struct.json";
+    private getMessageStructureDefForMessage(
+        basePath: string,
+        messageVersion: string,
+        messageType: string
+    ): MessageType[] {
+        let path: string =
+            basePath + messageVersion + '_' + messageType + '.struct.json';
         if (fs.existsSync(path)) {
             return this.readFileAsMessageStructure(path);
         } else {
-            path = basePath + messageType + "struct.json";
+            path = basePath + messageType + 'struct.json';
             if (fs.existsSync(path)) {
                 return this.readFileAsMessageStructure(path);
             } else {
                 switch (messageType) {
                     // default back to D01B messages
-                    case "APERAK":
+                    case 'APERAK':
                         return APERAK;
-                    case "AUTHOR":
+                    case 'AUTHOR':
                         return AUTHOR;
-                    case "BALANC":
+                    case 'BALANC':
                         return BALANC;
-                    case "DESADV":
+                    case 'DESADV':
                         return DESADV;
-                    case "GENRAL":
+                    case 'GENRAL':
                         return GENRAL;
-                    case "IFTMIN":
+                    case 'IFTMIN':
                         return IFTMIN;
-                    case "INVOIC":
+                    case 'INVOIC':
                         return INVOIC;
-                    case "INVRPT":
+                    case 'INVRPT':
                         return INVRPT;
-                    case "ORDERS":
+                    case 'ORDERS':
                         return ORDERS;
-                    case "OSTENQ":
+                    case 'OSTENQ':
                         return OSTENQ;
-                    case "OSTRPT":
+                    case 'OSTRPT':
                         return OSTRPT;
-                    case "PARTIN":
+                    case 'PARTIN':
                         return PARTIN;
-                    case "TAXCON":
+                    case 'TAXCON':
                         return TAXCON;
-                    case "VATDEC":
+                    case 'VATDEC':
                         return VATDEC;
                     default:
-                        throw new Error(`Could not find message definiton for message type '${messageType}' of version '${messageVersion}'`);
+                        throw new Error(
+                            `Could not find message definiton for message type '${messageType}' of version '${messageVersion}'`
+                        );
                 }
             }
         }
     }
 
     private readFileAsMessageStructure(path: string): MessageType[] {
-        const data: string = fs.readFileSync(path, { encoding: "utf-8"});
+        const data: string = fs.readFileSync(path, { encoding: 'utf-8' });
         return JSON.parse(data) as MessageType[];
     }
 }
