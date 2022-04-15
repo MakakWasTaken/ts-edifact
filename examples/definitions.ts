@@ -24,7 +24,7 @@ import * as path from "path";
 
 import * as fs from "fs";
 
-let document: string = "";
+let document = "";
 document += "UNB+UNOA:1+005435656:1+006415160:1+060515:1434+00000000000778'";
 document += "UNH+00000000000117+INV\n\rOIC:D:01B:UN'";
 document += "BGM+380+342459+9'";
@@ -56,7 +56,7 @@ function _validateDocument(doc: string, callback?: (numChecked: number) => void)
     const reader: Reader = new Reader();
     const result: ResultType[] = reader.parse(doc);
 
-    let checked: number = 0;
+    let checked = 0;
     const data: string = fs.readFileSync(path.resolve("./src/messageSpec/INVOIC.struct.json"), { encoding: "utf-8"});
     const msgStruct: MessageType[] = JSON.parse(data) as MessageType[];
     const tracker: Tracker = new Tracker(msgStruct);

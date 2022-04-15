@@ -36,13 +36,13 @@ describe("Validator", () => {
         });
 
         it("should throw if the required elements aren't provided", () => {
-            const segment: string = "AAA";
+            const segment = "AAA";
             validator.onOpenSegment(segment);
             expect(() => validator.onCloseSegment(segment)).toThrow();
         });
 
         it("should throw if too many elements are provided", () => {
-            const segment: string = "AAA";
+            const segment = "AAA";
             validator.onOpenSegment(segment);
             validator.onElement();
             validator.onElement();
@@ -51,7 +51,7 @@ describe("Validator", () => {
         });
 
         it ("should ignore segments not available in the segments definition table", () => {
-            const segment: string = "BBB";
+            const segment = "BBB";
             expect(() => {
                 validator.onOpenSegment(segment);
                 validator.onCloseSegment(segment);
@@ -276,7 +276,7 @@ describe("Validator", () => {
             });
 
             it("should throw on parsed segments with no definition available", () => {
-                const segment: string = "BBB";
+                const segment = "BBB";
                 expect(() => validator.onOpenSegment(segment)).toThrow();
             });
         });

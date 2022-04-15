@@ -97,7 +97,7 @@ export class Tracker {
     accept(segment: string | MessageType): void {
         let current: Pointer = this.stack[this.stack.length - 1];
         let optionals: number[] = [];
-        let probe: number = 0;
+        let probe = 0;
 
         while (
             segment !== current.content() ||

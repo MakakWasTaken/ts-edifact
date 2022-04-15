@@ -36,7 +36,7 @@ describe("MessageStructureParser", () => {
         });
 
         it("should extract message structure correctly", (done) => {
-            const page: string = `
+            const page = `
 <P>
             Message Type : INVOIC
             Version      : D
@@ -171,7 +171,7 @@ SUMMARY SECTION
 
         it("should parse segment definition page", (done) => {
 
-            const page: string = `
+            const page = `
 <H3>       MEA  MEASUREMENTS</H3>
 
        Function: To specify physical measurements, including
@@ -219,7 +219,7 @@ SUMMARY SECTION
         });
 
         it("should handle multi-line definitions correctly", (done) => {
-            const page: string = `
+            const page = `
 <H3>       DTM  DATE/TIME/PERIOD</H3>
 
        Function: To specify date, and/or time, or period.
@@ -248,7 +248,7 @@ SUMMARY SECTION
         });
 
         it("should skip already defined segments", (done) => {
-            const page: string = `
+            const page = `
 <H3>       DTM  DATE/TIME/PERIOD</H3>
 
        Function: To specify date, and/or time, or period.
@@ -285,7 +285,7 @@ SUMMARY SECTION
         });
 
         it("should add multiple element definitions only once", (done) => {
-            const page: string = `
+            const page = `
 <H3>       CUX  CURRENCIES</H3>
 
        Function: To specify currencies used in the transaction
@@ -329,7 +329,7 @@ SUMMARY SECTION
 
         it("should parse segment definition with long element name", (done) => {
 
-            const page: string = `
+            const page = `
 <H3>       TAX  DUTY/TAX/FEE DETAILS</H3>
 
        Function: To specify relevant duty/tax/fee information.
@@ -386,7 +386,7 @@ SUMMARY SECTION
 
         it("should parse complex segment definition with overflow and special characters", (done) => {
 
-            const page: string = `
+            const page = `
 <H3>       PCI  PACKAGE IDENTIFICATION</H3>
 
        Function: To specify markings and labels on individual

@@ -40,7 +40,7 @@ describe("Parsing edifact document", () => {
 
             parser = new Parser(config);
 
-            let document: string = "";
+            let document = "";
 
             document += "UNB+UNOA:1+005435656:1+006415160:1+060515:1434+00000000000778'";
             document += "UNH+00000000000117+INV\n\rOIC:D:97B:UN'";
@@ -85,7 +85,7 @@ describe("Parsing edifact document", () => {
 
             parser = new Parser(config);
 
-            let document: string = "";
+            let document = "";
             document += "UNA:+.? '";
             document += "UNH+ME000001+IFTMIN:D:01B:UN:EAN004'";
             document += "BGM+610+569952+9'";

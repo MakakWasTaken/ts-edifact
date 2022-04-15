@@ -139,7 +139,7 @@ export class Parser extends EventEmitter {
 
     write(chunk: string): void {
         // The position of the parser
-        let index: number = 0;
+        let index = 0;
         if (this.state === States.CONTINUED) {
             this.state = States.MODESET;
         }
@@ -255,7 +255,7 @@ export class Parser extends EventEmitter {
             return new Error('Cannot close an incomplete message');
         },
         invalidCharacter: function (character: string, index: number): Error {
-            let message: string = '';
+            let message = '';
             message += 'Invalid character ' + character;
             message += ` at position ${index}`;
             return new Error(message);
@@ -264,7 +264,7 @@ export class Parser extends EventEmitter {
             segment: string,
             character: string
         ): Error {
-            let message: string = '';
+            let message = '';
             message += "Invalid character '" + character;
             message += "' after reading segment name " + segment;
             return new Error(message);

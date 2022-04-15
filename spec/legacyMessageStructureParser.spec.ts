@@ -28,7 +28,7 @@ import { EdifactMessageSpecificationImpl, EdifactMessageSpecification } from "..
 import { MessageType } from "../src/tracker";
 import { Dictionary, ElementEntry, SegmentEntry } from "../src/validator";
 
-const D99A_INVOIC_METADATA_PAGE: string = `
+const D99A_INVOIC_METADATA_PAGE = `
 <HTML><PRE><body bgcolor=ffffff><TITLE>UNTDID - D.99A - Message INVOIC</title>
 <! --- This document was created by Viorel Iordache - UN/ECE ----->
                               UN/EDIFACT
@@ -223,7 +223,7 @@ describe('UNECELegacyMessageStructureParser', () => {
 
         it("should parse segment definition page", (done) => {
 
-            const page: string = `
+            const page = `
 <HTML><title>UNTDID - D.99A - Segment MEA</title>
 <! --- This document was created by Viorel Iordache - UN/ECE on 4/2/99 ----->
 <pre><body bgcolor=ffffff>
@@ -278,7 +278,7 @@ describe('UNECELegacyMessageStructureParser', () => {
 
 
         it("should add multiple element definitions only once", (done) => {
-            const page: string = `
+            const page = `
 <HTML><title>UNTDID - D.99A - Segment CUX</title>
 <! --- This document was created by Viorel Iordache - UN/ECE on 4/2/99 ----->
 <pre><body bgcolor=ffffff>

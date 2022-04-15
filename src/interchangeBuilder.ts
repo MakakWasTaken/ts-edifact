@@ -57,7 +57,7 @@ export class Group {
     }
 
     groupCount(): number {
-        let count: number = 0;
+        let count = 0;
         for (const group of this.data) {
             if (group instanceof Group) {
                 count++;
@@ -116,7 +116,7 @@ export class Message {
     }
 
     groupCount(sectionName?: string): number {
-        let count: number = 0;
+        let count = 0;
         for (const group of this.section(sectionName)) {
             if (group instanceof Group) {
                 count++;
@@ -260,7 +260,7 @@ export class InterchangeBuilder {
     interchange: Edifact;
 
     private stack: Pointer[] = [];
-    private curSection: string = 'header';
+    private curSection = 'header';
 
     /**
      * Uses the provided parsing result to create an Edifact interchange structure. This
@@ -369,7 +369,7 @@ export class InterchangeBuilder {
     ): void {
         let current: Pointer = this.stack[this.stack.length - 1];
         let optionals: number[] = [];
-        let probe: number = 0;
+        let probe = 0;
 
         while (
             segment.name !== current.content() ||
@@ -463,7 +463,7 @@ export class InterchangeBuilder {
         // Generate the tree-structure of the Edifact document
         if (this.stack.length > 1) {
             let curObj: Message | Group = obj;
-            for (let idx: number = 0; idx < this.stack.length; idx++) {
+            for (let idx = 0; idx < this.stack.length; idx++) {
                 const pointer: Pointer = this.stack[idx];
                 const groupName: string | undefined = pointer.name();
                 if (groupName) {

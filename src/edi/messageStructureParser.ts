@@ -123,11 +123,7 @@ export class UNECEMessageStructureParser implements MessageStructureParser {
         this.httpClient = new HttpClient(baseUrl);
     }
 
-    private extractTextValue(
-        text: string,
-        regex: RegExp,
-        index: number = 0
-    ): string {
+    private extractTextValue(text: string, regex: RegExp, index = 0): string {
         const arr: RegExpExecArray | null = regex.exec(text);
         if (isDefined(arr)) {
             return arr[index];
@@ -153,9 +149,9 @@ export class UNECEMessageStructureParser implements MessageStructureParser {
         let state: SegmentPart = SegmentPart.BeforeStructureDef;
 
         // only relevant for legacy UNECE segment specification pages:
-        let dataSection: boolean = false;
+        let dataSection = false;
 
-        let skipAddingElement: boolean = false;
+        let skipAddingElement = false;
         let overflowLine: string | null = null;
         let complexEleId: string | null = null;
         let complexEleEntry: ElementEntry | null = null;
@@ -179,7 +175,7 @@ export class UNECEMessageStructureParser implements MessageStructureParser {
             ) {
                 state = SegmentPart.Data;
             } else if (state === SegmentPart.Data && !line.includes('<P>')) {
-                const regexp: RegExp =
+                const regexp =
                     /^([\d]*)\s*?([X|\\*]?)\s*<A.*>([a-zA-Z0-9]*)<\/A>([a-zA-Z0-9 ,\-\\/&]{44,})([M|C])\s*([\d]*)\s*([a-zA-Z0-9\\.]*).*$/g;
                 const arr: RegExpExecArray | null = regexp.exec(line);
                 if (isDefined(arr)) {
@@ -277,7 +273,7 @@ export class UNECEMessageStructureParser implements MessageStructureParser {
                         }
                     }
                 } else {
-                    const regexpAlt: RegExp =
+                    const regexpAlt =
                         /^([\d]*)\s*([X|\\*]?)\s*<A.*>([a-zA-Z0-9]*)<\/A>\s*([a-zA-Z0-9 \\-\\/&]*)/g;
                     const arrAlt: RegExpExecArray | null = regexpAlt.exec(line);
                     if (isDefined(arrAlt)) {
@@ -369,7 +365,7 @@ export class UNECEMessageStructureParser implements MessageStructureParser {
                     // console.debug(`Pos: ${text}`);
                 } else if (state === Part.Deprecated) {
                     if (text.includes('- Segment group')) {
-                        const regex: RegExp =
+                        const regex =
                             /^[\s*+-]*-* (Segment group \d*)\s*-*\s*([M|C])\s*(\d*)([-|\\+|\\|]*).*/g;
                         const arr: RegExpExecArray | null = regex.exec(text);
                         if (isDefined(arr)) {
@@ -422,7 +418,7 @@ export class UNECEMessageStructureParser implements MessageStructureParser {
                     section = null;
                 } else if (state === Part.Name) {
                     // console.debug(`Name: ${text}`);
-                    const regex: RegExp =
+                    const regex =
                         /^([a-zA-Z /\\-]*)\s*?([M|C])\s*?([0-9]*?)([^0-9]*)$/g;
                     const arr: RegExpExecArray | null = regex.exec(text);
                     if (isDefined(arr)) {
@@ -445,7 +441,7 @@ export class UNECEMessageStructureParser implements MessageStructureParser {
                             remainder.includes('+')
                         ) {
                             for (
-                                let i: number = 0;
+                                let i = 0;
                                 i < remainder.split('+').length - 1;
                                 i++
                             ) {

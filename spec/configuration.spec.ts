@@ -25,7 +25,7 @@ describe("Configuration", () => {
     beforeEach(() => configuration = new Configuration());
 
     it("should return the delimiters as a sorted array", () => {
-        let count: number = 0;
+        let count = 0;
 
         const run = (permutation: number[]) => {
 
@@ -36,7 +36,7 @@ describe("Configuration", () => {
             configuration.config.releaseCharacter       = permutation[4];
 
             const delimiters: number[] = configuration.delimiters();
-            for (let i: number = 1; i < delimiters.length; i++) {
+            for (let i = 1; i < delimiters.length; i++) {
                 expect(delimiters[i]).toBeGreaterThan(delimiters[i - 1]);
             }
             count++;
@@ -46,7 +46,7 @@ describe("Configuration", () => {
             if (tail.length === 0) {
                 callback(head);
             } else {
-                for (let i: number = 0; i < tail.length; i++) {
+                for (let i = 0; i < tail.length; i++) {
                     const item: number = tail[i];
                     tail.splice(i, 1);
                     head.push(item);

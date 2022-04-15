@@ -65,7 +65,7 @@ export class Reader {
     private validator: Validator;
     private parser: Parser;
 
-    private defined: boolean = false;
+    private defined = false;
     private validationTables: (
         | Dictionary<SegmentEntry>
         | Dictionary<ElementEntry>
