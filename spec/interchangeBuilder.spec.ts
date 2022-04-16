@@ -16,19 +16,44 @@
  * limitations under the License.
  */
 
-import { ResultType } from "../src/reader";
-import { InterchangeBuilder, Edifact, Group } from "../src/interchangeBuilder";
-import { Separators, EdifactSeparatorsBuilder } from "../src/edi/separators";
+import { ResultType } from '../src/reader';
+import { InterchangeBuilder, Edifact, Group } from '../src/interchangeBuilder';
+import { Separators, EdifactSeparatorsBuilder } from '../src/edi/separators';
 
-describe("InterchangeBuilder", () => {
+describe('InterchangeBuilder', () => {
     let parseResult: ResultType[];
     const separators: Separators = new EdifactSeparatorsBuilder().build();
 
     beforeEach(() => {
         parseResult = [
             {
-                name: "UNB", elements: [
-                    ["UNOA", "1", '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''],
+                name: 'UNB',
+                elements: [
+                    [
+                        'UNOA',
+                        '1',
+                        '',
+                        '',
+                        '',
+                        '',
+                        '',
+                        '',
+                        '',
+                        '',
+                        '',
+                        '',
+                        '',
+                        '',
+                        '',
+                        '',
+                        '',
+                        '',
+                        '',
+                        '',
+                        '',
+                        '',
+                        ''
+                    ],
                     ['005435656', '1'],
                     ['006415160', '1'],
                     ['060515', '1434'],
@@ -36,37 +61,29 @@ describe("InterchangeBuilder", () => {
                 ]
             },
             {
-                name: "UNH", elements: [
-                    ['00000000000117'],
-                    ['INVOIC', 'D', '01B', 'UN']
-                ]
+                name: 'UNH',
+                elements: [['00000000000117'], ['INVOIC', 'D', '01B', 'UN']]
             },
             {
-                name: "BGM", elements: [
-                    ['380'],
-                    ['342459'],
-                    ['9']
-                ]
+                name: 'BGM',
+                elements: [['380'], ['342459'], ['9']]
             },
             {
-                name: "DTM", elements: [
-                    ['3', '20060515', '102']
-                ]
+                name: 'DTM',
+                elements: [['3', '20060515', '102']]
             },
             // added for demonstration purpose that the interchange builder values the respective spec
             {
-                name: "GIR", elements: [
-                    ['3'],
-                    ['00999100', 'ML']
-                ]
+                name: 'GIR',
+                elements: [['3'], ['00999100', 'ML']]
             },
             {
-                name: "RFF", elements: [
-                    ['ON', '521052']
-                ]
+                name: 'RFF',
+                elements: [['ON', '521052']]
             },
             {
-                name: "NAD", elements: [
+                name: 'NAD',
+                elements: [
                     ['BY'],
                     ['792820524', '', '16'],
                     [''],
@@ -74,7 +91,8 @@ describe("InterchangeBuilder", () => {
                 ]
             },
             {
-                name: "NAD", elements: [
+                name: 'NAD',
+                elements: [
                     ['SE'],
                     ['005435656', '', '16'],
                     [''],
@@ -82,138 +100,102 @@ describe("InterchangeBuilder", () => {
                 ]
             },
             {
-                name: "CUX", elements: [
-                    ['1', 'USD']
-                ]
+                name: 'CUX',
+                elements: [['1', 'USD']]
             },
             {
-                name: "LIN", elements: [
-                    ['1'],
-                    [''],
-                    ['157870', 'IN']
-                ]
+                name: 'LIN',
+                elements: [['1'], [''], ['157870', 'IN']]
             },
             {
-                name: "IMD", elements: [
-                    ['F'],
-                    [''],
-                    ['', '', '', 'WIDGET']
-                ]
+                name: 'IMD',
+                elements: [['F'], [''], ['', '', '', 'WIDGET']]
             },
             {
-                name: "QTY", elements: [
-                    ['47', '1020', 'EA']
-                ]
+                name: 'QTY',
+                elements: [['47', '1020', 'EA']]
             },
             {
-                name: "ALI", elements: [
-                    ['US']
-                ]
+                name: 'ALI',
+                elements: [['US']]
             },
             {
-                name: "MOA", elements: [
-                    ['203', '1202.58']
-                ]
+                name: 'MOA',
+                elements: [['203', '1202.58']]
             },
             {
-                name: "PRI", elements: [
-                    ['INV', '1.179']
-                ]
+                name: 'PRI',
+                elements: [['INV', '1.179']]
             },
             {
-                name: "LIN", elements: [
-                    ['2'],
-                    [''],
-                    ['157871', 'IN']
-                ]
+                name: 'LIN',
+                elements: [['2'], [''], ['157871', 'IN']]
             },
             {
-                name: "IMD", elements: [
-                    ['F'],
-                    [''],
-                    ['', '', '', 'DIFFERENT WIDGET']
-                ]
+                name: 'IMD',
+                elements: [['F'], [''], ['', '', '', 'DIFFERENT WIDGET']]
             },
             {
-                name: "QTY", elements: [
-                    ['47', '20', 'EA']
-                ]
+                name: 'QTY',
+                elements: [['47', '20', 'EA']]
             },
             {
-                name: "ALI", elements: [
-                    ['JP']
-                ]
+                name: 'ALI',
+                elements: [['JP']]
             },
             {
-                name: "MOA", elements: [
-                    ['203', '410']
-                ]
+                name: 'MOA',
+                elements: [['203', '410']]
             },
             {
-                name: "PRI", elements: [
-                    ['INV', '20.5']
-                ]
+                name: 'PRI',
+                elements: [['INV', '20.5']]
             },
             {
-                name: "UNS", elements: [
-                    ['S']
-                ]
+                name: 'UNS',
+                elements: [['S']]
             },
             {
-                name: "MOA", elements: [
-                    ['39', '2137.58']
-                ]
+                name: 'MOA',
+                elements: [['39', '2137.58']]
             },
             {
-                name: "ALC", elements: [
-                    ['C'],
-                    ['ABG']
-                ]
+                name: 'ALC',
+                elements: [['C'], ['ABG']]
             },
             {
-                name: "MOA", elements: [
-                    ['8', '525']
-                ]
+                name: 'MOA',
+                elements: [['8', '525']]
             },
             {
-                name: "UNT", elements: [
-                    ['23'],
-                    ['00000000000117']
-                ]
+                name: 'UNT',
+                elements: [['23'], ['00000000000117']]
             },
             // 2nd message
             {
-                name: "UNH", elements: [
-                    ['00000000000118'],
-                    ['INVOIC', 'D', '01B', 'UN']
-                ]
+                name: 'UNH',
+                elements: [['00000000000118'], ['INVOIC', 'D', '01B', 'UN']]
             },
             {
-                name: "BGM", elements: [
-                    ['380'],
-                    ['342459'],
-                    ['9']
-                ]
+                name: 'BGM',
+                elements: [['380'], ['342459'], ['9']]
             },
             {
-                name: "DTM", elements: [
-                    ['3', '20060515', '102']
-                ]
+                name: 'DTM',
+                elements: [['3', '20060515', '102']]
             },
             // added for demonstration purpose that the interchange builder values the respective spec
             {
-                name: "GIR", elements: [
-                    ['3'],
-                    ['00999100', 'ML']
-                ]
+                name: 'GIR',
+                elements: [['3'], ['00999100', 'ML']]
             },
             {
-                name: "RFF", elements: [
-                    ['ON', '521052']
-                ]
+                name: 'RFF',
+                elements: [['ON', '521052']]
             },
             {
-                name: "NAD", elements: [
+                name: 'NAD',
+                elements: [
                     ['BY'],
                     ['792820524', '', '16'],
                     [''],
@@ -221,7 +203,8 @@ describe("InterchangeBuilder", () => {
                 ]
             },
             {
-                name: "NAD", elements: [
+                name: 'NAD',
+                elements: [
                     ['SE'],
                     ['005435656', '', '16'],
                     [''],
@@ -229,120 +212,96 @@ describe("InterchangeBuilder", () => {
                 ]
             },
             {
-                name: "CUX", elements: [
-                    ['1', 'USD']
-                ]
+                name: 'CUX',
+                elements: [['1', 'USD']]
             },
             {
-                name: "LIN", elements: [
-                    ['1'],
-                    [''],
-                    ['157870', 'IN']
-                ]
+                name: 'LIN',
+                elements: [['1'], [''], ['157870', 'IN']]
             },
             {
-                name: "IMD", elements: [
-                    ['F'],
-                    [''],
-                    ['', '', '', 'WIDGET']
-                ]
+                name: 'IMD',
+                elements: [['F'], [''], ['', '', '', 'WIDGET']]
             },
             {
-                name: "QTY", elements: [
-                    ['47', '1020', 'EA']
-                ]
+                name: 'QTY',
+                elements: [['47', '1020', 'EA']]
             },
             {
-                name: "ALI", elements: [
-                    ['US']
-                ]
+                name: 'ALI',
+                elements: [['US']]
             },
             {
-                name: "MOA", elements: [
-                    ['203', '1202.58']
-                ]
+                name: 'MOA',
+                elements: [['203', '1202.58']]
             },
             {
-                name: "PRI", elements: [
-                    ['INV', '1.179']
-                ]
+                name: 'PRI',
+                elements: [['INV', '1.179']]
             },
             {
-                name: "LIN", elements: [
-                    ['2'],
-                    [''],
-                    ['157871', 'IN']
-                ]
+                name: 'LIN',
+                elements: [['2'], [''], ['157871', 'IN']]
             },
             {
-                name: "IMD", elements: [
-                    ['F'],
-                    [''],
-                    ['', '', '', 'DIFFERENT WIDGET']
-                ]
+                name: 'IMD',
+                elements: [['F'], [''], ['', '', '', 'DIFFERENT WIDGET']]
             },
             {
-                name: "QTY", elements: [
-                    ['47', '20', 'EA']
-                ]
+                name: 'QTY',
+                elements: [['47', '20', 'EA']]
             },
             {
-                name: "ALI", elements: [
-                    ['JP']
-                ]
+                name: 'ALI',
+                elements: [['JP']]
             },
             {
-                name: "MOA", elements: [
-                    ['203', '410']
-                ]
+                name: 'MOA',
+                elements: [['203', '410']]
             },
             {
-                name: "PRI", elements: [
-                    ['INV', '20.5']
-                ]
+                name: 'PRI',
+                elements: [['INV', '20.5']]
             },
             {
-                name: "UNS", elements: [
-                    ['S']
-                ]
+                name: 'UNS',
+                elements: [['S']]
             },
             {
-                name: "MOA", elements: [
-                    ['39', '2137.58']
-                ]
+                name: 'MOA',
+                elements: [['39', '2137.58']]
             },
             {
-                name: "ALC", elements: [
-                    ['C'],
-                    ['ABG']
-                ]
+                name: 'ALC',
+                elements: [['C'], ['ABG']]
             },
             {
-                name: "MOA", elements: [
-                    ['8', '525']
-                ]
+                name: 'MOA',
+                elements: [['8', '525']]
             },
             {
-                name: "UNT", elements: [
-                    ['23'],
-                    ['00000000000118']
-                ]
+                name: 'UNT',
+                elements: [['23'], ['00000000000118']]
             },
             {
-                name: "UNZ", elements: [
-                    ['2'],
-                    ['00000000000778']
-                ]
+                name: 'UNZ',
+                elements: [['2'], ['00000000000778']]
             }
         ];
     });
 
-    it ("shouldn't accept empty parse result as input", () => {
-        expect(() => new InterchangeBuilder([], separators, "src/messageSpec/")).toThrow();
+    it("shouldn't accept empty parse result as input", () => {
+        expect(
+            () => new InterchangeBuilder([], separators, 'src/messageSpec/')
+        ).toThrow();
     });
 
-    it ("should build D01B interchange correctly", () => {
-        const builder: InterchangeBuilder = new InterchangeBuilder(parseResult, separators, "src/messageSpec/");
+    it('should build D01B interchange correctly', () => {
+        const builder: InterchangeBuilder = new InterchangeBuilder(
+            parseResult,
+            separators,
+            'src/messageSpec/'
+        );
         const edi: Edifact = builder.interchange;
         expect(edi).toBeDefined();
         expect(edi.messages.length).toEqual(2);
@@ -351,21 +310,32 @@ describe("InterchangeBuilder", () => {
         expect(edi.messages[0].detail.length).toEqual(1);
         expect((edi.messages[0].detail[0] as Group).data.length).toEqual(2);
         // looking up the LIN segments by group name should also return the same result
-        const segGroup: Group | undefined = edi.messages[0].groupByName("Segment group 26");
+        const segGroup: Group | undefined =
+            edi.messages[0].groupByName('Segment group 26');
         expect(segGroup?.data.length).toEqual(2);
         // subgroup should contain 6 segments (LIN, IMD, QTY, ALI) or groups (MOA + PRI)
         const linGroup0: Group = segGroup?.data[0] as Group;
         expect(linGroup0.data.length).toEqual(6);
 
-        expect(edi.messages[1].header.length).toEqual(edi.messages[0].header.length);
+        expect(edi.messages[1].header.length).toEqual(
+            edi.messages[0].header.length
+        );
         expect(edi.messages[1].detail.length).toEqual(1);
+        console.log(edi.messages[0]);
     });
 
-    it ("should fail D96A message structure", () => {
+    it('should fail D96A message structure', () => {
         parseResult[1].elements = [
             ['00000000000117'],
             ['INVOIC', 'D', '96A', 'UN']
         ];
-        expect(() => new InterchangeBuilder(parseResult, separators, "src/messageSpec/")).toThrow();
+        expect(
+            () =>
+                new InterchangeBuilder(
+                    parseResult,
+                    separators,
+                    'src/messageSpec/'
+                )
+        ).toThrow();
     });
 });

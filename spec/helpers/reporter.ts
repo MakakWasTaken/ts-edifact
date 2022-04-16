@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-import { SpecReporter } from "jasmine-spec-reporter";
+import { SpecReporter } from 'jasmine-spec-reporter';
 
 // remove default reporter logs
 jasmine.getEnv().clearReporters();

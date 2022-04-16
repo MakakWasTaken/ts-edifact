@@ -16,16 +16,15 @@
  * limitations under the License.
  */
 
-import { Reader, ResultType } from "../src/reader";
+import { Reader, ResultType } from '../src/reader';
 
-describe("Edifact Reader", () => {
-
-    it("should read document with custom decimal separator", () => {
-
-        let document = "";
+describe('Edifact Reader', () => {
+    it('should read document with custom decimal separator', () => {
+        let document = '';
         // custom decimal character in UNA segment!
         document += "UNA:+,? '";
-        document += "UNB+UNOA:1+005435656:1+006415160:1+060515:1434+00000000000778'";
+        document +=
+            "UNB+UNOA:1+005435656:1+006415160:1+060515:1434+00000000000778'";
         document += "UNH+00000000000117+INV\n\rOIC:D:01B:UN'";
         document += "BGM+380+342459+9'";
         document += "DTM+3:20060515:102'";
@@ -52,18 +51,18 @@ describe("Edifact Reader", () => {
         document += "UNT+23+00000000000117'";
         document += "UNZ+1+00000000000778'";
 
-        const sut: Reader = new Reader("./src/messageSpec");
+        const sut: Reader = new Reader('./src/messageSpec');
 
         const parsingResult: ResultType[] = sut.parse(document);
 
         expect(parsingResult.length).toEqual(26);
-        expect(sut.separators.decimalSeparator).toEqual(",");
+        expect(sut.separators.decimalSeparator).toEqual(',');
     });
 
-    it("should read document with reported issues", () => {
-        const sut: Reader = new Reader("./src/messageSpec");
+    it('should read document with reported issues', () => {
+        const sut: Reader = new Reader('./src/messageSpec');
 
-        let doc = "";
+        let doc = '';
         doc += "UNA:+.? '";
         doc += "UNB+UNOC:3+SENDER:ZZZ+RECEIVER:ZZZ+200921:1518+7++++++1'";
         doc += "UNH+1+INVOIC:D:07A:UN:GAVA23'";
@@ -72,8 +71,10 @@ describe("Edifact Reader", () => {
         doc += "DTM+158:20200701:102'";
         doc += "DTM+159:20200731:102'";
         doc += "FTX+AAI+++Wir erlauben uns wie folgt in Rechnung zu stellen?:'";
-        doc += "FTX+REG+++Geschäftsführer?: M. Muster; Partner?: T. Test;: Registergericht?: München; HRB 123456; Ust-ID?: DE 123456789; T ?+49 00 :9876 543-0; office@test.com; www.test.com'";
-        doc += "NAD+SE+12345678::92++The Test Company GmbH+Teststraße 1+München++80992+DE'";
+        doc +=
+            "FTX+REG+++Geschäftsführer?: M. Muster; Partner?: T. Test;: Registergericht?: München; HRB 123456; Ust-ID?: DE 123456789; T ?+49 00 :9876 543-0; office@test.com; www.test.com'";
+        doc +=
+            "NAD+SE+12345678::92++The Test Company GmbH+Teststraße 1+München++80992+DE'";
         doc += "RFF+VA:DE123456789'";
         doc += "RFF+XA:Registergericht München HRB 123456'";
         doc += "CTA+IC+:Max Muster'";
@@ -86,7 +87,8 @@ describe("Edifact Reader", () => {
         doc += "CUX+2:EUR:4'";
         doc += "PYT+1'";
         doc += "DTM+140:20200910:102'";
-        doc += "FII+RH+DE12345678901234567890:The Test Company GmbH+::::::Some Bank'";
+        doc +=
+            "FII+RH+DE12345678901234567890:The Test Company GmbH+::::::Some Bank'";
         doc += "LIN+10'";
         doc += "PIA+1+2:SA'";
         doc += "IMD+++:::Rüsttage'";

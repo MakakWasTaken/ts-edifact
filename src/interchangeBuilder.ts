@@ -389,7 +389,7 @@ export class InterchangeBuilder {
                 current = new Pointer(current.content() as MessageType[], 0);
                 this.stack.push(current);
             } else {
-                // Check if we ware omitting mandatory content
+                // Check if we are omitting mandatory content
                 if (current.mandatory() && current.count === 0) {
                     if (optionals.length === 0) {
                         const segName: string | undefined = current.name();

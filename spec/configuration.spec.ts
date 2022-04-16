@@ -16,24 +16,22 @@
  * limitations under the License.
  */
 
-import { Configuration } from "../src/configuration";
+import { Configuration } from '../src/configuration';
 
-describe("Configuration", () => {
-
+describe('Configuration', () => {
     let configuration: Configuration;
 
-    beforeEach(() => configuration = new Configuration());
+    beforeEach(() => (configuration = new Configuration()));
 
-    it("should return the delimiters as a sorted array", () => {
+    it('should return the delimiters as a sorted array', () => {
         let count = 0;
 
         const run = (permutation: number[]) => {
-
-            configuration.config.segmentTerminator      = permutation[0];
-            configuration.config.dataElementSeparator   = permutation[1];
+            configuration.config.segmentTerminator = permutation[0];
+            configuration.config.dataElementSeparator = permutation[1];
             configuration.config.componentDataSeparator = permutation[2];
-            configuration.config.decimalMark            = permutation[3];
-            configuration.config.releaseCharacter       = permutation[4];
+            configuration.config.decimalMark = permutation[3];
+            configuration.config.releaseCharacter = permutation[4];
 
             const delimiters: number[] = configuration.delimiters();
             for (let i = 1; i < delimiters.length; i++) {
@@ -42,7 +40,11 @@ describe("Configuration", () => {
             count++;
         };
 
-        const permute = (head: number[], tail: number[], callback: (permutation: number[]) => unknown): void => {
+        const permute = (
+            head: number[],
+            tail: number[],
+            callback: (permutation: number[]) => unknown
+        ): void => {
             if (tail.length === 0) {
                 callback(head);
             } else {
