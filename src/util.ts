@@ -25,6 +25,7 @@ import {
     MessageStructureParser,
     UNECEMessageStructureParser
 } from './edi/messageStructureParser';
+import { ElementEntry } from './validator';
 
 export function isDefined<T>(value: T | undefined | null): value is T {
     return <T>value !== undefined && <T>value !== null;
@@ -73,6 +74,28 @@ export function persist(
     fs.writeFileSync(p + segmentsFileName, segments);
     // fs.writeFileSync(p + elementsFileName, elements);
 }
+
+export const formatComponents = (
+    element: ElementEntry,
+    decimalSeparator?: string
+): any => {
+    const result: { [key: string]: string } = {};
+    result['tag'] = element.id;
+    element.components.forEach((component) => {
+        if (component.value) {
+            if (decimalSeparator) {
+                // If decimal seperator is defined replace instances
+                result[component.name] = component.value.replace(
+                    decimalSeparator,
+                    '.'
+                );
+            } else {
+                result[component.name] = component.value;
+            }
+        }
+    });
+    return Object(result);
+};
 
 export function storeAllDefaultSpecs(version: string, location: string): void {
     const types: string[] = [
@@ -309,6 +332,14 @@ export function storeAllDefaultSpecs(version: string, location: string): void {
             });
     }
 }
+
+export const findElement = (
+    elements: ElementEntry[] | undefined, // undefined for easier writing of tests
+    id: string
+): ElementEntry | undefined => {
+    const element = elements?.find((elementEntry) => elementEntry.id === id);
+    return element;
+};
 
 // Run with: npx ts-node src/util.ts
 // storeAllDefaultSpecs("d01b", ".");

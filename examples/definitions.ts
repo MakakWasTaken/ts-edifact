@@ -26,7 +26,7 @@ import * as fs from 'fs';
 
 let document = '';
 document += "UNB+UNOA:1+005435656:1+006415160:1+060515:1434+00000000000778'";
-document += "UNH+00000000000117+INV\n\rOIC:D:01B:UN'";
+document += "UNH+00000000000117+INVOIC:D:01B:UN'";
 document += "BGM+380+342459+9'";
 document += "DTM+3:20060515:102'";
 document += "RFF+ON:521052'";

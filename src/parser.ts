@@ -18,7 +18,7 @@
 
 import { Configuration } from './configuration';
 import { Tokenizer } from './tokenizer';
-import { Validator } from './validator';
+import { ElementEntry, SegmentEntry, Validator } from './validator';
 
 import { EventEmitter } from 'events';
 import { Separators, EdifactSeparatorsBuilder } from './edi/separators';
@@ -38,6 +38,8 @@ export class Parser extends EventEmitter {
     configuration: Configuration;
     private tokenizer: Tokenizer;
     private state: States;
+    private segment: SegmentEntry | undefined;
+    private element: ElementEntry | undefined;
 
     constructor(configuration?: Configuration) {
         super();
@@ -77,16 +79,19 @@ export class Parser extends EventEmitter {
         return builder.build();
     }
 
-    onOpenSegment(segment: string): void {
-        this.emit('openSegment', segment);
+    onOpenSegment(
+        segment: string,
+        segmentEntry: SegmentEntry | undefined
+    ): void {
+        this.emit('openSegment', segment, segmentEntry);
     }
 
     onCloseSegment(): void {
         this.emit('closeSegment');
     }
 
-    onElement(): void {
-        this.emit('element');
+    onElement(element: ElementEntry | undefined): void {
+        this.emit('element', element);
     }
 
     onComponent(data: string): void {
@@ -163,15 +168,26 @@ export class Parser extends EventEmitter {
                         this.configuration.config.endOfTag
                     ) {
                         case this.configuration.config.dataElementSeparator:
-                            this.validator.onOpenSegment(this.tokenizer.buffer);
-                            this.onOpenSegment(this.tokenizer.buffer);
+                            this.segment = this.validator.onOpenSegment(
+                                this.tokenizer.buffer
+                            );
+                            this.onOpenSegment(
+                                this.tokenizer.buffer,
+                                this.segment
+                            );
                             this.state = States.ELEMENT;
                             this.tokenizer.buffer = '';
                             break;
                         case this.configuration.config.segmentTerminator:
-                            this.validator.onOpenSegment(this.tokenizer.buffer);
-                            this.onOpenSegment(this.tokenizer.buffer);
+                            this.segment = this.validator.onOpenSegment(
+                                this.tokenizer.buffer
+                            );
+                            this.onOpenSegment(
+                                this.tokenizer.buffer,
+                                this.segment
+                            );
                             this.validator.onCloseSegment('');
+                            this.segment = undefined;
                             this.onCloseSegment();
                             this.state = States.SEGMENT;
                             this.tokenizer.buffer = '';
@@ -189,8 +205,8 @@ export class Parser extends EventEmitter {
                     break;
                 case States.ELEMENT:
                     // Start reading a new element
-                    this.validator.onElement();
-                    this.onElement();
+                    this.element = this.validator.onElement();
+                    this.onElement(this.element);
                 // eslint-disable-next-line no-fallthrough
                 case States.COMPONENT:
                     // Start reading a new component
@@ -255,10 +271,9 @@ export class Parser extends EventEmitter {
             return new Error('Cannot close an incomplete message');
         },
         invalidCharacter: function (character: string, index: number): Error {
-            let message = '';
-            message += 'Invalid character ' + character;
-            message += ` at position ${index}`;
-            return new Error(message);
+            return new Error(
+                `Invalid character '${character}' at position ${index}`
+            );
         },
         invalidControlAfterSegment: function (
             segment: string,

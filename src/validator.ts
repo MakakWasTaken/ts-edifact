@@ -61,19 +61,19 @@ export class Dictionary<T> {
     }
 }
 
-export type ElementName = {
-    header: boolean;
+export type Component = {
     name: string;
+    value?: string;
+    format: string;
 };
 export type SegmentEntry = {
     requires: number;
-    elements: { [key: string]: ElementEntry };
+    elements: ElementEntry[];
 };
 export type ElementEntry = {
     id: string;
     requires: number;
-    components: string[];
-    name?: ElementName;
+    components: Component[];
 };
 
 interface FormatType {
@@ -112,29 +112,33 @@ export enum ValidatorStates {
 }
 
 export interface Validator {
-    onOpenSegment(segment: string): void;
-    onElement(): void;
+    onOpenSegment(segment: string): SegmentEntry | undefined;
+    onElement(): ElementEntry | undefined;
     onOpenComponent(buffer: Tokenizer): void;
-    onCloseComponent(buffer: Tokenizer): void;
+    onCloseComponent(buffer: Tokenizer): Component | undefined;
     onCloseSegment(segment: string): void;
 
     disable(): void;
     enable(): void;
-    define(
-        definitions: Dictionary<SegmentEntry> | Dictionary<ElementEntry>
-    ): void;
+    define(definitions: Dictionary<SegmentEntry>): void;
     format(formatString: string): FormatType | undefined;
 }
 
 export class NullValidator implements Validator {
     // eslint-disable-next-line @typescript-eslint/no-empty-function
-    onOpenSegment(): void {}
+    onOpenSegment(): undefined {
+        return undefined;
+    }
     // eslint-disable-next-line @typescript-eslint/no-empty-function
-    onElement(): void {}
+    onElement(): undefined {
+        return undefined;
+    }
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     onOpenComponent(): void {}
     // eslint-disable-next-line @typescript-eslint/no-empty-function
-    onCloseComponent(): void {}
+    onCloseComponent(): undefined {
+        return undefined;
+    }
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     onCloseSegment(): void {}
 
@@ -161,7 +165,6 @@ export class NullValidator implements Validator {
  */
 export class ValidatorImpl implements Validator {
     private segments: Dictionary<SegmentEntry> = new Dictionary<SegmentEntry>();
-    private elements: Dictionary<ElementEntry> = new Dictionary<ElementEntry>();
     private formats: Dictionary<FormatType> = new Dictionary<FormatType>();
     private counts = {
         segment: 0,
@@ -199,23 +202,11 @@ export class ValidatorImpl implements Validator {
         this.state = ValidatorStates.SEGMENTS;
     }
 
-    public define(
-        definitions: Dictionary<SegmentEntry> | Dictionary<ElementEntry>
-    ): void {
+    public define(definitions: Dictionary<SegmentEntry>): void {
         for (const key of definitions.keys()) {
-            const entry: SegmentEntry | ElementEntry | undefined =
-                definitions.get(key);
-            if (
-                entry &&
-                Object.prototype.hasOwnProperty.call(entry, 'elements')
-            ) {
-                this.segments.add(key, entry as SegmentEntry);
-            }
-            if (
-                entry &&
-                Object.prototype.hasOwnProperty.call(entry, 'components')
-            ) {
-                this.elements.add(key, entry as ElementEntry);
+            const entry: SegmentEntry | undefined = definitions.get(key);
+            if (entry) {
+                this.segments.add(key, entry);
             }
         }
     }
@@ -262,7 +253,12 @@ export class ValidatorImpl implements Validator {
         }
     }
 
-    onOpenSegment(segment: string): void {
+    /**
+     * Called when a adding a new segment to the parser
+     * @param segment The segment as a string
+     * @returns The segment entry
+     */
+    onOpenSegment(segment: string): SegmentEntry | undefined {
         switch (this.state) {
             case ValidatorStates.ALL:
             case ValidatorStates.ELEMENTS:
@@ -287,9 +283,11 @@ export class ValidatorImpl implements Validator {
         }
         this.counts.segment += 1;
         this.counts.element = 0;
+        this.element = undefined;
+        return this.segment;
     }
 
-    onElement(): void {
+    onElement(): ElementEntry | undefined {
         let name: string;
 
         switch (this.state) {
@@ -340,21 +338,25 @@ export class ValidatorImpl implements Validator {
                         return;
                     }
                 }
-                // eslint-disable-next-line no-case-declarations
-                const key = Object.keys(this.segment.elements)[
-                    this.counts.element
-                ];
-                if ((this.element = this.elements.get(key))) {
+                // Get the current element
+                if (
+                    (this.element = this.segment.elements[this.counts.element])
+                ) {
                     this.state = ValidatorStates.ALL;
                 } else {
                     this.state = ValidatorStates.ELEMENTS;
                     if (this.throwOnMissingDefinitions) {
-                        throw this.errors.missingElementDefinition(key);
+                        throw this.errors.missingElementDefinition(
+                            this.counts.element.toString()
+                        );
                     }
                 }
         }
+        // Move to the next element
         this.counts.element += 1;
+        // Reset component, as we are done with this element
         this.counts.component = 0;
+        return this.element;
     }
 
     /**
@@ -379,16 +381,33 @@ export class ValidatorImpl implements Validator {
 
         switch (this.state) {
             case ValidatorStates.ALL:
+                // Used to display the error message
                 // eslint-disable-next-line no-case-declarations
                 const currentElement: ElementEntry =
                     this.segment.elements[this.counts.element];
                 if (this.element === undefined) {
                     throw this.errors.missingElementStart(currentElement?.id);
                 }
+                if (typeof this.element === 'string') {
+                    throw new Error('Element is a string ' + currentElement.id);
+                }
 
                 // Retrieve a component definition if validation is set to all
+
+                // eslint-disable-next-line no-case-declarations
+                const sortedComponents = this.element.components.reduce<
+                    Component[]
+                >((prev, cur) => {
+                    if (cur.value) {
+                        // If we have a value prepend it to the array
+                        return [cur, ...prev];
+                    } else {
+                        // Just add the component
+                        return [...prev, cur];
+                    }
+                }, []);
                 this.component = this.format(
-                    this.element.components[this.counts.component]
+                    sortedComponents[this.counts.component]?.format || ''
                 );
                 if (this.component === undefined) {
                     return;
@@ -418,17 +437,22 @@ export class ValidatorImpl implements Validator {
         this.counts.component += 1;
     }
 
-    onCloseComponent(buffer: Tokenizer): void {
+    onCloseComponent(buffer: Tokenizer): Component | undefined {
         let length: number;
 
+        // Hold the component we are closing
+        let currentComponent: Component | undefined;
         switch (this.state) {
             case ValidatorStates.ALL:
                 // Component validation is only needed when validation is set to all
                 length = buffer.length();
-                // eslint-disable-next-line no-case-declarations
-                let currentElement: ElementEntry;
                 if (this.segment) {
-                    currentElement = this.segment.elements[this.counts.element];
+                    if (this.element) {
+                        currentComponent =
+                            this.element.components[this.counts.component];
+                    } else {
+                        console.error('Element not found');
+                    }
                 } else {
                     const error: Error | undefined =
                         this.errors.missingSegmentStart(
@@ -447,21 +471,22 @@ export class ValidatorImpl implements Validator {
                 if (this.required >= this.counts.component || length > 0) {
                     if (length < this.minimum) {
                         throw this.errors.invalidData(
-                            currentElement?.id,
+                            this.element,
                             `'${buffer.content()}' length is less than minimum length ${
                                 this.minimum
                             }`
                         );
                     } else if (length > this.maximum) {
                         throw this.errors.invalidData(
-                            currentElement?.id,
-                            `'${buffer.content()} exceeds maximum length ${
+                            this.element,
+                            `'${buffer.content()}' exceeds maximum length ${
                                 this.maximum
                             }`
                         );
                     }
                 }
         }
+        return currentComponent;
     }
 
     /**
@@ -492,7 +517,7 @@ export class ValidatorImpl implements Validator {
                     this.counts.component < this.element.requires ||
                     this.counts.component > this.element.components.length
                 ) {
-                    name = this.segment.elements[this.counts.element]?.id;
+                    name = this.segment.elements[this.counts.element].id;
                     throw this.errors.countError(
                         'Element',
                         name,
@@ -517,8 +542,7 @@ export class ValidatorImpl implements Validator {
 
                 if (
                     this.counts.element < this.segment.requires ||
-                    this.counts.element >
-                        Object.keys(this.segment.elements).length
+                    this.counts.element > this.segment.elements.length
                 ) {
                     name = segment;
                     throw this.errors.countError(
@@ -532,9 +556,14 @@ export class ValidatorImpl implements Validator {
     }
 
     private errors = {
-        invalidData: function (element: string, msg: string): Error {
+        invalidData: function (
+            element: ElementEntry | undefined,
+            msg: string
+        ): Error {
             return new Error(
-                `Could not accept data on element ${element}: ${msg}`
+                `Could not accept data on element ${
+                    element?.id || 'undefined'
+                }: ${msg}`
             );
         },
         invalidFormatString: function (formatString: string): Error {
@@ -554,7 +583,7 @@ export class ValidatorImpl implements Validator {
             if (type === 'Segment') {
                 array = 'elements';
                 const entry: SegmentEntry = definition as SegmentEntry;
-                length = Object.keys(entry.elements).length;
+                length = entry.elements.length;
             } else {
                 array = 'components';
                 const entry: ElementEntry = definition as ElementEntry;
@@ -567,7 +596,13 @@ export class ValidatorImpl implements Validator {
             } else {
                 end = ` but accepts at most ${length}`;
             }
-            return new Error(start + ` got ${count} ` + array + end);
+            return new Error(
+                start +
+                    ` got ${count} ` +
+                    array +
+                    end +
+                    JSON.stringify(definition)
+            );
         },
         missingElementStart: function (segment: string): Error {
             const message = `Active open element expected on segment ${segment}`;

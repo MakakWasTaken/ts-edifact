@@ -39,14 +39,22 @@ describe('Validator', () => {
                 new Dictionary<SegmentEntry>();
             dict.add('AAA', {
                 requires: 1,
-                elements: {
-                    A000: {
+                elements: [
+                    {
                         id: 'A000',
                         requires: 1,
-                        components: ['a3', 'an3', 'n3']
+                        components: [
+                            { format: 'a3', name: 'something1' },
+                            { format: 'an3', name: 'something2' },
+                            { format: 'n3', name: 'something3' }
+                        ]
                     },
-                    A001: { id: 'A001', requires: 1, components: ['a3'] }
-                }
+                    {
+                        id: 'A001',
+                        requires: 1,
+                        components: [{ format: 'a3', name: 'something1' }]
+                    }
+                ]
             });
             validator.define(dict);
         });
@@ -54,15 +62,6 @@ describe('Validator', () => {
         it("should throw if the required elements aren't provided", () => {
             const segment = 'AAA';
             validator.onOpenSegment(segment);
-            expect(() => validator.onCloseSegment(segment)).toThrow();
-        });
-
-        it('should throw if too many elements are provided', () => {
-            const segment = 'AAA';
-            validator.onOpenSegment(segment);
-            validator.onElement();
-            validator.onElement();
-            validator.onElement();
             expect(() => validator.onCloseSegment(segment)).toThrow();
         });
 
@@ -88,33 +87,61 @@ describe('Validator', () => {
                 new Dictionary<SegmentEntry>();
             dict.add('AAA', {
                 requires: 0,
-                elements: {
-                    A000: {
+                elements: [
+                    {
                         id: 'A000',
                         requires: 1,
-                        components: ['a3', 'an3', 'n3']
+                        components: [
+                            { format: 'a3', name: 'something1' },
+                            { format: 'an3', name: 'something2' },
+                            { format: 'n3', name: 'something3' }
+                        ]
                     },
-                    A001: { id: 'A001', requires: 1, components: ['a3'] }
-                }
+                    {
+                        id: 'A001',
+                        requires: 1,
+                        components: [{ format: 'a3', name: 'something1' }]
+                    }
+                ]
             });
             validator.define(dict);
         });
 
         it("should throw if the required components aren't provided", () => {
-            const dict: Dictionary<ElementEntry> =
-                new Dictionary<ElementEntry>();
-            dict.add('A000', { id: 'A000', requires: 1, components: ['a3'] });
-            validator.define(dict);
+            const segmentDict: Dictionary<SegmentEntry> =
+                new Dictionary<SegmentEntry>();
+            const dict = [
+                {
+                    id: 'A000',
+                    requires: 1,
+                    components: [{ format: 'a3', name: 'something1' }]
+                }
+            ];
+            segmentDict.add('AAA', {
+                elements: dict,
+                requires: 1
+            });
+            validator.define(segmentDict);
             validator.onOpenSegment('AAA');
             validator.onElement();
             expect(() => validator.onElement()).toThrow();
         });
 
         it('should throw if too many components are provided', () => {
-            const dict: Dictionary<ElementEntry> =
-                new Dictionary<ElementEntry>();
-            dict.add('A000', { id: 'A000', requires: 0, components: ['a3'] });
-            validator.define(dict);
+            const segmentDict: Dictionary<SegmentEntry> =
+                new Dictionary<SegmentEntry>();
+            const dict = [
+                {
+                    id: 'A000',
+                    requires: 1,
+                    components: [{ format: 'a3', name: 'something1' }]
+                }
+            ];
+            segmentDict.add('AAA', {
+                elements: dict,
+                requires: 1
+            });
+            validator.define(segmentDict);
             validator.onOpenSegment('AAA');
             validator.onElement();
             validator.onOpenComponent(buffer);
@@ -125,14 +152,24 @@ describe('Validator', () => {
         });
 
         it('should ignore parsed elements with no definition available', () => {
-            const dict: Dictionary<ElementEntry> =
-                new Dictionary<ElementEntry>();
-            dict.add('A001', {
-                id: 'A001',
-                requires: 0,
-                components: ['a3', 'an3', 'n3']
+            const segmentDict: Dictionary<SegmentEntry> =
+                new Dictionary<SegmentEntry>();
+            const dict = [
+                {
+                    id: 'A001',
+                    requires: 0,
+                    components: [
+                        { format: 'a3', name: 'something1' },
+                        { format: 'an3', name: 'something2' },
+                        { format: 'n3', name: 'something3' }
+                    ]
+                }
+            ];
+            segmentDict.add('AAA', {
+                elements: dict,
+                requires: 1
             });
-            validator.define(dict);
+            validator.define(segmentDict);
 
             validator.onOpenSegment('AAA');
             expect(() => validator.onElement()).not.toThrow();
@@ -150,125 +187,137 @@ describe('Validator', () => {
                 new Dictionary<SegmentEntry>();
             segments.add('UNB', {
                 requires: 5,
-                elements: {
-                    S001: {
+                elements: [
+                    {
                         id: 'S001',
                         requires: 2,
-                        components: ['a4', 'an1', 'an..6', 'an..3']
+                        components: [
+                            { format: 'a4', name: 'syntaxIdentifier' },
+                            { format: 'n1', name: 'syntaxVersionNumber' },
+                            {
+                                format: 'an..6',
+                                name: 'serviceCodeListDirectoryVersionNumber'
+                            },
+                            { format: 'an..3', name: 'characterEncodingCoded' }
+                        ]
                     },
-                    S002: {
+                    {
                         id: 'S002',
                         requires: 1,
-                        components: ['an..35', 'an..4', 'an..35', 'an..35']
+                        components: [
+                            {
+                                format: 'an..35',
+                                name: 'interchangeSenderIdentification'
+                            },
+                            {
+                                format: 'an..4',
+                                name: 'identificationCodeQualifier'
+                            },
+                            {
+                                format: 'an..35',
+                                name: 'interchangeSenderInternalIdentification'
+                            },
+                            {
+                                format: 'an..35',
+                                name: 'interchangeSenderInternalSubIdentification'
+                            }
+                        ]
                     },
-                    S003: {
+                    {
                         id: 'S003',
                         requires: 1,
-                        components: ['an..35', 'an..4', 'an..35', 'an..35']
+                        components: [
+                            {
+                                format: 'an..35',
+                                name: 'interchangeRecipientIdentification'
+                            },
+                            {
+                                format: 'an..4',
+                                name: 'identificationCodeQualifier'
+                            },
+                            {
+                                format: 'an..35',
+                                name: 'interchangeRecipientInternalIdentification'
+                            },
+                            {
+                                format: 'an..35',
+                                name: 'interchangeRecipientInternalSubIdentification'
+                            }
+                        ]
                     },
-                    S004: {
+                    {
                         id: 'S004',
                         requires: 2,
-                        components: ['n..8', 'n4']
+                        components: [
+                            { format: 'n..8', name: 'date' },
+                            { format: 'n4', name: 'time' }
+                        ]
                     },
-                    '0020': {
+                    {
                         id: '0020',
                         requires: 1,
-                        components: ['an..14']
+                        components: [
+                            {
+                                format: 'an..14',
+                                name: 'interchangeControlReference'
+                            }
+                        ]
                     },
-                    S005: {
+                    {
                         id: 'S005',
                         requires: 1,
-                        components: ['an..14', 'an2']
+                        components: [
+                            {
+                                format: 'an..14',
+                                name: 'recipientReferencePassword'
+                            },
+                            {
+                                format: 'an2',
+                                name: 'recipientReferencePasswordQualifier'
+                            }
+                        ]
                     },
-                    '0026': {
+                    {
                         id: '0026',
                         requires: 0,
-                        components: ['an..14']
+                        components: [
+                            { format: 'an..14', name: 'applicationReference' }
+                        ]
                     },
-                    '0029': {
+                    {
                         id: '0029',
                         requires: 0,
-                        components: ['a1']
+                        components: [
+                            { format: 'a1', name: 'processingPriorityCode' }
+                        ]
                     },
-                    '0031': {
+                    {
                         id: '0031',
                         requires: 0,
-                        components: ['n1']
+                        components: [
+                            { format: 'n1', name: 'acknowledgementRequest' }
+                        ]
                     },
-                    '0032': {
+                    {
                         id: '0032',
                         requires: 0,
-                        components: ['an..35']
+                        components: [
+                            {
+                                format: 'an..35',
+                                name: 'interchangeAgreementIdentifier'
+                            }
+                        ]
                     },
-                    '0035': {
+                    {
                         id: '0035',
                         requires: 0,
-                        components: ['n1']
+                        components: [{ format: 'n1', name: 'testIndicator' }]
                     }
-                }
-            });
-            const elements: Dictionary<ElementEntry> =
-                new Dictionary<ElementEntry>();
-            elements.add('S001', {
-                id: 'S001',
-                requires: 2,
-                components: ['a4', 'an1', 'an..6', 'an..3']
-            });
-            elements.add('S002', {
-                id: 'S002',
-                requires: 1,
-                components: ['an..35', 'an..4', 'an..35', 'an..35']
-            });
-            elements.add('S003', {
-                id: 'S003',
-                requires: 1,
-                components: ['an..35', 'an..4', 'an..35', 'an..35']
-            });
-            elements.add('S004', {
-                id: 'S004',
-                requires: 2,
-                components: ['n..8', 'n4']
-            });
-            elements.add('0020', {
-                id: '0020',
-                requires: 1,
-                components: ['an..14']
-            });
-            elements.add('S005', {
-                id: 'S005',
-                requires: 1,
-                components: ['an..14', 'an2']
-            });
-            elements.add('0026', {
-                id: '0026',
-                requires: 0,
-                components: ['an..14']
-            });
-            elements.add('0029', {
-                id: '0029',
-                requires: 0,
-                components: ['a1']
-            });
-            elements.add('0031', {
-                id: '0031',
-                requires: 0,
-                components: ['n1']
-            });
-            elements.add('0032', {
-                id: '0032',
-                requires: 0,
-                components: ['an..35']
-            });
-            elements.add('0035', {
-                id: '0035',
-                requires: 0,
-                components: ['n1']
+                ]
             });
 
             validator = new ValidatorImpl();
             validator.define(segments);
-            validator.define(elements);
         });
 
         it('should not throw on optional UNB elements', () => {
@@ -388,14 +437,22 @@ describe('Validator', () => {
                     new Dictionary<SegmentEntry>();
                 dict.add('AAA', {
                     requires: 1,
-                    elements: {
-                        A000: {
+                    elements: [
+                        {
                             id: 'A000',
                             requires: 1,
-                            components: ['a3', 'an3', 'n3']
+                            components: [
+                                { format: 'a3', name: 'something1' },
+                                { format: 'an3', name: 'something2' },
+                                { format: 'n3', name: 'something3' }
+                            ]
                         },
-                        A001: { id: 'A001', requires: 1, components: ['a3'] }
-                    }
+                        {
+                            id: 'A001',
+                            requires: 1,
+                            components: [{ format: 'a3', name: 'something1' }]
+                        }
+                    ]
                 });
                 validator.define(dict);
             });
@@ -419,14 +476,22 @@ describe('Validator', () => {
                     new Dictionary<SegmentEntry>();
                 segments.add('AAA', {
                     requires: 0,
-                    elements: {
-                        A000: {
+                    elements: [
+                        {
                             id: 'A000',
                             requires: 1,
-                            components: ['a3', 'an3', 'n3']
+                            components: [
+                                { format: 'a3', name: 'something1' },
+                                { format: 'an3', name: 'something2' },
+                                { format: 'n3', name: 'something3' }
+                            ]
                         },
-                        A001: { id: 'A001', requires: 1, components: ['a3'] }
-                    }
+                        {
+                            id: 'A001',
+                            requires: 1,
+                            components: [{ format: 'a3', name: 'something1' }]
+                        }
+                    ]
                 });
 
                 const elements: Dictionary<ElementEntry> =
@@ -434,15 +499,21 @@ describe('Validator', () => {
                 elements.add('A001', {
                     id: 'A001',
                     requires: 1,
-                    components: ['a3']
+                    components: [{ format: 'a3', name: 'something1' }]
                 });
 
                 validator.define(segments);
-                validator.define(elements);
             });
 
             it('should throw on parsed elements with no definition available', () => {
-                validator.onOpenSegment('AAA');
+                const segment: Dictionary<SegmentEntry> =
+                    new Dictionary<SegmentEntry>();
+                segment.add('AA0', {
+                    requires: 1,
+                    elements: []
+                });
+                validator.define(segment);
+                validator.onOpenSegment('AA0');
                 expect(() => validator.onElement()).toThrow();
             });
         });

@@ -27,13 +27,6 @@ import {
     EdifactMessageSpecification
 } from '../src/edi/messageStructureParser';
 import { persist } from '../src/util';
-import {
-    ItemDescription,
-    LineItem,
-    Quantity,
-    PriceDetails,
-    MonetaryAmount
-} from '../src/edifact';
 
 let document = '';
 document += "UNB+UNOA:1+005435656:1+006415160:1+060515:1434+00000000000778'";

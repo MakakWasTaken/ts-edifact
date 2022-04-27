@@ -30,6 +30,7 @@ import {
     EdifactMessageSpecification
 } from '../src/edi/messageStructureParser';
 import { MessageType } from '../src/tracker';
+import { findElement } from '../src/util';
 import { Dictionary, SegmentEntry } from '../src/validator';
 
 const D99A_INVOIC_METADATA_PAGE = `
@@ -355,7 +356,11 @@ describe('UNECELegacyMessageStructureParser', () => {
                     const segments: Dictionary<SegmentEntry> =
                         spec.segmentTable;
 
-                    expect(Object.keys(segments.get('MEA')!.elements)).toEqual(
+                    expect(
+                        segments
+                            .get('MEA')!
+                            .elements.map((element) => element.id)
+                    ).toEqual(
                         jasmine.arrayContaining([
                             '6311',
                             'C502',
@@ -366,13 +371,25 @@ describe('UNECELegacyMessageStructureParser', () => {
                     expect(segments.get('MEA')?.requires).toEqual(1);
 
                     expect(
-                        segments.get('MEA')?.elements['6311']?.components
-                    ).toEqual(jasmine.arrayContaining(['an..3']));
+                        findElement(segments.get('MEA')?.elements, '6311')
+                            ?.components
+                    ).toEqual(
+                        jasmine.arrayContaining([
+                            {
+                                format: 'an..3',
+                                name: 'measurementPurposeQualifier'
+                            }
+                        ])
+                    );
                     expect(
-                        segments.get('MEA')?.elements['6311']?.requires
+                        findElement(segments.get('MEA')?.elements, '6311')
+                            ?.requires
                     ).toEqual(1);
                     expect(
-                        segments.get('MEA')?.elements['C174']?.components
+                        findElement(
+                            segments.get('MEA')?.elements,
+                            'C174'
+                        )?.components?.map((c) => c.format)
                     ).toEqual(
                         jasmine.arrayContaining([
                             'an..3',
@@ -383,12 +400,13 @@ describe('UNECELegacyMessageStructureParser', () => {
                         ])
                     );
                     expect(
-                        segments.get('MEA')?.elements['C174']?.requires
+                        findElement(segments.get('MEA')?.elements, 'C174')
+                            ?.requires
                     ).toEqual(1);
 
                     // sub-components should not be stored
                     expect(
-                        segments.get('MEA')?.elements['6411']
+                        findElement(segments.get('MEA')?.elements, '6411')
                     ).toBeUndefined();
 
                     done();
@@ -435,7 +453,9 @@ describe('UNECELegacyMessageStructureParser', () => {
                     const segments: Dictionary<SegmentEntry> =
                         spec.segmentTable;
 
-                    expect(Object.keys(segments.get('CUX')!.elements)).toEqual(
+                    expect(
+                        segments.get('CUX')!.elements.map((e) => e.id)
+                    ).toEqual(
                         jasmine.arrayContaining([
                             'C504',
                             'C504',
@@ -446,16 +466,27 @@ describe('UNECELegacyMessageStructureParser', () => {
                     expect(segments.get('CUX')?.requires).toEqual(0);
 
                     expect(
-                        segments.get('CUX')?.elements['C504']?.components.length
+                        findElement(segments.get('CUX')?.elements, 'C504')
+                            ?.components.length
                     ).toEqual(4);
                     expect(
-                        segments.get('CUX')?.elements['C504']?.components
+                        findElement(segments.get('CUX')?.elements, 'C504')
+                            ?.components
                     ).toEqual(
                         jasmine.arrayContaining([
-                            'an..3',
-                            'an..3',
-                            'an..3',
-                            'n..4'
+                            {
+                                format: 'an..3',
+                                name: 'currencyDetailsQualifier'
+                            },
+                            {
+                                format: 'an..3',
+                                name: 'currencyCoded'
+                            },
+                            {
+                                format: 'an..3',
+                                name: 'currencyQualifier'
+                            },
+                            { format: 'n..4', name: 'currencyRateBase' }
                         ])
                     );
 
@@ -476,40 +507,60 @@ describe('UNECELegacyMessageStructureParser', () => {
             expect(spec.messageType).toBe('INVOIC');
 
             // check segments
-            expect(Object.keys(segments.get('MEA')!.elements)).toEqual(
+            expect(segments.get('MEA')!.elements.map((e) => e.id)).toEqual(
                 jasmine.arrayContaining(['6311', 'C502', 'C174', '7383'])
             );
             expect(segments.get('MEA')?.requires).toEqual(1);
-            expect(Object.keys(segments.get('CUX')!.elements)).toEqual(
+            expect(segments.get('CUX')!.elements.map((e) => e.id)).toEqual(
                 jasmine.arrayContaining(['C504', 'C504', '5402', '6341'])
             );
             expect(segments.get('CUX')?.requires).toEqual(0);
 
             // check elements
             // elements for segment MEA
-            expect(segments.get('MEA')?.elements['6311']?.components).toEqual(
-                jasmine.arrayContaining(['an..3'])
-            );
-            expect(segments.get('MEA')?.elements['6311']?.requires).toEqual(1);
-            expect(segments.get('MEA')?.elements['C174']?.components).toEqual(
+            expect(
+                findElement(segments.get('MEA')?.elements, '6311')?.components
+            ).toEqual(
                 jasmine.arrayContaining([
-                    'an..3',
-                    'an..18',
-                    'n..18',
-                    'n..18',
-                    'n..2'
+                    { name: 'measurementPurposeQualifier', format: 'an..3' }
                 ])
             );
-            expect(segments.get('MEA')?.elements['C174']?.requires).toEqual(1);
+            expect(
+                findElement(segments.get('MEA')?.elements, '6311')?.requires
+            ).toEqual(1);
+            expect(
+                findElement(segments.get('MEA')?.elements, 'C174')?.components
+            ).toEqual(
+                jasmine.arrayContaining([
+                    { format: 'an..3', name: 'measureUnitQualifier' },
+                    { format: 'an..18', name: 'measurementValue' },
+                    { format: 'n..18', name: 'rangeMinimum' },
+                    { format: 'n..18', name: 'rangeMaximum' },
+                    { format: 'n..2', name: 'significantDigits' }
+                ])
+            );
+            expect(
+                findElement(segments.get('MEA')?.elements, 'C174')?.requires
+            ).toEqual(1);
             // elements for segment CUX
             expect(
-                segments.get('CUX')?.elements['C504']?.components.length
+                findElement(segments.get('CUX')?.elements, 'C504')?.components
+                    .length
             ).toEqual(4);
-            expect(segments.get('CUX')?.elements['C504']?.components).toEqual(
-                jasmine.arrayContaining(['an..3', 'an..3', 'an..3', 'n..4'])
+            expect(
+                findElement(segments.get('CUX')?.elements, 'C504')?.components
+            ).toEqual(
+                jasmine.arrayContaining([
+                    { format: 'an..3', name: 'currencyDetailsQualifier' },
+                    { format: 'an..3', name: 'currencyCoded' },
+                    { format: 'an..3', name: 'currencyQualifier' },
+                    { format: 'n..4', name: 'currencyRateBase' }
+                ])
             );
             // sub-components should not be stored
-            expect(segments.get('MEA')?.elements['6411']).toBeUndefined();
+            expect(
+                findElement(segments.get('MEA')?.elements, '6411')
+            ).toBeUndefined();
 
             // check message structure
             expect(spec.messageStructureDefinition).toContain(expectedBGMEntry);

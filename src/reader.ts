@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 /**
  * @author Roman Vottner
  * @copyright 2020 Roman Vottner
@@ -21,8 +22,9 @@ import {
     Validator,
     Dictionary,
     SegmentEntry,
+    ValidatorImpl,
     ElementEntry,
-    ValidatorImpl
+    Component
 } from './validator';
 
 import { SegmentTableBuilder } from './segments';
@@ -33,7 +35,7 @@ import { Configuration } from './configuration';
 
 export type ResultType = {
     name: string;
-    elements: string[][];
+    elements: ElementEntry[];
 };
 
 /**
@@ -45,17 +47,14 @@ export type ResultType = {
  */
 export class Reader {
     private result: ResultType[];
-    private elements: string[][];
-    private components: string[];
+    private elements: ElementEntry[];
+    private element: ElementEntry;
 
     private validator: Validator;
     private parser: Parser;
 
     private defined = false;
-    private validationTables: (
-        | Dictionary<SegmentEntry>
-        | Dictionary<ElementEntry>
-    )[] = [];
+    private validationTables: Dictionary<SegmentEntry>[] = [];
 
     private definitionCache: Cache<Dictionary<SegmentEntry>> = new Cache(15);
     private unbCharsetDefined = false;
@@ -73,37 +72,64 @@ export class Reader {
         const result: ResultType[] = this.result;
 
         this.elements = [];
-        let elements: string[][] = this.elements;
+        let elements: ElementEntry[] = this.elements;
 
-        this.components = [];
-        let components: string[] = this.components;
+        this.element = {
+            components: [],
+            id: '',
+            requires: 0
+        } as ElementEntry;
+        let components: Component[] = [];
 
-        let activeSegment: string | null;
+        let activeSegment: { id: string; segmentEntry: SegmentEntry } | null;
 
-        this.parser.onOpenSegment = (segment: string): void => {
+        this.parser.onOpenSegment = (
+            segment: string,
+            segmentEntry: SegmentEntry | undefined
+        ): void => {
             elements = [];
             result.push({ name: segment, elements: elements });
-            activeSegment = segment;
+            activeSegment = segmentEntry
+                ? { id: segment, segmentEntry: segmentEntry }
+                : null;
         };
-        this.parser.onElement = (): void => {
-            components = [];
-            elements.push(components);
+        this.parser.onElement = (element: ElementEntry | undefined): void => {
+            if (element) {
+                components = element.components;
+                elements.push(this.element);
+                this.element = element;
+                // this.element.components = [];
+            }
         };
         this.parser.onComponent = (value: string): void => {
-            if (activeSegment === 'UNB' && !this.unbCharsetDefined) {
+            if (activeSegment?.id === 'UNB' && !this.unbCharsetDefined) {
                 this.parser.updateCharset(value);
                 this.unbCharsetDefined = true;
             }
-            components.push(value);
+            // Replace first value with correct item
+            const component = components.shift();
+            if (typeof component === 'string') {
+                throw new Error('Component is a string');
+            }
+            this.element.components.push({
+                value,
+                format: component?.format || '',
+                name: component?.name || ''
+            });
         };
         this.parser.onCloseSegment = (): void => {
             if (isDefined(activeSegment)) {
                 // Update the respective segment and element definitions once we know the exact version
                 // of the document
-                if (activeSegment === 'UNH') {
-                    const messageType: string = elements[1][0];
-                    const messageVersion: string = elements[1][1];
-                    const messageRelease: string = elements[1][2];
+                if (activeSegment.id === 'UNH') {
+                    const filteredComponents = components.filter((component) =>
+                        Boolean(component.value)
+                    );
+                    const messageType: string = filteredComponents[0]!.value!;
+                    const messageVersion: string =
+                        filteredComponents[1]!.value!;
+                    const messageRelease: string =
+                        filteredComponents[2]!.value!;
 
                     const key: string =
                         messageVersion + messageRelease + '_' + messageType;
@@ -114,7 +140,6 @@ export class Reader {
                     } else {
                         let segmentTableBuilder: SegmentTableBuilder =
                             new SegmentTableBuilder(messageType);
-
                         const version: string = (
                             messageVersion + messageRelease
                         ).toUpperCase();
@@ -134,7 +159,6 @@ export class Reader {
                         const segmentTable: Dictionary<SegmentEntry> =
                             segmentTableBuilder.build();
                         this.validator.define(segmentTable);
-
                         this.definitionCache.insert(key, segmentTable);
                     }
                 }
@@ -152,9 +176,7 @@ export class Reader {
      * @summary Define segment and element structures.
      * @param definitions An object containing the definitions.
      */
-    define(
-        definitions: Dictionary<SegmentEntry> | Dictionary<ElementEntry>
-    ): void {
+    define(definitions: Dictionary<SegmentEntry>): void {
         this.validator.define(definitions);
     }
 

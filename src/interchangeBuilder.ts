@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 /**
  * @author Roman Vottner
  * @copyright 2020 Roman Vottner
@@ -37,6 +39,8 @@ import {
     TAXCON,
     VATDEC
 } from './index';
+import { ElementEntry } from './validator';
+import { formatComponents } from './util';
 
 export class Group {
     name: string;
@@ -92,7 +96,8 @@ export class Message {
     summary: (Group | Segment)[] = [];
 
     constructor(data: ResultType) {
-        this.messageHeader = new MessageHeader(data);
+        const formattedComponents = formatComponents(data.elements[0]);
+        this.messageHeader = formattedComponents as MessageHeader;
     }
 
     addSegment(segment: Segment, sectionName: string): void {
@@ -144,72 +149,29 @@ export class Message {
     }
 }
 
-export class SyntaxIdentifier {
+export interface SyntaxIdentifier {
     syntaxIdentifer: string;
     version: string;
     serviceCodeListDirectoryVersionNumber: string | undefined;
     charEncoding: string | undefined;
-
-    constructor(components: string[]) {
-        this.syntaxIdentifer = components[0];
-        this.version = components[1];
-        if (components.length >= 3) {
-            this.serviceCodeListDirectoryVersionNumber = components[2];
-        }
-        if (components.length === 4) {
-            this.charEncoding = components[3];
-        }
-    }
 }
 
-abstract class Participant {
+export interface Participant {
     id: string;
     codeQualifier: string | undefined;
     internalId: string | undefined;
     internalSubId: string | undefined;
-
-    constructor(components: string[]) {
-        this.id = components[0];
-        if (components.length >= 2) {
-            this.codeQualifier = components[1];
-        }
-        if (components.length >= 3) {
-            this.internalId = components[2];
-        }
-        if (components.length === 4) {
-            this.internalSubId = components[3];
-        }
-    }
 }
 
-export class Sender extends Participant {
-    constructor(compnenets: string[]) {
-        super(compnenets);
-    }
-}
-
-export class Receiver extends Participant {
-    constructor(components: string[]) {
-        super(components);
-    }
-}
-
-export class RecipientsRef {
+export interface RecipientsRef {
     password: string;
     passwordQualifier: string | undefined;
-
-    constructor(components: string[]) {
-        this.password = components[0];
-        if (components.length === 2) {
-            this.passwordQualifier = components[1];
-        }
-    }
 }
 
 export class Edifact {
     syntaxIdentifier: SyntaxIdentifier;
-    sender: Sender;
-    receiver: Receiver;
+    sender: Participant;
+    receiver: Participant;
     date: string;
     time: string;
     interchangeNumber: string;
@@ -222,30 +184,36 @@ export class Edifact {
 
     messages: Message[] = [];
 
-    constructor(elements: string[][]) {
-        this.syntaxIdentifier = new SyntaxIdentifier(elements[0]);
-        this.sender = new Sender(elements[1]);
-        this.receiver = new Receiver(elements[2]);
-        this.date = elements[3][0];
-        this.time = elements[3][1];
-        this.interchangeNumber = elements[4][0];
+    constructor(elements: ElementEntry[]) {
+        this.syntaxIdentifier = formatComponents(
+            elements[0]
+        ) as SyntaxIdentifier;
+        this.sender = formatComponents(elements[1]) as Participant;
+        this.receiver = formatComponents(elements[2]) as Participant;
+        this.date = elements[3].components[0].value!;
+        this.time = elements[3].components[1].value!;
+        this.interchangeNumber = elements[4].components[0].value!;
         if (elements.length >= 6) {
-            this.recipientsRef = new RecipientsRef(elements[5]);
+            this.recipientsRef = formatComponents(elements[5]) as RecipientsRef;
         }
         if (elements.length >= 7) {
-            this.applicationRef = elements[6][0];
+            this.applicationRef = elements[6].components?.[0]?.value;
         }
         if (elements.length >= 8) {
-            this.processingPriorityCode = elements[7][0];
+            this.processingPriorityCode = elements[7].components?.[0]?.value;
         }
         if (elements.length >= 9) {
-            this.ackRequest = parseInt(elements[8][0]);
+            this.ackRequest = parseInt(
+                elements[8].components?.[0]?.value || ''
+            );
         }
         if (elements.length >= 10) {
-            this.agreementId = elements[9][0];
+            this.agreementId = elements[9].components?.[0]?.value;
         }
         if (elements.length === 11) {
-            this.testIndicator = parseInt(elements[10][0]);
+            this.testIndicator = parseInt(
+                elements[10].components?.[0]?.value || ''
+            );
         } else {
             this.testIndicator = 0;
         }

@@ -43,8 +43,6 @@ export {
     Group,
     Message,
     SyntaxIdentifier,
-    Sender,
-    Receiver,
     RecipientsRef
 } from './interchangeBuilder';
 export {
@@ -97,6 +95,6 @@ export {
     OSTRPT,
     PARTIN,
     TAXCON,
-    VATDEC
+    VATDEC,
+    D96A_INVOIC
 };
-export { D96A_INVOIC };

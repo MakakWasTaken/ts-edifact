@@ -20,7 +20,7 @@ import {
     Dictionary,
     SegmentEntry,
     ElementEntry,
-    ElementName
+    Component
 } from '../validator';
 import { MessageType } from '../tracker';
 import { HttpClient } from '../httpClient';
@@ -136,11 +136,13 @@ export class UNECEMessageStructureParser implements MessageStructureParser {
         return data;
     }
 
-    protected formatElementName(name?: string): ElementName | undefined {
-        if (!name) {
+    protected formatComponentName(
+        component?: Component
+    ): Component | undefined {
+        if (!component || component.value === '') {
             return undefined;
         }
-        const formattedName: string = name.replace(/\/|&|,/g, ' ');
+        const formattedName: string = component.name.replace(/\/|&|,|-/g, ' ');
         const split = formattedName.split(' ');
         if (split.length > 0) {
             const formattedNames = split.map(
@@ -151,9 +153,9 @@ export class UNECEMessageStructureParser implements MessageStructureParser {
                 formattedNames[0].toLowerCase() +
                 formattedNames.slice(1).join('');
 
-            return { name: result, header: name === name.toUpperCase() };
+            return { ...component, name: result };
         } else {
-            return { name: name, header: name === name.toUpperCase() };
+            return component;
         }
     }
 
@@ -166,7 +168,7 @@ export class UNECEMessageStructureParser implements MessageStructureParser {
             return Promise.resolve(definition);
         }
 
-        const segEntry: SegmentEntry = { requires: 0, elements: {} };
+        const segEntry: SegmentEntry = { requires: 0, elements: [] };
         let state: SegmentPart = SegmentPart.BeforeStructureDef;
 
         // only relevant for legacy UNECE segment specification pages:
@@ -177,9 +179,9 @@ export class UNECEMessageStructureParser implements MessageStructureParser {
         let complexEleId: string | null = null;
         let complexEleEntry: ElementEntry | null = null;
         for (let line of page.split('\n')) {
-            line = line.trimRight();
+            line = line.trimEnd();
             if (overflowLine !== null) {
-                line = overflowLine.trimRight() + ' ' + line.trim();
+                line = overflowLine.trimStart() + ' ' + line.trim();
                 overflowLine = null;
             }
 
@@ -197,24 +199,28 @@ export class UNECEMessageStructureParser implements MessageStructureParser {
                 state = SegmentPart.Data;
             } else if (state === SegmentPart.Data && !line.includes('<P>')) {
                 const regexp =
-                    /^([\d]*)\s*?([X|\\*]?)\s*<A.*>([a-zA-Z0-9]*)<\/A>([a-zA-Z0-9 ,\-\\/&]{44,})([M|C])\s*([\d]*)\s*([a-zA-Z0-9\\.]*).*$/g;
+                    /^\s*?([\d]*)\s*?([X|\\*]?)\s*<A.*>([a-zA-Z0-9]*)<\/A>([a-zA-Z0-9 ,\-\\/&]{44,})([M|C])\s*([\d]*)\s*([a-zA-Z0-9\\.]*).*$/g;
                 const arr: RegExpExecArray | null = regexp.exec(line);
                 if (isDefined(arr)) {
                     const segGroupId: string | undefined =
                         arr[1] === '' ? undefined : arr[1];
                     // const deprecated: boolean = arr[2] === "X" ? true : false;
                     const id: string = arr[3];
-                    const name = this.formatElementName(arr[4]?.trim());
                     const mandatory: boolean = arr[5] === 'M' ? true : false;
                     // const repetition: number | undefined = isDefined(arr[6]) ? parseInt(arr[6]) : undefined;
                     const elementDef: string | undefined =
                         arr[7] === '' ? undefined : arr[7];
+                    const component = elementDef
+                        ? this.formatComponentName({
+                              name: arr[4]?.trim(),
+                              format: elementDef
+                          })
+                        : undefined;
 
                     const eleEntry: ElementEntry = {
                         id,
                         requires: 0,
-                        components: [],
-                        name
+                        components: []
                     };
                     if (segGroupId) {
                         if (id === '') {
@@ -223,40 +229,45 @@ export class UNECEMessageStructureParser implements MessageStructureParser {
                             );
                             continue;
                         }
-                        segEntry.elements[id] = eleEntry;
                         skipAddingElement = false;
 
                         if (mandatory) {
                             segEntry.requires = segEntry.requires + 1;
                         }
-                        if (elementDef) {
+                        if (component) {
                             if (
                                 complexEleEntry !== null &&
                                 complexEleId !== null
                             ) {
-                                segEntry.elements[complexEleId] =
-                                    complexEleEntry;
+                                segEntry.elements.push(complexEleEntry);
                             }
                             complexEleId = null;
                             complexEleEntry = null;
 
-                            if (segEntry.elements[id].components.includes(id)) {
+                            if (
+                                segEntry.elements.some(
+                                    (element) => element?.id === id
+                                )
+                            ) {
                                 continue;
                             }
                             if (mandatory) {
                                 eleEntry.requires = eleEntry.requires + 1;
                             }
-                            eleEntry.components.push(elementDef);
-                            segEntry.elements[id] = eleEntry;
+                            eleEntry.components.push(component);
+                            segEntry.elements.push(eleEntry);
                         } else {
                             if (
                                 complexEleEntry !== null &&
                                 complexEleId !== null
                             ) {
-                                segEntry.elements[complexEleId] =
-                                    complexEleEntry;
+                                segEntry.elements.push(complexEleEntry);
                             }
-                            if (segEntry.elements[id].components.includes(id)) {
+                            if (
+                                segEntry.elements.some(
+                                    (element) => element.id === id
+                                )
+                            ) {
                                 skipAddingElement = true;
                                 continue;
                             }
@@ -265,16 +276,16 @@ export class UNECEMessageStructureParser implements MessageStructureParser {
                         }
                     } else {
                         if (!skipAddingElement) {
-                            if (complexEleEntry !== null && elementDef) {
-                                complexEleEntry.components.push(elementDef);
+                            if (complexEleEntry !== null && component) {
+                                complexEleEntry.components.push(component);
                                 complexEleEntry.requires = mandatory
                                     ? complexEleEntry.requires + 1
                                     : complexEleEntry.requires;
                             } else {
                                 // simple element definition
                                 if (
-                                    segEntry.elements[id].components.includes(
-                                        id
+                                    segEntry.elements.some(
+                                        (element) => element.id === id
                                     )
                                 ) {
                                     continue;
@@ -282,16 +293,17 @@ export class UNECEMessageStructureParser implements MessageStructureParser {
                                 if (mandatory) {
                                     eleEntry.requires = eleEntry.requires + 1;
                                 }
-                                if (elementDef) {
-                                    eleEntry.components.push(elementDef);
+                                if (component) {
+                                    eleEntry.components.push(component);
                                 }
-                                segEntry.elements[id] = eleEntry;
+                                eleEntry.id = id;
+                                segEntry.elements.push(eleEntry);
                             }
                         }
                     }
                 } else {
                     const regexpAlt =
-                        /^([\d]*)\s*([X|\\*]?)\s*<A.*>([a-zA-Z0-9]*)<\/A>\s*([a-zA-Z0-9 \\-\\/&]*)/g;
+                        /^\s*([\d]*)\s*([X|\\*]?)\s*<A.*>([a-zA-Z0-9]*)<\/A>\s*([a-zA-Z0-9 \\-\\/&]*)/g;
                     const arrAlt: RegExpExecArray | null = regexpAlt.exec(line);
                     if (isDefined(arrAlt)) {
                         overflowLine = line;
@@ -303,7 +315,7 @@ export class UNECEMessageStructureParser implements MessageStructureParser {
             }
         }
         if (complexEleEntry !== null && complexEleId !== null) {
-            segEntry.elements[complexEleId] = complexEleEntry;
+            segEntry.elements.push(complexEleEntry);
         }
         if (segment !== '') {
             definition.segmentTable.add(segment, segEntry);

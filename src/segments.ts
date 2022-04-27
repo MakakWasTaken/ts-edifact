@@ -30,99 +30,274 @@ export class SegmentTableBuilder extends TableBuilder<SegmentEntry> {
     ): Dictionary<SegmentEntry> {
         data.add('UNB', {
             requires: 5,
-            elements: {
-                S001: {
+            elements: [
+                {
                     id: 'S001',
                     requires: 2,
-                    components: ['a4', 'n1', 'an..6', 'an..3']
+                    components: [
+                        { format: 'a4', name: 'syntaxIdentifier' },
+                        { format: 'n1', name: 'syntaxVersionNumber' },
+                        {
+                            format: 'an..6',
+                            name: 'serviceCodeListDirectoryVersionNumber'
+                        },
+                        { format: 'an..3', name: 'characterEncodingCoded' }
+                    ]
                 },
-                S002: {
+                {
                     id: 'S002',
                     requires: 1,
-                    components: ['an..35', 'an..4', 'an..35', 'an..35']
+                    components: [
+                        {
+                            format: 'an..35',
+                            name: 'interchangeSenderIdentification'
+                        },
+                        {
+                            format: 'an..4',
+                            name: 'identificationCodeQualifier'
+                        },
+                        {
+                            format: 'an..35',
+                            name: 'interchangeSenderInternalIdentification'
+                        },
+                        {
+                            format: 'an..35',
+                            name: 'interchangeSenderInternalSubIdentification'
+                        }
+                    ]
                 },
-                S003: {
+                {
                     id: 'S003',
                     requires: 1,
-                    components: ['an..35', 'an..4', 'an..35', 'an..35']
+                    components: [
+                        {
+                            format: 'an..35',
+                            name: 'interchangeRecipientIdentification'
+                        },
+                        {
+                            format: 'an..4',
+                            name: 'identificationCodeQualifier'
+                        },
+                        {
+                            format: 'an..35',
+                            name: 'interchangeRecipientInternalIdentification'
+                        },
+                        {
+                            format: 'an..35',
+                            name: 'interchangeRecipientInternalSubIdentification'
+                        }
+                    ]
                 },
-                S004: {
+                {
                     id: 'S004',
                     requires: 2,
-                    components: ['n..8', 'n4']
+                    components: [
+                        { format: 'n..8', name: 'date' },
+                        { format: 'n4', name: 'time' }
+                    ]
                 },
-                '0020': { id: '0020', requires: 1, components: ['an..14'] },
-                S005: {
+                {
+                    id: '0020',
+                    requires: 1,
+                    components: [
+                        {
+                            format: 'an..14',
+                            name: 'interchangeControlReference'
+                        }
+                    ]
+                },
+                {
                     id: 'S005',
                     requires: 1,
-                    components: ['an..14', 'an2']
+                    components: [
+                        {
+                            format: 'an..14',
+                            name: 'recipientReferencePassword'
+                        },
+                        {
+                            format: 'an2',
+                            name: 'recipientReferencePasswordQualifier'
+                        }
+                    ]
                 },
-                '0026': { id: '0026', requires: 0, components: ['an..14'] },
-                '0029': { id: '0029', requires: 0, components: ['a1'] },
-                '0031': { id: '0031', requires: 0, components: ['n1'] },
-                '0032': { id: '0032', requires: 0, components: ['an..35'] },
-                '0035': { id: '0035', requires: 0, components: ['n1'] }
-            }
+                {
+                    id: '0026',
+                    requires: 0,
+                    components: [
+                        { format: 'an..14', name: 'applicationReference' }
+                    ]
+                },
+                {
+                    id: '0029',
+                    requires: 0,
+                    components: [
+                        { format: 'a1', name: 'processingPriorityCode' }
+                    ]
+                },
+                {
+                    id: '0031',
+                    requires: 0,
+                    components: [
+                        { format: 'n1', name: 'acknowledgementRequest' }
+                    ]
+                },
+                {
+                    id: '0032',
+                    requires: 0,
+                    components: [
+                        {
+                            format: 'an..35',
+                            name: 'interchangeAgreementIdentifier'
+                        }
+                    ]
+                },
+                {
+                    id: '0035',
+                    requires: 0,
+                    components: [{ format: 'n1', name: 'testIndicator' }]
+                }
+            ]
         });
         data.add('UNH', {
             requires: 2,
-            elements: {
-                '0062': { id: '0062', requires: 1, components: ['an..14'] },
-                S009: {
+            elements: [
+                {
+                    id: '0062',
+                    requires: 1,
+                    components: [
+                        { format: 'an..14', name: 'messageReferenceNumber' }
+                    ]
+                },
+                {
                     id: 'S009',
                     requires: 4,
                     components: [
-                        'an..6',
-                        'an..3',
-                        'an..3',
-                        'an..3',
-                        'an..6',
-                        'an..6',
-                        'an..6'
+                        { format: 'an..6', name: 'messageType' },
+                        { format: 'an..3', name: 'messageVersionNumber' },
+                        { format: 'an..3', name: 'messageReleaseNumber' },
+                        { format: 'an..3', name: 'controllingAgencyCoded' },
+                        { format: 'an..6', name: 'associationAssignedCode' },
+                        {
+                            format: 'an..6',
+                            name: 'codeListDirectoryVersionNumber'
+                        },
+                        {
+                            format: 'an..6',
+                            name: 'messageTypeSubfunctionIdentification'
+                        }
                     ]
                 },
-                '0068': { id: '0068', requires: 0, components: ['an..35'] },
-                S010: {
+                {
+                    id: '0068',
+                    requires: 0,
+                    components: [
+                        { format: 'an..35', name: 'commonAccessReference' }
+                    ]
+                },
+                {
                     id: 'S010',
                     requires: 1,
-                    components: ['n..2', 'a1']
+                    components: [
+                        { format: 'n..2', name: 'sequenceOfTransfers' },
+                        { format: 'a1', name: 'firstAndLastTransfer' }
+                    ]
                 },
-                S016: {
+                {
                     id: 'S016',
                     requires: 1,
-                    components: ['an..14', 'an..3', 'an..3', 'an..3']
+                    components: [
+                        {
+                            format: 'an..14',
+                            name: 'messageSubsetIdentification'
+                        },
+                        { format: 'an..3', name: 'messageSubsetVersionNumber' },
+                        { format: 'an..3', name: 'messageSubsetReleaseNumber' },
+                        { format: 'an..3', name: 'controllingAgencyCoded' }
+                    ]
                 },
-                S017: {
+                {
                     id: 'S017',
                     requires: 1,
-                    components: ['an..14', 'an..3', 'an..3', 'an..3']
+                    components: [
+                        {
+                            format: 'an..14',
+                            name: 'messageImplementationGuidelineIdentification'
+                        },
+                        {
+                            format: 'an..3',
+                            name: 'messageImplementationGuidelineVersionNumber'
+                        },
+                        {
+                            format: 'an..3',
+                            name: 'messageImplementationGuidelineReleaseNumber'
+                        },
+                        { format: 'an..3', name: 'controllingAgencyCoded' }
+                    ]
                 },
-                S018: {
+                {
                     id: 'S018',
                     requires: 1,
-                    components: ['an..14', 'an..3', 'an..3', 'an..3']
+                    components: [
+                        { format: 'an..14', name: 'scenarioIdentification' },
+                        { format: 'an..3', name: 'scenarioVersionNumber' },
+                        { format: 'an..3', name: 'scenarioReleaseNumber' },
+                        { format: 'an..3', name: 'controllingAgencyCoded' }
+                    ]
                 }
-            }
+            ]
         });
         data.add('UNS', {
             requires: 1,
-            elements: {
-                '0081': { id: '0081', requires: 1, components: ['a1'] }
-            }
+            elements: [
+                {
+                    id: '0081',
+                    requires: 1,
+                    components: [
+                        { format: 'a1', name: 'sectionIdentification' }
+                    ]
+                }
+            ]
         });
         data.add('UNT', {
             requires: 2,
-            elements: {
-                '0074': { id: '0074', requires: 1, components: ['n..10'] },
-                '0062': { id: '0062', requires: 1, components: ['an..14'] }
-            }
+            elements: [
+                {
+                    id: '0074',
+                    requires: 1,
+                    components: [
+                        { format: 'n..10', name: 'numberOfSegmentsInAMessage' }
+                    ]
+                },
+                {
+                    id: '0062',
+                    requires: 1,
+                    components: [
+                        { format: 'an..14', name: 'messageReferenceNumber' }
+                    ]
+                }
+            ]
         });
         data.add('UNZ', {
             requires: 2,
-            elements: {
-                '0036': { id: '0036', requires: 1, components: ['n..6'] },
-                '0020': { id: '0020', requires: 1, components: ['an..14'] }
-            }
+            elements: [
+                {
+                    id: '0036',
+                    requires: 1,
+                    components: [
+                        { format: 'n..6', name: 'interchangeControlCount' }
+                    ]
+                },
+                {
+                    id: '0020',
+                    requires: 1,
+                    components: [
+                        {
+                            format: 'an..14',
+                            name: 'interchangeControlReference'
+                        }
+                    ]
+                }
+            ]
         });
 
         return data;
