@@ -17,12 +17,12 @@
  */
 
 // import { ResultType } from '../src/reader';
-// import { InterchangeBuilder, Edifact, Group } from '../src/interchangeBuilder';
-// import { Separators, EdifactSeparatorsBuilder } from '../src/edi/separators';
+import { InterchangeBuilder } from '../src/interchangeBuilder';
+import { Separators, EdifactSeparatorsBuilder } from '../src/edi/separators';
 
 describe('InterchangeBuilder', () => {
     // let parseResult: ResultType[];
-    // const separators: Separators = new EdifactSeparatorsBuilder().build();
+    const separators: Separators = new EdifactSeparatorsBuilder().build();
 
     // beforeEach(() => {
     //     parseResult = [
@@ -305,11 +305,11 @@ describe('InterchangeBuilder', () => {
     //     ];
     // });
 
-    // it("shouldn't accept empty parse result as input", () => {
-    //     expect(
-    //         () => new InterchangeBuilder([], separators, 'src/messageSpec/')
-    //     ).toThrow();
-    // });
+    it("shouldn't accept empty parse result as input", () => {
+        expect(
+            () => new InterchangeBuilder([], separators, 'src/messageSpec/')
+        ).toThrow();
+    });
 
     // it('should build D01B interchange correctly', () => {
     //     const builder: InterchangeBuilder = new InterchangeBuilder(
@@ -339,18 +339,18 @@ describe('InterchangeBuilder', () => {
     //     console.log(edi.messages[1].header[0]);
     // });
 
-    it('should fail D96A message structure', () => {
-        // parseResult[1].elements = [
-        //     ['00000000000117'],
-        //     ['INVOIC', 'D', '96A', 'UN']
-        // ];
-        // expect(
-        //     () =>
-        //         new InterchangeBuilder(
-        //             parseResult,
-        //             separators,
-        //             'src/messageSpec/'
-        //         )
-        // ).toThrow();
-    });
+    // it('should fail D96A message structure', () => {
+    //     parseResult[1].elements = [
+    //         ['00000000000117'],
+    //         ['INVOIC', 'D', '96A', 'UN']
+    //     ];
+    //     expect(
+    //         () =>
+    //             new InterchangeBuilder(
+    //                 parseResult,
+    //                 separators,
+    //                 'src/messageSpec/'
+    //             )
+    //     ).toThrow();
+    // });
 });

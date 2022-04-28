@@ -162,6 +162,7 @@ export class Parser extends EventEmitter {
                 // eslint-disable-next-line no-fallthrough
                 case States.SEGMENT:
                     index = this.tokenizer.segment(chunk, index);
+
                     // Determine the next parser state
                     switch (
                         chunk.charCodeAt(index) ||

@@ -23,8 +23,7 @@ import {
     Dictionary,
     SegmentEntry,
     ValidatorImpl,
-    ElementEntry,
-    Component
+    ElementEntry
 } from './validator';
 
 import { SegmentTableBuilder } from './segments';
@@ -79,7 +78,8 @@ export class Reader {
             id: '',
             requires: 0
         } as ElementEntry;
-        let components: Component[] = [];
+        // Holds the temporary element components.
+        let componentIndex = 0;
 
         let activeSegment: { id: string; segmentEntry: SegmentEntry } | null;
 
@@ -95,10 +95,9 @@ export class Reader {
         };
         this.parser.onElement = (element: ElementEntry | undefined): void => {
             if (element) {
-                components = element.components;
-                elements.push(this.element);
+                elements.push(this.element); // Add the previous element
                 this.element = element;
-                // this.element.components = [];
+                componentIndex = 0;
             }
         };
         this.parser.onComponent = (value: string): void => {
@@ -107,23 +106,16 @@ export class Reader {
                 this.unbCharsetDefined = true;
             }
             // Replace first value with correct item
-            const component = components.shift();
-            if (typeof component === 'string') {
-                throw new Error('Component is a string');
-            }
-            this.element.components.push({
-                value,
-                format: component?.format || '',
-                name: component?.name || ''
-            });
+            this.element.components[componentIndex].value = value;
+            componentIndex++;
         };
         this.parser.onCloseSegment = (): void => {
             if (isDefined(activeSegment)) {
                 // Update the respective segment and element definitions once we know the exact version
                 // of the document
                 if (activeSegment.id === 'UNH') {
-                    const filteredComponents = components.filter((component) =>
-                        Boolean(component.value)
+                    const filteredComponents = this.element.components.filter(
+                        (component) => Boolean(component.value)
                     );
                     const messageType: string = filteredComponents[0]!.value!;
                     const messageVersion: string =

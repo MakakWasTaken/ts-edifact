@@ -283,7 +283,6 @@ export class ValidatorImpl implements Validator {
         }
         this.counts.segment += 1;
         this.counts.element = 0;
-        this.element = undefined;
         return this.segment;
     }
 
@@ -394,20 +393,8 @@ export class ValidatorImpl implements Validator {
 
                 // Retrieve a component definition if validation is set to all
 
-                // eslint-disable-next-line no-case-declarations
-                const sortedComponents = this.element.components.reduce<
-                    Component[]
-                >((prev, cur) => {
-                    if (cur.value) {
-                        // If we have a value prepend it to the array
-                        return [cur, ...prev];
-                    } else {
-                        // Just add the component
-                        return [...prev, cur];
-                    }
-                }, []);
                 this.component = this.format(
-                    sortedComponents[this.counts.component]?.format || ''
+                    this.element.components[this.counts.component]?.format || ''
                 );
                 if (this.component === undefined) {
                     return;

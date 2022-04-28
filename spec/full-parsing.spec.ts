@@ -20,12 +20,6 @@ import { Dictionary, SegmentEntry } from '../src/validator';
 import { Parser } from '../src/parser';
 import { SegmentTableBuilder } from '../src/segments';
 import { Configuration } from '../src/configuration';
-import {
-    MessageStructureParser,
-    UNECEMessageStructureParser,
-    EdifactMessageSpecification
-} from '../src/edi/messageStructureParser';
-import { persist } from '../src/util';
 
 // issue #1 - Differences between ts-edifact and edifact libraries
 describe('Parsing edifact document', () => {
@@ -78,15 +72,7 @@ describe('Parsing edifact document', () => {
             expect(() => parser.write(document)).not.toThrow();
         });
 
-        it('should parse issue #1 document', async () => {
-            const specDir = './';
-            const specParser: MessageStructureParser =
-                new UNECEMessageStructureParser('D01B', 'IFTMIN');
-            await specParser
-                .loadTypeSpec()
-                .then((data: EdifactMessageSpecification) => {
-                    persist(data, specDir, true);
-                });
+        it('should parse issue #1 document', () => {
             const segments: Dictionary<SegmentEntry> = new SegmentTableBuilder(
                 'IFTMIN'
             )
