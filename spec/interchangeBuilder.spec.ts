@@ -351,13 +351,12 @@ describe('InterchangeBuilder', () => {
         const interchangeBuilder = new InterchangeBuilder(
             parsingResult,
             sut.separators,
-            '../src/messageSpec'
+            './src/messageSpec'
         );
 
         // Should have exactly one message
         expect(interchangeBuilder.interchange.messages.length === 1);
-        const message = interchangeBuilder.interchange.messages[0];
-        console.log(message);
+        // const message = interchangeBuilder.interchange.messages[0];
     });
 
     // it('should build D01B interchange correctly', () => {

@@ -40,7 +40,6 @@ export function toSegmentObject(
         data.name,
         decimalSeparator
     );
-    console.log('Formatted components', formattedComponents);
 
     switch (data.name) {
         case 'AJT':
