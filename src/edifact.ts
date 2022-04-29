@@ -20,7 +20,6 @@
 
 import { ResultType } from './reader';
 import { formatComponents } from './util';
-import { ElementEntry } from './validator';
 
 export function sanitizeFloat(str: string, decimalSymbol: string): number {
     const updatedStr: string = str.replace(decimalSymbol, '.');
@@ -36,67 +35,66 @@ export function toSegmentObject(
     version: string,
     decimalSeparator: string
 ): Segment {
-    const formattedComponents: { [key: string]: any } = {};
-    data.elements.forEach((element: ElementEntry) => {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-        formattedComponents[element.id] = formatComponents(
-            element,
-            decimalSeparator
-        );
-    });
+    const formattedComponents = formatComponents(
+        data.elements,
+        data.name,
+        decimalSeparator
+    );
+    console.log('Formatted components', formattedComponents);
+
     switch (data.name) {
         case 'AJT':
-            return formattedComponents[data.name] as AdjustmentDetails;
+            return formattedComponents as AdjustmentDetails;
         case 'ALC':
-            return formattedComponents[data.name] as AllowanceOrCharge;
+            return formattedComponents as AllowanceOrCharge;
         case 'ALI':
-            return formattedComponents[data.name] as AdditionalInformation;
+            return formattedComponents as AdditionalInformation;
         case 'APR':
-            return formattedComponents[data.name] as AdditionalPriceInformation;
+            return formattedComponents as AdditionalPriceInformation;
         case 'ARD':
-            return formattedComponents[data.name] as MonetaryAmountFunction;
+            return formattedComponents as MonetaryAmountFunction;
         case 'AUT':
-            return formattedComponents[data.name] as AuthenticationResult;
+            return formattedComponents as AuthenticationResult;
         case 'BGM':
-            return formattedComponents[data.name] as BeginOfMessage;
+            return formattedComponents as BeginOfMessage;
         case 'BUS':
-            return formattedComponents[data.name] as BusinessFunction;
+            return formattedComponents as BusinessFunction;
         case 'CAV':
-            return formattedComponents[data.name] as CharacteristicValue;
+            return formattedComponents as CharacteristicValue;
         case 'CCI':
-            return formattedComponents[data.name] as CharacteristicinterfaceID;
+            return formattedComponents as CharacteristicinterfaceID;
         case 'CED':
-            return formattedComponents[data.name] as ComputerEnvironmentDetails;
+            return formattedComponents as ComputerEnvironmentDetails;
         case 'CNT':
-            return formattedComponents[data.name] as ControlTotal;
+            return formattedComponents as ControlTotal;
         case 'COD':
-            return formattedComponents[data.name] as ComponentDetails;
+            return formattedComponents as ComponentDetails;
         case 'COM':
-            return formattedComponents[data.name] as CommunicationContact;
+            return formattedComponents as CommunicationContact;
         case 'CPS':
-            return formattedComponents[data.name] as ConsignmentPackingSequence;
+            return formattedComponents as ConsignmentPackingSequence;
         case 'CTA':
-            return formattedComponents[data.name] as ContactInformation;
+            return formattedComponents as ContactInformation;
         case 'CUX':
-            return formattedComponents[data.name] as Currencies;
+            return formattedComponents as Currencies;
         case 'DGS':
-            return formattedComponents[data.name] as DangerousGoods;
+            return formattedComponents as DangerousGoods;
         case 'DLM':
-            return formattedComponents[data.name] as DeliveryLimitations;
+            return formattedComponents as DeliveryLimitations;
         case 'DMS':
-            return formattedComponents[data.name] as MessageSummary;
+            return formattedComponents as MessageSummary;
         case 'DOC':
-            return formattedComponents[data.name] as MessageDetails;
+            return formattedComponents as MessageDetails;
         case 'DTM':
-            return formattedComponents[data.name] as DateTimePeriod;
+            return formattedComponents as DateTimePeriod;
         case 'EFI':
             return formattedComponents[
                 data.name
             ] as ExternalFileLinkIdentification;
         case 'EQA':
-            return formattedComponents[data.name] as AttachedEquipment;
+            return formattedComponents as AttachedEquipment;
         case 'EQD':
-            return formattedComponents[data.name] as EquipmentDetails;
+            return formattedComponents as EquipmentDetails;
         case 'ERC':
             return formattedComponents[
                 data.name
@@ -106,91 +104,91 @@ export function toSegmentObject(
                 data.name
             ] as FinancialInstitutionInformation;
         case 'FTX':
-            return formattedComponents[data.name] as FreeText;
+            return formattedComponents as FreeText;
         case 'GEI':
-            return formattedComponents[data.name] as ProcessingInformation;
+            return formattedComponents as ProcessingInformation;
         case 'GIN':
-            return formattedComponents[data.name] as GoodsIdentityNumber;
+            return formattedComponents as GoodsIdentityNumber;
         case 'GIR':
-            return formattedComponents[data.name] as RelatedInformationNumbers;
+            return formattedComponents as RelatedInformationNumbers;
         case 'GIS': // removed since D02B
-            return formattedComponents[data.name] as GeneralIndicator;
+            return formattedComponents as GeneralIndicator;
         case 'HAN':
-            return formattedComponents[data.name] as HandlingInstructions;
+            return formattedComponents as HandlingInstructions;
         case 'HYN':
-            return formattedComponents[data.name] as HierarchyInformation;
+            return formattedComponents as HierarchyInformation;
         case 'IDE':
-            return formattedComponents[data.name] as Identity;
+            return formattedComponents as Identity;
         case 'IMD':
-            return formattedComponents[data.name] as ItemDescription;
+            return formattedComponents as ItemDescription;
         case 'INP':
-            return formattedComponents[data.name] as PartiesAndInstruction;
+            return formattedComponents as PartiesAndInstruction;
         case 'IRQ':
-            return formattedComponents[data.name] as InformationRequired;
+            return formattedComponents as InformationRequired;
         case 'LIN':
-            return formattedComponents[data.name] as LineItem;
+            return formattedComponents as LineItem;
         case 'LOC':
-            return formattedComponents[data.name] as LocationIdentification;
+            return formattedComponents as LocationIdentification;
         case 'MEA':
-            return formattedComponents[data.name] as Measurements;
+            return formattedComponents as Measurements;
         case 'MKS':
             return formattedComponents[
                 data.name
             ] as MarketSalesChannelInformation;
         case 'MOA':
-            return formattedComponents[data.name] as MonetaryAmount;
+            return formattedComponents as MonetaryAmount;
         case 'MTD':
             return formattedComponents[
                 data.name
             ] as MaintenanceOperationDetails;
         case 'NAD':
-            return formattedComponents[data.name] as NameAndAddress;
+            return formattedComponents as NameAndAddress;
         case 'PAC':
-            return formattedComponents[data.name] as Package;
+            return formattedComponents as Package;
         case 'PAI':
-            return formattedComponents[data.name] as PaymentInstructions;
+            return formattedComponents as PaymentInstructions;
         case 'PAT': // removed since D02B
-            return formattedComponents[data.name] as PaymentTermsBasis;
+            return formattedComponents as PaymentTermsBasis;
         case 'PCD':
-            return formattedComponents[data.name] as PercentageDetails;
+            return formattedComponents as PercentageDetails;
         case 'PCI':
-            return formattedComponents[data.name] as PackageIdentification;
+            return formattedComponents as PackageIdentification;
         case 'PGI':
-            return formattedComponents[data.name] as ProductGroupInformation;
+            return formattedComponents as ProductGroupInformation;
         case 'PIA':
-            return formattedComponents[data.name] as AdditionalProductId;
+            return formattedComponents as AdditionalProductId;
         case 'PRI':
-            return formattedComponents[data.name] as PriceDetails;
+            return formattedComponents as PriceDetails;
         case 'PYT':
-            return formattedComponents[data.name] as PaymentTerms;
+            return formattedComponents as PaymentTerms;
         case 'QTY':
-            return formattedComponents[data.name] as Quantity;
+            return formattedComponents as Quantity;
         case 'QVR':
-            return formattedComponents[data.name] as QuantityVariances;
+            return formattedComponents as QuantityVariances;
         case 'RCS':
-            return formattedComponents[data.name] as RequirementsAndConditions;
+            return formattedComponents as RequirementsAndConditions;
         case 'RFF':
-            return formattedComponents[data.name] as Reference;
+            return formattedComponents as Reference;
         case 'RJL':
             return formattedComponents[
                 data.name
             ] as AccountingJournalIdentification;
         case 'RNG':
-            return formattedComponents[data.name] as RangeDetails;
+            return formattedComponents as RangeDetails;
         case 'RTE':
-            return formattedComponents[data.name] as RateDetails;
+            return formattedComponents as RateDetails;
         case 'SEL':
-            return formattedComponents[data.name] as SealNumber;
+            return formattedComponents as SealNumber;
         case 'SCC':
-            return formattedComponents[data.name] as SchedulingConditions;
+            return formattedComponents as SchedulingConditions;
         case 'SEQ':
-            return formattedComponents[data.name] as SequenceDetails;
+            return formattedComponents as SequenceDetails;
         case 'SGP':
-            return formattedComponents[data.name] as SplitGoodsPlacement;
+            return formattedComponents as SplitGoodsPlacement;
         case 'STS':
-            return formattedComponents[data.name] as Status;
+            return formattedComponents as Status;
         case 'TAX':
-            return formattedComponents[data.name] as TaxDetails;
+            return formattedComponents as TaxDetails;
         case 'TDT':
             // eslint-disable-next-line no-case-declarations
             const lversion: string = version.toLowerCase();
@@ -239,22 +237,22 @@ export function toSegmentObject(
                     data.name
                 ] as TransportInformationD02b;
             } else {
-                return formattedComponents[data.name] as DetailsOfTransport;
+                return formattedComponents as DetailsOfTransport;
             }
         case 'TMD':
-            return formattedComponents[data.name] as TransportMovementDetails;
+            return formattedComponents as TransportMovementDetails;
         case 'TOD':
-            return formattedComponents[data.name] as TermsOfDeliveryOrTransport;
+            return formattedComponents as TermsOfDeliveryOrTransport;
         case 'TSR':
             return formattedComponents[
                 data.name
             ] as TransportServiceRequirements;
         case 'UNH':
-            return formattedComponents[data.name] as MessageHeader;
+            return formattedComponents as MessageHeader;
         case 'UNS':
-            return formattedComponents[data.name] as SectionControl;
+            return formattedComponents as SectionControl;
         case 'UNT':
-            return formattedComponents[data.name] as MessageTrailer;
+            return formattedComponents as MessageTrailer;
         default:
             throw new Error(`Unsupported segment: ${data.name}`);
     }

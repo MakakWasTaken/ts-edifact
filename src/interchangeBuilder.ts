@@ -96,7 +96,7 @@ export class Message {
     summary: (Group | Segment)[] = [];
 
     constructor(data: ResultType) {
-        const formattedComponents = formatComponents(data.elements[0]);
+        const formattedComponents = formatComponents(data.elements, data.name);
         this.messageHeader = formattedComponents as MessageHeader;
     }
 
@@ -186,15 +186,19 @@ export class Edifact {
 
     constructor(elements: ElementEntry[]) {
         this.syntaxIdentifier = formatComponents(
-            elements[0]
+            elements,
+            ''
         ) as SyntaxIdentifier;
-        this.sender = formatComponents(elements[1]) as Participant;
-        this.receiver = formatComponents(elements[2]) as Participant;
+        this.sender = formatComponents(elements, '') as Participant;
+        this.receiver = formatComponents(elements, '') as Participant;
         this.date = elements[3].components[0].value!;
         this.time = elements[3].components[1].value!;
         this.interchangeNumber = elements[4].components[0].value!;
         if (elements.length >= 6) {
-            this.recipientsRef = formatComponents(elements[5]) as RecipientsRef;
+            this.recipientsRef = formatComponents(
+                elements,
+                ''
+            ) as RecipientsRef;
         }
         if (elements.length >= 7) {
             this.applicationRef = elements[6].components?.[0]?.value;
@@ -237,9 +241,7 @@ export class InterchangeBuilder {
      * version defined in the UNH segments of the parsing result.
      *
      * This process will fail if mandatory segments are missing of if any unexpected
-     * segments, not defined in the message structure definition file, are found. If no
-     * definition for the exact version can be found, i.e. D96A_INVOIC a fallback for a
-     * generic INVOIC message structure is attempted.
+     * segments, not defined in the message structure definition file, are found.
      *
      * @param parsingResult The actual result of the Edifact document parsing process.
      * @param basePath The base location the Edifact message structure definition files

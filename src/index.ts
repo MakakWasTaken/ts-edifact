@@ -79,8 +79,6 @@ import * as PARTIN from './messageSpec/PARTIN.struct.json';
 import * as TAXCON from './messageSpec/TAXCON.struct.json';
 import * as VATDEC from './messageSpec/VATDEC.struct.json';
 
-import * as D96A_INVOIC from './messageSpec/D96A_INVOIC.struct.json';
-
 export {
     APERAK,
     AUTHOR,
@@ -95,6 +93,5 @@ export {
     OSTRPT,
     PARTIN,
     TAXCON,
-    VATDEC,
-    D96A_INVOIC
+    VATDEC
 };

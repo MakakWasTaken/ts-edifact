@@ -33,6 +33,7 @@ export class SegmentTableBuilder extends TableBuilder<SegmentEntry> {
             elements: [
                 {
                     id: 'S001',
+                    name: 'syntaxIdentifier',
                     requires: 2,
                     components: [
                         { format: 'a4', name: 'syntaxIdentifier' },
@@ -46,6 +47,7 @@ export class SegmentTableBuilder extends TableBuilder<SegmentEntry> {
                 },
                 {
                     id: 'S002',
+                    name: 'interchangeSender',
                     requires: 1,
                     components: [
                         {
@@ -68,6 +70,7 @@ export class SegmentTableBuilder extends TableBuilder<SegmentEntry> {
                 },
                 {
                     id: 'S003',
+                    name: 'interchangeRecipient',
                     requires: 1,
                     components: [
                         {
@@ -90,6 +93,7 @@ export class SegmentTableBuilder extends TableBuilder<SegmentEntry> {
                 },
                 {
                     id: 'S004',
+                    name: 'dateAndTimeOfPreparation',
                     requires: 2,
                     components: [
                         { format: 'n..8', name: 'date' },
@@ -98,6 +102,7 @@ export class SegmentTableBuilder extends TableBuilder<SegmentEntry> {
                 },
                 {
                     id: '0020',
+                    name: 'interchangeControlReference',
                     requires: 1,
                     components: [
                         {
@@ -108,6 +113,7 @@ export class SegmentTableBuilder extends TableBuilder<SegmentEntry> {
                 },
                 {
                     id: 'S005',
+                    name: 'recipientReferencePasswordDetails',
                     requires: 1,
                     components: [
                         {
@@ -122,6 +128,7 @@ export class SegmentTableBuilder extends TableBuilder<SegmentEntry> {
                 },
                 {
                     id: '0026',
+                    name: 'applicationReference',
                     requires: 0,
                     components: [
                         { format: 'an..14', name: 'applicationReference' }
@@ -129,6 +136,7 @@ export class SegmentTableBuilder extends TableBuilder<SegmentEntry> {
                 },
                 {
                     id: '0029',
+                    name: 'processingPriorityCode',
                     requires: 0,
                     components: [
                         { format: 'a1', name: 'processingPriorityCode' }
@@ -136,6 +144,7 @@ export class SegmentTableBuilder extends TableBuilder<SegmentEntry> {
                 },
                 {
                     id: '0031',
+                    name: 'acknowledgementRequest',
                     requires: 0,
                     components: [
                         { format: 'n1', name: 'acknowledgementRequest' }
@@ -143,6 +152,7 @@ export class SegmentTableBuilder extends TableBuilder<SegmentEntry> {
                 },
                 {
                     id: '0032',
+                    name: 'interchangeAgreementIdentifier',
                     requires: 0,
                     components: [
                         {
@@ -153,6 +163,7 @@ export class SegmentTableBuilder extends TableBuilder<SegmentEntry> {
                 },
                 {
                     id: '0035',
+                    name: 'testIndicator',
                     requires: 0,
                     components: [{ format: 'n1', name: 'testIndicator' }]
                 }
@@ -163,6 +174,7 @@ export class SegmentTableBuilder extends TableBuilder<SegmentEntry> {
             elements: [
                 {
                     id: '0062',
+                    name: 'messageReferenceNumber',
                     requires: 1,
                     components: [
                         { format: 'an..14', name: 'messageReferenceNumber' }
@@ -170,6 +182,7 @@ export class SegmentTableBuilder extends TableBuilder<SegmentEntry> {
                 },
                 {
                     id: 'S009',
+                    name: 'messageIdentifier',
                     requires: 4,
                     components: [
                         { format: 'an..6', name: 'messageType' },
@@ -189,6 +202,7 @@ export class SegmentTableBuilder extends TableBuilder<SegmentEntry> {
                 },
                 {
                     id: '0068',
+                    name: 'commonAccessReference',
                     requires: 0,
                     components: [
                         { format: 'an..35', name: 'commonAccessReference' }
@@ -196,6 +210,7 @@ export class SegmentTableBuilder extends TableBuilder<SegmentEntry> {
                 },
                 {
                     id: 'S010',
+                    name: 'statusOfTheTransfer',
                     requires: 1,
                     components: [
                         { format: 'n..2', name: 'sequenceOfTransfers' },
@@ -204,6 +219,7 @@ export class SegmentTableBuilder extends TableBuilder<SegmentEntry> {
                 },
                 {
                     id: 'S016',
+                    name: 'messageSubsetIdentification',
                     requires: 1,
                     components: [
                         {
@@ -217,6 +233,7 @@ export class SegmentTableBuilder extends TableBuilder<SegmentEntry> {
                 },
                 {
                     id: 'S017',
+                    name: 'messageImplementationGuidelineIdentification',
                     requires: 1,
                     components: [
                         {
@@ -236,6 +253,7 @@ export class SegmentTableBuilder extends TableBuilder<SegmentEntry> {
                 },
                 {
                     id: 'S018',
+                    name: 'scenarioIdentification',
                     requires: 1,
                     components: [
                         { format: 'an..14', name: 'scenarioIdentification' },
@@ -251,6 +269,7 @@ export class SegmentTableBuilder extends TableBuilder<SegmentEntry> {
             elements: [
                 {
                     id: '0081',
+                    name: 'sectionIdentification',
                     requires: 1,
                     components: [
                         { format: 'a1', name: 'sectionIdentification' }
@@ -263,6 +282,7 @@ export class SegmentTableBuilder extends TableBuilder<SegmentEntry> {
             elements: [
                 {
                     id: '0074',
+                    name: 'numberOfSegmentsInAMessage',
                     requires: 1,
                     components: [
                         { format: 'n..10', name: 'numberOfSegmentsInAMessage' }
@@ -270,6 +290,7 @@ export class SegmentTableBuilder extends TableBuilder<SegmentEntry> {
                 },
                 {
                     id: '0062',
+                    name: 'messageReferenceNumber',
                     requires: 1,
                     components: [
                         { format: 'an..14', name: 'messageReferenceNumber' }
@@ -282,6 +303,7 @@ export class SegmentTableBuilder extends TableBuilder<SegmentEntry> {
             elements: [
                 {
                     id: '0036',
+                    name: 'interchangeControlCount',
                     requires: 1,
                     components: [
                         { format: 'n..6', name: 'interchangeControlCount' }
@@ -289,6 +311,7 @@ export class SegmentTableBuilder extends TableBuilder<SegmentEntry> {
                 },
                 {
                     id: '0020',
+                    name: 'interchangeControlReference',
                     requires: 1,
                     components: [
                         {

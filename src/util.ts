@@ -20,6 +20,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 
 import * as fs from 'fs';
+
 import {
     EdifactMessageSpecification,
     MessageStructureParser,
@@ -42,28 +43,23 @@ function toString(data: any, pretty?: boolean): string {
 export function persist(
     data: EdifactMessageSpecification,
     path: string,
-    pretty?: boolean
+    pretty?: boolean,
+    defaultVersion = false
 ): void {
     const messageStructDef: string = toString(
         data.messageStructureDefinition,
         pretty
     );
     const messageStructDefFileName: string =
-        data.version + data.release + '_' + data.messageType + '.struct.json';
+        (defaultVersion ? '' : data.version + data.release + '_') +
+        data.messageType +
+        '.struct.json';
 
     const segments: string = toString((data.segmentTable as any).entries);
     const segmentsFileName: string =
-        data.version + data.release + '_' + data.messageType + '.segments.json';
-
-    // const elements: string = toString((data.elementTable as any).entries);
-    // const elementsFileName: string =
-    //     data.version +
-    //     data.release +
-    //     '_' +
-    //     data.messageType +
-    //     '.' +
-    //     Suffix.Elements +
-    //     '.json';
+        (defaultVersion ? '' : data.version + data.release + '_') +
+        data.messageType +
+        '.segments.json';
 
     let p: string = path;
     if (!p.endsWith('/')) {
@@ -72,28 +68,40 @@ export function persist(
 
     fs.writeFileSync(p + messageStructDefFileName, messageStructDef);
     fs.writeFileSync(p + segmentsFileName, segments);
-    // fs.writeFileSync(p + elementsFileName, elements);
 }
 
 export const formatComponents = (
-    element: ElementEntry,
+    elements: ElementEntry[],
+    segmentId: string,
     decimalSeparator?: string
-): any => {
-    const result: { [key: string]: string } = {};
-    result['tag'] = element.id;
-    element.components.forEach((component) => {
-        if (component.value) {
-            if (decimalSeparator) {
-                // If decimal seperator is defined replace instances
-                result[component.name] = component.value.replace(
-                    decimalSeparator,
-                    '.'
-                );
-            } else {
-                result[component.name] = component.value;
+): { [key: string]: any } => {
+    const result: { [key: string]: any } = {};
+    result['tag'] = segmentId;
+    elements.forEach((element) => {
+        element.components.forEach((component) => {
+            if (component.value) {
+                if (element.components.length <= 1) {
+                    result[element.name] = component.value;
+                    return;
+                } else {
+                    if (!result[element.name]) {
+                        result[element.name] = {};
+                    }
+                    if (typeof result[element.name] === 'object') {
+                        if (decimalSeparator) {
+                            // If decimal seperator is defined replace instances
+                            result[element.name][component.name] =
+                                component.value.replace(decimalSeparator, '.');
+                        } else {
+                            result[element.name][component.name] =
+                                component.value;
+                        }
+                    }
+                }
             }
-        }
+        });
     });
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     return Object(result);
 };
 
@@ -329,7 +337,7 @@ export function storeAllDefaultSpecs(version: string, location: string): void {
         structParser
             .loadTypeSpec()
             .then((result: EdifactMessageSpecification) => {
-                persist(result, location);
+                persist(result, location, false, true);
             })
             .then(() => {
                 console.log(

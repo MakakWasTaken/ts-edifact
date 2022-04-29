@@ -136,13 +136,11 @@ export class UNECEMessageStructureParser implements MessageStructureParser {
         return data;
     }
 
-    protected formatComponentName(
-        component?: Component
-    ): Component | undefined {
-        if (!component || component.value === '') {
+    protected formatComponentName(name?: string): string | undefined {
+        if (!name || name === '') {
             return undefined;
         }
-        const formattedName: string = component.name.replace(/\/|&|,|-/g, ' ');
+        const formattedName: string = name.replace(/\/|&|,|-/g, ' ');
         const split = formattedName.split(' ');
         if (split.length > 0) {
             const formattedNames = split.map(
@@ -153,10 +151,9 @@ export class UNECEMessageStructureParser implements MessageStructureParser {
                 formattedNames[0].toLowerCase() +
                 formattedNames.slice(1).join('');
 
-            return { ...component, name: result };
-        } else {
-            return component;
+            return result;
         }
+        return undefined;
     }
 
     protected async parseSegmentDefinitionPage(
@@ -210,15 +207,21 @@ export class UNECEMessageStructureParser implements MessageStructureParser {
                     // const repetition: number | undefined = isDefined(arr[6]) ? parseInt(arr[6]) : undefined;
                     const elementDef: string | undefined =
                         arr[7] === '' ? undefined : arr[7];
-                    const component = elementDef
-                        ? this.formatComponentName({
-                              name: arr[4]?.trim(),
-                              format: elementDef
-                          })
-                        : undefined;
+                    const componentName = this.formatComponentName(
+                        arr[4]?.trim()
+                    );
+
+                    const component: Component | undefined =
+                        componentName && elementDef
+                            ? {
+                                  name: componentName,
+                                  format: elementDef
+                              }
+                            : undefined;
 
                     const eleEntry: ElementEntry = {
                         id,
+                        name: componentName || '',
                         requires: 0,
                         components: []
                     };

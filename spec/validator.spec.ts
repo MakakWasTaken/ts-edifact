@@ -42,6 +42,7 @@ describe('Validator', () => {
                 elements: [
                     {
                         id: 'A000',
+                        name: 'something',
                         requires: 1,
                         components: [
                             { format: 'a3', name: 'something1' },
@@ -51,6 +52,7 @@ describe('Validator', () => {
                     },
                     {
                         id: 'A001',
+                        name: 'something1',
                         requires: 1,
                         components: [{ format: 'a3', name: 'something1' }]
                     }
@@ -90,6 +92,7 @@ describe('Validator', () => {
                 elements: [
                     {
                         id: 'A000',
+                        name: 'something',
                         requires: 1,
                         components: [
                             { format: 'a3', name: 'something1' },
@@ -99,6 +102,7 @@ describe('Validator', () => {
                     },
                     {
                         id: 'A001',
+                        name: 'something1',
                         requires: 1,
                         components: [{ format: 'a3', name: 'something1' }]
                     }
@@ -113,6 +117,7 @@ describe('Validator', () => {
             const dict = [
                 {
                     id: 'A000',
+                    name: 'something',
                     requires: 1,
                     components: [{ format: 'a3', name: 'something1' }]
                 }
@@ -133,6 +138,7 @@ describe('Validator', () => {
             const dict = [
                 {
                     id: 'A000',
+                    name: 'something',
                     requires: 1,
                     components: [{ format: 'a3', name: 'something1' }]
                 }
@@ -157,6 +163,7 @@ describe('Validator', () => {
             const dict = [
                 {
                     id: 'A001',
+                    name: 'something',
                     requires: 0,
                     components: [
                         { format: 'a3', name: 'something1' },
@@ -190,6 +197,7 @@ describe('Validator', () => {
                 elements: [
                     {
                         id: 'S001',
+                        name: 'syntaxIdentifier',
                         requires: 2,
                         components: [
                             { format: 'a4', name: 'syntaxIdentifier' },
@@ -203,6 +211,7 @@ describe('Validator', () => {
                     },
                     {
                         id: 'S002',
+                        name: 'interchangeSender',
                         requires: 1,
                         components: [
                             {
@@ -225,6 +234,7 @@ describe('Validator', () => {
                     },
                     {
                         id: 'S003',
+                        name: 'interchangeRecipient',
                         requires: 1,
                         components: [
                             {
@@ -247,6 +257,7 @@ describe('Validator', () => {
                     },
                     {
                         id: 'S004',
+                        name: 'dateAndTimeOfPreparation',
                         requires: 2,
                         components: [
                             { format: 'n..8', name: 'date' },
@@ -255,6 +266,7 @@ describe('Validator', () => {
                     },
                     {
                         id: '0020',
+                        name: 'interchangeControlReference',
                         requires: 1,
                         components: [
                             {
@@ -265,6 +277,7 @@ describe('Validator', () => {
                     },
                     {
                         id: 'S005',
+                        name: 'recipientReferencePasswordDetails',
                         requires: 1,
                         components: [
                             {
@@ -279,6 +292,7 @@ describe('Validator', () => {
                     },
                     {
                         id: '0026',
+                        name: 'applicationReference',
                         requires: 0,
                         components: [
                             { format: 'an..14', name: 'applicationReference' }
@@ -286,6 +300,7 @@ describe('Validator', () => {
                     },
                     {
                         id: '0029',
+                        name: 'processingPriorityCode',
                         requires: 0,
                         components: [
                             { format: 'a1', name: 'processingPriorityCode' }
@@ -293,6 +308,7 @@ describe('Validator', () => {
                     },
                     {
                         id: '0031',
+                        name: 'acknowledgementRequest',
                         requires: 0,
                         components: [
                             { format: 'n1', name: 'acknowledgementRequest' }
@@ -300,6 +316,7 @@ describe('Validator', () => {
                     },
                     {
                         id: '0032',
+                        name: 'interchangeAgreementIdentifier',
                         requires: 0,
                         components: [
                             {
@@ -310,6 +327,7 @@ describe('Validator', () => {
                     },
                     {
                         id: '0035',
+                        name: 'testIndicator',
                         requires: 0,
                         components: [{ format: 'n1', name: 'testIndicator' }]
                     }
@@ -440,6 +458,7 @@ describe('Validator', () => {
                     elements: [
                         {
                             id: 'A000',
+                            name: 'something',
                             requires: 1,
                             components: [
                                 { format: 'a3', name: 'something1' },
@@ -449,6 +468,7 @@ describe('Validator', () => {
                         },
                         {
                             id: 'A001',
+                            name: 'something1',
                             requires: 1,
                             components: [{ format: 'a3', name: 'something1' }]
                         }
@@ -479,6 +499,7 @@ describe('Validator', () => {
                     elements: [
                         {
                             id: 'A000',
+                            name: 'something',
                             requires: 1,
                             components: [
                                 { format: 'a3', name: 'something1' },
@@ -488,6 +509,7 @@ describe('Validator', () => {
                         },
                         {
                             id: 'A001',
+                            name: 'something1',
                             requires: 1,
                             components: [{ format: 'a3', name: 'something1' }]
                         }
@@ -498,6 +520,7 @@ describe('Validator', () => {
                     new Dictionary<ElementEntry>();
                 elements.add('A001', {
                     id: 'A001',
+                    name: 'something',
                     requires: 1,
                     components: [{ format: 'a3', name: 'something1' }]
                 });

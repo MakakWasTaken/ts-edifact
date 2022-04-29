@@ -27,6 +27,8 @@ import {
     EdifactMessageSpecification
 } from '../src/edi/messageStructureParser';
 import { persist } from '../src/util';
+import { LineItem, MonetaryAmount, PriceDetails, Quantity } from '../src';
+import { ItemDescription } from '../src/edifact';
 
 let document = '';
 document += "UNB+UNOA:1+005435656:1+006415160:1+060515:1434+00000000000778'";
@@ -107,23 +109,28 @@ parseDocument(document)
                 let total: number | undefined = 0;
                 for (const itemData of entry.data) {
                     if (!(itemData instanceof Group)) {
-                        if (itemData instanceof LineItem) {
+                        let item:
+                            | ItemDescription
+                            | Quantity
+                            | LineItem
+                            | undefined;
+                        if ((item = itemData as LineItem)) {
                             articleNumber =
-                                itemData?.itemNumberIdentification
-                                    ?.itemIdentifier;
-                        } else if (itemData instanceof ItemDescription) {
-                            name = itemData?.itemDescription?.itemDescription;
-                        } else if (itemData instanceof Quantity) {
-                            qty = itemData.quantityDetails.quantity;
+                                item.itemNumberIdentification?.itemIdentifier;
+                        } else if ((item = itemData as ItemDescription)) {
+                            name = item.itemDescription?.itemDescription;
+                        } else if ((item = itemData as Quantity)) {
+                            qty = item.quantityDetails.quantity;
                         }
                     } else {
                         for (const subGroupItem of itemData.data) {
-                            if (subGroupItem instanceof PriceDetails) {
-                                price =
-                                    subGroupItem?.priceInformation?.priceAmount;
-                            } else if (subGroupItem instanceof MonetaryAmount) {
-                                total =
-                                    subGroupItem.monetaryAmount?.monetaryAmount;
+                            let item: PriceDetails | MonetaryAmount | undefined;
+                            if ((item = subGroupItem as PriceDetails)) {
+                                price = item.priceInformation?.priceAmount;
+                            } else if (
+                                (item = subGroupItem as MonetaryAmount)
+                            ) {
+                                total = item.monetaryAmount?.monetaryAmount;
                             }
                         }
                     }

@@ -72,6 +72,7 @@ export type SegmentEntry = {
 };
 export type ElementEntry = {
     id: string;
+    name: string;
     requires: number;
     components: Component[];
 };

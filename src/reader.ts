@@ -37,6 +37,20 @@ export type ResultType = {
     elements: ElementEntry[];
 };
 
+export type Result = {
+    name: string;
+    elements: ResultElement[];
+};
+
+export type ResultElement = {
+    name: string;
+    components: ResultComponents;
+};
+
+export type ResultComponents = {
+    [key: string]: string | undefined;
+};
+
 /**
  * The `Reader` class is included for backwards compatibility. It translates an
  * UN/EDIFACT document to an array of segments. Each segment has a `name` and
@@ -47,7 +61,7 @@ export type ResultType = {
 export class Reader {
     private result: ResultType[];
     private elements: ElementEntry[];
-    private element: ElementEntry;
+    private element: ElementEntry | undefined;
 
     private validator: Validator;
     private parser: Parser;
@@ -73,11 +87,6 @@ export class Reader {
         this.elements = [];
         let elements: ElementEntry[] = this.elements;
 
-        this.element = {
-            components: [],
-            id: '',
-            requires: 0
-        } as ElementEntry;
         // Holds the temporary element components.
         let componentIndex = 0;
 
@@ -89,34 +98,43 @@ export class Reader {
         ): void => {
             elements = [];
             result.push({ name: segment, elements: elements });
+            // Set the currently active segments
             activeSegment = segmentEntry
                 ? { id: segment, segmentEntry: segmentEntry }
                 : null;
         };
         this.parser.onElement = (element: ElementEntry | undefined): void => {
-            if (element) {
+            if (this.element) {
                 elements.push(this.element); // Add the previous element
-                this.element = element;
-                componentIndex = 0;
             }
+            // Set values for next component
+            this.element = element;
+            componentIndex = 0;
         };
         this.parser.onComponent = (value: string): void => {
             if (activeSegment?.id === 'UNB' && !this.unbCharsetDefined) {
                 this.parser.updateCharset(value);
                 this.unbCharsetDefined = true;
             }
-            // Replace first value with correct item
-            this.element.components[componentIndex].value = value;
-            componentIndex++;
+            // Replace value at index with correct one
+            if (this.element) {
+                this.element.components[componentIndex].value = value;
+                componentIndex++;
+            }
         };
         this.parser.onCloseSegment = (): void => {
             if (isDefined(activeSegment)) {
+                if (this.element) {
+                    // Add the final element, when a segment ends (Prevents the final element from missing)
+                    elements.push(this.element);
+                }
                 // Update the respective segment and element definitions once we know the exact version
                 // of the document
                 if (activeSegment.id === 'UNH') {
-                    const filteredComponents = this.element.components.filter(
-                        (component) => Boolean(component.value)
-                    );
+                    const filteredComponents =
+                        this.element?.components.filter((component) =>
+                            Boolean(component.value)
+                        ) || [];
                     const messageType: string = filteredComponents[0]!.value!;
                     const messageVersion: string =
                         filteredComponents[1]!.value!;
