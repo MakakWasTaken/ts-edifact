@@ -87,21 +87,15 @@ export function toSegmentObject(
         case 'DTM':
             return formattedComponents as DateTimePeriod;
         case 'EFI':
-            return formattedComponents[
-                data.name
-            ] as ExternalFileLinkIdentification;
+            return formattedComponents as ExternalFileLinkIdentification;
         case 'EQA':
             return formattedComponents as AttachedEquipment;
         case 'EQD':
             return formattedComponents as EquipmentDetails;
         case 'ERC':
-            return formattedComponents[
-                data.name
-            ] as ApplicationErrorInformation;
+            return formattedComponents as ApplicationErrorInformation;
         case 'FII':
-            return formattedComponents[
-                data.name
-            ] as FinancialInstitutionInformation;
+            return formattedComponents as FinancialInstitutionInformation;
         case 'FTX':
             return formattedComponents as FreeText;
         case 'GEI':
@@ -131,15 +125,11 @@ export function toSegmentObject(
         case 'MEA':
             return formattedComponents as Measurements;
         case 'MKS':
-            return formattedComponents[
-                data.name
-            ] as MarketSalesChannelInformation;
+            return formattedComponents as MarketSalesChannelInformation;
         case 'MOA':
             return formattedComponents as MonetaryAmount;
         case 'MTD':
-            return formattedComponents[
-                data.name
-            ] as MaintenanceOperationDetails;
+            return formattedComponents as MaintenanceOperationDetails;
         case 'NAD':
             return formattedComponents as NameAndAddress;
         case 'PAC':
@@ -169,9 +159,7 @@ export function toSegmentObject(
         case 'RFF':
             return formattedComponents as Reference;
         case 'RJL':
-            return formattedComponents[
-                data.name
-            ] as AccountingJournalIdentification;
+            return formattedComponents as AccountingJournalIdentification;
         case 'RNG':
             return formattedComponents as RangeDetails;
         case 'RTE':
@@ -209,9 +197,7 @@ export function toSegmentObject(
                 lversion === 'd11b' ||
                 lversion === 'd11a'
             ) {
-                return formattedComponents[
-                    data.name
-                ] as TransportInformationD11a;
+                return formattedComponents as TransportInformationD11a;
             } else if (
                 version === 'd10b' ||
                 version === 'd10a' ||
@@ -232,9 +218,7 @@ export function toSegmentObject(
                 lversion === 'd02b' ||
                 lversion === 'd02a'
             ) {
-                return formattedComponents[
-                    data.name
-                ] as TransportInformationD02b;
+                return formattedComponents as TransportInformationD02b;
             } else {
                 return formattedComponents as DetailsOfTransport;
             }
@@ -243,9 +227,7 @@ export function toSegmentObject(
         case 'TOD':
             return formattedComponents as TermsOfDeliveryOrTransport;
         case 'TSR':
-            return formattedComponents[
-                data.name
-            ] as TransportServiceRequirements;
+            return formattedComponents as TransportServiceRequirements;
         case 'UNH':
             return formattedComponents as MessageHeader;
         case 'UNS':
