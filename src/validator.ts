@@ -389,7 +389,10 @@ export class ValidatorImpl implements Validator {
                     throw this.errors.missingElementStart(currentElement?.id);
                 }
                 if (typeof this.element === 'string') {
-                    throw new Error('Element is a string ' + currentElement.id);
+                    throw new Error(
+                        'Element is a string ' + currentElement?.id ||
+                            this.element
+                    );
                 }
 
                 // Retrieve a component definition if validation is set to all
