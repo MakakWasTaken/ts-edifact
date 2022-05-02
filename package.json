@@ -1,17 +1,21 @@
 {
     "name": "@makakwastaken/ts-edifact",
     "description": "Edifact parser library",
-    "version": "0.0.15",
+    "version": "0.0.16",
+    "private": false,
     "type": "commonjs",
     "main": "lib/index.js",
     "types": "lib/index.d.ts",
+    "publishConfig": {
+        "access": "public",
+        "registry": "https://registry.npmjs.org/"
+    },
     "keywords": [
         "edi",
         "edifact",
         "parser"
     ],
     "publisher": "Roman Vottner",
-    "preview": true,
     "readme": "README.md",
     "author": {
         "name": "Roman Vottner"
@@ -23,7 +27,7 @@
     "homepage": "https://github.com/MakakWasTaken/ts-edifact/README.md",
     "bugs": {
         "url": "https://github.com/MakakWasTaken/ts-edifact/-/issues",
-        "email": "rovo@gmx.at"
+        "email": "markus@unknown-studios.com"
     },
     "contributors": [
         {

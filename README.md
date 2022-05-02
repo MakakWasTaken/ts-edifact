@@ -1,9 +1,15 @@
 # ts-edifact
 
-[![view on npm](https://img.shields.io/npm/v/ts-edifact.svg)](https://www.npmjs.org/package/ts-edifact)
-[![npm module downloads per month](https://img.shields.io/npm/dm/ts-edifact.svg)](https://www.npmjs.org/package/ts-edifact)
+[![view on npm](https://img.shields.io/npm/v/@makakwastaken/ts-edifact.svg)](https://www.npmjs.org/package/@makakwastaken/ts-edifact)
+[![npm module downloads per month](https://img.shields.io/npm/dm/@makakwastaken/ts-edifact.svg)](https://www.npmjs.org/package/@makakwastaken/ts-edifact)
 
-`ts-edifact` is an _Edifact_ parsing library written in typescript. This implementation was initially based on[node-edifact](https://github.com/tdecaluwe/node-edifact) but has changed a bit since the start of the project. It now is able to build a full object tree based on the general message structure defined in the Edifact documentation and update the tokenizer with the the appropriate charset, which was defined in the `UNB` segment.
+## Credit
+
+This repository is a fork of RovoMe's version of node-edifact:
+
+-   [ts-edifact](https://github.com/RovoMe/ts-edifact)
+
+`ts-edifact` is an _Edifact_ parsing library written in typescript. This implementation was initially based on [node-edifact](https://github.com/tdecaluwe/node-edifact) but has changed a bit since the start of the project. It now is able to build a full object tree based on the general message structure defined in the Edifact documentation and update the tokenizer with the the appropriate charset, which was defined in the `UNB` segment.
 
 By default `ts-edifact` ships with a selection of `D:01B` message structure definitions as well as their respective segment and element definition files. For convenience a parser was added recently to generate such definitions from the [UNECE](https://www.unece.org/) Web page. Plans to generate these definition files from the [Edifact Directory](https://www.unece.org/tradewelcome/un-centre-for-trade-facilitation-and-e-business-uncefact/outputs/standards/unedifact/directories/download.html) exist, though due to time limitations this feature wasn't added yet.
 
@@ -17,7 +23,7 @@ Currently supported functionality:
 -   Parsing and checking standard UN/EDIFACT messages with segment tables.
 -   Support for envelopes.
 -   Check for well-formed Edifact documents according to the defined message type, version and revision within the `UNH` message header.
--   Generation of Edifact specification definition files (i.e. `D01B_INVOIC.struct.json`, `D01B_INVOIC.segments.json`) obtained from the UNECE page directly.
+-   Generation of Edifact specification definition files (i.e. `D01B_INVOIC.struct.json` and `D01B_INVOIC.segments.json`) obtained from the UNECE page directly.
 -   On using the `Reader` class, updating the charset according to the one specified in the `UNB` segment of the interchange is supported.
 
 ## Current status
@@ -28,13 +34,11 @@ We switched from `ts-edifact` to a currently proprietary Java-based implementati
 -   Charsets ([v3](https://www.gefeg.com/jswg/cl/v3/21a/cl1.htm), [v4](https://www.gefeg.com/jswg/cl/v4x/40219/cl1.htm)) in `UNB` segments are not correctly supported which can lead to issues for `UNOX` and `UNOY` encodings that may utilize up to 4 bytes per character
 -   Code-list values are not parsed and therefore not included in the validation process
 -   Objects generated for the object tree do not respect the specifications in different Edifact directories
--   `segments.ts` and `elements.ts` only support basic service segments (`UNB`, `UNH`, ...), that are more or less mixing things of different syntax versions, but are missing a lot of [others](https://www.gefeg.com/jswg/v3/se/sl1.htm), especially ones defined in [syntax version 4](https://www.gefeg.com/jswg/v4x/se/sl1.htm)
+-   `segments.ts` and `elements.ts` only support basic
 -   Parsing and validation should be decoupled
 -   More configuration options are needed
 -   More sample files are needed, especially ones with uncommon charsets
--   Better mechanism for loading message structure, segments and element definition tables needed to reduce the size of this artifact and to load definitions only when really needed. Any help from more experienced JS/TS developers is more than appreciated here on how such a mechanism may look like
-
-Changing these things, unfortunately, takes a bit time of which I'm currently not having that much of. I try to port the necessary changes to this project as soon as possible, but my schedule for the upcoming months looks pretty exhausting TBH.
+-   Better mechanism for loading message structure, segments and element definition tables needed to reduce the size of this artifact and to load definitions only when really needed. Any help from more experienced JS/TS developers is more than appreciated here on how such a mechanism may look like.
 
 ## Usage
 
@@ -100,16 +104,14 @@ const result: ResultType[] = reader.parse(document);
 or if a custom set of segment- and element definitions should be used
 
 ```typescript
-import { Reader, ResultType, Dictionary, SegmentEntry, ElementEntry } from "ts-edifact";
+import { Reader, ResultType, Dictionary, SegmentEntry } from "ts-edifact";
 
 import * as segmentsData from ".../segments.json";
-import * as elementsData from ".../elements.json";
 
 const document: string = ...;
 const specDir: string = ...;
 
 const segments: Dictionary<SegmentEntry> = new Dictionary<SegmentEntry>(segmentsData);
-const elements: Dictionary<ElementEntry> = new Dictionary<ElmentEntry>(elementsData);
 
 const reader: Reader = new Reader(specDir);
 reader.define(segments);
@@ -123,8 +125,16 @@ const result: ResultType[] = reader.parse(document);
 
 The module can be installled through:
 
+### NPM
+
 ```shell
-npm install ts-edifact
+npm install @makakwastaken/ts-edifact
+```
+
+### Yarn
+
+```shell
+yarn add @makakwastaken/ts-edifact
 ```
 
 Keep in mind that this is an ES6 library. It currently can be used with node 4.0 or higher.
@@ -147,9 +157,23 @@ Definitions can be provided to describe the structure of segments and elements. 
 ```json
 {
     "BGM": {
-        "requires": 0,
-        "elements": ["C002", "C106", "1225", "4343"]
-    }
+      "requires": 5,
+      "elements": [
+          {
+              "id": "S001",
+              "name": "syntaxIdentifier",
+              "requires": 2,
+              "components": [
+                  { "format": "a4", "name": "syntaxIdentifier" },
+                  { "format": "n1", "name": "syntaxVersionNumber" },
+                  {
+                      "format": "an..6",
+                      "name": "serviceCodeListDirectoryVersionNumber"
+                  },
+                  { "format": "an..3", "name": "characterEncodingCoded" }
+              ]
+          }
+      ]
 }
 ```
 

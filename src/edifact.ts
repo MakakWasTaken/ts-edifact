@@ -253,7 +253,7 @@ export function toSegmentObject(
         case 'UNT':
             return formattedComponents as MessageTrailer;
         default:
-            throw new Error(`Unsupported segment: ${data.name}`);
+            return formattedComponents as Segment;
     }
 }
 
