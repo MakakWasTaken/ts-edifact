@@ -26,7 +26,7 @@ import {
     EdifactMessageSpecification,
     ParsingResultType
 } from '../src/edi/messageStructureParser';
-import { Dictionary, SegmentEntry } from '../src/validator';
+import { Dictionary, ElementEntry, SegmentEntry } from '../src/validator';
 import { MessageType } from '../src/tracker';
 import { findElement } from '../src/util';
 
@@ -324,7 +324,9 @@ describe('MessageStructureParser', () => {
                     const segments: Dictionary<SegmentEntry> =
                         response.segmentTable;
                     expect(
-                        segments.get('DTM')!.elements.map((e) => e.id)
+                        segments
+                            .get('DTM')!
+                            .elements.map((e: ElementEntry) => e.id)
                     ).toEqual(jasmine.arrayContaining([]));
                     expect(segments.get('DTM')?.requires).toEqual(0);
                     // will also skip element assignment as this should already

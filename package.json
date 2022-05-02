@@ -1,7 +1,7 @@
 {
-    "name": "ts-edifact",
+    "name": "@makakwastaken/ts-edifact",
     "description": "Edifact parser library",
-    "version": "0.0.14",
+    "version": "0.0.15",
     "type": "commonjs",
     "main": "lib/index.js",
     "types": "lib/index.d.ts",
@@ -18,30 +18,30 @@
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/RovoMe/ts-edifact.git"
+        "url": "https://github.com/MakakWasTaken/ts-edifact.git"
     },
-    "homepage": "https://github.com/RovoMe/ts-edifact/README.md",
+    "homepage": "https://github.com/MakakWasTaken/ts-edifact/README.md",
     "bugs": {
-        "url": "https://github.com/RovoMe/ts-edifact/-/issues",
+        "url": "https://github.com/MakakWasTaken/ts-edifact/-/issues",
         "email": "rovo@gmx.at"
     },
+    "contributors": [
+        {
+            "name": "Markus Moltke",
+            "email": "markus@unknown-studios.com",
+            "url": "https://unknown-studios.com"
+        }
+    ],
     "scripts": {
         "clean": "rm -rf ./lib ./dist",
-        "lint": "eslint ./src --ext .ts,.tsx",
-        "build": "tsc -p .",
-        "build:watch": "tsc -p . --watch",
+        "lint": "eslint ./src --fix --ext .ts,.tsx",
+        "build": "tsc -b",
         "check": "npm run check:tsc",
         "check:tsc": "tsc -p . --noEmit",
         "pretest": "npm run lint && npm run build",
         "test": "jasmine-ts --config=spec/support/jasmine.json",
         "coverage": "nyc -r lcov -e .ts -x \"*.spec.ts\" jasmine-ts JASMINE_CONFIG_PATH=spec/support/jasmine.json",
-        "prepackage-dev": "npm run test && webpack --mode development",
-        "prepackage": "npm run test && webpack --mode production",
-        "prepare": "npm run build",
-        "prepublishOnly": "npm test && npm run lint",
-        "preversion": "npm run lint",
-        "version": "git add -A src",
-        "postversion": "git push && git push -- tags"
+        "prepublishOnly": "yarn build"
     },
     "devDependencies": {
         "@initics/tsm": "^1.0.2",
@@ -52,14 +52,11 @@
         "@typescript-eslint/eslint-plugin": "^4.30.0",
         "@typescript-eslint/parser": "^4.30.0",
         "domhandler": "^5.0.2",
-        "edifact": "^1.2.8",
         "eslint": "^7.32.0",
         "eslint-plugin-import": "^2.22.0",
         "eslint-plugin-jsdoc": "^39.2.1",
         "events": "^3.1.0",
         "glob-parent": "^6.0.1",
-        "htmlparser2": "^7.2.0",
-        "inspect-brk": "^0.1.2",
         "jasmine": "^3.5.0",
         "jasmine-core": "^3.9.0",
         "jasmine-node": "^3.0.0",
@@ -70,13 +67,11 @@
         "ts-loader": "^9.2.5",
         "ts-node": "^10.2.1",
         "tsconfig-paths": "^3.9.0",
-        "typescript": "^4.4.2",
-        "underscore": "^1.13.1",
-        "webpack": "^5.52.0",
-        "webpack-cli": "^4.8.0"
+        "typescript": "^4.4.2"
     },
     "dependencies": {
-        "axios": "^0.21.1"
+        "axios": "^0.21.1",
+        "htmlparser2": "^7.2.0"
     },
     "files": [
         "lib/**/*"
