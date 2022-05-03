@@ -53,11 +53,15 @@ export class Group {
     }
 
     addSegment(segment: Segment): void {
-        this.data.push(segment);
+        if (segment) {
+            this.data.push(segment);
+        }
     }
 
     addGroup(group: Group): void {
-        this.data.push(group);
+        if (group) {
+            this.data.push(group);
+        }
     }
 
     groupCount(): number {
@@ -187,17 +191,17 @@ export class Edifact {
     constructor(elements: ElementEntry[]) {
         this.syntaxIdentifier = formatComponents(
             elements,
-            ''
+            'UNH'
         ) as SyntaxIdentifier;
-        this.sender = formatComponents(elements, '') as Participant;
-        this.receiver = formatComponents(elements, '') as Participant;
+        this.sender = formatComponents(elements, 'sender') as Participant;
+        this.receiver = formatComponents(elements, 'receiver') as Participant;
         this.date = elements[3].components[0].value!;
         this.time = elements[3].components[1].value!;
         this.interchangeNumber = elements[4].components[0].value!;
         if (elements.length >= 6) {
             this.recipientsRef = formatComponents(
                 elements,
-                ''
+                'recipientRef'
             ) as RecipientsRef;
         }
         if (elements.length >= 7) {

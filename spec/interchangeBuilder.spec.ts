@@ -359,6 +359,14 @@ describe('InterchangeBuilder', () => {
         // const message = interchangeBuilder.interchange.messages[0];
     });
 
+    it('should read singleline documents correctly', () => {
+        const document = `UNA:+.? 'UNB+UNOC:3+91100:ZZ:PRODAT+92015:ZZ+220223:2014+E220223842164++27-DDQ-PRODAT'UNH+1+APERAK:D:96A:UN:E2SE6B'BGM+++34'DTM+137:202202232014:203'DTM+178:202202232012:203'RFF+ACW:E223201218334'NAD+FR+91100:160:SVK+++++++SE'NAD+DO+92015:160:SVK+++++++SE'ERC+100::260'FTX+AAO+++OK'RFF+Z07:ANLID-10120'RFF+LI:ANLID-10120'UNT+12+1'UNZ+1+E220223842164'`;
+
+        const sut: Reader = new Reader('./src/messageSpec');
+        const results = sut.parse(document);
+        console.log(results);
+    });
+
     // it('should build D01B interchange correctly', () => {
     //     const builder: InterchangeBuilder = new InterchangeBuilder(
     //         parseResult,

@@ -28,7 +28,7 @@ import {
 
 import { SegmentTableBuilder } from './segments';
 import { Separators } from './edi/separators';
-import { isDefined } from './util';
+import { findElement, isDefined } from './util';
 import { Cache } from './cache';
 import { Configuration } from './configuration';
 
@@ -131,15 +131,13 @@ export class Reader {
                 // Update the respective segment and element definitions once we know the exact version
                 // of the document
                 if (activeSegment.id === 'UNH') {
-                    const filteredComponents =
-                        this.element?.components.filter((component) =>
-                            Boolean(component.value)
-                        ) || [];
-                    const messageType: string = filteredComponents[0]!.value!;
-                    const messageVersion: string =
-                        filteredComponents[1]!.value!;
-                    const messageRelease: string =
-                        filteredComponents[2]!.value!;
+                    const messageIdentifier = findElement(
+                        elements,
+                        'S009'
+                    )!.components;
+                    const messageType: string = messageIdentifier[0]!.value!;
+                    const messageVersion: string = messageIdentifier[1]!.value!;
+                    const messageRelease: string = messageIdentifier[2]!.value!;
 
                     const key: string =
                         messageVersion + messageRelease + '_' + messageType;
