@@ -6,6 +6,7 @@
     "type": "commonjs",
     "main": "lib/index.js",
     "types": "lib/index.d.ts",
+    "license": "MIT",
     "publishConfig": {
         "access": "public",
         "registry": "https://registry.npmjs.org/"
