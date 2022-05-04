@@ -155,7 +155,7 @@ export class Message {
 
 export interface SyntaxIdentifier {
     syntaxIdentifer: string;
-    version: string;
+    syntaxVersionNumber: string;
     serviceCodeListDirectoryVersionNumber: string | undefined;
     charEncoding: string | undefined;
 }
@@ -191,7 +191,7 @@ export class Edifact {
     constructor(elements: ElementEntry[]) {
         const formattedElements = formatComponents(elements, 'UNH');
         this.syntaxIdentifier =
-            formattedElements.syntaxIdentifer as SyntaxIdentifier;
+            formattedElements.syntaxIdentifier as SyntaxIdentifier;
         this.sender = formattedElements.interchangeSender as Participant;
         this.receiver = formattedElements.interchangeRecipient as Participant;
         // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
