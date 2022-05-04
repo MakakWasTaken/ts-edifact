@@ -189,38 +189,39 @@ export class Edifact {
     messages: Message[] = [];
 
     constructor(elements: ElementEntry[]) {
-        this.syntaxIdentifier = formatComponents(
-            elements,
-            'UNH'
-        ) as SyntaxIdentifier;
-        this.sender = formatComponents(elements, 'sender') as Participant;
-        this.receiver = formatComponents(elements, 'receiver') as Participant;
-        this.date = elements[3].components[0].value!;
-        this.time = elements[3].components[1].value!;
+        const formattedElements = formatComponents(elements, 'UNH');
+        this.syntaxIdentifier =
+            formattedElements.syntaxIdentifer as SyntaxIdentifier;
+        this.sender = formattedElements.interchangeSender as Participant;
+        this.receiver = formattedElements.interchangeRecipient as Participant;
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+        this.date = formattedElements.dateAndTimeOfPreparation.date as string;
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+        this.time = formattedElements.dateAndTimeOfPreparation.time as string;
         this.interchangeNumber = elements[4].components[0].value!;
         if (elements.length >= 6) {
-            this.recipientsRef = formatComponents(
-                elements,
-                'recipientRef'
-            ) as RecipientsRef;
+            this.recipientsRef =
+                formattedElements.interchangeControlReference as RecipientsRef;
         }
         if (elements.length >= 7) {
-            this.applicationRef = elements[6].components?.[0]?.value;
+            this.applicationRef =
+                formattedElements.applicationReference as string;
         }
         if (elements.length >= 8) {
-            this.processingPriorityCode = elements[7].components?.[0]?.value;
+            this.processingPriorityCode =
+                formattedElements.processingPriorityCode as string;
         }
         if (elements.length >= 9) {
             this.ackRequest = parseInt(
-                elements[8].components?.[0]?.value || ''
+                formattedElements.acknowledgementRequested || ''
             );
         }
         if (elements.length >= 10) {
-            this.agreementId = elements[9].components?.[0]?.value;
+            this.agreementId = formattedElements.agreementIdentifier as string;
         }
         if (elements.length === 11) {
             this.testIndicator = parseInt(
-                elements[10].components?.[0]?.value || ''
+                formattedElements.testIndicator || ''
             );
         } else {
             this.testIndicator = 0;

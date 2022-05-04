@@ -364,7 +364,12 @@ describe('InterchangeBuilder', () => {
 
         const sut: Reader = new Reader('./src/messageSpec');
         const results = sut.parse(document);
-        console.log(results);
+        const interchange = new InterchangeBuilder(
+            results,
+            sut.separators,
+            './src/messageSpec'
+        ).interchange;
+        console.log(interchange);
     });
 
     // it('should build D01B interchange correctly', () => {
