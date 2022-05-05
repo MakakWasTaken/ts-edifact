@@ -195,9 +195,13 @@ export class Edifact {
         this.sender = formattedElements.interchangeSender as Participant;
         this.receiver = formattedElements.interchangeRecipient as Participant;
         // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-        this.date = formattedElements.dateAndTimeOfPreparation.date as string;
+        this.date = formattedElements.dateAndTimeOfPreparation?.date as
+            | string
+            | '';
         // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-        this.time = formattedElements.dateAndTimeOfPreparation.time as string;
+        this.time = formattedElements.dateAndTimeOfPreparation?.time as
+            | string
+            | '';
         this.interchangeNumber = elements[4].components[0].value!;
         if (elements.length >= 6) {
             this.recipientsRef =

@@ -256,7 +256,6 @@ export class Parser extends EventEmitter {
                             this.state = States.DATA;
                             break;
                         default:
-                            console.log(chunk);
                             throw this.errors.invalidCharacter(
                                 chunk.charAt(index),
                                 index

@@ -23,7 +23,8 @@ import {
     Dictionary,
     SegmentEntry,
     ValidatorImpl,
-    ElementEntry
+    ElementEntry,
+    Component
 } from './validator';
 
 import { SegmentTableBuilder } from './segments';
@@ -81,34 +82,41 @@ export class Reader {
         this.parser = new Parser(config);
         this.validator = config.validator;
 
+        // Holds the results
         this.result = [];
-        const result: ResultType[] = this.result;
 
+        // Holds the elements
         this.elements = [];
-        let elements: ElementEntry[] = this.elements;
+        let components: Component[] = [];
 
         // Holds the temporary element components.
         let componentIndex = 0;
 
         let activeSegment: { id: string; segmentEntry: SegmentEntry } | null;
 
+        // When a new segment is opened, reset all things element and set the current segment
         this.parser.onOpenSegment = (
             segment: string,
             segmentEntry: SegmentEntry | undefined
         ): void => {
-            elements = [];
-            result.push({ name: segment, elements: elements });
+            this.elements = [];
+            this.element = undefined;
             // Set the currently active segments
             activeSegment = segmentEntry
                 ? { id: segment, segmentEntry: segmentEntry }
                 : null;
         };
-        this.parser.onElement = (element: ElementEntry | undefined): void => {
+        this.parser.onElement = (
+            newElement: ElementEntry | undefined
+        ): void => {
+            // Add the previous element
             if (this.element) {
-                elements.push(this.element); // Add the previous element
+                this.elements.push({ ...this.element, components });
             }
-            // Set values for next component
-            this.element = element;
+            // Set the current element
+            this.element = newElement;
+            // Reset component values
+            components = [];
             componentIndex = 0;
         };
         this.parser.onComponent = (value: string): void => {
@@ -118,7 +126,8 @@ export class Reader {
             }
             // Replace value at index with correct one
             if (this.element) {
-                this.element.components[componentIndex].value = value;
+                const component = this.element.components[componentIndex];
+                components.push({ ...component, value });
                 componentIndex++;
             }
         };
@@ -126,13 +135,13 @@ export class Reader {
             if (isDefined(activeSegment)) {
                 if (this.element) {
                     // Add the final element, when a segment ends (Prevents the final element from missing)
-                    elements.push(this.element);
+                    this.elements.push({ ...this.element, components });
                 }
                 // Update the respective segment and element definitions once we know the exact version
                 // of the document
                 if (activeSegment.id === 'UNH') {
                     const messageIdentifier = findElement(
-                        elements,
+                        this.elements,
                         'S009'
                     )!.components;
                     const messageType: string = messageIdentifier[0]!.value!;
@@ -170,8 +179,12 @@ export class Reader {
                         this.definitionCache.insert(key, segmentTable);
                     }
                 }
+                // Add the current elements to the results array
+                this.result.push({
+                    name: activeSegment.id,
+                    elements: this.elements
+                });
                 activeSegment = null;
-                this.element = undefined;
             }
         };
 
@@ -209,6 +222,8 @@ export class Reader {
 
     parse(document: string): ResultType[] {
         this.initializeIfNeeded();
+
+        this.result = [];
 
         this.parser.write(document);
         this.parser.end();
