@@ -369,7 +369,7 @@ describe('InterchangeBuilder', () => {
             sut.separators,
             './src/messageSpec'
         ).interchange;
-        console.log(interchange);
+        console.log(interchange.messages[0]);
     });
 
     // it('should build D01B interchange correctly', () => {

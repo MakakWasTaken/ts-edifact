@@ -171,6 +171,7 @@ export class Reader {
                     }
                 }
                 activeSegment = null;
+                this.element = undefined;
             }
         };
 
