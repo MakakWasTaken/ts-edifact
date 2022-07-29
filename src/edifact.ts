@@ -363,8 +363,8 @@ interface MessageIdentification {
 export interface BeginOfMessage {
     tag: string;
 
-    messageName: MessageName | undefined;
-    messageIdentification: MessageIdentification | undefined;
+    documentMessageName: MessageName | undefined;
+    documentMessageIdentification: string | undefined;
     messageFunctionCode: string | undefined;
     responseTypeCode: string | undefined;
     documentStatusCode: string | undefined;
@@ -643,7 +643,7 @@ export interface DateTimePeriod {
     tag: string;
 
     dateTimeOrPeriodFunctionCodeQualifier: string;
-    dateTimeOrPeriodText: string | undefined;
+    dateTimeOrPeriodValue: string | undefined;
     dateTimeOrPeriodFormatCode: string | undefined;
 }
 
