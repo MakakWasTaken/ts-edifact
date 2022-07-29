@@ -642,9 +642,9 @@ export interface MessageDetails {
 export interface DateTimePeriod {
     tag: string;
 
-    dateTimeOrPeriodFunctionCodeQualifier: string;
-    dateTimeOrPeriodValue: string | undefined;
-    dateTimeOrPeriodFormatCode: string | undefined;
+    dateOrTimeOrPeriodFunctionCodeQualifier: string;
+    dateOrTimeOrPeriodValue: string | undefined;
+    dateOrTimeOrPeriodFormatCode: string | undefined;
 }
 
 // EFI
