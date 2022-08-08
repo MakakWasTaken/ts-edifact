@@ -1393,10 +1393,12 @@ export interface RequirementsAndConditions {
 export interface Reference {
     tag: string;
 
-    referenceCodeQualifier: string;
-    referenceIdentifier: string | undefined;
+    reference: {
+        referenceCodeQualifier: string;
+        referenceIdentifier: string | undefined;
+        referenceVersionIdentifier: string | undefined;
+    };
     documentLineIdentifier: string | undefined;
-    referenceVersionIdentifier: string | undefined;
     revisionIdentifier: string | undefined;
 }
 
