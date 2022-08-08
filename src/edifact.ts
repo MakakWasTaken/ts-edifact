@@ -427,7 +427,7 @@ export interface CharacteristicinterfaceID {
     tag: string;
 
     interfaceTypeCode: string | undefined;
-    measurementDetails: MeasurementDetails | undefined;
+    measurementDetails: string | undefined;
     characteristicDescription: CharacteristicDescription | undefined;
     characteristicRelevanceCode: string | undefined;
 }
