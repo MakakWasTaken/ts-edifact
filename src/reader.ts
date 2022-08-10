@@ -75,9 +75,9 @@ export class Reader {
 
     separators: Separators;
 
-    constructor(messageSpecDir?: string) {
+    constructor(messageSpecDir?: string, throwOnMissingDefinitions = false) {
         const config: Configuration = new Configuration({
-            validator: new ValidatorImpl()
+            validator: new ValidatorImpl(throwOnMissingDefinitions)
         });
         this.parser = new Parser(config);
         this.validator = config.validator;
