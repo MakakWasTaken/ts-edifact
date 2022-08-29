@@ -131,7 +131,8 @@ class UNOB extends Charset {
         ['\u0041', '\u005A'], // A-Z
         ['\u0025', '\u002F'], // % & ' ( ) * + , - . /
         ['\u003A', '\u003F'], // : ; < = > ?
-        ['\u0061', '\u007A'] // a-z
+        ['\u0061', '\u007A'], // a-z
+        ['\u005E', '\u005F'] // ^ _
     ];
 
     constructor(config: Configuration) {

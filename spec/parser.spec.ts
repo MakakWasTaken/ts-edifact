@@ -74,6 +74,26 @@ describe('Parser', () => {
             );
         });
 
+        it('should allow _ in default messages (UNOB)', () => {
+            const config: Configuration = new Configuration({
+                charset: 'UNOB'
+            });
+            const parser1: Parser = new Parser(config);
+            parser1.write("UNA+:.? '");
+            expect(() => parser1.write("SEG:+:1_1'")).not.toThrow();
+            expect(() => parser1.end()).not.toThrow();
+        });
+
+        it('should allow _ in default messages (UNOC)', () => {
+            const config: Configuration = new Configuration({
+                charset: 'UNOC'
+            });
+            const parser1: Parser = new Parser(config);
+            parser1.write("UNA+:.? '");
+            expect(() => parser1.write("SEG:+:1_1'")).not.toThrow();
+            expect(() => parser1.end()).not.toThrow();
+        });
+
         it('should accept a valid UNA header', () => {
             expect(() => parser.write("UNA:+.? '")).not.toThrow();
             expect(() => parser.end()).not.toThrow();

@@ -258,6 +258,7 @@ export class Parser extends EventEmitter {
                         default:
                             throw this.errors.invalidCharacter(
                                 chunk.charAt(index),
+                                chunk.charCodeAt(index),
                                 index
                             );
                     }
@@ -271,9 +272,13 @@ export class Parser extends EventEmitter {
         incompleteMessage: function (): Error {
             return new Error('Cannot close an incomplete message');
         },
-        invalidCharacter: function (character: string, index: number): Error {
+        invalidCharacter: function (
+            character: string,
+            charCode: number,
+            index: number
+        ): Error {
             return new Error(
-                `Invalid character '${character}' at position ${index}`
+                `Invalid character '${character}' at position ${index} (${charCode})`
             );
         },
         invalidControlAfterSegment: function (
