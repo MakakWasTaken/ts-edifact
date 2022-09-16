@@ -128,7 +128,7 @@ export class UNECEStructurePageParser extends UNECEPageParser {
                         }
 
                         stack[index].push(group);
-                        stack.push(group.content as []);
+                        stack.push(group?.content as []);
                         index++;
 
                         // reset section assignment after first segment group

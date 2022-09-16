@@ -100,11 +100,11 @@ export class Tracker {
         let probe = 0;
 
         while (
-            segment !== current.content() ||
+            segment !== current?.content() ||
             current.count === current.repetition()
         ) {
             if (
-                Array.isArray(current.content()) &&
+                Array.isArray(current?.content()) &&
                 current.count < current.repetition()
             ) {
                 // Enter the subgroup.
@@ -114,7 +114,7 @@ export class Tracker {
                 }
 
                 current.count++;
-                current = new Pointer(current.content() as MessageType[], 0);
+                current = new Pointer(current?.content() as MessageType[], 0);
                 this.stack.push(current);
             } else {
                 // Check if we are omitting mandatory content
@@ -124,7 +124,7 @@ export class Tracker {
                         // name of the segment stored in it's content property
                         throw new Error(
                             `A mandatory segment ${
-                                current.content() as string
+                                current?.content() as string
                             } is missing`
                         );
                     } else {
@@ -153,7 +153,7 @@ export class Tracker {
                         optionals = [this.stack.length];
                         current.count++;
                         current = new Pointer(
-                            current.content() as MessageType[],
+                            current?.content() as MessageType[],
                             0
                         );
                         this.stack.push(current);

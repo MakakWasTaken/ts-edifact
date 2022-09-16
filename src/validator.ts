@@ -463,14 +463,14 @@ export class ValidatorImpl implements Validator {
                     if (length < this.minimum) {
                         throw this.errors.invalidData(
                             this.element,
-                            `'${buffer.content()}' length is less than minimum length ${
+                            `'${buffer?.content()}' length is less than minimum length ${
                                 this.minimum
                             }`
                         );
                     } else if (length > this.maximum) {
                         throw this.errors.invalidData(
                             this.element,
-                            `'${buffer.content()}' exceeds maximum length ${
+                            `'${buffer?.content()}' exceeds maximum length ${
                                 this.maximum
                             }`
                         );
