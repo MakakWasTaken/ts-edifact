@@ -18,11 +18,9 @@
  * limitations under the License.
  */
 
-import { ResultType } from './reader';
-import { MessageType, Pointer } from './tracker';
 import * as fs from 'fs';
-import { MessageHeader, Segment, toSegmentObject } from './edifact';
 import { Separators } from './edi/separators';
+import { MessageHeader, Segment, toSegmentObject } from './edifact';
 import {
     APERAK,
     AUTHOR,
@@ -39,8 +37,10 @@ import {
     TAXCON,
     VATDEC
 } from './index';
-import { ElementEntry } from './validator';
+import { ResultType } from './reader';
+import { MessageType, Pointer } from './tracker';
 import { formatComponents } from './util';
+import { ElementEntry } from './validator';
 
 export class Group {
     name: string;
@@ -217,7 +217,7 @@ export class Edifact {
         }
         if (elements.length >= 9) {
             this.ackRequest = parseInt(
-                formattedElements.acknowledgementRequested || ''
+                (formattedElements.acknowledgementRequested as string) || ''
             );
         }
         if (elements.length >= 10) {
@@ -225,7 +225,7 @@ export class Edifact {
         }
         if (elements.length === 11) {
             this.testIndicator = parseInt(
-                formattedElements.testIndicator || ''
+                (formattedElements.testIndicator as string) || ''
             );
         } else {
             this.testIndicator = 0;

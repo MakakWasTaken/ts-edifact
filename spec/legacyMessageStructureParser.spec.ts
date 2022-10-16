@@ -23,11 +23,10 @@
 
 import { readFileSync } from 'fs';
 import { join } from 'path';
-
 import { UNECELegacyMessageStructureParser } from '../src/edi/legacyMessageStructureParser';
 import {
-    EdifactMessageSpecificationImpl,
-    EdifactMessageSpecification
+    EdifactMessageSpecification,
+    EdifactMessageSpecificationImpl
 } from '../src/edi/messageStructureParser';
 import { MessageType } from '../src/tracker';
 import { findElement } from '../src/util';
