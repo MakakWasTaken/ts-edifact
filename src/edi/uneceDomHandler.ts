@@ -16,11 +16,11 @@
  * limitations under the License.
  */
 
-import { DomHandler, DomHandlerOptions } from 'htmlparser2';
-import { Node, Element } from 'htmlparser2/node_modules/domhandler';
+import { DomHandler, DomHandlerOptions } from 'htmlparser2'
+import { Element, Node } from 'htmlparser2/node_modules/domhandler'
 
-type Callback = (error: Error | null, dom: Node[]) => void;
-type ElementCallback = (element: Element) => void;
+type Callback = (error: Error | null, dom: Node[]) => void
+type ElementCallback = (element: Element) => void
 
 /**
  * Customization of the `DomHandler` class to allow for extending the behavior
@@ -39,60 +39,60 @@ type ElementCallback = (element: Element) => void;
  * after the parent methods got called.
  */
 export abstract class UNECEDomHandler extends DomHandler {
-    constructor(
-        callback?: Callback | null,
-        options?: DomHandlerOptions | null,
-        elementCB?: ElementCallback
-    ) {
-        super(callback, options, elementCB);
-    }
+  constructor(
+    callback?: Callback | null,
+    options?: DomHandlerOptions | null,
+    elementCB?: ElementCallback,
+  ) {
+    super(callback, options, elementCB)
+  }
 
-    /**
-     * Do not use this method. Please use {@link onText} instead.
-     *
-     * This method just ensures that the parent method is executed before an
-     * overriden version of {@link onText}
-     *
-     * @internal
-     */
-    override ontext(data: string): void {
-        super.ontext(data);
-        this.onText(data);
-    }
+  /**
+   * Do not use this method. Please use {@link onText} instead.
+   *
+   * This method just ensures that the parent method is executed before an
+   * overriden version of {@link onText}
+   *
+   * @internal
+   */
+  override ontext(data: string): void {
+    super.ontext(data)
+    this.onText(data)
+  }
 
-    /**
-     * Indicates that the handler is currently processing a text node of the
-     * HTML document. The actual content of the text node is present in the
-     * given `data` object passed to this method.
-     *
-     * @param data The content of the text node
-     */
-    public abstract onText(data: string): void;
+  /**
+   * Indicates that the handler is currently processing a text node of the
+   * HTML document. The actual content of the text node is present in the
+   * given `data` object passed to this method.
+   *
+   * @param data The content of the text node
+   */
+  public abstract onText(data: string): void
 
-    /**
-     * Do not use this method. Please use {@link onOpenTag} instead.
-     *
-     * This method just ensures that the parent method is executed before an
-     * overriden version of {@link onOpenTag}
-     *
-     * @internal
-     */
-    override onopentag(name: string, attribs: { [key: string]: string }): void {
-        super.onopentag(name, attribs);
-        this.onOpenTag(name, attribs);
-    }
+  /**
+   * Do not use this method. Please use {@link onOpenTag} instead.
+   *
+   * This method just ensures that the parent method is executed before an
+   * overriden version of {@link onOpenTag}
+   *
+   * @internal
+   */
+  override onopentag(name: string, attribs: { [key: string]: string }): void {
+    super.onopentag(name, attribs)
+    this.onOpenTag(name, attribs)
+  }
 
-    /**
-     * Indicates that the hander is currently processing a HTML tag that
-     * contains further data. The open tag is identified by the given `name`
-     * argument. If the tag has any attributes, these will be available in the
-     * `attribs` argument.
-     *
-     * @param name The name of the opening tag found
-     * @param attribs Any attributes attached to this tag
-     */
-    public abstract onOpenTag(
-        name: string,
-        attribs: { [key: string]: string }
-    ): void;
+  /**
+   * Indicates that the hander is currently processing a HTML tag that
+   * contains further data. The open tag is identified by the given `name`
+   * argument. If the tag has any attributes, these will be available in the
+   * `attribs` argument.
+   *
+   * @param name The name of the opening tag found
+   * @param attribs Any attributes attached to this tag
+   */
+  public abstract onOpenTag(
+    name: string,
+    attribs: { [key: string]: string },
+  ): void
 }

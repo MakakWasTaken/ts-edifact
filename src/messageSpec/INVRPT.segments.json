@@ -1,1 +1,1009 @@
-{"DTM":{"requires":1,"elements":[{"id":"C507","name":"dateTimePeriod","requires":1,"components":[{"name":"dateOrTimeOrPeriodFunctionCodeQualifier","format":"an..3"},{"name":"dateOrTimeOrPeriodValue","format":"an..35"},{"name":"dateOrTimeOrPeriodFormatCode","format":"an..3"}]}]},"CTA":{"requires":0,"elements":[{"id":"3139","name":"contactFunctionCode","requires":0,"components":[{"name":"contactFunctionCode","format":"an..3"}]},{"id":"C056","name":"departmentOrEmployeeDetails","requires":0,"components":[{"name":"departmentOrEmployeeNameCode","format":"an..17"},{"name":"departmentOrEmployeeName","format":"an..35"}]}]},"GIR":{"requires":2,"elements":[{"id":"7297","name":"setTypeCodeQualifier","requires":1,"components":[{"name":"setTypeCodeQualifier","format":"an..3"}]},{"id":"C206","name":"identificationNumber","requires":1,"components":[{"name":"objectIdentifier","format":"an..35"},{"name":"objectIdentificationCodeQualifier","format":"an..3"},{"name":"statusDescriptionCode","format":"an..3"}]},{"id":"C206","name":"identificationNumber","requires":1,"components":[{"name":"objectIdentifier","format":"an..35"},{"name":"objectIdentificationCodeQualifier","format":"an..3"},{"name":"statusDescriptionCode","format":"an..3"}]},{"id":"C206","name":"identificationNumber","requires":1,"components":[{"name":"objectIdentifier","format":"an..35"},{"name":"objectIdentificationCodeQualifier","format":"an..3"},{"name":"statusDescriptionCode","format":"an..3"}]},{"id":"C206","name":"identificationNumber","requires":1,"components":[{"name":"objectIdentifier","format":"an..35"},{"name":"objectIdentificationCodeQualifier","format":"an..3"},{"name":"statusDescriptionCode","format":"an..3"}]},{"id":"C206","name":"identificationNumber","requires":1,"components":[{"name":"objectIdentifier","format":"an..35"},{"name":"objectIdentificationCodeQualifier","format":"an..3"},{"name":"statusDescriptionCode","format":"an..3"}]}]},"FTX":{"requires":1,"elements":[{"id":"4451","name":"textSubjectCodeQualifier","requires":1,"components":[{"name":"textSubjectCodeQualifier","format":"an..3"}]},{"id":"4453","name":"freeTextFunctionCode","requires":0,"components":[{"name":"freeTextFunctionCode","format":"an..3"}]},{"id":"C107","name":"textReference","requires":1,"components":[{"name":"freeTextValueCode","format":"an..17"},{"name":"codeListIdentificationCode","format":"an..17"},{"name":"codeListResponsibleAgencyCode","format":"an..3"}]},{"id":"C108","name":"textLiteral","requires":1,"components":[{"name":"freeTextValue","format":"an..512"},{"name":"freeTextValue","format":"an..512"},{"name":"freeTextValue","format":"an..512"},{"name":"freeTextValue","format":"an..512"},{"name":"freeTextValue","format":"an..512"}]},{"id":"3453","name":"languageNameCode","requires":0,"components":[{"name":"languageNameCode","format":"an..3"}]},{"id":"4447","name":"freeTextFormatCode","requires":0,"components":[{"name":"freeTextFormatCode","format":"an..3"}]}]},"RFF":{"requires":1,"elements":[{"id":"C506","name":"reference","requires":1,"components":[{"name":"referenceCodeQualifier","format":"an..3"},{"name":"referenceIdentifier","format":"an..70"},{"name":"documentLineIdentifier","format":"an..6"},{"name":"referenceVersionIdentifier","format":"an..35"},{"name":"revisionIdentifier","format":"an..6"}]}]},"QTY":{"requires":1,"elements":[{"id":"C186","name":"quantityDetails","requires":2,"components":[{"name":"quantityTypeCodeQualifier","format":"an..3"},{"name":"quantity","format":"an..35"},{"name":"measurementUnitCode","format":"an..3"}]}]},"BGM":{"requires":0,"elements":[{"id":"C002","name":"documentMessageName","requires":0,"components":[{"name":"documentNameCode","format":"an..3"},{"name":"codeListIdentificationCode","format":"an..17"},{"name":"codeListResponsibleAgencyCode","format":"an..3"},{"name":"documentName","format":"an..35"}]},{"id":"C106","name":"documentMessageIdentification","requires":0,"components":[{"name":"documentIdentifier","format":"an..35"},{"name":"versionIdentifier","format":"an..9"},{"name":"revisionIdentifier","format":"an..6"}]},{"id":"1225","name":"messageFunctionCode","requires":0,"components":[{"name":"messageFunctionCode","format":"an..3"}]},{"id":"4343","name":"responseTypeCode","requires":0,"components":[{"name":"responseTypeCode","format":"an..3"}]}]},"PAC":{"requires":0,"elements":[{"id":"7224","name":"packageQuantity","requires":0,"components":[{"name":"packageQuantity","format":"n..8"}]},{"id":"C531","name":"packagingDetails","requires":0,"components":[{"name":"packagingLevelCode","format":"an..3"},{"name":"packagingRelatedDescriptionCode","format":"an..3"},{"name":"packagingTermsAndConditionsCode","format":"an..3"}]},{"id":"C202","name":"packageType","requires":0,"components":[{"name":"packageTypeDescriptionCode","format":"an..17"},{"name":"codeListIdentificationCode","format":"an..17"},{"name":"codeListResponsibleAgencyCode","format":"an..3"},{"name":"typeOfPackages","format":"an..35"}]},{"id":"C402","name":"packageTypeIdentification","requires":2,"components":[{"name":"descriptionFormatCode","format":"an..3"},{"name":"typeOfPackages","format":"an..35"},{"name":"itemTypeIdentificationCode","format":"an..3"},{"name":"typeOfPackages","format":"an..35"},{"name":"itemTypeIdentificationCode","format":"an..3"}]},{"id":"C532","name":"returnablePackageDetails","requires":0,"components":[{"name":"returnablePackageFreightPaymentResponsibilityCode","format":"an..3"},{"name":"returnablePackageLoadContentsCode","format":"an..3"}]}]},"CUX":{"requires":0,"elements":[{"id":"C504","name":"currencyDetails","requires":1,"components":[{"name":"currencyUsageCodeQualifier","format":"an..3"},{"name":"currencyIdentificationCode","format":"an..3"},{"name":"currencyTypeCodeQualifier","format":"an..3"},{"name":"currencyRateValue","format":"n..4"}]},{"id":"C504","name":"currencyDetails","requires":1,"components":[{"name":"currencyUsageCodeQualifier","format":"an..3"},{"name":"currencyIdentificationCode","format":"an..3"},{"name":"currencyTypeCodeQualifier","format":"an..3"},{"name":"currencyRateValue","format":"n..4"}]},{"id":"5402","name":"currencyExchangeRate","requires":0,"components":[{"name":"currencyExchangeRate","format":"n..12"}]},{"id":"6341","name":"exchangeRateCurrencyMarketIdentifier","requires":0,"components":[{"name":"exchangeRateCurrencyMarketIdentifier","format":"an..3"}]}]},"NAD":{"requires":1,"elements":[{"id":"3035","name":"partyFunctionCodeQualifier","requires":1,"components":[{"name":"partyFunctionCodeQualifier","format":"an..3"}]},{"id":"C082","name":"partyIdentificationDetails","requires":1,"components":[{"name":"partyIdentifier","format":"an..35"},{"name":"codeListIdentificationCode","format":"an..17"},{"name":"codeListResponsibleAgencyCode","format":"an..3"}]},{"id":"C058","name":"nameAndAddress","requires":1,"components":[{"name":"nameAndAddressDescription","format":"an..35"},{"name":"nameAndAddressDescription","format":"an..35"},{"name":"nameAndAddressDescription","format":"an..35"},{"name":"nameAndAddressDescription","format":"an..35"},{"name":"nameAndAddressDescription","format":"an..35"}]},{"id":"C080","name":"partyName","requires":1,"components":[{"name":"partyName","format":"an..35"},{"name":"partyName","format":"an..35"},{"name":"partyName","format":"an..35"},{"name":"partyName","format":"an..35"},{"name":"partyName","format":"an..35"},{"name":"partyNameFormatCode","format":"an..3"}]},{"id":"C059","name":"street","requires":1,"components":[{"name":"streetAndNumberOrPostOfficeBoxIdentifier","format":"an..35"},{"name":"streetAndNumberOrPostOfficeBoxIdentifier","format":"an..35"},{"name":"streetAndNumberOrPostOfficeBoxIdentifier","format":"an..35"},{"name":"streetAndNumberOrPostOfficeBoxIdentifier","format":"an..35"}]},{"id":"3164","name":"cityName","requires":0,"components":[{"name":"cityName","format":"an..35"}]},{"id":"C819","name":"countrySubEntityDetails","requires":0,"components":[{"name":"countrySubEntityNameCode","format":"an..9"},{"name":"codeListIdentificationCode","format":"an..17"},{"name":"codeListResponsibleAgencyCode","format":"an..3"},{"name":"countrySubEntityName","format":"an..70"}]},{"id":"3251","name":"postalIdentificationCode","requires":0,"components":[{"name":"postalIdentificationCode","format":"an..17"}]},{"id":"3207","name":"countryNameCode","requires":0,"components":[{"name":"countryNameCode","format":"an..3"}]}]},"CPS":{"requires":1,"elements":[{"id":"7164","name":"hierarchicalStructureLevelIdentifier","requires":1,"components":[{"name":"hierarchicalStructureLevelIdentifier","format":"an..35"}]},{"id":"7166","name":"hierarchicalStructureParentIdentifier","requires":0,"components":[{"name":"hierarchicalStructureParentIdentifier","format":"an..35"}]},{"id":"7075","name":"packagingLevelCode","requires":0,"components":[{"name":"packagingLevelCode","format":"an..3"}]}]},"GIN":{"requires":2,"elements":[{"id":"7405","name":"objectIdentificationCodeQualifier","requires":1,"components":[{"name":"objectIdentificationCodeQualifier","format":"an..3"}]},{"id":"C208","name":"identityNumberRange","requires":1,"components":[{"name":"objectIdentifier","format":"an..35"},{"name":"objectIdentifier","format":"an..35"}]},{"id":"C208","name":"identityNumberRange","requires":1,"components":[{"name":"objectIdentifier","format":"an..35"},{"name":"objectIdentifier","format":"an..35"}]},{"id":"C208","name":"identityNumberRange","requires":1,"components":[{"name":"objectIdentifier","format":"an..35"},{"name":"objectIdentifier","format":"an..35"}]},{"id":"C208","name":"identityNumberRange","requires":1,"components":[{"name":"objectIdentifier","format":"an..35"},{"name":"objectIdentifier","format":"an..35"}]},{"id":"C208","name":"identityNumberRange","requires":1,"components":[{"name":"objectIdentifier","format":"an..35"},{"name":"objectIdentifier","format":"an..35"}]}]},"PCI":{"requires":0,"elements":[{"id":"4233","name":"markingInstructionsCode","requires":0,"components":[{"name":"markingInstructionsCode","format":"an..3"}]},{"id":"C210","name":"marksLabels","requires":1,"components":[{"name":"shippingMarksDescription","format":"an..35"},{"name":"shippingMarksDescription","format":"an..35"},{"name":"shippingMarksDescription","format":"an..35"},{"name":"shippingMarksDescription","format":"an..35"},{"name":"shippingMarksDescription","format":"an..35"},{"name":"shippingMarksDescription","format":"an..35"},{"name":"shippingMarksDescription","format":"an..35"},{"name":"shippingMarksDescription","format":"an..35"},{"name":"shippingMarksDescription","format":"an..35"},{"name":"shippingMarksDescription","format":"an..35"}]},{"id":"8275","name":"containerOrPackageContentsIndicatorCode","requires":0,"components":[{"name":"containerOrPackageContentsIndicatorCode","format":"an..3"}]},{"id":"C827","name":"typeOfMarking","requires":1,"components":[{"name":"markingTypeCode","format":"an..3"},{"name":"codeListIdentificationCode","format":"an..17"},{"name":"codeListResponsibleAgencyCode","format":"an..3"}]}]},"ALI":{"requires":0,"elements":[{"id":"3239","name":"countryOfOriginNameCode","requires":0,"components":[{"name":"countryOfOriginNameCode","format":"an..3"}]},{"id":"9213","name":"dutyRegimeTypeCode","requires":0,"components":[{"name":"dutyRegimeTypeCode","format":"an..3"}]},{"id":"4183","name":"specialConditionCode","requires":0,"components":[{"name":"specialConditionCode","format":"an..3"}]}]},"INV":{"requires":0,"elements":[{"id":"4501","name":"inventoryMovementDirectionCode","requires":0,"components":[{"name":"inventoryMovementDirectionCode","format":"an..3"}]},{"id":"7491","name":"inventoryTypeCode","requires":0,"components":[{"name":"inventoryTypeCode","format":"an..3"}]},{"id":"4499","name":"inventoryMovementReasonCode","requires":0,"components":[{"name":"inventoryMovementReasonCode","format":"an..3"}]},{"id":"4503","name":"inventoryBalanceMethodCode","requires":0,"components":[{"name":"inventoryBalanceMethodCode","format":"an..3"}]},{"id":"C522","name":"instruction","requires":1,"components":[{"name":"instructionTypeCodeQualifier","format":"an..3"},{"name":"instructionDescriptionCode","format":"an..3"},{"name":"codeListIdentificationCode","format":"an..17"},{"name":"codeListResponsibleAgencyCode","format":"an..3"},{"name":"instructionDescription","format":"an..35"}]}]},"MEA":{"requires":1,"elements":[{"id":"6311","name":"measurementPurposeCodeQualifier","requires":1,"components":[{"name":"measurementPurposeCodeQualifier","format":"an..3"}]},{"id":"C502","name":"measurementDetails","requires":0,"components":[{"name":"measuredAttributeCode","format":"an..3"},{"name":"measurementSignificanceCode","format":"an..3"},{"name":"nonDiscreteMeasurementNameCode","format":"an..17"},{"name":"nonDiscreteMeasurementName","format":"an..70"}]},{"id":"C174","name":"valueRange","requires":1,"components":[{"name":"measurementUnitCode","format":"an..3"},{"name":"measurementValue","format":"an..18"},{"name":"rangeMinimumValue","format":"n..18"},{"name":"rangeMaximumValue","format":"n..18"},{"name":"significantDigitsQuantity","format":"n..2"}]},{"id":"7383","name":"surfaceOrLayerCode","requires":0,"components":[{"name":"surfaceOrLayerCode","format":"an..3"}]}]},"PIA":{"requires":2,"elements":[{"id":"4347","name":"productIdentifierCodeQualifier","requires":1,"components":[{"name":"productIdentifierCodeQualifier","format":"an..3"}]},{"id":"C212","name":"itemNumberIdentification","requires":0,"components":[{"name":"itemIdentifier","format":"an..35"},{"name":"itemTypeIdentificationCode","format":"an..3"},{"name":"codeListIdentificationCode","format":"an..17"},{"name":"codeListResponsibleAgencyCode","format":"an..3"}]},{"id":"C212","name":"itemNumberIdentification","requires":0,"components":[{"name":"itemIdentifier","format":"an..35"},{"name":"itemTypeIdentificationCode","format":"an..3"},{"name":"codeListIdentificationCode","format":"an..17"},{"name":"codeListResponsibleAgencyCode","format":"an..3"}]},{"id":"C212","name":"itemNumberIdentification","requires":0,"components":[{"name":"itemIdentifier","format":"an..35"},{"name":"itemTypeIdentificationCode","format":"an..3"},{"name":"codeListIdentificationCode","format":"an..17"},{"name":"codeListResponsibleAgencyCode","format":"an..3"}]},{"id":"C212","name":"itemNumberIdentification","requires":0,"components":[{"name":"itemIdentifier","format":"an..35"},{"name":"itemTypeIdentificationCode","format":"an..3"},{"name":"codeListIdentificationCode","format":"an..17"},{"name":"codeListResponsibleAgencyCode","format":"an..3"}]},{"id":"C212","name":"itemNumberIdentification","requires":0,"components":[{"name":"itemIdentifier","format":"an..35"},{"name":"itemTypeIdentificationCode","format":"an..3"},{"name":"codeListIdentificationCode","format":"an..17"},{"name":"codeListResponsibleAgencyCode","format":"an..3"}]}]},"LOC":{"requires":1,"elements":[{"id":"3227","name":"locationFunctionCodeQualifier","requires":1,"components":[{"name":"locationFunctionCodeQualifier","format":"an..3"}]},{"id":"C517","name":"locationIdentification","requires":0,"components":[{"name":"locationNameCode","format":"an..25"},{"name":"codeListIdentificationCode","format":"an..17"},{"name":"codeListResponsibleAgencyCode","format":"an..3"},{"name":"locationName","format":"an..256"}]},{"id":"C519","name":"relatedLocationOneIdentification","requires":0,"components":[{"name":"firstRelatedLocationNameCode","format":"an..25"},{"name":"codeListIdentificationCode","format":"an..17"},{"name":"codeListResponsibleAgencyCode","format":"an..3"},{"name":"firstRelatedLocationName","format":"an..70"}]},{"id":"C553","name":"relatedLocationTwoIdentification","requires":0,"components":[{"name":"secondRelatedLocationNameCode","format":"an..25"},{"name":"codeListIdentificationCode","format":"an..17"},{"name":"codeListResponsibleAgencyCode","format":"an..3"},{"name":"secondRelatedLocationName","format":"an..70"}]},{"id":"5479","name":"relationCode","requires":0,"components":[{"name":"relationCode","format":"an..3"}]}]},"LIN":{"requires":0,"elements":[{"id":"1082","name":"lineItemIdentifier","requires":0,"components":[{"name":"lineItemIdentifier","format":"an..6"}]},{"id":"1229","name":"actionRequestNotificationDescriptionCode","requires":0,"components":[{"name":"actionRequestNotificationDescriptionCode","format":"an..3"}]},{"id":"C212","name":"itemNumberIdentification","requires":0,"components":[{"name":"itemIdentifier","format":"an..35"},{"name":"itemTypeIdentificationCode","format":"an..3"},{"name":"codeListIdentificationCode","format":"an..17"},{"name":"codeListResponsibleAgencyCode","format":"an..3"}]},{"id":"C829","name":"subLineInformation","requires":0,"components":[{"name":"subLineIndicatorCode","format":"an..3"},{"name":"lineItemIdentifier","format":"an..6"}]},{"id":"1222","name":"configurationLevelNumber","requires":0,"components":[{"name":"configurationLevelNumber","format":"n..2"}]},{"id":"7083","name":"configurationOperationCode","requires":0,"components":[{"name":"configurationOperationCode","format":"an..3"}]}]},"STS":{"requires":0,"elements":[{"id":"C601","name":"statusCategory","requires":1,"components":[{"name":"statusCategoryCode","format":"an..3"},{"name":"codeListIdentificationCode","format":"an..17"},{"name":"codeListResponsibleAgencyCode","format":"an..3"}]},{"id":"C555","name":"status","requires":1,"components":[{"name":"statusDescriptionCode","format":"an..3"},{"name":"codeListIdentificationCode","format":"an..17"},{"name":"codeListResponsibleAgencyCode","format":"an..3"},{"name":"statusDescription","format":"an..35"}]},{"id":"C556","name":"statusReason","requires":1,"components":[{"name":"statusReasonDescriptionCode","format":"an..3"},{"name":"codeListIdentificationCode","format":"an..17"},{"name":"codeListResponsibleAgencyCode","format":"an..3"},{"name":"statusReasonDescription","format":"an..256"}]},{"id":"C556","name":"statusReason","requires":1,"components":[{"name":"statusReasonDescriptionCode","format":"an..3"},{"name":"codeListIdentificationCode","format":"an..17"},{"name":"codeListResponsibleAgencyCode","format":"an..3"},{"name":"statusReasonDescription","format":"an..256"}]},{"id":"C556","name":"statusReason","requires":1,"components":[{"name":"statusReasonDescriptionCode","format":"an..3"},{"name":"codeListIdentificationCode","format":"an..17"},{"name":"codeListResponsibleAgencyCode","format":"an..3"},{"name":"statusReasonDescription","format":"an..256"}]},{"id":"C556","name":"statusReason","requires":1,"components":[{"name":"statusReasonDescriptionCode","format":"an..3"},{"name":"codeListIdentificationCode","format":"an..17"},{"name":"codeListResponsibleAgencyCode","format":"an..3"},{"name":"statusReasonDescription","format":"an..256"}]},{"id":"C556","name":"statusReason","requires":1,"components":[{"name":"statusReasonDescriptionCode","format":"an..3"},{"name":"codeListIdentificationCode","format":"an..17"},{"name":"codeListResponsibleAgencyCode","format":"an..3"},{"name":"statusReasonDescription","format":"an..256"}]}]},"IMD":{"requires":0,"elements":[{"id":"7077","name":"descriptionFormatCode","requires":0,"components":[{"name":"descriptionFormatCode","format":"an..3"}]},{"id":"C272","name":"itemCharacteristic","requires":0,"components":[{"name":"itemCharacteristicCode","format":"an..3"},{"name":"codeListIdentificationCode","format":"an..17"},{"name":"codeListResponsibleAgencyCode","format":"an..3"}]},{"id":"C273","name":"itemDescription","requires":0,"components":[{"name":"itemDescriptionCode","format":"an..17"},{"name":"codeListIdentificationCode","format":"an..17"},{"name":"codeListResponsibleAgencyCode","format":"an..3"},{"name":"itemDescription","format":"an..256"},{"name":"itemDescription","format":"an..256"},{"name":"languageNameCode","format":"an..3"}]},{"id":"7383","name":"surfaceOrLayerCode","requires":0,"components":[{"name":"surfaceOrLayerCode","format":"an..3"}]}]},"PRI":{"requires":0,"elements":[{"id":"C509","name":"priceInformation","requires":1,"components":[{"name":"priceCodeQualifier","format":"an..3"},{"name":"priceAmount","format":"n..15"},{"name":"priceTypeCode","format":"an..3"},{"name":"priceSpecificationCode","format":"an..3"},{"name":"unitPriceBasisValue","format":"n..9"},{"name":"measurementUnitCode","format":"an..3"}]},{"id":"5213","name":"subLineItemPriceChangeOperationCode","requires":0,"components":[{"name":"subLineItemPriceChangeOperationCode","format":"an..3"}]}]},"COM":{"requires":1,"elements":[{"id":"C076","name":"communicationContact","requires":2,"components":[{"name":"communicationAddressIdentifier","format":"an..512"},{"name":"communicationAddressCodeQualifier","format":"an..3"}]}]}}
+{
+  "DTM": {
+    "requires": 1,
+    "elements": [
+      {
+        "id": "C507",
+        "name": "dateTimePeriod",
+        "requires": 1,
+        "components": [
+          {
+            "name": "dateOrTimeOrPeriodFunctionCodeQualifier",
+            "format": "an..3"
+          },
+          { "name": "dateOrTimeOrPeriodValue", "format": "an..35" },
+          { "name": "dateOrTimeOrPeriodFormatCode", "format": "an..3" }
+        ]
+      }
+    ]
+  },
+  "CTA": {
+    "requires": 0,
+    "elements": [
+      {
+        "id": "3139",
+        "name": "contactFunctionCode",
+        "requires": 0,
+        "components": [{ "name": "contactFunctionCode", "format": "an..3" }]
+      },
+      {
+        "id": "C056",
+        "name": "departmentOrEmployeeDetails",
+        "requires": 0,
+        "components": [
+          { "name": "departmentOrEmployeeNameCode", "format": "an..17" },
+          { "name": "departmentOrEmployeeName", "format": "an..35" }
+        ]
+      }
+    ]
+  },
+  "GIR": {
+    "requires": 2,
+    "elements": [
+      {
+        "id": "7297",
+        "name": "setTypeCodeQualifier",
+        "requires": 1,
+        "components": [{ "name": "setTypeCodeQualifier", "format": "an..3" }]
+      },
+      {
+        "id": "C206",
+        "name": "identificationNumber",
+        "requires": 1,
+        "components": [
+          { "name": "objectIdentifier", "format": "an..35" },
+          { "name": "objectIdentificationCodeQualifier", "format": "an..3" },
+          { "name": "statusDescriptionCode", "format": "an..3" }
+        ]
+      },
+      {
+        "id": "C206",
+        "name": "identificationNumber",
+        "requires": 1,
+        "components": [
+          { "name": "objectIdentifier", "format": "an..35" },
+          { "name": "objectIdentificationCodeQualifier", "format": "an..3" },
+          { "name": "statusDescriptionCode", "format": "an..3" }
+        ]
+      },
+      {
+        "id": "C206",
+        "name": "identificationNumber",
+        "requires": 1,
+        "components": [
+          { "name": "objectIdentifier", "format": "an..35" },
+          { "name": "objectIdentificationCodeQualifier", "format": "an..3" },
+          { "name": "statusDescriptionCode", "format": "an..3" }
+        ]
+      },
+      {
+        "id": "C206",
+        "name": "identificationNumber",
+        "requires": 1,
+        "components": [
+          { "name": "objectIdentifier", "format": "an..35" },
+          { "name": "objectIdentificationCodeQualifier", "format": "an..3" },
+          { "name": "statusDescriptionCode", "format": "an..3" }
+        ]
+      },
+      {
+        "id": "C206",
+        "name": "identificationNumber",
+        "requires": 1,
+        "components": [
+          { "name": "objectIdentifier", "format": "an..35" },
+          { "name": "objectIdentificationCodeQualifier", "format": "an..3" },
+          { "name": "statusDescriptionCode", "format": "an..3" }
+        ]
+      }
+    ]
+  },
+  "FTX": {
+    "requires": 1,
+    "elements": [
+      {
+        "id": "4451",
+        "name": "textSubjectCodeQualifier",
+        "requires": 1,
+        "components": [
+          { "name": "textSubjectCodeQualifier", "format": "an..3" }
+        ]
+      },
+      {
+        "id": "4453",
+        "name": "freeTextFunctionCode",
+        "requires": 0,
+        "components": [{ "name": "freeTextFunctionCode", "format": "an..3" }]
+      },
+      {
+        "id": "C107",
+        "name": "textReference",
+        "requires": 1,
+        "components": [
+          { "name": "freeTextValueCode", "format": "an..17" },
+          { "name": "codeListIdentificationCode", "format": "an..17" },
+          { "name": "codeListResponsibleAgencyCode", "format": "an..3" }
+        ]
+      },
+      {
+        "id": "C108",
+        "name": "textLiteral",
+        "requires": 1,
+        "components": [
+          { "name": "freeTextValue", "format": "an..512" },
+          { "name": "freeTextValue", "format": "an..512" },
+          { "name": "freeTextValue", "format": "an..512" },
+          { "name": "freeTextValue", "format": "an..512" },
+          { "name": "freeTextValue", "format": "an..512" }
+        ]
+      },
+      {
+        "id": "3453",
+        "name": "languageNameCode",
+        "requires": 0,
+        "components": [{ "name": "languageNameCode", "format": "an..3" }]
+      },
+      {
+        "id": "4447",
+        "name": "freeTextFormatCode",
+        "requires": 0,
+        "components": [{ "name": "freeTextFormatCode", "format": "an..3" }]
+      }
+    ]
+  },
+  "RFF": {
+    "requires": 1,
+    "elements": [
+      {
+        "id": "C506",
+        "name": "reference",
+        "requires": 1,
+        "components": [
+          { "name": "referenceCodeQualifier", "format": "an..3" },
+          { "name": "referenceIdentifier", "format": "an..70" },
+          { "name": "documentLineIdentifier", "format": "an..6" },
+          { "name": "referenceVersionIdentifier", "format": "an..35" },
+          { "name": "revisionIdentifier", "format": "an..6" }
+        ]
+      }
+    ]
+  },
+  "QTY": {
+    "requires": 1,
+    "elements": [
+      {
+        "id": "C186",
+        "name": "quantityDetails",
+        "requires": 2,
+        "components": [
+          { "name": "quantityTypeCodeQualifier", "format": "an..3" },
+          { "name": "quantity", "format": "an..35" },
+          { "name": "measurementUnitCode", "format": "an..3" }
+        ]
+      }
+    ]
+  },
+  "BGM": {
+    "requires": 0,
+    "elements": [
+      {
+        "id": "C002",
+        "name": "documentMessageName",
+        "requires": 0,
+        "components": [
+          { "name": "documentNameCode", "format": "an..3" },
+          { "name": "codeListIdentificationCode", "format": "an..17" },
+          { "name": "codeListResponsibleAgencyCode", "format": "an..3" },
+          { "name": "documentName", "format": "an..35" }
+        ]
+      },
+      {
+        "id": "C106",
+        "name": "documentMessageIdentification",
+        "requires": 0,
+        "components": [
+          { "name": "documentIdentifier", "format": "an..35" },
+          { "name": "versionIdentifier", "format": "an..9" },
+          { "name": "revisionIdentifier", "format": "an..6" }
+        ]
+      },
+      {
+        "id": "1225",
+        "name": "messageFunctionCode",
+        "requires": 0,
+        "components": [{ "name": "messageFunctionCode", "format": "an..3" }]
+      },
+      {
+        "id": "4343",
+        "name": "responseTypeCode",
+        "requires": 0,
+        "components": [{ "name": "responseTypeCode", "format": "an..3" }]
+      }
+    ]
+  },
+  "PAC": {
+    "requires": 0,
+    "elements": [
+      {
+        "id": "7224",
+        "name": "packageQuantity",
+        "requires": 0,
+        "components": [{ "name": "packageQuantity", "format": "n..8" }]
+      },
+      {
+        "id": "C531",
+        "name": "packagingDetails",
+        "requires": 0,
+        "components": [
+          { "name": "packagingLevelCode", "format": "an..3" },
+          { "name": "packagingRelatedDescriptionCode", "format": "an..3" },
+          { "name": "packagingTermsAndConditionsCode", "format": "an..3" }
+        ]
+      },
+      {
+        "id": "C202",
+        "name": "packageType",
+        "requires": 0,
+        "components": [
+          { "name": "packageTypeDescriptionCode", "format": "an..17" },
+          { "name": "codeListIdentificationCode", "format": "an..17" },
+          { "name": "codeListResponsibleAgencyCode", "format": "an..3" },
+          { "name": "typeOfPackages", "format": "an..35" }
+        ]
+      },
+      {
+        "id": "C402",
+        "name": "packageTypeIdentification",
+        "requires": 2,
+        "components": [
+          { "name": "descriptionFormatCode", "format": "an..3" },
+          { "name": "typeOfPackages", "format": "an..35" },
+          { "name": "itemTypeIdentificationCode", "format": "an..3" },
+          { "name": "typeOfPackages", "format": "an..35" },
+          { "name": "itemTypeIdentificationCode", "format": "an..3" }
+        ]
+      },
+      {
+        "id": "C532",
+        "name": "returnablePackageDetails",
+        "requires": 0,
+        "components": [
+          {
+            "name": "returnablePackageFreightPaymentResponsibilityCode",
+            "format": "an..3"
+          },
+          { "name": "returnablePackageLoadContentsCode", "format": "an..3" }
+        ]
+      }
+    ]
+  },
+  "CUX": {
+    "requires": 0,
+    "elements": [
+      {
+        "id": "C504",
+        "name": "currencyDetails",
+        "requires": 1,
+        "components": [
+          { "name": "currencyUsageCodeQualifier", "format": "an..3" },
+          { "name": "currencyIdentificationCode", "format": "an..3" },
+          { "name": "currencyTypeCodeQualifier", "format": "an..3" },
+          { "name": "currencyRateValue", "format": "n..4" }
+        ]
+      },
+      {
+        "id": "C504",
+        "name": "currencyDetails",
+        "requires": 1,
+        "components": [
+          { "name": "currencyUsageCodeQualifier", "format": "an..3" },
+          { "name": "currencyIdentificationCode", "format": "an..3" },
+          { "name": "currencyTypeCodeQualifier", "format": "an..3" },
+          { "name": "currencyRateValue", "format": "n..4" }
+        ]
+      },
+      {
+        "id": "5402",
+        "name": "currencyExchangeRate",
+        "requires": 0,
+        "components": [{ "name": "currencyExchangeRate", "format": "n..12" }]
+      },
+      {
+        "id": "6341",
+        "name": "exchangeRateCurrencyMarketIdentifier",
+        "requires": 0,
+        "components": [
+          { "name": "exchangeRateCurrencyMarketIdentifier", "format": "an..3" }
+        ]
+      }
+    ]
+  },
+  "NAD": {
+    "requires": 1,
+    "elements": [
+      {
+        "id": "3035",
+        "name": "partyFunctionCodeQualifier",
+        "requires": 1,
+        "components": [
+          { "name": "partyFunctionCodeQualifier", "format": "an..3" }
+        ]
+      },
+      {
+        "id": "C082",
+        "name": "partyIdentificationDetails",
+        "requires": 1,
+        "components": [
+          { "name": "partyIdentifier", "format": "an..35" },
+          { "name": "codeListIdentificationCode", "format": "an..17" },
+          { "name": "codeListResponsibleAgencyCode", "format": "an..3" }
+        ]
+      },
+      {
+        "id": "C058",
+        "name": "nameAndAddress",
+        "requires": 1,
+        "components": [
+          { "name": "nameAndAddressDescription", "format": "an..35" },
+          { "name": "nameAndAddressDescription", "format": "an..35" },
+          { "name": "nameAndAddressDescription", "format": "an..35" },
+          { "name": "nameAndAddressDescription", "format": "an..35" },
+          { "name": "nameAndAddressDescription", "format": "an..35" }
+        ]
+      },
+      {
+        "id": "C080",
+        "name": "partyName",
+        "requires": 1,
+        "components": [
+          { "name": "partyName", "format": "an..35" },
+          { "name": "partyName", "format": "an..35" },
+          { "name": "partyName", "format": "an..35" },
+          { "name": "partyName", "format": "an..35" },
+          { "name": "partyName", "format": "an..35" },
+          { "name": "partyNameFormatCode", "format": "an..3" }
+        ]
+      },
+      {
+        "id": "C059",
+        "name": "street",
+        "requires": 1,
+        "components": [
+          {
+            "name": "streetAndNumberOrPostOfficeBoxIdentifier",
+            "format": "an..35"
+          },
+          {
+            "name": "streetAndNumberOrPostOfficeBoxIdentifier",
+            "format": "an..35"
+          },
+          {
+            "name": "streetAndNumberOrPostOfficeBoxIdentifier",
+            "format": "an..35"
+          },
+          {
+            "name": "streetAndNumberOrPostOfficeBoxIdentifier",
+            "format": "an..35"
+          }
+        ]
+      },
+      {
+        "id": "3164",
+        "name": "cityName",
+        "requires": 0,
+        "components": [{ "name": "cityName", "format": "an..35" }]
+      },
+      {
+        "id": "C819",
+        "name": "countrySubEntityDetails",
+        "requires": 0,
+        "components": [
+          { "name": "countrySubEntityNameCode", "format": "an..9" },
+          { "name": "codeListIdentificationCode", "format": "an..17" },
+          { "name": "codeListResponsibleAgencyCode", "format": "an..3" },
+          { "name": "countrySubEntityName", "format": "an..70" }
+        ]
+      },
+      {
+        "id": "3251",
+        "name": "postalIdentificationCode",
+        "requires": 0,
+        "components": [
+          { "name": "postalIdentificationCode", "format": "an..17" }
+        ]
+      },
+      {
+        "id": "3207",
+        "name": "countryNameCode",
+        "requires": 0,
+        "components": [{ "name": "countryNameCode", "format": "an..3" }]
+      }
+    ]
+  },
+  "CPS": {
+    "requires": 1,
+    "elements": [
+      {
+        "id": "7164",
+        "name": "hierarchicalStructureLevelIdentifier",
+        "requires": 1,
+        "components": [
+          { "name": "hierarchicalStructureLevelIdentifier", "format": "an..35" }
+        ]
+      },
+      {
+        "id": "7166",
+        "name": "hierarchicalStructureParentIdentifier",
+        "requires": 0,
+        "components": [
+          {
+            "name": "hierarchicalStructureParentIdentifier",
+            "format": "an..35"
+          }
+        ]
+      },
+      {
+        "id": "7075",
+        "name": "packagingLevelCode",
+        "requires": 0,
+        "components": [{ "name": "packagingLevelCode", "format": "an..3" }]
+      }
+    ]
+  },
+  "GIN": {
+    "requires": 2,
+    "elements": [
+      {
+        "id": "7405",
+        "name": "objectIdentificationCodeQualifier",
+        "requires": 1,
+        "components": [
+          { "name": "objectIdentificationCodeQualifier", "format": "an..3" }
+        ]
+      },
+      {
+        "id": "C208",
+        "name": "identityNumberRange",
+        "requires": 1,
+        "components": [
+          { "name": "objectIdentifier", "format": "an..35" },
+          { "name": "objectIdentifier", "format": "an..35" }
+        ]
+      },
+      {
+        "id": "C208",
+        "name": "identityNumberRange",
+        "requires": 1,
+        "components": [
+          { "name": "objectIdentifier", "format": "an..35" },
+          { "name": "objectIdentifier", "format": "an..35" }
+        ]
+      },
+      {
+        "id": "C208",
+        "name": "identityNumberRange",
+        "requires": 1,
+        "components": [
+          { "name": "objectIdentifier", "format": "an..35" },
+          { "name": "objectIdentifier", "format": "an..35" }
+        ]
+      },
+      {
+        "id": "C208",
+        "name": "identityNumberRange",
+        "requires": 1,
+        "components": [
+          { "name": "objectIdentifier", "format": "an..35" },
+          { "name": "objectIdentifier", "format": "an..35" }
+        ]
+      },
+      {
+        "id": "C208",
+        "name": "identityNumberRange",
+        "requires": 1,
+        "components": [
+          { "name": "objectIdentifier", "format": "an..35" },
+          { "name": "objectIdentifier", "format": "an..35" }
+        ]
+      }
+    ]
+  },
+  "PCI": {
+    "requires": 0,
+    "elements": [
+      {
+        "id": "4233",
+        "name": "markingInstructionsCode",
+        "requires": 0,
+        "components": [{ "name": "markingInstructionsCode", "format": "an..3" }]
+      },
+      {
+        "id": "C210",
+        "name": "marksLabels",
+        "requires": 1,
+        "components": [
+          { "name": "shippingMarksDescription", "format": "an..35" },
+          { "name": "shippingMarksDescription", "format": "an..35" },
+          { "name": "shippingMarksDescription", "format": "an..35" },
+          { "name": "shippingMarksDescription", "format": "an..35" },
+          { "name": "shippingMarksDescription", "format": "an..35" },
+          { "name": "shippingMarksDescription", "format": "an..35" },
+          { "name": "shippingMarksDescription", "format": "an..35" },
+          { "name": "shippingMarksDescription", "format": "an..35" },
+          { "name": "shippingMarksDescription", "format": "an..35" },
+          { "name": "shippingMarksDescription", "format": "an..35" }
+        ]
+      },
+      {
+        "id": "8275",
+        "name": "containerOrPackageContentsIndicatorCode",
+        "requires": 0,
+        "components": [
+          {
+            "name": "containerOrPackageContentsIndicatorCode",
+            "format": "an..3"
+          }
+        ]
+      },
+      {
+        "id": "C827",
+        "name": "typeOfMarking",
+        "requires": 1,
+        "components": [
+          { "name": "markingTypeCode", "format": "an..3" },
+          { "name": "codeListIdentificationCode", "format": "an..17" },
+          { "name": "codeListResponsibleAgencyCode", "format": "an..3" }
+        ]
+      }
+    ]
+  },
+  "ALI": {
+    "requires": 0,
+    "elements": [
+      {
+        "id": "3239",
+        "name": "countryOfOriginNameCode",
+        "requires": 0,
+        "components": [{ "name": "countryOfOriginNameCode", "format": "an..3" }]
+      },
+      {
+        "id": "9213",
+        "name": "dutyRegimeTypeCode",
+        "requires": 0,
+        "components": [{ "name": "dutyRegimeTypeCode", "format": "an..3" }]
+      },
+      {
+        "id": "4183",
+        "name": "specialConditionCode",
+        "requires": 0,
+        "components": [{ "name": "specialConditionCode", "format": "an..3" }]
+      }
+    ]
+  },
+  "INV": {
+    "requires": 0,
+    "elements": [
+      {
+        "id": "4501",
+        "name": "inventoryMovementDirectionCode",
+        "requires": 0,
+        "components": [
+          { "name": "inventoryMovementDirectionCode", "format": "an..3" }
+        ]
+      },
+      {
+        "id": "7491",
+        "name": "inventoryTypeCode",
+        "requires": 0,
+        "components": [{ "name": "inventoryTypeCode", "format": "an..3" }]
+      },
+      {
+        "id": "4499",
+        "name": "inventoryMovementReasonCode",
+        "requires": 0,
+        "components": [
+          { "name": "inventoryMovementReasonCode", "format": "an..3" }
+        ]
+      },
+      {
+        "id": "4503",
+        "name": "inventoryBalanceMethodCode",
+        "requires": 0,
+        "components": [
+          { "name": "inventoryBalanceMethodCode", "format": "an..3" }
+        ]
+      },
+      {
+        "id": "C522",
+        "name": "instruction",
+        "requires": 1,
+        "components": [
+          { "name": "instructionTypeCodeQualifier", "format": "an..3" },
+          { "name": "instructionDescriptionCode", "format": "an..3" },
+          { "name": "codeListIdentificationCode", "format": "an..17" },
+          { "name": "codeListResponsibleAgencyCode", "format": "an..3" },
+          { "name": "instructionDescription", "format": "an..35" }
+        ]
+      }
+    ]
+  },
+  "MEA": {
+    "requires": 1,
+    "elements": [
+      {
+        "id": "6311",
+        "name": "measurementPurposeCodeQualifier",
+        "requires": 1,
+        "components": [
+          { "name": "measurementPurposeCodeQualifier", "format": "an..3" }
+        ]
+      },
+      {
+        "id": "C502",
+        "name": "measurementDetails",
+        "requires": 0,
+        "components": [
+          { "name": "measuredAttributeCode", "format": "an..3" },
+          { "name": "measurementSignificanceCode", "format": "an..3" },
+          { "name": "nonDiscreteMeasurementNameCode", "format": "an..17" },
+          { "name": "nonDiscreteMeasurementName", "format": "an..70" }
+        ]
+      },
+      {
+        "id": "C174",
+        "name": "valueRange",
+        "requires": 1,
+        "components": [
+          { "name": "measurementUnitCode", "format": "an..3" },
+          { "name": "measurementValue", "format": "an..18" },
+          { "name": "rangeMinimumValue", "format": "n..18" },
+          { "name": "rangeMaximumValue", "format": "n..18" },
+          { "name": "significantDigitsQuantity", "format": "n..2" }
+        ]
+      },
+      {
+        "id": "7383",
+        "name": "surfaceOrLayerCode",
+        "requires": 0,
+        "components": [{ "name": "surfaceOrLayerCode", "format": "an..3" }]
+      }
+    ]
+  },
+  "PIA": {
+    "requires": 2,
+    "elements": [
+      {
+        "id": "4347",
+        "name": "productIdentifierCodeQualifier",
+        "requires": 1,
+        "components": [
+          { "name": "productIdentifierCodeQualifier", "format": "an..3" }
+        ]
+      },
+      {
+        "id": "C212",
+        "name": "itemNumberIdentification",
+        "requires": 0,
+        "components": [
+          { "name": "itemIdentifier", "format": "an..35" },
+          { "name": "itemTypeIdentificationCode", "format": "an..3" },
+          { "name": "codeListIdentificationCode", "format": "an..17" },
+          { "name": "codeListResponsibleAgencyCode", "format": "an..3" }
+        ]
+      },
+      {
+        "id": "C212",
+        "name": "itemNumberIdentification",
+        "requires": 0,
+        "components": [
+          { "name": "itemIdentifier", "format": "an..35" },
+          { "name": "itemTypeIdentificationCode", "format": "an..3" },
+          { "name": "codeListIdentificationCode", "format": "an..17" },
+          { "name": "codeListResponsibleAgencyCode", "format": "an..3" }
+        ]
+      },
+      {
+        "id": "C212",
+        "name": "itemNumberIdentification",
+        "requires": 0,
+        "components": [
+          { "name": "itemIdentifier", "format": "an..35" },
+          { "name": "itemTypeIdentificationCode", "format": "an..3" },
+          { "name": "codeListIdentificationCode", "format": "an..17" },
+          { "name": "codeListResponsibleAgencyCode", "format": "an..3" }
+        ]
+      },
+      {
+        "id": "C212",
+        "name": "itemNumberIdentification",
+        "requires": 0,
+        "components": [
+          { "name": "itemIdentifier", "format": "an..35" },
+          { "name": "itemTypeIdentificationCode", "format": "an..3" },
+          { "name": "codeListIdentificationCode", "format": "an..17" },
+          { "name": "codeListResponsibleAgencyCode", "format": "an..3" }
+        ]
+      },
+      {
+        "id": "C212",
+        "name": "itemNumberIdentification",
+        "requires": 0,
+        "components": [
+          { "name": "itemIdentifier", "format": "an..35" },
+          { "name": "itemTypeIdentificationCode", "format": "an..3" },
+          { "name": "codeListIdentificationCode", "format": "an..17" },
+          { "name": "codeListResponsibleAgencyCode", "format": "an..3" }
+        ]
+      }
+    ]
+  },
+  "LOC": {
+    "requires": 1,
+    "elements": [
+      {
+        "id": "3227",
+        "name": "locationFunctionCodeQualifier",
+        "requires": 1,
+        "components": [
+          { "name": "locationFunctionCodeQualifier", "format": "an..3" }
+        ]
+      },
+      {
+        "id": "C517",
+        "name": "locationIdentification",
+        "requires": 0,
+        "components": [
+          { "name": "locationNameCode", "format": "an..25" },
+          { "name": "codeListIdentificationCode", "format": "an..17" },
+          { "name": "codeListResponsibleAgencyCode", "format": "an..3" },
+          { "name": "locationName", "format": "an..256" }
+        ]
+      },
+      {
+        "id": "C519",
+        "name": "relatedLocationOneIdentification",
+        "requires": 0,
+        "components": [
+          { "name": "firstRelatedLocationNameCode", "format": "an..25" },
+          { "name": "codeListIdentificationCode", "format": "an..17" },
+          { "name": "codeListResponsibleAgencyCode", "format": "an..3" },
+          { "name": "firstRelatedLocationName", "format": "an..70" }
+        ]
+      },
+      {
+        "id": "C553",
+        "name": "relatedLocationTwoIdentification",
+        "requires": 0,
+        "components": [
+          { "name": "secondRelatedLocationNameCode", "format": "an..25" },
+          { "name": "codeListIdentificationCode", "format": "an..17" },
+          { "name": "codeListResponsibleAgencyCode", "format": "an..3" },
+          { "name": "secondRelatedLocationName", "format": "an..70" }
+        ]
+      },
+      {
+        "id": "5479",
+        "name": "relationCode",
+        "requires": 0,
+        "components": [{ "name": "relationCode", "format": "an..3" }]
+      }
+    ]
+  },
+  "LIN": {
+    "requires": 0,
+    "elements": [
+      {
+        "id": "1082",
+        "name": "lineItemIdentifier",
+        "requires": 0,
+        "components": [{ "name": "lineItemIdentifier", "format": "an..6" }]
+      },
+      {
+        "id": "1229",
+        "name": "actionRequestNotificationDescriptionCode",
+        "requires": 0,
+        "components": [
+          {
+            "name": "actionRequestNotificationDescriptionCode",
+            "format": "an..3"
+          }
+        ]
+      },
+      {
+        "id": "C212",
+        "name": "itemNumberIdentification",
+        "requires": 0,
+        "components": [
+          { "name": "itemIdentifier", "format": "an..35" },
+          { "name": "itemTypeIdentificationCode", "format": "an..3" },
+          { "name": "codeListIdentificationCode", "format": "an..17" },
+          { "name": "codeListResponsibleAgencyCode", "format": "an..3" }
+        ]
+      },
+      {
+        "id": "C829",
+        "name": "subLineInformation",
+        "requires": 0,
+        "components": [
+          { "name": "subLineIndicatorCode", "format": "an..3" },
+          { "name": "lineItemIdentifier", "format": "an..6" }
+        ]
+      },
+      {
+        "id": "1222",
+        "name": "configurationLevelNumber",
+        "requires": 0,
+        "components": [{ "name": "configurationLevelNumber", "format": "n..2" }]
+      },
+      {
+        "id": "7083",
+        "name": "configurationOperationCode",
+        "requires": 0,
+        "components": [
+          { "name": "configurationOperationCode", "format": "an..3" }
+        ]
+      }
+    ]
+  },
+  "STS": {
+    "requires": 0,
+    "elements": [
+      {
+        "id": "C601",
+        "name": "statusCategory",
+        "requires": 1,
+        "components": [
+          { "name": "statusCategoryCode", "format": "an..3" },
+          { "name": "codeListIdentificationCode", "format": "an..17" },
+          { "name": "codeListResponsibleAgencyCode", "format": "an..3" }
+        ]
+      },
+      {
+        "id": "C555",
+        "name": "status",
+        "requires": 1,
+        "components": [
+          { "name": "statusDescriptionCode", "format": "an..3" },
+          { "name": "codeListIdentificationCode", "format": "an..17" },
+          { "name": "codeListResponsibleAgencyCode", "format": "an..3" },
+          { "name": "statusDescription", "format": "an..35" }
+        ]
+      },
+      {
+        "id": "C556",
+        "name": "statusReason",
+        "requires": 1,
+        "components": [
+          { "name": "statusReasonDescriptionCode", "format": "an..3" },
+          { "name": "codeListIdentificationCode", "format": "an..17" },
+          { "name": "codeListResponsibleAgencyCode", "format": "an..3" },
+          { "name": "statusReasonDescription", "format": "an..256" }
+        ]
+      },
+      {
+        "id": "C556",
+        "name": "statusReason",
+        "requires": 1,
+        "components": [
+          { "name": "statusReasonDescriptionCode", "format": "an..3" },
+          { "name": "codeListIdentificationCode", "format": "an..17" },
+          { "name": "codeListResponsibleAgencyCode", "format": "an..3" },
+          { "name": "statusReasonDescription", "format": "an..256" }
+        ]
+      },
+      {
+        "id": "C556",
+        "name": "statusReason",
+        "requires": 1,
+        "components": [
+          { "name": "statusReasonDescriptionCode", "format": "an..3" },
+          { "name": "codeListIdentificationCode", "format": "an..17" },
+          { "name": "codeListResponsibleAgencyCode", "format": "an..3" },
+          { "name": "statusReasonDescription", "format": "an..256" }
+        ]
+      },
+      {
+        "id": "C556",
+        "name": "statusReason",
+        "requires": 1,
+        "components": [
+          { "name": "statusReasonDescriptionCode", "format": "an..3" },
+          { "name": "codeListIdentificationCode", "format": "an..17" },
+          { "name": "codeListResponsibleAgencyCode", "format": "an..3" },
+          { "name": "statusReasonDescription", "format": "an..256" }
+        ]
+      },
+      {
+        "id": "C556",
+        "name": "statusReason",
+        "requires": 1,
+        "components": [
+          { "name": "statusReasonDescriptionCode", "format": "an..3" },
+          { "name": "codeListIdentificationCode", "format": "an..17" },
+          { "name": "codeListResponsibleAgencyCode", "format": "an..3" },
+          { "name": "statusReasonDescription", "format": "an..256" }
+        ]
+      }
+    ]
+  },
+  "IMD": {
+    "requires": 0,
+    "elements": [
+      {
+        "id": "7077",
+        "name": "descriptionFormatCode",
+        "requires": 0,
+        "components": [{ "name": "descriptionFormatCode", "format": "an..3" }]
+      },
+      {
+        "id": "C272",
+        "name": "itemCharacteristic",
+        "requires": 0,
+        "components": [
+          { "name": "itemCharacteristicCode", "format": "an..3" },
+          { "name": "codeListIdentificationCode", "format": "an..17" },
+          { "name": "codeListResponsibleAgencyCode", "format": "an..3" }
+        ]
+      },
+      {
+        "id": "C273",
+        "name": "itemDescription",
+        "requires": 0,
+        "components": [
+          { "name": "itemDescriptionCode", "format": "an..17" },
+          { "name": "codeListIdentificationCode", "format": "an..17" },
+          { "name": "codeListResponsibleAgencyCode", "format": "an..3" },
+          { "name": "itemDescription", "format": "an..256" },
+          { "name": "itemDescription", "format": "an..256" },
+          { "name": "languageNameCode", "format": "an..3" }
+        ]
+      },
+      {
+        "id": "7383",
+        "name": "surfaceOrLayerCode",
+        "requires": 0,
+        "components": [{ "name": "surfaceOrLayerCode", "format": "an..3" }]
+      }
+    ]
+  },
+  "PRI": {
+    "requires": 0,
+    "elements": [
+      {
+        "id": "C509",
+        "name": "priceInformation",
+        "requires": 1,
+        "components": [
+          { "name": "priceCodeQualifier", "format": "an..3" },
+          { "name": "priceAmount", "format": "n..15" },
+          { "name": "priceTypeCode", "format": "an..3" },
+          { "name": "priceSpecificationCode", "format": "an..3" },
+          { "name": "unitPriceBasisValue", "format": "n..9" },
+          { "name": "measurementUnitCode", "format": "an..3" }
+        ]
+      },
+      {
+        "id": "5213",
+        "name": "subLineItemPriceChangeOperationCode",
+        "requires": 0,
+        "components": [
+          { "name": "subLineItemPriceChangeOperationCode", "format": "an..3" }
+        ]
+      }
+    ]
+  },
+  "COM": {
+    "requires": 1,
+    "elements": [
+      {
+        "id": "C076",
+        "name": "communicationContact",
+        "requires": 2,
+        "components": [
+          { "name": "communicationAddressIdentifier", "format": "an..512" },
+          { "name": "communicationAddressCodeQualifier", "format": "an..3" }
+        ]
+      }
+    ]
+  }
+}

@@ -17,46 +17,46 @@
  */
 
 type Entry<T> = {
-    [key: string]: T;
-};
+  [key: string]: T
+}
 
 export class Cache<T> {
-    private data: Entry<T>;
-    private queue: string[];
-    private begin: number;
-    private end: number;
+  private data: Entry<T>
+  private queue: string[]
+  private begin: number
+  private end: number
 
-    constructor(size: number) {
-        this.data = {};
-        this.queue = new Array<string>(size);
-        this.begin = 0;
-        this.end = size;
-    }
+  constructor(size: number) {
+    this.data = {}
+    this.queue = new Array<string>(size)
+    this.begin = 0
+    this.end = size
+  }
 
-    public insert(key: string, value: T): void {
-        if (!this.contains(key)) {
-            if ((this.end + 1 - this.begin) % this.queue.length === 0) {
-                delete this.data[this.queue[this.begin]];
-                this.begin = (this.begin + 1) % this.queue.length;
-            }
-            this.end = (this.end + 1) % this.queue.length;
-            this.queue[this.end] = key;
-        }
-        this.data[key] = value;
+  public insert(key: string, value: T): void {
+    if (!this.contains(key)) {
+      if ((this.end + 1 - this.begin) % this.queue.length === 0) {
+        delete this.data[this.queue[this.begin]]
+        this.begin = (this.begin + 1) % this.queue.length
+      }
+      this.end = (this.end + 1) % this.queue.length
+      this.queue[this.end] = key
     }
+    this.data[key] = value
+  }
 
-    public contains(key: string): boolean {
-        if (Object.prototype.hasOwnProperty.call(this.data, key)) {
-            return true;
-        }
-        return false;
+  public contains(key: string): boolean {
+    if (Object.prototype.hasOwnProperty.call(this.data, key)) {
+      return true
     }
+    return false
+  }
 
-    public get(key: string): T {
-        return this.data[key];
-    }
+  public get(key: string): T {
+    return this.data[key]
+  }
 
-    public length(): number {
-        return this.queue.length;
-    }
+  public length(): number {
+    return this.queue.length
+  }
 }

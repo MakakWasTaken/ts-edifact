@@ -16,50 +16,50 @@
  * limitations under the License.
  */
 
-import { Configuration } from '../src/configuration';
+import { Configuration } from '../src/configuration'
 
 describe('Configuration', () => {
-    let configuration: Configuration;
+  let configuration: Configuration
 
-    beforeEach(() => (configuration = new Configuration()));
+  beforeEach(() => (configuration = new Configuration()))
 
-    it('should return the delimiters as a sorted array', () => {
-        let count = 0;
+  it('should return the delimiters as a sorted array', () => {
+    let count = 0
 
-        const run = (permutation: number[]) => {
-            configuration.config.segmentTerminator = permutation[0];
-            configuration.config.dataElementSeparator = permutation[1];
-            configuration.config.componentDataSeparator = permutation[2];
-            configuration.config.decimalMark = permutation[3];
-            configuration.config.releaseCharacter = permutation[4];
+    const run = (permutation: number[]) => {
+      configuration.config.segmentTerminator = permutation[0]
+      configuration.config.dataElementSeparator = permutation[1]
+      configuration.config.componentDataSeparator = permutation[2]
+      configuration.config.decimalMark = permutation[3]
+      configuration.config.releaseCharacter = permutation[4]
 
-            const delimiters: number[] = configuration.delimiters();
-            for (let i = 1; i < delimiters.length; i++) {
-                expect(delimiters[i]).toBeGreaterThan(delimiters[i - 1]);
-            }
-            count++;
-        };
+      const delimiters: number[] = configuration.delimiters()
+      for (let i = 1; i < delimiters.length; i++) {
+        expect(delimiters[i]).toBeGreaterThan(delimiters[i - 1])
+      }
+      count++
+    }
 
-        const permute = (
-            head: number[],
-            tail: number[],
-            callback: (permutation: number[]) => unknown
-        ): void => {
-            if (tail.length === 0) {
-                callback(head);
-            } else {
-                for (let i = 0; i < tail.length; i++) {
-                    const item: number = tail[i];
-                    tail.splice(i, 1);
-                    head.push(item);
-                    permute(head, tail, callback);
-                    head.pop();
-                    tail.splice(i, 0, item);
-                }
-            }
-        };
+    const permute = (
+      head: number[],
+      tail: number[],
+      callback: (permutation: number[]) => unknown,
+    ): void => {
+      if (tail.length === 0) {
+        callback(head)
+      } else {
+        for (let i = 0; i < tail.length; i++) {
+          const item: number = tail[i]
+          tail.splice(i, 1)
+          head.push(item)
+          permute(head, tail, callback)
+          head.pop()
+          tail.splice(i, 0, item)
+        }
+      }
+    }
 
-        permute([], [0, 1, 2, 3, 4], run);
-        expect(count).toEqual(120);
-    });
-});
+    permute([], [0, 1, 2, 3, 4], run)
+    expect(count).toEqual(120)
+  })
+})

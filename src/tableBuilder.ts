@@ -16,70 +16,70 @@
  * limitations under the License.
  */
 
-import * as fs from 'fs';
-import * as path from 'path';
-import { Dictionary } from './validator';
+import * as fs from 'fs'
+import * as path from 'path'
+import { Dictionary } from './validator'
 
 export abstract class TableBuilder<T> {
-    private type: string;
-    private version?: string;
-    private location?: string;
+  private type: string
+  private version?: string
+  private location?: string
 
-    constructor(type: string) {
-        this.type = type;
+  constructor(type: string) {
+    this.type = type
+  }
+
+  forVersion(version: string): TableBuilder<T> {
+    this.version = version
+    return this
+  }
+
+  specLocation(location: string): TableBuilder<T> {
+    this.location = location
+    return this
+  }
+
+  protected getDefinitionFileLoc(): string | undefined {
+    let defaultFilePath: string
+
+    if (this.location) {
+      defaultFilePath = path.resolve('./', this.location)
+      if (!defaultFilePath.endsWith('/')) {
+        defaultFilePath += '/'
+      }
+    } else {
+      defaultFilePath = './'
     }
 
-    forVersion(version: string): TableBuilder<T> {
-        this.version = version;
-        return this;
+    const baseFileName: string =
+      defaultFilePath + this.type.toUpperCase() + '.segments.json'
+    if (this.version) {
+      const versionedFileName: string =
+        defaultFilePath +
+        this.version.toUpperCase() +
+        '_' +
+        this.type.toUpperCase() +
+        '.segments.json'
+
+      if (fs.existsSync(versionedFileName)) {
+        return versionedFileName
+      } else if (fs.existsSync(baseFileName)) {
+        console.warn(
+          `No segments definition file found for message type ${this.type} of version ${this.version}. Falling back to default version`,
+        )
+        return baseFileName
+      }
+    } else {
+      if (fs.existsSync(baseFileName)) {
+        return baseFileName
+      }
     }
 
-    specLocation(location: string): TableBuilder<T> {
-        this.location = location;
-        return this;
-    }
+    console.error(
+      `No segments definition file found for message type ${this.type}`,
+    )
+    return undefined
+  }
 
-    protected getDefinitionFileLoc(): string | undefined {
-        let defaultFilePath: string;
-
-        if (this.location) {
-            defaultFilePath = path.resolve('./', this.location);
-            if (!defaultFilePath.endsWith('/')) {
-                defaultFilePath += '/';
-            }
-        } else {
-            defaultFilePath = './';
-        }
-
-        const baseFileName: string =
-            defaultFilePath + this.type.toUpperCase() + '.segments.json';
-        if (this.version) {
-            const versionedFileName: string =
-                defaultFilePath +
-                this.version.toUpperCase() +
-                '_' +
-                this.type.toUpperCase() +
-                '.segments.json';
-
-            if (fs.existsSync(versionedFileName)) {
-                return versionedFileName;
-            } else if (fs.existsSync(baseFileName)) {
-                console.warn(
-                    `No segments definition file found for message type ${this.type} of version ${this.version}. Falling back to default version`
-                );
-                return baseFileName;
-            }
-        } else {
-            if (fs.existsSync(baseFileName)) {
-                return baseFileName;
-            }
-        }
-
-        console.error(
-            `No segments definition file found for message type ${this.type}`
-        );
-        return undefined;
-    }
-
-    abstract build(): Dictionary<T>;
+  abstract build(): Dictionary<T>
 }

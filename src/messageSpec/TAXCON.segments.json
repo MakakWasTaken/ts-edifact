@@ -1,1 +1,338 @@
-{"DTM":{"requires":1,"elements":[{"id":"C507","name":"dateTimePeriod","requires":1,"components":[{"name":"dateOrTimeOrPeriodFunctionCodeQualifier","format":"an..3"},{"name":"dateOrTimeOrPeriodValue","format":"an..35"},{"name":"dateOrTimeOrPeriodFormatCode","format":"an..3"}]}]},"MOA":{"requires":1,"elements":[{"id":"C516","name":"monetaryAmount","requires":1,"components":[{"name":"monetaryAmountTypeCodeQualifier","format":"an..3"},{"name":"monetaryAmount","format":"n..35"},{"name":"currencyIdentificationCode","format":"an..3"},{"name":"currencyTypeCodeQualifier","format":"an..3"},{"name":"statusDescriptionCode","format":"an..3"}]}]},"TAX":{"requires":1,"elements":[{"id":"5283","name":"dutyOrTaxOrFeeFunctionCodeQualifier","requires":1,"components":[{"name":"dutyOrTaxOrFeeFunctionCodeQualifier","format":"an..3"}]},{"id":"C241","name":"dutyTaxFeeType","requires":0,"components":[{"name":"dutyOrTaxOrFeeTypeNameCode","format":"an..3"},{"name":"codeListIdentificationCode","format":"an..17"},{"name":"codeListResponsibleAgencyCode","format":"an..3"},{"name":"dutyOrTaxOrFeeTypeName","format":"an..35"}]},{"id":"C533","name":"dutyTaxFeeAccountDetail","requires":1,"components":[{"name":"dutyOrTaxOrFeeAccountCode","format":"an..6"},{"name":"codeListIdentificationCode","format":"an..17"},{"name":"codeListResponsibleAgencyCode","format":"an..3"}]},{"id":"5286","name":"dutyOrTaxOrFeeAssessmentBasisValue","requires":0,"components":[{"name":"dutyOrTaxOrFeeAssessmentBasisValue","format":"an..15"}]},{"id":"C243","name":"dutyTaxFeeDetail","requires":0,"components":[{"name":"dutyOrTaxOrFeeRateCode","format":"an..7"},{"name":"codeListIdentificationCode","format":"an..17"},{"name":"codeListResponsibleAgencyCode","format":"an..3"},{"name":"dutyOrTaxOrFeeRate","format":"an..17"},{"name":"dutyOrTaxOrFeeRateBasisCode","format":"an..12"},{"name":"codeListIdentificationCode","format":"an..17"},{"name":"codeListResponsibleAgencyCode","format":"an..3"}]},{"id":"5305","name":"dutyOrTaxOrFeeCategoryCode","requires":0,"components":[{"name":"dutyOrTaxOrFeeCategoryCode","format":"an..3"}]},{"id":"3446","name":"partyTaxIdentifier","requires":0,"components":[{"name":"partyTaxIdentifier","format":"an..20"}]},{"id":"1227","name":"calculationSequenceCode","requires":0,"components":[{"name":"calculationSequenceCode","format":"an..3"}]}]},"RFF":{"requires":1,"elements":[{"id":"C506","name":"reference","requires":1,"components":[{"name":"referenceCodeQualifier","format":"an..3"},{"name":"referenceIdentifier","format":"an..70"},{"name":"documentLineIdentifier","format":"an..6"},{"name":"referenceVersionIdentifier","format":"an..35"},{"name":"revisionIdentifier","format":"an..6"}]}]},"DOC":{"requires":1,"elements":[{"id":"C002","name":"documentMessageName","requires":0,"components":[{"name":"documentNameCode","format":"an..3"},{"name":"codeListIdentificationCode","format":"an..17"},{"name":"codeListResponsibleAgencyCode","format":"an..3"},{"name":"documentName","format":"an..35"}]},{"id":"C503","name":"documentMessageDetails","requires":0,"components":[{"name":"documentIdentifier","format":"an..35"},{"name":"documentStatusCode","format":"an..3"},{"name":"documentSourceDescription","format":"an..70"},{"name":"languageNameCode","format":"an..3"},{"name":"versionIdentifier","format":"an..9"},{"name":"revisionIdentifier","format":"an..6"}]},{"id":"3153","name":"communicationMediumTypeCode","requires":0,"components":[{"name":"communicationMediumTypeCode","format":"an..3"}]},{"id":"1220","name":"documentCopiesRequiredQuantity","requires":0,"components":[{"name":"documentCopiesRequiredQuantity","format":"n..2"}]},{"id":"1218","name":"documentOriginalsRequiredQuantity","requires":0,"components":[{"name":"documentOriginalsRequiredQuantity","format":"n..2"}]}]},"NAD":{"requires":1,"elements":[{"id":"3035","name":"partyFunctionCodeQualifier","requires":1,"components":[{"name":"partyFunctionCodeQualifier","format":"an..3"}]},{"id":"C082","name":"partyIdentificationDetails","requires":1,"components":[{"name":"partyIdentifier","format":"an..35"},{"name":"codeListIdentificationCode","format":"an..17"},{"name":"codeListResponsibleAgencyCode","format":"an..3"}]},{"id":"C058","name":"nameAndAddress","requires":1,"components":[{"name":"nameAndAddressDescription","format":"an..35"},{"name":"nameAndAddressDescription","format":"an..35"},{"name":"nameAndAddressDescription","format":"an..35"},{"name":"nameAndAddressDescription","format":"an..35"},{"name":"nameAndAddressDescription","format":"an..35"}]},{"id":"C080","name":"partyName","requires":1,"components":[{"name":"partyName","format":"an..35"},{"name":"partyName","format":"an..35"},{"name":"partyName","format":"an..35"},{"name":"partyName","format":"an..35"},{"name":"partyName","format":"an..35"},{"name":"partyNameFormatCode","format":"an..3"}]},{"id":"C059","name":"street","requires":1,"components":[{"name":"streetAndNumberOrPostOfficeBoxIdentifier","format":"an..35"},{"name":"streetAndNumberOrPostOfficeBoxIdentifier","format":"an..35"},{"name":"streetAndNumberOrPostOfficeBoxIdentifier","format":"an..35"},{"name":"streetAndNumberOrPostOfficeBoxIdentifier","format":"an..35"}]},{"id":"3164","name":"cityName","requires":0,"components":[{"name":"cityName","format":"an..35"}]},{"id":"C819","name":"countrySubEntityDetails","requires":0,"components":[{"name":"countrySubEntityNameCode","format":"an..9"},{"name":"codeListIdentificationCode","format":"an..17"},{"name":"codeListResponsibleAgencyCode","format":"an..3"},{"name":"countrySubEntityName","format":"an..70"}]},{"id":"3251","name":"postalIdentificationCode","requires":0,"components":[{"name":"postalIdentificationCode","format":"an..17"}]},{"id":"3207","name":"countryNameCode","requires":0,"components":[{"name":"countryNameCode","format":"an..3"}]}]},"BGM":{"requires":0,"elements":[{"id":"C002","name":"documentMessageName","requires":0,"components":[{"name":"documentNameCode","format":"an..3"},{"name":"codeListIdentificationCode","format":"an..17"},{"name":"codeListResponsibleAgencyCode","format":"an..3"},{"name":"documentName","format":"an..35"}]},{"id":"C106","name":"documentMessageIdentification","requires":0,"components":[{"name":"documentIdentifier","format":"an..35"},{"name":"versionIdentifier","format":"an..9"},{"name":"revisionIdentifier","format":"an..6"}]},{"id":"1225","name":"messageFunctionCode","requires":0,"components":[{"name":"messageFunctionCode","format":"an..3"}]},{"id":"4343","name":"responseTypeCode","requires":0,"components":[{"name":"responseTypeCode","format":"an..3"}]}]},"CNT":{"requires":1,"elements":[{"id":"C270","name":"control","requires":2,"components":[{"name":"controlTotalTypeCodeQualifier","format":"an..3"},{"name":"controlTotalValue","format":"n..18"},{"name":"measurementUnitCode","format":"an..3"}]}]}}
+{
+  "DTM": {
+    "requires": 1,
+    "elements": [
+      {
+        "id": "C507",
+        "name": "dateTimePeriod",
+        "requires": 1,
+        "components": [
+          {
+            "name": "dateOrTimeOrPeriodFunctionCodeQualifier",
+            "format": "an..3"
+          },
+          { "name": "dateOrTimeOrPeriodValue", "format": "an..35" },
+          { "name": "dateOrTimeOrPeriodFormatCode", "format": "an..3" }
+        ]
+      }
+    ]
+  },
+  "MOA": {
+    "requires": 1,
+    "elements": [
+      {
+        "id": "C516",
+        "name": "monetaryAmount",
+        "requires": 1,
+        "components": [
+          { "name": "monetaryAmountTypeCodeQualifier", "format": "an..3" },
+          { "name": "monetaryAmount", "format": "n..35" },
+          { "name": "currencyIdentificationCode", "format": "an..3" },
+          { "name": "currencyTypeCodeQualifier", "format": "an..3" },
+          { "name": "statusDescriptionCode", "format": "an..3" }
+        ]
+      }
+    ]
+  },
+  "TAX": {
+    "requires": 1,
+    "elements": [
+      {
+        "id": "5283",
+        "name": "dutyOrTaxOrFeeFunctionCodeQualifier",
+        "requires": 1,
+        "components": [
+          { "name": "dutyOrTaxOrFeeFunctionCodeQualifier", "format": "an..3" }
+        ]
+      },
+      {
+        "id": "C241",
+        "name": "dutyTaxFeeType",
+        "requires": 0,
+        "components": [
+          { "name": "dutyOrTaxOrFeeTypeNameCode", "format": "an..3" },
+          { "name": "codeListIdentificationCode", "format": "an..17" },
+          { "name": "codeListResponsibleAgencyCode", "format": "an..3" },
+          { "name": "dutyOrTaxOrFeeTypeName", "format": "an..35" }
+        ]
+      },
+      {
+        "id": "C533",
+        "name": "dutyTaxFeeAccountDetail",
+        "requires": 1,
+        "components": [
+          { "name": "dutyOrTaxOrFeeAccountCode", "format": "an..6" },
+          { "name": "codeListIdentificationCode", "format": "an..17" },
+          { "name": "codeListResponsibleAgencyCode", "format": "an..3" }
+        ]
+      },
+      {
+        "id": "5286",
+        "name": "dutyOrTaxOrFeeAssessmentBasisValue",
+        "requires": 0,
+        "components": [
+          { "name": "dutyOrTaxOrFeeAssessmentBasisValue", "format": "an..15" }
+        ]
+      },
+      {
+        "id": "C243",
+        "name": "dutyTaxFeeDetail",
+        "requires": 0,
+        "components": [
+          { "name": "dutyOrTaxOrFeeRateCode", "format": "an..7" },
+          { "name": "codeListIdentificationCode", "format": "an..17" },
+          { "name": "codeListResponsibleAgencyCode", "format": "an..3" },
+          { "name": "dutyOrTaxOrFeeRate", "format": "an..17" },
+          { "name": "dutyOrTaxOrFeeRateBasisCode", "format": "an..12" },
+          { "name": "codeListIdentificationCode", "format": "an..17" },
+          { "name": "codeListResponsibleAgencyCode", "format": "an..3" }
+        ]
+      },
+      {
+        "id": "5305",
+        "name": "dutyOrTaxOrFeeCategoryCode",
+        "requires": 0,
+        "components": [
+          { "name": "dutyOrTaxOrFeeCategoryCode", "format": "an..3" }
+        ]
+      },
+      {
+        "id": "3446",
+        "name": "partyTaxIdentifier",
+        "requires": 0,
+        "components": [{ "name": "partyTaxIdentifier", "format": "an..20" }]
+      },
+      {
+        "id": "1227",
+        "name": "calculationSequenceCode",
+        "requires": 0,
+        "components": [{ "name": "calculationSequenceCode", "format": "an..3" }]
+      }
+    ]
+  },
+  "RFF": {
+    "requires": 1,
+    "elements": [
+      {
+        "id": "C506",
+        "name": "reference",
+        "requires": 1,
+        "components": [
+          { "name": "referenceCodeQualifier", "format": "an..3" },
+          { "name": "referenceIdentifier", "format": "an..70" },
+          { "name": "documentLineIdentifier", "format": "an..6" },
+          { "name": "referenceVersionIdentifier", "format": "an..35" },
+          { "name": "revisionIdentifier", "format": "an..6" }
+        ]
+      }
+    ]
+  },
+  "DOC": {
+    "requires": 1,
+    "elements": [
+      {
+        "id": "C002",
+        "name": "documentMessageName",
+        "requires": 0,
+        "components": [
+          { "name": "documentNameCode", "format": "an..3" },
+          { "name": "codeListIdentificationCode", "format": "an..17" },
+          { "name": "codeListResponsibleAgencyCode", "format": "an..3" },
+          { "name": "documentName", "format": "an..35" }
+        ]
+      },
+      {
+        "id": "C503",
+        "name": "documentMessageDetails",
+        "requires": 0,
+        "components": [
+          { "name": "documentIdentifier", "format": "an..35" },
+          { "name": "documentStatusCode", "format": "an..3" },
+          { "name": "documentSourceDescription", "format": "an..70" },
+          { "name": "languageNameCode", "format": "an..3" },
+          { "name": "versionIdentifier", "format": "an..9" },
+          { "name": "revisionIdentifier", "format": "an..6" }
+        ]
+      },
+      {
+        "id": "3153",
+        "name": "communicationMediumTypeCode",
+        "requires": 0,
+        "components": [
+          { "name": "communicationMediumTypeCode", "format": "an..3" }
+        ]
+      },
+      {
+        "id": "1220",
+        "name": "documentCopiesRequiredQuantity",
+        "requires": 0,
+        "components": [
+          { "name": "documentCopiesRequiredQuantity", "format": "n..2" }
+        ]
+      },
+      {
+        "id": "1218",
+        "name": "documentOriginalsRequiredQuantity",
+        "requires": 0,
+        "components": [
+          { "name": "documentOriginalsRequiredQuantity", "format": "n..2" }
+        ]
+      }
+    ]
+  },
+  "NAD": {
+    "requires": 1,
+    "elements": [
+      {
+        "id": "3035",
+        "name": "partyFunctionCodeQualifier",
+        "requires": 1,
+        "components": [
+          { "name": "partyFunctionCodeQualifier", "format": "an..3" }
+        ]
+      },
+      {
+        "id": "C082",
+        "name": "partyIdentificationDetails",
+        "requires": 1,
+        "components": [
+          { "name": "partyIdentifier", "format": "an..35" },
+          { "name": "codeListIdentificationCode", "format": "an..17" },
+          { "name": "codeListResponsibleAgencyCode", "format": "an..3" }
+        ]
+      },
+      {
+        "id": "C058",
+        "name": "nameAndAddress",
+        "requires": 1,
+        "components": [
+          { "name": "nameAndAddressDescription", "format": "an..35" },
+          { "name": "nameAndAddressDescription", "format": "an..35" },
+          { "name": "nameAndAddressDescription", "format": "an..35" },
+          { "name": "nameAndAddressDescription", "format": "an..35" },
+          { "name": "nameAndAddressDescription", "format": "an..35" }
+        ]
+      },
+      {
+        "id": "C080",
+        "name": "partyName",
+        "requires": 1,
+        "components": [
+          { "name": "partyName", "format": "an..35" },
+          { "name": "partyName", "format": "an..35" },
+          { "name": "partyName", "format": "an..35" },
+          { "name": "partyName", "format": "an..35" },
+          { "name": "partyName", "format": "an..35" },
+          { "name": "partyNameFormatCode", "format": "an..3" }
+        ]
+      },
+      {
+        "id": "C059",
+        "name": "street",
+        "requires": 1,
+        "components": [
+          {
+            "name": "streetAndNumberOrPostOfficeBoxIdentifier",
+            "format": "an..35"
+          },
+          {
+            "name": "streetAndNumberOrPostOfficeBoxIdentifier",
+            "format": "an..35"
+          },
+          {
+            "name": "streetAndNumberOrPostOfficeBoxIdentifier",
+            "format": "an..35"
+          },
+          {
+            "name": "streetAndNumberOrPostOfficeBoxIdentifier",
+            "format": "an..35"
+          }
+        ]
+      },
+      {
+        "id": "3164",
+        "name": "cityName",
+        "requires": 0,
+        "components": [{ "name": "cityName", "format": "an..35" }]
+      },
+      {
+        "id": "C819",
+        "name": "countrySubEntityDetails",
+        "requires": 0,
+        "components": [
+          { "name": "countrySubEntityNameCode", "format": "an..9" },
+          { "name": "codeListIdentificationCode", "format": "an..17" },
+          { "name": "codeListResponsibleAgencyCode", "format": "an..3" },
+          { "name": "countrySubEntityName", "format": "an..70" }
+        ]
+      },
+      {
+        "id": "3251",
+        "name": "postalIdentificationCode",
+        "requires": 0,
+        "components": [
+          { "name": "postalIdentificationCode", "format": "an..17" }
+        ]
+      },
+      {
+        "id": "3207",
+        "name": "countryNameCode",
+        "requires": 0,
+        "components": [{ "name": "countryNameCode", "format": "an..3" }]
+      }
+    ]
+  },
+  "BGM": {
+    "requires": 0,
+    "elements": [
+      {
+        "id": "C002",
+        "name": "documentMessageName",
+        "requires": 0,
+        "components": [
+          { "name": "documentNameCode", "format": "an..3" },
+          { "name": "codeListIdentificationCode", "format": "an..17" },
+          { "name": "codeListResponsibleAgencyCode", "format": "an..3" },
+          { "name": "documentName", "format": "an..35" }
+        ]
+      },
+      {
+        "id": "C106",
+        "name": "documentMessageIdentification",
+        "requires": 0,
+        "components": [
+          { "name": "documentIdentifier", "format": "an..35" },
+          { "name": "versionIdentifier", "format": "an..9" },
+          { "name": "revisionIdentifier", "format": "an..6" }
+        ]
+      },
+      {
+        "id": "1225",
+        "name": "messageFunctionCode",
+        "requires": 0,
+        "components": [{ "name": "messageFunctionCode", "format": "an..3" }]
+      },
+      {
+        "id": "4343",
+        "name": "responseTypeCode",
+        "requires": 0,
+        "components": [{ "name": "responseTypeCode", "format": "an..3" }]
+      }
+    ]
+  },
+  "CNT": {
+    "requires": 1,
+    "elements": [
+      {
+        "id": "C270",
+        "name": "control",
+        "requires": 2,
+        "components": [
+          { "name": "controlTotalTypeCodeQualifier", "format": "an..3" },
+          { "name": "controlTotalValue", "format": "n..18" },
+          { "name": "measurementUnitCode", "format": "an..3" }
+        ]
+      }
+    ]
+  }
+}

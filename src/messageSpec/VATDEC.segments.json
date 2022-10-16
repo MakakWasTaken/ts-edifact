@@ -1,1 +1,635 @@
-{"PAI":{"requires":1,"elements":[{"id":"C534","name":"paymentInstructionDetails","requires":0,"components":[{"name":"paymentConditionsCode","format":"an..3"},{"name":"paymentGuaranteeMeansCode","format":"an..3"},{"name":"paymentMeansCode","format":"an..3"},{"name":"codeListIdentificationCode","format":"an..17"},{"name":"codeListResponsibleAgencyCode","format":"an..3"},{"name":"paymentChannelCode","format":"an..3"}]}]},"RFF":{"requires":1,"elements":[{"id":"C506","name":"reference","requires":1,"components":[{"name":"referenceCodeQualifier","format":"an..3"},{"name":"referenceIdentifier","format":"an..70"},{"name":"documentLineIdentifier","format":"an..6"},{"name":"referenceVersionIdentifier","format":"an..35"},{"name":"revisionIdentifier","format":"an..6"}]}]},"DTM":{"requires":1,"elements":[{"id":"C507","name":"dateTimePeriod","requires":1,"components":[{"name":"dateOrTimeOrPeriodFunctionCodeQualifier","format":"an..3"},{"name":"dateOrTimeOrPeriodValue","format":"an..35"},{"name":"dateOrTimeOrPeriodFormatCode","format":"an..3"}]}]},"PCD":{"requires":1,"elements":[{"id":"C501","name":"percentageDetails","requires":1,"components":[{"name":"percentageTypeCodeQualifier","format":"an..3"},{"name":"percentage","format":"n..10"},{"name":"percentageBasisIdentificationCode","format":"an..3"},{"name":"codeListIdentificationCode","format":"an..17"},{"name":"codeListResponsibleAgencyCode","format":"an..3"}]},{"id":"4405","name":"statusDescriptionCode","requires":0,"components":[{"name":"statusDescriptionCode","format":"an..3"}]}]},"ARD":{"requires":0,"elements":[{"id":"C549","name":"monetaryAmountFunction","requires":0,"components":[{"name":"monetaryAmountFunctionDescriptionCode","format":"an..3"},{"name":"codeListIdentificationCode","format":"an..17"},{"name":"codeListResponsibleAgencyCode","format":"an..3"},{"name":"monetaryAmountFunctionDescription","format":"an..70"}]},{"id":"C008","name":"monetaryAmountFunctionDetail","requires":0,"components":[{"name":"monetaryAmountFunctionDetailDescriptionCode","format":"an..17"},{"name":"codeListIdentificationCode","format":"an..17"},{"name":"codeListResponsibleAgencyCode","format":"an..3"},{"name":"monetaryAmountFunctionDetailDescription","format":"an..70"}]}]},"MEA":{"requires":1,"elements":[{"id":"6311","name":"measurementPurposeCodeQualifier","requires":1,"components":[{"name":"measurementPurposeCodeQualifier","format":"an..3"}]},{"id":"C502","name":"measurementDetails","requires":0,"components":[{"name":"measuredAttributeCode","format":"an..3"},{"name":"measurementSignificanceCode","format":"an..3"},{"name":"nonDiscreteMeasurementNameCode","format":"an..17"},{"name":"nonDiscreteMeasurementName","format":"an..70"}]},{"id":"C174","name":"valueRange","requires":1,"components":[{"name":"measurementUnitCode","format":"an..3"},{"name":"measurementValue","format":"an..18"},{"name":"rangeMinimumValue","format":"n..18"},{"name":"rangeMaximumValue","format":"n..18"},{"name":"significantDigitsQuantity","format":"n..2"}]},{"id":"7383","name":"surfaceOrLayerCode","requires":0,"components":[{"name":"surfaceOrLayerCode","format":"an..3"}]}]},"GIS":{"requires":1,"elements":[{"id":"C529","name":"processingIndicator","requires":1,"components":[{"name":"processingIndicatorDescriptionCode","format":"an..3"},{"name":"codeListIdentificationCode","format":"an..17"},{"name":"codeListResponsibleAgencyCode","format":"an..3"},{"name":"processTypeDescriptionCode","format":"an..17"}]}]},"COM":{"requires":1,"elements":[{"id":"C076","name":"communicationContact","requires":2,"components":[{"name":"communicationAddressIdentifier","format":"an..512"},{"name":"communicationAddressCodeQualifier","format":"an..3"}]}]},"MOA":{"requires":1,"elements":[{"id":"C516","name":"monetaryAmount","requires":1,"components":[{"name":"monetaryAmountTypeCodeQualifier","format":"an..3"},{"name":"monetaryAmount","format":"n..35"},{"name":"currencyIdentificationCode","format":"an..3"},{"name":"currencyTypeCodeQualifier","format":"an..3"},{"name":"statusDescriptionCode","format":"an..3"}]}]},"BGM":{"requires":0,"elements":[{"id":"C002","name":"documentMessageName","requires":0,"components":[{"name":"documentNameCode","format":"an..3"},{"name":"codeListIdentificationCode","format":"an..17"},{"name":"codeListResponsibleAgencyCode","format":"an..3"},{"name":"documentName","format":"an..35"}]},{"id":"C106","name":"documentMessageIdentification","requires":0,"components":[{"name":"documentIdentifier","format":"an..35"},{"name":"versionIdentifier","format":"an..9"},{"name":"revisionIdentifier","format":"an..6"}]},{"id":"1225","name":"messageFunctionCode","requires":0,"components":[{"name":"messageFunctionCode","format":"an..3"}]},{"id":"4343","name":"responseTypeCode","requires":0,"components":[{"name":"responseTypeCode","format":"an..3"}]}]},"AUT":{"requires":1,"elements":[{"id":"9280","name":"validationResultValue","requires":1,"components":[{"name":"validationResultValue","format":"an..35"}]},{"id":"9282","name":"validationKeyIdentifier","requires":0,"components":[{"name":"validationKeyIdentifier","format":"an..35"}]}]},"CNT":{"requires":1,"elements":[{"id":"C270","name":"control","requires":2,"components":[{"name":"controlTotalTypeCodeQualifier","format":"an..3"},{"name":"controlTotalValue","format":"n..18"},{"name":"measurementUnitCode","format":"an..3"}]}]},"LOC":{"requires":1,"elements":[{"id":"3227","name":"locationFunctionCodeQualifier","requires":1,"components":[{"name":"locationFunctionCodeQualifier","format":"an..3"}]},{"id":"C517","name":"locationIdentification","requires":0,"components":[{"name":"locationNameCode","format":"an..25"},{"name":"codeListIdentificationCode","format":"an..17"},{"name":"codeListResponsibleAgencyCode","format":"an..3"},{"name":"locationName","format":"an..256"}]},{"id":"C519","name":"relatedLocationOneIdentification","requires":0,"components":[{"name":"firstRelatedLocationNameCode","format":"an..25"},{"name":"codeListIdentificationCode","format":"an..17"},{"name":"codeListResponsibleAgencyCode","format":"an..3"},{"name":"firstRelatedLocationName","format":"an..70"}]},{"id":"C553","name":"relatedLocationTwoIdentification","requires":0,"components":[{"name":"secondRelatedLocationNameCode","format":"an..25"},{"name":"codeListIdentificationCode","format":"an..17"},{"name":"codeListResponsibleAgencyCode","format":"an..3"},{"name":"secondRelatedLocationName","format":"an..70"}]},{"id":"5479","name":"relationCode","requires":0,"components":[{"name":"relationCode","format":"an..3"}]}]},"FII":{"requires":1,"elements":[{"id":"3035","name":"partyFunctionCodeQualifier","requires":1,"components":[{"name":"partyFunctionCodeQualifier","format":"an..3"}]},{"id":"C078","name":"accountHolderIdentification","requires":0,"components":[{"name":"accountHolderIdentifier","format":"an..35"},{"name":"accountHolderName","format":"an..35"},{"name":"accountHolderName","format":"an..35"},{"name":"currencyIdentificationCode","format":"an..3"}]},{"id":"C088","name":"institutionIdentification","requires":0,"components":[{"name":"institutionNameCode","format":"an..11"},{"name":"codeListIdentificationCode","format":"an..17"},{"name":"codeListResponsibleAgencyCode","format":"an..3"},{"name":"institutionBranchIdentifier","format":"an..17"},{"name":"codeListIdentificationCode","format":"an..17"},{"name":"codeListResponsibleAgencyCode","format":"an..3"},{"name":"institutionName","format":"an..70"},{"name":"institutionBranchLocationName","format":"an..70"}]},{"id":"3207","name":"countryNameCode","requires":0,"components":[{"name":"countryNameCode","format":"an..3"}]}]},"DMS":{"requires":0,"elements":[{"id":"C106","name":"documentMessageIdentification","requires":0,"components":[{"name":"documentIdentifier","format":"an..35"},{"name":"versionIdentifier","format":"an..9"},{"name":"revisionIdentifier","format":"an..6"}]},{"id":"C002","name":"documentMessageName","requires":0,"components":[{"name":"documentNameCode","format":"an..3"},{"name":"codeListIdentificationCode","format":"an..17"},{"name":"codeListResponsibleAgencyCode","format":"an..3"},{"name":"documentName","format":"an..35"}]},{"id":"7240","name":"itemTotalQuantity","requires":0,"components":[{"name":"itemTotalQuantity","format":"n..15"}]}]},"CTA":{"requires":0,"elements":[{"id":"3139","name":"contactFunctionCode","requires":0,"components":[{"name":"contactFunctionCode","format":"an..3"}]},{"id":"C056","name":"departmentOrEmployeeDetails","requires":0,"components":[{"name":"departmentOrEmployeeNameCode","format":"an..17"},{"name":"departmentOrEmployeeName","format":"an..35"}]}]},"NAD":{"requires":1,"elements":[{"id":"3035","name":"partyFunctionCodeQualifier","requires":1,"components":[{"name":"partyFunctionCodeQualifier","format":"an..3"}]},{"id":"C082","name":"partyIdentificationDetails","requires":1,"components":[{"name":"partyIdentifier","format":"an..35"},{"name":"codeListIdentificationCode","format":"an..17"},{"name":"codeListResponsibleAgencyCode","format":"an..3"}]},{"id":"C058","name":"nameAndAddress","requires":1,"components":[{"name":"nameAndAddressDescription","format":"an..35"},{"name":"nameAndAddressDescription","format":"an..35"},{"name":"nameAndAddressDescription","format":"an..35"},{"name":"nameAndAddressDescription","format":"an..35"},{"name":"nameAndAddressDescription","format":"an..35"}]},{"id":"C080","name":"partyName","requires":1,"components":[{"name":"partyName","format":"an..35"},{"name":"partyName","format":"an..35"},{"name":"partyName","format":"an..35"},{"name":"partyName","format":"an..35"},{"name":"partyName","format":"an..35"},{"name":"partyNameFormatCode","format":"an..3"}]},{"id":"C059","name":"street","requires":1,"components":[{"name":"streetAndNumberOrPostOfficeBoxIdentifier","format":"an..35"},{"name":"streetAndNumberOrPostOfficeBoxIdentifier","format":"an..35"},{"name":"streetAndNumberOrPostOfficeBoxIdentifier","format":"an..35"},{"name":"streetAndNumberOrPostOfficeBoxIdentifier","format":"an..35"}]},{"id":"3164","name":"cityName","requires":0,"components":[{"name":"cityName","format":"an..35"}]},{"id":"C819","name":"countrySubEntityDetails","requires":0,"components":[{"name":"countrySubEntityNameCode","format":"an..9"},{"name":"codeListIdentificationCode","format":"an..17"},{"name":"codeListResponsibleAgencyCode","format":"an..3"},{"name":"countrySubEntityName","format":"an..70"}]},{"id":"3251","name":"postalIdentificationCode","requires":0,"components":[{"name":"postalIdentificationCode","format":"an..17"}]},{"id":"3207","name":"countryNameCode","requires":0,"components":[{"name":"countryNameCode","format":"an..3"}]}]},"FTX":{"requires":1,"elements":[{"id":"4451","name":"textSubjectCodeQualifier","requires":1,"components":[{"name":"textSubjectCodeQualifier","format":"an..3"}]},{"id":"4453","name":"freeTextFunctionCode","requires":0,"components":[{"name":"freeTextFunctionCode","format":"an..3"}]},{"id":"C107","name":"textReference","requires":1,"components":[{"name":"freeTextValueCode","format":"an..17"},{"name":"codeListIdentificationCode","format":"an..17"},{"name":"codeListResponsibleAgencyCode","format":"an..3"}]},{"id":"C108","name":"textLiteral","requires":1,"components":[{"name":"freeTextValue","format":"an..512"},{"name":"freeTextValue","format":"an..512"},{"name":"freeTextValue","format":"an..512"},{"name":"freeTextValue","format":"an..512"},{"name":"freeTextValue","format":"an..512"}]},{"id":"3453","name":"languageNameCode","requires":0,"components":[{"name":"languageNameCode","format":"an..3"}]},{"id":"4447","name":"freeTextFormatCode","requires":0,"components":[{"name":"freeTextFormatCode","format":"an..3"}]}]},"LIN":{"requires":0,"elements":[{"id":"1082","name":"lineItemIdentifier","requires":0,"components":[{"name":"lineItemIdentifier","format":"an..6"}]},{"id":"1229","name":"actionRequestNotificationDescriptionCode","requires":0,"components":[{"name":"actionRequestNotificationDescriptionCode","format":"an..3"}]},{"id":"C212","name":"itemNumberIdentification","requires":0,"components":[{"name":"itemIdentifier","format":"an..35"},{"name":"itemTypeIdentificationCode","format":"an..3"},{"name":"codeListIdentificationCode","format":"an..17"},{"name":"codeListResponsibleAgencyCode","format":"an..3"}]},{"id":"C829","name":"subLineInformation","requires":0,"components":[{"name":"subLineIndicatorCode","format":"an..3"},{"name":"lineItemIdentifier","format":"an..6"}]},{"id":"1222","name":"configurationLevelNumber","requires":0,"components":[{"name":"configurationLevelNumber","format":"n..2"}]},{"id":"7083","name":"configurationOperationCode","requires":0,"components":[{"name":"configurationOperationCode","format":"an..3"}]}]}}
+{
+  "PAI": {
+    "requires": 1,
+    "elements": [
+      {
+        "id": "C534",
+        "name": "paymentInstructionDetails",
+        "requires": 0,
+        "components": [
+          { "name": "paymentConditionsCode", "format": "an..3" },
+          { "name": "paymentGuaranteeMeansCode", "format": "an..3" },
+          { "name": "paymentMeansCode", "format": "an..3" },
+          { "name": "codeListIdentificationCode", "format": "an..17" },
+          { "name": "codeListResponsibleAgencyCode", "format": "an..3" },
+          { "name": "paymentChannelCode", "format": "an..3" }
+        ]
+      }
+    ]
+  },
+  "RFF": {
+    "requires": 1,
+    "elements": [
+      {
+        "id": "C506",
+        "name": "reference",
+        "requires": 1,
+        "components": [
+          { "name": "referenceCodeQualifier", "format": "an..3" },
+          { "name": "referenceIdentifier", "format": "an..70" },
+          { "name": "documentLineIdentifier", "format": "an..6" },
+          { "name": "referenceVersionIdentifier", "format": "an..35" },
+          { "name": "revisionIdentifier", "format": "an..6" }
+        ]
+      }
+    ]
+  },
+  "DTM": {
+    "requires": 1,
+    "elements": [
+      {
+        "id": "C507",
+        "name": "dateTimePeriod",
+        "requires": 1,
+        "components": [
+          {
+            "name": "dateOrTimeOrPeriodFunctionCodeQualifier",
+            "format": "an..3"
+          },
+          { "name": "dateOrTimeOrPeriodValue", "format": "an..35" },
+          { "name": "dateOrTimeOrPeriodFormatCode", "format": "an..3" }
+        ]
+      }
+    ]
+  },
+  "PCD": {
+    "requires": 1,
+    "elements": [
+      {
+        "id": "C501",
+        "name": "percentageDetails",
+        "requires": 1,
+        "components": [
+          { "name": "percentageTypeCodeQualifier", "format": "an..3" },
+          { "name": "percentage", "format": "n..10" },
+          { "name": "percentageBasisIdentificationCode", "format": "an..3" },
+          { "name": "codeListIdentificationCode", "format": "an..17" },
+          { "name": "codeListResponsibleAgencyCode", "format": "an..3" }
+        ]
+      },
+      {
+        "id": "4405",
+        "name": "statusDescriptionCode",
+        "requires": 0,
+        "components": [{ "name": "statusDescriptionCode", "format": "an..3" }]
+      }
+    ]
+  },
+  "ARD": {
+    "requires": 0,
+    "elements": [
+      {
+        "id": "C549",
+        "name": "monetaryAmountFunction",
+        "requires": 0,
+        "components": [
+          {
+            "name": "monetaryAmountFunctionDescriptionCode",
+            "format": "an..3"
+          },
+          { "name": "codeListIdentificationCode", "format": "an..17" },
+          { "name": "codeListResponsibleAgencyCode", "format": "an..3" },
+          { "name": "monetaryAmountFunctionDescription", "format": "an..70" }
+        ]
+      },
+      {
+        "id": "C008",
+        "name": "monetaryAmountFunctionDetail",
+        "requires": 0,
+        "components": [
+          {
+            "name": "monetaryAmountFunctionDetailDescriptionCode",
+            "format": "an..17"
+          },
+          { "name": "codeListIdentificationCode", "format": "an..17" },
+          { "name": "codeListResponsibleAgencyCode", "format": "an..3" },
+          {
+            "name": "monetaryAmountFunctionDetailDescription",
+            "format": "an..70"
+          }
+        ]
+      }
+    ]
+  },
+  "MEA": {
+    "requires": 1,
+    "elements": [
+      {
+        "id": "6311",
+        "name": "measurementPurposeCodeQualifier",
+        "requires": 1,
+        "components": [
+          { "name": "measurementPurposeCodeQualifier", "format": "an..3" }
+        ]
+      },
+      {
+        "id": "C502",
+        "name": "measurementDetails",
+        "requires": 0,
+        "components": [
+          { "name": "measuredAttributeCode", "format": "an..3" },
+          { "name": "measurementSignificanceCode", "format": "an..3" },
+          { "name": "nonDiscreteMeasurementNameCode", "format": "an..17" },
+          { "name": "nonDiscreteMeasurementName", "format": "an..70" }
+        ]
+      },
+      {
+        "id": "C174",
+        "name": "valueRange",
+        "requires": 1,
+        "components": [
+          { "name": "measurementUnitCode", "format": "an..3" },
+          { "name": "measurementValue", "format": "an..18" },
+          { "name": "rangeMinimumValue", "format": "n..18" },
+          { "name": "rangeMaximumValue", "format": "n..18" },
+          { "name": "significantDigitsQuantity", "format": "n..2" }
+        ]
+      },
+      {
+        "id": "7383",
+        "name": "surfaceOrLayerCode",
+        "requires": 0,
+        "components": [{ "name": "surfaceOrLayerCode", "format": "an..3" }]
+      }
+    ]
+  },
+  "GIS": {
+    "requires": 1,
+    "elements": [
+      {
+        "id": "C529",
+        "name": "processingIndicator",
+        "requires": 1,
+        "components": [
+          { "name": "processingIndicatorDescriptionCode", "format": "an..3" },
+          { "name": "codeListIdentificationCode", "format": "an..17" },
+          { "name": "codeListResponsibleAgencyCode", "format": "an..3" },
+          { "name": "processTypeDescriptionCode", "format": "an..17" }
+        ]
+      }
+    ]
+  },
+  "COM": {
+    "requires": 1,
+    "elements": [
+      {
+        "id": "C076",
+        "name": "communicationContact",
+        "requires": 2,
+        "components": [
+          { "name": "communicationAddressIdentifier", "format": "an..512" },
+          { "name": "communicationAddressCodeQualifier", "format": "an..3" }
+        ]
+      }
+    ]
+  },
+  "MOA": {
+    "requires": 1,
+    "elements": [
+      {
+        "id": "C516",
+        "name": "monetaryAmount",
+        "requires": 1,
+        "components": [
+          { "name": "monetaryAmountTypeCodeQualifier", "format": "an..3" },
+          { "name": "monetaryAmount", "format": "n..35" },
+          { "name": "currencyIdentificationCode", "format": "an..3" },
+          { "name": "currencyTypeCodeQualifier", "format": "an..3" },
+          { "name": "statusDescriptionCode", "format": "an..3" }
+        ]
+      }
+    ]
+  },
+  "BGM": {
+    "requires": 0,
+    "elements": [
+      {
+        "id": "C002",
+        "name": "documentMessageName",
+        "requires": 0,
+        "components": [
+          { "name": "documentNameCode", "format": "an..3" },
+          { "name": "codeListIdentificationCode", "format": "an..17" },
+          { "name": "codeListResponsibleAgencyCode", "format": "an..3" },
+          { "name": "documentName", "format": "an..35" }
+        ]
+      },
+      {
+        "id": "C106",
+        "name": "documentMessageIdentification",
+        "requires": 0,
+        "components": [
+          { "name": "documentIdentifier", "format": "an..35" },
+          { "name": "versionIdentifier", "format": "an..9" },
+          { "name": "revisionIdentifier", "format": "an..6" }
+        ]
+      },
+      {
+        "id": "1225",
+        "name": "messageFunctionCode",
+        "requires": 0,
+        "components": [{ "name": "messageFunctionCode", "format": "an..3" }]
+      },
+      {
+        "id": "4343",
+        "name": "responseTypeCode",
+        "requires": 0,
+        "components": [{ "name": "responseTypeCode", "format": "an..3" }]
+      }
+    ]
+  },
+  "AUT": {
+    "requires": 1,
+    "elements": [
+      {
+        "id": "9280",
+        "name": "validationResultValue",
+        "requires": 1,
+        "components": [{ "name": "validationResultValue", "format": "an..35" }]
+      },
+      {
+        "id": "9282",
+        "name": "validationKeyIdentifier",
+        "requires": 0,
+        "components": [
+          { "name": "validationKeyIdentifier", "format": "an..35" }
+        ]
+      }
+    ]
+  },
+  "CNT": {
+    "requires": 1,
+    "elements": [
+      {
+        "id": "C270",
+        "name": "control",
+        "requires": 2,
+        "components": [
+          { "name": "controlTotalTypeCodeQualifier", "format": "an..3" },
+          { "name": "controlTotalValue", "format": "n..18" },
+          { "name": "measurementUnitCode", "format": "an..3" }
+        ]
+      }
+    ]
+  },
+  "LOC": {
+    "requires": 1,
+    "elements": [
+      {
+        "id": "3227",
+        "name": "locationFunctionCodeQualifier",
+        "requires": 1,
+        "components": [
+          { "name": "locationFunctionCodeQualifier", "format": "an..3" }
+        ]
+      },
+      {
+        "id": "C517",
+        "name": "locationIdentification",
+        "requires": 0,
+        "components": [
+          { "name": "locationNameCode", "format": "an..25" },
+          { "name": "codeListIdentificationCode", "format": "an..17" },
+          { "name": "codeListResponsibleAgencyCode", "format": "an..3" },
+          { "name": "locationName", "format": "an..256" }
+        ]
+      },
+      {
+        "id": "C519",
+        "name": "relatedLocationOneIdentification",
+        "requires": 0,
+        "components": [
+          { "name": "firstRelatedLocationNameCode", "format": "an..25" },
+          { "name": "codeListIdentificationCode", "format": "an..17" },
+          { "name": "codeListResponsibleAgencyCode", "format": "an..3" },
+          { "name": "firstRelatedLocationName", "format": "an..70" }
+        ]
+      },
+      {
+        "id": "C553",
+        "name": "relatedLocationTwoIdentification",
+        "requires": 0,
+        "components": [
+          { "name": "secondRelatedLocationNameCode", "format": "an..25" },
+          { "name": "codeListIdentificationCode", "format": "an..17" },
+          { "name": "codeListResponsibleAgencyCode", "format": "an..3" },
+          { "name": "secondRelatedLocationName", "format": "an..70" }
+        ]
+      },
+      {
+        "id": "5479",
+        "name": "relationCode",
+        "requires": 0,
+        "components": [{ "name": "relationCode", "format": "an..3" }]
+      }
+    ]
+  },
+  "FII": {
+    "requires": 1,
+    "elements": [
+      {
+        "id": "3035",
+        "name": "partyFunctionCodeQualifier",
+        "requires": 1,
+        "components": [
+          { "name": "partyFunctionCodeQualifier", "format": "an..3" }
+        ]
+      },
+      {
+        "id": "C078",
+        "name": "accountHolderIdentification",
+        "requires": 0,
+        "components": [
+          { "name": "accountHolderIdentifier", "format": "an..35" },
+          { "name": "accountHolderName", "format": "an..35" },
+          { "name": "accountHolderName", "format": "an..35" },
+          { "name": "currencyIdentificationCode", "format": "an..3" }
+        ]
+      },
+      {
+        "id": "C088",
+        "name": "institutionIdentification",
+        "requires": 0,
+        "components": [
+          { "name": "institutionNameCode", "format": "an..11" },
+          { "name": "codeListIdentificationCode", "format": "an..17" },
+          { "name": "codeListResponsibleAgencyCode", "format": "an..3" },
+          { "name": "institutionBranchIdentifier", "format": "an..17" },
+          { "name": "codeListIdentificationCode", "format": "an..17" },
+          { "name": "codeListResponsibleAgencyCode", "format": "an..3" },
+          { "name": "institutionName", "format": "an..70" },
+          { "name": "institutionBranchLocationName", "format": "an..70" }
+        ]
+      },
+      {
+        "id": "3207",
+        "name": "countryNameCode",
+        "requires": 0,
+        "components": [{ "name": "countryNameCode", "format": "an..3" }]
+      }
+    ]
+  },
+  "DMS": {
+    "requires": 0,
+    "elements": [
+      {
+        "id": "C106",
+        "name": "documentMessageIdentification",
+        "requires": 0,
+        "components": [
+          { "name": "documentIdentifier", "format": "an..35" },
+          { "name": "versionIdentifier", "format": "an..9" },
+          { "name": "revisionIdentifier", "format": "an..6" }
+        ]
+      },
+      {
+        "id": "C002",
+        "name": "documentMessageName",
+        "requires": 0,
+        "components": [
+          { "name": "documentNameCode", "format": "an..3" },
+          { "name": "codeListIdentificationCode", "format": "an..17" },
+          { "name": "codeListResponsibleAgencyCode", "format": "an..3" },
+          { "name": "documentName", "format": "an..35" }
+        ]
+      },
+      {
+        "id": "7240",
+        "name": "itemTotalQuantity",
+        "requires": 0,
+        "components": [{ "name": "itemTotalQuantity", "format": "n..15" }]
+      }
+    ]
+  },
+  "CTA": {
+    "requires": 0,
+    "elements": [
+      {
+        "id": "3139",
+        "name": "contactFunctionCode",
+        "requires": 0,
+        "components": [{ "name": "contactFunctionCode", "format": "an..3" }]
+      },
+      {
+        "id": "C056",
+        "name": "departmentOrEmployeeDetails",
+        "requires": 0,
+        "components": [
+          { "name": "departmentOrEmployeeNameCode", "format": "an..17" },
+          { "name": "departmentOrEmployeeName", "format": "an..35" }
+        ]
+      }
+    ]
+  },
+  "NAD": {
+    "requires": 1,
+    "elements": [
+      {
+        "id": "3035",
+        "name": "partyFunctionCodeQualifier",
+        "requires": 1,
+        "components": [
+          { "name": "partyFunctionCodeQualifier", "format": "an..3" }
+        ]
+      },
+      {
+        "id": "C082",
+        "name": "partyIdentificationDetails",
+        "requires": 1,
+        "components": [
+          { "name": "partyIdentifier", "format": "an..35" },
+          { "name": "codeListIdentificationCode", "format": "an..17" },
+          { "name": "codeListResponsibleAgencyCode", "format": "an..3" }
+        ]
+      },
+      {
+        "id": "C058",
+        "name": "nameAndAddress",
+        "requires": 1,
+        "components": [
+          { "name": "nameAndAddressDescription", "format": "an..35" },
+          { "name": "nameAndAddressDescription", "format": "an..35" },
+          { "name": "nameAndAddressDescription", "format": "an..35" },
+          { "name": "nameAndAddressDescription", "format": "an..35" },
+          { "name": "nameAndAddressDescription", "format": "an..35" }
+        ]
+      },
+      {
+        "id": "C080",
+        "name": "partyName",
+        "requires": 1,
+        "components": [
+          { "name": "partyName", "format": "an..35" },
+          { "name": "partyName", "format": "an..35" },
+          { "name": "partyName", "format": "an..35" },
+          { "name": "partyName", "format": "an..35" },
+          { "name": "partyName", "format": "an..35" },
+          { "name": "partyNameFormatCode", "format": "an..3" }
+        ]
+      },
+      {
+        "id": "C059",
+        "name": "street",
+        "requires": 1,
+        "components": [
+          {
+            "name": "streetAndNumberOrPostOfficeBoxIdentifier",
+            "format": "an..35"
+          },
+          {
+            "name": "streetAndNumberOrPostOfficeBoxIdentifier",
+            "format": "an..35"
+          },
+          {
+            "name": "streetAndNumberOrPostOfficeBoxIdentifier",
+            "format": "an..35"
+          },
+          {
+            "name": "streetAndNumberOrPostOfficeBoxIdentifier",
+            "format": "an..35"
+          }
+        ]
+      },
+      {
+        "id": "3164",
+        "name": "cityName",
+        "requires": 0,
+        "components": [{ "name": "cityName", "format": "an..35" }]
+      },
+      {
+        "id": "C819",
+        "name": "countrySubEntityDetails",
+        "requires": 0,
+        "components": [
+          { "name": "countrySubEntityNameCode", "format": "an..9" },
+          { "name": "codeListIdentificationCode", "format": "an..17" },
+          { "name": "codeListResponsibleAgencyCode", "format": "an..3" },
+          { "name": "countrySubEntityName", "format": "an..70" }
+        ]
+      },
+      {
+        "id": "3251",
+        "name": "postalIdentificationCode",
+        "requires": 0,
+        "components": [
+          { "name": "postalIdentificationCode", "format": "an..17" }
+        ]
+      },
+      {
+        "id": "3207",
+        "name": "countryNameCode",
+        "requires": 0,
+        "components": [{ "name": "countryNameCode", "format": "an..3" }]
+      }
+    ]
+  },
+  "FTX": {
+    "requires": 1,
+    "elements": [
+      {
+        "id": "4451",
+        "name": "textSubjectCodeQualifier",
+        "requires": 1,
+        "components": [
+          { "name": "textSubjectCodeQualifier", "format": "an..3" }
+        ]
+      },
+      {
+        "id": "4453",
+        "name": "freeTextFunctionCode",
+        "requires": 0,
+        "components": [{ "name": "freeTextFunctionCode", "format": "an..3" }]
+      },
+      {
+        "id": "C107",
+        "name": "textReference",
+        "requires": 1,
+        "components": [
+          { "name": "freeTextValueCode", "format": "an..17" },
+          { "name": "codeListIdentificationCode", "format": "an..17" },
+          { "name": "codeListResponsibleAgencyCode", "format": "an..3" }
+        ]
+      },
+      {
+        "id": "C108",
+        "name": "textLiteral",
+        "requires": 1,
+        "components": [
+          { "name": "freeTextValue", "format": "an..512" },
+          { "name": "freeTextValue", "format": "an..512" },
+          { "name": "freeTextValue", "format": "an..512" },
+          { "name": "freeTextValue", "format": "an..512" },
+          { "name": "freeTextValue", "format": "an..512" }
+        ]
+      },
+      {
+        "id": "3453",
+        "name": "languageNameCode",
+        "requires": 0,
+        "components": [{ "name": "languageNameCode", "format": "an..3" }]
+      },
+      {
+        "id": "4447",
+        "name": "freeTextFormatCode",
+        "requires": 0,
+        "components": [{ "name": "freeTextFormatCode", "format": "an..3" }]
+      }
+    ]
+  },
+  "LIN": {
+    "requires": 0,
+    "elements": [
+      {
+        "id": "1082",
+        "name": "lineItemIdentifier",
+        "requires": 0,
+        "components": [{ "name": "lineItemIdentifier", "format": "an..6" }]
+      },
+      {
+        "id": "1229",
+        "name": "actionRequestNotificationDescriptionCode",
+        "requires": 0,
+        "components": [
+          {
+            "name": "actionRequestNotificationDescriptionCode",
+            "format": "an..3"
+          }
+        ]
+      },
+      {
+        "id": "C212",
+        "name": "itemNumberIdentification",
+        "requires": 0,
+        "components": [
+          { "name": "itemIdentifier", "format": "an..35" },
+          { "name": "itemTypeIdentificationCode", "format": "an..3" },
+          { "name": "codeListIdentificationCode", "format": "an..17" },
+          { "name": "codeListResponsibleAgencyCode", "format": "an..3" }
+        ]
+      },
+      {
+        "id": "C829",
+        "name": "subLineInformation",
+        "requires": 0,
+        "components": [
+          { "name": "subLineIndicatorCode", "format": "an..3" },
+          { "name": "lineItemIdentifier", "format": "an..6" }
+        ]
+      },
+      {
+        "id": "1222",
+        "name": "configurationLevelNumber",
+        "requires": 0,
+        "components": [{ "name": "configurationLevelNumber", "format": "n..2" }]
+      },
+      {
+        "id": "7083",
+        "name": "configurationOperationCode",
+        "requires": 0,
+        "components": [
+          { "name": "configurationOperationCode", "format": "an..3" }
+        ]
+      }
+    ]
+  }
+}
