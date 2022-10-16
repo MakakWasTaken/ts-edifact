@@ -639,12 +639,16 @@ export interface MessageDetails {
 
 // DTM
 
+interface DateTimePeriodData {
+    dateTimeOrPeriodFunctionCodeQualifier: string;
+    dateTimeOrPeriodText: string | undefined;
+    dateTimeOrPeriodFormatCode: string | undefined;
+}
+
 export interface DateTimePeriod {
     tag: string;
 
-    dateOrTimeOrPeriodFunctionCodeQualifier: string;
-    dateOrTimeOrPeriodValue: string | undefined;
-    dateOrTimeOrPeriodFormatCode: string | undefined;
+    dateTimePeriod: DateTimePeriodData;
 }
 
 // EFI
