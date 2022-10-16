@@ -1,9 +1,10 @@
-/lib
+lib/
+coverage/
 dist
 node_modules
 .vscode-test/
 *.vsix
-.nyc_output
+.nyc_output/
 coverage
 package-lock.json
 *.code-workspace

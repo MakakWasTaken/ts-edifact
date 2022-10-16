@@ -16,93 +16,91 @@
  * limitations under the License.
  */
 
-import { StateMachineDefinition } from '@initics/tsm';
-import { UNECEDomHandler } from './uneceDomHandler';
-
-import { EdifactMessageSpecificationImpl } from './messageStructureParser';
-import { UNECEPageParser } from './unecePageParser';
+import { StateMachineDefinition } from '@initics/tsm'
+import { EdifactMessageSpecificationImpl } from './messageStructureParser'
+import { UNECEDomHandler } from './uneceDomHandler'
+import { UNECEPageParser } from './unecePageParser'
 
 enum State {
-    initial = 'initial',
-    beforeMessageType = 'beforeMessageType',
-    afterMessageType = 'afterMessageType',
-    beforeMetaData = 'beforeMetaData',
-    afterMetaData = 'afterMetaData'
+  initial = 'initial',
+  beforeMessageType = 'beforeMessageType',
+  afterMessageType = 'afterMessageType',
+  beforeMetaData = 'beforeMetaData',
+  afterMetaData = 'afterMetaData',
 }
 
 const SM_DEFINITION: StateMachineDefinition = {
-    initial: State.initial,
-    transitions: [
-        { from: State.initial, to: State.beforeMessageType },
-        { from: State.beforeMessageType, to: State.afterMessageType },
-        { from: State.afterMessageType, to: State.beforeMetaData },
-        { from: State.beforeMetaData, to: State.afterMetaData }
-    ]
-};
+  initial: State.initial,
+  transitions: [
+    { from: State.initial, to: State.beforeMessageType },
+    { from: State.beforeMessageType, to: State.afterMessageType },
+    { from: State.afterMessageType, to: State.beforeMetaData },
+    { from: State.beforeMetaData, to: State.afterMetaData },
+  ],
+}
 
 export class UNECEMetaDataPageParser extends UNECEPageParser {
-    private messageType?: string;
+  private messageType?: string
 
-    constructor() {
-        super(SM_DEFINITION);
-    }
+  constructor() {
+    super(SM_DEFINITION)
+  }
 
-    protected setupHandler(): UNECEDomHandler {
-        const handler: UNECEDomHandler = super.setupHandler();
+  protected setupHandler(): UNECEDomHandler {
+    const handler: UNECEDomHandler = super.setupHandler()
 
-        handler.onText = (text: string) => {
-            switch (this.sm.state) {
-                case State.initial:
-                    if (text.includes('Message Type')) {
-                        this.sm.transition(State.beforeMessageType);
-                    }
-                    break;
+    handler.onText = (text: string) => {
+      switch (this.sm.state) {
+        case State.initial:
+          if (text.includes('Message Type')) {
+            this.sm.transition(State.beforeMessageType)
+          }
+          break
 
-                case State.beforeMessageType:
-                    this.messageType = text;
-                    this.sm.transition(State.afterMessageType);
-                    break;
+        case State.beforeMessageType:
+          this.messageType = text
+          this.sm.transition(State.afterMessageType)
+          break
 
-                case State.afterMessageType:
-                    if (!this.messageType) {
-                        this.throwCouldNotParsePage();
-                    } else {
-                        if (
-                            text.includes('Version') &&
-                            text.includes('Release') &&
-                            text.includes('Contr. Agency')
-                        ) {
-                            const version: string = this.extractTextValue(
-                                text,
-                                /Version\s*: ([A-Z]*)\s/g,
-                                1
-                            );
-                            const release: string = this.extractTextValue(
-                                text,
-                                /Release\s*: ([0-9A-Z]*)\s/g,
-                                1
-                            );
-                            const controllingAgency: string =
-                                this.extractTextValue(
-                                    text,
-                                    /Contr. Agency\s*: ([0-9A-Z]*)\s/g,
-                                    1
-                                );
-                            this._spec = new EdifactMessageSpecificationImpl(
-                                this.messageType,
-                                version,
-                                release,
-                                controllingAgency
-                            );
-                        }
-                    }
-                    break;
-
-                default:
-                    this.throwInvalidParserState(this.sm.state);
+        case State.afterMessageType:
+          if (!this.messageType) {
+            this.throwCouldNotParsePage()
+          } else {
+            if (
+              text.includes('Version') &&
+              text.includes('Release') &&
+              text.includes('Contr. Agency')
+            ) {
+              const version: string = this.extractTextValue(
+                text,
+                /Version\s*: ([A-Z]*)\s/g,
+                1,
+              )
+              const release: string = this.extractTextValue(
+                text,
+                /Release\s*: ([0-9A-Z]*)\s/g,
+                1,
+              )
+              const controllingAgency: string = this.extractTextValue(
+                text,
+                /Contr. Agency\s*: ([0-9A-Z]*)\s/g,
+                1,
+              )
+              this._spec = new EdifactMessageSpecificationImpl(
+                this.messageType,
+                version,
+                release,
+                controllingAgency,
+              )
             }
-        };
+          }
+          break
 
-        return handler;
+        default:
+          this.throwInvalidParserState(this.sm.state)
+      }
     }
+
+    return handler
+  }
 }

@@ -16,554 +16,499 @@
  * limitations under the License.
  */
 
-import {
-    Dictionary,
-    SegmentEntry,
-    ElementEntry,
-    Component
-} from '../validator';
-import { MessageType } from '../tracker';
-import { HttpClient } from '../httpClient';
-import { Parser, DomHandler } from 'htmlparser2';
-import { isDefined } from '../util';
+import { DomHandler, Parser } from 'htmlparser2'
+import { HttpClient } from '../httpClient'
+import { MessageType } from '../tracker'
+import { isDefined } from '../util'
+import { Component, Dictionary, ElementEntry, SegmentEntry } from '../validator'
 
 export interface EdifactMessageSpecification {
-    readonly messageType: string;
-    readonly version: string;
-    readonly release: string;
-    readonly controllingAgency: string;
+  readonly messageType: string
+  readonly version: string
+  readonly release: string
+  readonly controllingAgency: string
 
-    /**
-     * Contains the available segments as key and the respective elements
-     * a segment contains as well as the mandatory count as value
-     */
-    readonly segmentTable: Dictionary<SegmentEntry>;
-    /**
-     * Contains the actual message structure generatedby this parser
-     */
-    readonly messageStructureDefinition: MessageType[];
+  /**
+   * Contains the available segments as key and the respective elements
+   * a segment contains as well as the mandatory count as value
+   */
+  readonly segmentTable: Dictionary<SegmentEntry>
+  /**
+   * Contains the actual message structure generatedby this parser
+   */
+  readonly messageStructureDefinition: MessageType[]
 
-    type(): string;
-    versionAbbr(): string;
+  type(): string
+  versionAbbr(): string
 }
 
 export class EdifactMessageSpecificationImpl
-    implements EdifactMessageSpecification
+  implements EdifactMessageSpecification
 {
-    messageType: string;
-    version: string;
-    release: string;
-    controllingAgency: string;
+  messageType: string
+  version: string
+  release: string
+  controllingAgency: string
 
-    segmentTable: Dictionary<SegmentEntry> = new Dictionary<SegmentEntry>();
-    elementTable: Dictionary<ElementEntry> = new Dictionary<ElementEntry>();
-    messageStructureDefinition: MessageType[] = [];
+  segmentTable: Dictionary<SegmentEntry> = new Dictionary<SegmentEntry>()
+  elementTable: Dictionary<ElementEntry> = new Dictionary<ElementEntry>()
+  messageStructureDefinition: MessageType[] = []
 
-    constructor(
-        messageType: string,
-        version: string,
-        release: string,
-        controllingAgency: string
-    ) {
-        this.messageType = messageType;
-        this.version = version;
-        this.release = release;
-        this.controllingAgency = controllingAgency;
-    }
+  constructor(
+    messageType: string,
+    version: string,
+    release: string,
+    controllingAgency: string,
+  ) {
+    this.messageType = messageType
+    this.version = version
+    this.release = release
+    this.controllingAgency = controllingAgency
+  }
 
-    public type(): string {
-        return this.version + this.release + '_' + this.messageType;
-    }
+  public type(): string {
+    return this.version + this.release + '_' + this.messageType
+  }
 
-    public versionAbbr(): string {
-        return this.version + this.release;
-    }
+  public versionAbbr(): string {
+    return this.version + this.release
+  }
 }
 
 enum Part {
-    BeforeStructureDef,
-    RefLink,
-    Pos,
-    Tag,
-    Deprecated,
-    Name,
-    AfterStructureDef
+  BeforeStructureDef,
+  RefLink,
+  Pos,
+  Tag,
+  Deprecated,
+  Name,
+  AfterStructureDef,
 }
 
 enum SegmentPart {
-    BeforeStructureDef,
-    Data,
-    AfterStructureDef
+  BeforeStructureDef,
+  Data,
+  AfterStructureDef,
 }
 
 export type ParsingResultType = {
-    specObj: EdifactMessageSpecification;
-    promises: Promise<EdifactMessageSpecification>[];
-};
+  specObj: EdifactMessageSpecification
+  promises: Promise<EdifactMessageSpecification>[]
+}
 
 export interface MessageStructureParser {
-    loadTypeSpec(): Promise<EdifactMessageSpecification>;
+  loadTypeSpec(): Promise<EdifactMessageSpecification>
 }
 
 export class UNECEMessageStructureParser implements MessageStructureParser {
-    readonly version: string;
-    readonly type: string;
-    readonly httpClient: HttpClient;
+  readonly version: string
+  readonly type: string
+  readonly httpClient: HttpClient
 
-    constructor(version: string, type: string) {
-        this.version = version.toLowerCase();
-        this.type = type.toLowerCase();
+  constructor(version: string, type: string) {
+    this.version = version.toLowerCase()
+    this.type = type.toLowerCase()
 
-        const baseUrl: string =
-            'https://service.unece.org/trade/untdid/' +
-            this.version +
-            '/trmd/' +
-            this.type +
-            '_c.htm';
-        this.httpClient = new HttpClient(baseUrl);
+    const baseUrl: string =
+      'https://service.unece.org/trade/untdid/' +
+      this.version +
+      '/trmd/' +
+      this.type +
+      '_c.htm'
+    this.httpClient = new HttpClient(baseUrl)
+  }
+
+  private extractTextValue(text: string, regex: RegExp, index = 0): string {
+    const arr: RegExpExecArray | null = regex.exec(text)
+    if (isDefined(arr)) {
+      return arr[index]
+    }
+    return ''
+  }
+
+  protected async loadPage(page: string): Promise<string> {
+    const data: string = await this.httpClient.get(page)
+    return data
+  }
+
+  protected formatComponentName(name?: string): string | undefined {
+    if (!name || name === '') {
+      return undefined
+    }
+    const formattedName: string = name.replace(/\/|&|,|-/g, ' ')
+    const split = formattedName.split(' ')
+    if (split.length > 0) {
+      const formattedNames = split.map(
+        (part: string) =>
+          part.charAt(0).toUpperCase() + part.slice(1).toLowerCase(),
+      )
+      const result =
+        formattedNames[0].toLowerCase() + formattedNames.slice(1).join('')
+
+      return result
+    }
+    return undefined
+  }
+
+  protected async parseSegmentDefinitionPage(
+    segment: string,
+    page: string,
+    definition: EdifactMessageSpecification,
+  ): Promise<EdifactMessageSpecification> {
+    if (definition.segmentTable.contains(segment)) {
+      return Promise.resolve(definition)
     }
 
-    private extractTextValue(text: string, regex: RegExp, index = 0): string {
-        const arr: RegExpExecArray | null = regex.exec(text);
+    const segEntry: SegmentEntry = { requires: 0, elements: [] }
+    let state: SegmentPart = SegmentPart.BeforeStructureDef
+
+    // only relevant for legacy UNECE segment specification pages:
+    let dataSection = false
+
+    let skipAddingElement = false
+    let overflowLine: string | null = null
+    let complexEleId: string | null = null
+    let complexEleEntry: ElementEntry | null = null
+    for (let line of page.split('\n')) {
+      line = line.trimEnd()
+      if (overflowLine !== null) {
+        line = overflowLine.trimStart() + ' ' + line.trim()
+        overflowLine = null
+      }
+
+      if (state === SegmentPart.BeforeStructureDef && line.includes('<HR>')) {
+        dataSection = true
+      } else if (
+        state === SegmentPart.BeforeStructureDef &&
+        // checking dataSection and <B> tag only relevant for legacy
+        // UNECE segment specification pages:
+        (line.includes('<H3>') || (dataSection && line.includes('<B>')))
+      ) {
+        state = SegmentPart.Data
+      } else if (state === SegmentPart.Data && !line.includes('<P>')) {
+        const regexp: RegExp =
+          /^\s*?([\d]*)\s*?([X|\\*]?)\s*<A.*>([a-zA-Z0-9]*)<\/A>([a-zA-Z0-9 ,\-\\/&]{44,})([M|C])\s*([\d]*)\s*([a-zA-Z0-9\\.]*).*$/g
+        const arr: RegExpExecArray | null = regexp.exec(line)
         if (isDefined(arr)) {
-            return arr[index];
-        }
-        return '';
-    }
+          const segGroupId: string | undefined =
+            arr[1] === '' ? undefined : arr[1]
+          // const deprecated: boolean = arr[2] === "X" ? true : false;
+          const id: string = arr[3]
+          const mandatory: boolean = arr[5] === 'M' ? true : false
+          // const repetition: number | undefined = isDefined(arr[6]) ? parseInt(arr[6]) : undefined;
+          const elementDef: string | undefined =
+            arr[7] === '' ? undefined : arr[7]
+          const componentName = this.formatComponentName(arr[4]?.trim())
 
-    protected async loadPage(page: string): Promise<string> {
-        const data: string = await this.httpClient.get(page);
-        return data;
-    }
-
-    protected formatComponentName(name?: string): string | undefined {
-        if (!name || name === '') {
-            return undefined;
-        }
-        const formattedName: string = name.replace(/\/|&|,|-/g, ' ');
-        const split = formattedName.split(' ');
-        if (split.length > 0) {
-            const formattedNames = split.map(
-                (part: string) =>
-                    part.charAt(0).toUpperCase() + part.slice(1).toLowerCase()
-            );
-            const result =
-                formattedNames[0].toLowerCase() +
-                formattedNames.slice(1).join('');
-
-            return result;
-        }
-        return undefined;
-    }
-
-    protected async parseSegmentDefinitionPage(
-        segment: string,
-        page: string,
-        definition: EdifactMessageSpecification
-    ): Promise<EdifactMessageSpecification> {
-        if (definition.segmentTable.contains(segment)) {
-            return Promise.resolve(definition);
-        }
-
-        const segEntry: SegmentEntry = { requires: 0, elements: [] };
-        let state: SegmentPart = SegmentPart.BeforeStructureDef;
-
-        // only relevant for legacy UNECE segment specification pages:
-        let dataSection = false;
-
-        let skipAddingElement = false;
-        let overflowLine: string | null = null;
-        let complexEleId: string | null = null;
-        let complexEleEntry: ElementEntry | null = null;
-        for (let line of page.split('\n')) {
-            line = line.trimEnd();
-            if (overflowLine !== null) {
-                line = overflowLine.trimStart() + ' ' + line.trim();
-                overflowLine = null;
-            }
-
-            if (
-                state === SegmentPart.BeforeStructureDef &&
-                line.includes('<HR>')
-            ) {
-                dataSection = true;
-            } else if (
-                state === SegmentPart.BeforeStructureDef &&
-                // checking dataSection and <B> tag only relevant for legacy
-                // UNECE segment specification pages:
-                (line.includes('<H3>') || (dataSection && line.includes('<B>')))
-            ) {
-                state = SegmentPart.Data;
-            } else if (state === SegmentPart.Data && !line.includes('<P>')) {
-                const regexp =
-                    /^\s*?([\d]*)\s*?([X|\\*]?)\s*<A.*>([a-zA-Z0-9]*)<\/A>([a-zA-Z0-9 ,\-\\/&]{44,})([M|C])\s*([\d]*)\s*([a-zA-Z0-9\\.]*).*$/g;
-                const arr: RegExpExecArray | null = regexp.exec(line);
-                if (isDefined(arr)) {
-                    const segGroupId: string | undefined =
-                        arr[1] === '' ? undefined : arr[1];
-                    // const deprecated: boolean = arr[2] === "X" ? true : false;
-                    const id: string = arr[3];
-                    const mandatory: boolean = arr[5] === 'M' ? true : false;
-                    // const repetition: number | undefined = isDefined(arr[6]) ? parseInt(arr[6]) : undefined;
-                    const elementDef: string | undefined =
-                        arr[7] === '' ? undefined : arr[7];
-                    const componentName = this.formatComponentName(
-                        arr[4]?.trim()
-                    );
-
-                    const component: Component | undefined =
-                        componentName && elementDef
-                            ? {
-                                  name: componentName,
-                                  format: elementDef
-                              }
-                            : undefined;
-
-                    const eleEntry: ElementEntry = {
-                        id,
-                        name: componentName || '',
-                        requires: 0,
-                        components: []
-                    };
-                    if (segGroupId) {
-                        if (id === '') {
-                            console.warn(
-                                `Could not determine element ID based on line ${line}`
-                            );
-                            continue;
-                        }
-                        skipAddingElement = false;
-
-                        if (mandatory) {
-                            segEntry.requires = segEntry.requires + 1;
-                        }
-                        if (component) {
-                            if (
-                                complexEleEntry !== null &&
-                                complexEleId !== null
-                            ) {
-                                segEntry.elements.push(complexEleEntry);
-                            }
-                            complexEleId = null;
-                            complexEleEntry = null;
-
-                            if (
-                                segEntry.elements.some(
-                                    (element) => element?.id === id
-                                )
-                            ) {
-                                continue;
-                            }
-                            if (mandatory) {
-                                eleEntry.requires = eleEntry.requires + 1;
-                            }
-                            eleEntry.components.push(component);
-                            segEntry.elements.push(eleEntry);
-                        } else {
-                            if (
-                                complexEleEntry !== null &&
-                                complexEleId !== null
-                            ) {
-                                segEntry.elements.push(complexEleEntry);
-                            }
-                            if (
-                                segEntry.elements.some(
-                                    (element) => element.id === id
-                                )
-                            ) {
-                                skipAddingElement = true;
-                                continue;
-                            }
-                            complexEleId = id;
-                            complexEleEntry = eleEntry;
-                        }
-                    } else {
-                        if (!skipAddingElement) {
-                            if (complexEleEntry !== null && component) {
-                                complexEleEntry.components.push(component);
-                                complexEleEntry.requires = mandatory
-                                    ? complexEleEntry.requires + 1
-                                    : complexEleEntry.requires;
-                            } else {
-                                // simple element definition
-                                if (
-                                    segEntry.elements.some(
-                                        (element) => element.id === id
-                                    )
-                                ) {
-                                    continue;
-                                }
-                                if (mandatory) {
-                                    eleEntry.requires = eleEntry.requires + 1;
-                                }
-                                if (component) {
-                                    eleEntry.components.push(component);
-                                }
-                                eleEntry.id = id;
-                                segEntry.elements.push(eleEntry);
-                            }
-                        }
-                    }
-                } else {
-                    const regexpAlt =
-                        /^\s*([\d]*)\s*([X|\\*]?)\s*<A.*>([a-zA-Z0-9]*)<\/A>\s*([a-zA-Z0-9 \\-\\/&]*)/g;
-                    const arrAlt: RegExpExecArray | null = regexpAlt.exec(line);
-                    if (isDefined(arrAlt)) {
-                        overflowLine = line;
-                    }
+          const component: Component | undefined =
+            componentName && elementDef
+              ? {
+                  name: componentName,
+                  format: elementDef,
                 }
-            } else if (state === SegmentPart.Data && line.includes('<P>')) {
-                state = SegmentPart.AfterStructureDef;
-                break;
-            }
-        }
-        if (complexEleEntry !== null && complexEleId !== null) {
-            segEntry.elements.push(complexEleEntry);
-        }
-        if (segment !== '') {
-            definition.segmentTable.add(segment, segEntry);
-        }
+              : undefined
 
-        return Promise.resolve(definition);
+          const eleEntry: ElementEntry = {
+            id,
+            name: componentName || '',
+            requires: 0,
+            components: [],
+          }
+          if (segGroupId) {
+            if (id === '') {
+              console.warn(
+                `Could not determine element ID based on line ${line}`,
+              )
+              continue
+            }
+            skipAddingElement = false
+
+            if (mandatory) {
+              segEntry.requires = segEntry.requires + 1
+            }
+            if (component) {
+              if (complexEleEntry !== null && complexEleId !== null) {
+                segEntry.elements.push(complexEleEntry)
+              }
+              complexEleId = null
+              complexEleEntry = null
+
+              if (segEntry.elements.some((element) => element?.id === id)) {
+                continue
+              }
+              if (mandatory) {
+                eleEntry.requires = eleEntry.requires + 1
+              }
+              eleEntry.components.push(component)
+              segEntry.elements.push(eleEntry)
+            } else {
+              if (complexEleEntry !== null && complexEleId !== null) {
+                segEntry.elements.push(complexEleEntry)
+              }
+              if (segEntry.elements.some((element) => element.id === id)) {
+                skipAddingElement = true
+                continue
+              }
+              complexEleId = id
+              complexEleEntry = eleEntry
+            }
+          } else {
+            if (!skipAddingElement) {
+              if (complexEleEntry !== null && component) {
+                complexEleEntry.components.push(component)
+                complexEleEntry.requires = mandatory
+                  ? complexEleEntry.requires + 1
+                  : complexEleEntry.requires
+              } else {
+                // simple element definition
+                if (segEntry.elements.some((element) => element.id === id)) {
+                  continue
+                }
+                if (mandatory) {
+                  eleEntry.requires = eleEntry.requires + 1
+                }
+                if (component) {
+                  eleEntry.components.push(component)
+                }
+                eleEntry.id = id
+                segEntry.elements.push(eleEntry)
+              }
+            }
+          }
+        } else {
+          const regexpAlt =
+            /^\s*([\d]*)\s*([X|\\*]?)\s*<A.*>([a-zA-Z0-9]*)<\/A>\s*([a-zA-Z0-9 \\-\\/&]*)/g
+          const arrAlt: RegExpExecArray | null = regexpAlt.exec(line)
+          if (isDefined(arrAlt)) {
+            overflowLine = line
+          }
+        }
+      } else if (state === SegmentPart.Data && line.includes('<P>')) {
+        state = SegmentPart.AfterStructureDef
+        break
+      }
+    }
+    if (complexEleEntry !== null && complexEleId !== null) {
+      segEntry.elements.push(complexEleEntry)
+    }
+    if (segment !== '') {
+      definition.segmentTable.add(segment, segEntry)
     }
 
-    private async parsePage(page: string): Promise<ParsingResultType> {
-        let definition: EdifactMessageSpecification | undefined;
-        const handler: DomHandler = new DomHandler();
+    return Promise.resolve(definition)
+  }
 
-        let state: Part = Part.BeforeStructureDef;
-        let section: string | null = 'header';
-        const segStack: MessageType[][] = [];
-        const lookupSegmentPromises: Promise<EdifactMessageSpecification>[] =
-            [];
+  private async parsePage(page: string): Promise<ParsingResultType> {
+    let definition: EdifactMessageSpecification | undefined
+    const handler: DomHandler = new DomHandler()
 
-        const nextState = () => {
-            if (state === Part.RefLink) {
-                state = Part.Pos;
-            } else if (state === Part.Pos) {
-                state = Part.Deprecated;
-            } else if (state === Part.Deprecated) {
-                state = Part.Tag;
-            } else if (state === Part.Tag) {
-                state = Part.Name;
-            } else if (state === Part.Name) {
-                state = Part.RefLink;
+    let state: Part = Part.BeforeStructureDef
+    let section: string | null = 'header'
+    const segStack: MessageType[][] = []
+    const lookupSegmentPromises: Promise<EdifactMessageSpecification>[] = []
+
+    const nextState = () => {
+      if (state === Part.RefLink) {
+        state = Part.Pos
+      } else if (state === Part.Pos) {
+        state = Part.Deprecated
+      } else if (state === Part.Deprecated) {
+        state = Part.Tag
+      } else if (state === Part.Tag) {
+        state = Part.Name
+      } else if (state === Part.Name) {
+        state = Part.RefLink
+      }
+    }
+
+    handler.ontext = (text: string) => {
+      if (
+        text.includes('Message Type') &&
+        text.includes('Version') &&
+        text.includes('Release')
+      ) {
+        const messageType: string = this.extractTextValue(
+          text,
+          /Message Type\s*: ([A-Z]*)\s/g,
+          1,
+        )
+        const version: string = this.extractTextValue(
+          text,
+          /Version\s*: ([A-Z]*)\s/g,
+          1,
+        )
+        const release: string = this.extractTextValue(
+          text,
+          /Release\s*: ([0-9A-Z]*)\s/g,
+          1,
+        )
+        const controllingAgency: string = this.extractTextValue(
+          text,
+          /Contr. Agency\s*: ([0-9A-Z]*)\s/g,
+          1,
+        )
+        definition = new EdifactMessageSpecificationImpl(
+          messageType,
+          version,
+          release,
+          controllingAgency,
+        )
+        segStack.push(definition.messageStructureDefinition)
+      } else if (text.includes('Message structure')) {
+        state = Part.RefLink
+      } else if (
+        state !== Part.BeforeStructureDef &&
+        state !== Part.AfterStructureDef
+      ) {
+        if (state === Part.RefLink) {
+          // ignored
+          // console.debug(`RefLink: ${text}`);
+        } else if (state === Part.Pos) {
+          // console.debug(`Pos: ${text}`);
+        } else if (state === Part.Deprecated) {
+          if (text.includes('- Segment group')) {
+            const regex =
+              /^[\s*+-]*-* (Segment group \d*)\s*-*\s*([M|C])\s*(\d*)([-|\\+|\\|]*).*/g
+            const arr: RegExpExecArray | null = regex.exec(text)
+            if (isDefined(arr)) {
+              const groupArray: MessageType[] = []
+              const group: MessageType = {
+                content: groupArray,
+                mandatory: arr[2] === 'M' ? true : false,
+                repetition: parseInt(arr[3]),
+                name: arr[1],
+                section: isDefined(section) ? section : undefined,
+              }
+              section = null
+              // add the group to the end of the current top segments
+              segStack[segStack.length - 1].push(group)
+              // push the array managed by this group to the end of the stack to fill it down the road
+              segStack.push(groupArray)
             }
-        };
+            // no further tags available, continue on the next line with the RefLink
+            state = Part.RefLink
+          } else {
+            // console.debug(`Deprecated: ${text}`);
+            nextState()
+          }
+        } else if (state === Part.Tag) {
+          // console.debug(`Tag: ${text}`);
+          const _section: string | undefined =
+            section !== null ? section : undefined
+          let _data: string[] | undefined
+          if (definition) {
+            _data =
+              text === 'UNH'
+                ? [definition.versionAbbr(), definition.messageType]
+                : undefined
+          }
+          const segment: MessageType = {
+            content: text,
+            mandatory: false,
+            repetition: 0,
+            data: _data,
+            section: _section,
+          }
+          if (definition) {
+            segStack[segStack.length - 1].push(segment)
+          }
+          section = null
+        } else if (state === Part.Name) {
+          // console.debug(`Name: ${text}`);
+          const regex = /^([a-zA-Z /\\-]*)\s*?([M|C])\s*?([0-9]*?)([^0-9]*)$/g
+          const arr: RegExpExecArray | null = regex.exec(text)
+          if (isDefined(arr)) {
+            // const name: string = arr[1].trim();
+            const sMandatory: string = arr[2]
+            const sRepetition: string = arr[3]
+            const remainder: string = arr[4]
+            // console.debug(`Processing segment: ${name}`);
 
-        handler.ontext = (text: string) => {
-            if (
-                text.includes('Message Type') &&
-                text.includes('Version') &&
-                text.includes('Release')
-            ) {
-                const messageType: string = this.extractTextValue(
-                    text,
-                    /Message Type\s*: ([A-Z]*)\s/g,
-                    1
-                );
-                const version: string = this.extractTextValue(
-                    text,
-                    /Version\s*: ([A-Z]*)\s/g,
-                    1
-                );
-                const release: string = this.extractTextValue(
-                    text,
-                    /Release\s*: ([0-9A-Z]*)\s/g,
-                    1
-                );
-                const controllingAgency: string = this.extractTextValue(
-                    text,
-                    /Contr. Agency\s*: ([0-9A-Z]*)\s/g,
-                    1
-                );
-                definition = new EdifactMessageSpecificationImpl(
-                    messageType,
-                    version,
-                    release,
-                    controllingAgency
-                );
-                segStack.push(definition.messageStructureDefinition);
-            } else if (text.includes('Message structure')) {
-                state = Part.RefLink;
-            } else if (
-                state !== Part.BeforeStructureDef &&
-                state !== Part.AfterStructureDef
-            ) {
-                if (state === Part.RefLink) {
-                    // ignored
-                    // console.debug(`RefLink: ${text}`);
-                } else if (state === Part.Pos) {
-                    // console.debug(`Pos: ${text}`);
-                } else if (state === Part.Deprecated) {
-                    if (text.includes('- Segment group')) {
-                        const regex =
-                            /^[\s*+-]*-* (Segment group \d*)\s*-*\s*([M|C])\s*(\d*)([-|\\+|\\|]*).*/g;
-                        const arr: RegExpExecArray | null = regex.exec(text);
-                        if (isDefined(arr)) {
-                            const groupArray: MessageType[] = [];
-                            const group: MessageType = {
-                                content: groupArray,
-                                mandatory: arr[2] === 'M' ? true : false,
-                                repetition: parseInt(arr[3]),
-                                name: arr[1],
-                                section: isDefined(section)
-                                    ? section
-                                    : undefined
-                            };
-                            section = null;
-                            // add the group to the end of the current top segments
-                            segStack[segStack.length - 1].push(group);
-                            // push the array managed by this group to the end of the stack to fill it down the road
-                            segStack.push(groupArray);
-                        }
-                        // no further tags available, continue on the next line with the RefLink
-                        state = Part.RefLink;
-                    } else {
-                        // console.debug(`Deprecated: ${text}`);
-                        nextState();
-                    }
-                } else if (state === Part.Tag) {
-                    // console.debug(`Tag: ${text}`);
-                    const _section: string | undefined =
-                        section !== null ? section : undefined;
-                    let _data: string[] | undefined;
-                    if (definition) {
-                        _data =
-                            text === 'UNH'
-                                ? [
-                                      definition.versionAbbr(),
-                                      definition.messageType
-                                  ]
-                                : undefined;
-                    }
-                    const segment: MessageType = {
-                        content: text,
-                        mandatory: false,
-                        repetition: 0,
-                        data: _data,
-                        section: _section
-                    };
-                    if (definition) {
-                        segStack[segStack.length - 1].push(segment);
-                    }
-                    section = null;
-                } else if (state === Part.Name) {
-                    // console.debug(`Name: ${text}`);
-                    const regex =
-                        /^([a-zA-Z /\\-]*)\s*?([M|C])\s*?([0-9]*?)([^0-9]*)$/g;
-                    const arr: RegExpExecArray | null = regex.exec(text);
-                    if (isDefined(arr)) {
-                        // const name: string = arr[1].trim();
-                        const sMandatory: string = arr[2];
-                        const sRepetition: string = arr[3];
-                        const remainder: string = arr[4];
-                        // console.debug(`Processing segment: ${name}`);
+            // update the last element on the top-most stack with the respective data
+            const segArr: MessageType[] = segStack[segStack.length - 1]
+            const segData: MessageType = segArr[segArr.length - 1]
+            segData.mandatory = sMandatory === 'M' ? true : false
+            segData.repetition = parseInt(sRepetition)
 
-                        // update the last element on the top-most stack with the respective data
-                        const segArr: MessageType[] =
-                            segStack[segStack.length - 1];
-                        const segData: MessageType = segArr[segArr.length - 1];
-                        segData.mandatory = sMandatory === 'M' ? true : false;
-                        segData.repetition = parseInt(sRepetition);
-
-                        // check whether the remainder contains a closing hint for a subgroup: -...-++
-                        if (
-                            remainder.includes('-') &&
-                            remainder.includes('+')
-                        ) {
-                            for (
-                                let i = 0;
-                                i < remainder.split('+').length - 1;
-                                i++
-                            ) {
-                                segStack.pop();
-                            }
-                        }
-
-                        nextState();
-                    }
-                    if (text.includes('DETAIL SECTION')) {
-                        section = 'detail';
-                    } else if (text.includes('SUMMARY SECTION')) {
-                        section = 'summary';
-                    }
-                } else {
-                    console.warn(`Unknown part: ${text}`);
-                }
+            // check whether the remainder contains a closing hint for a subgroup: -...-++
+            if (remainder.includes('-') && remainder.includes('+')) {
+              for (let i = 0; i < remainder.split('+').length - 1; i++) {
+                segStack.pop()
+              }
             }
-        };
-        handler.onopentag = (
-            name: string,
-            attribs: { [key: string]: string }
-        ) => {
-            if (
-                name === 'p' &&
-                state !== Part.BeforeStructureDef &&
-                state !== Part.AfterStructureDef
-            ) {
-                state = Part.AfterStructureDef;
-            }
-            if (state === Part.Tag && attribs.href !== undefined) {
-                if (definition) {
-                    const end: number = attribs.href.indexOf('.htm');
-                    const curSeg: string = attribs.href
-                        .substring(end - 3, end)
-                        .toUpperCase();
 
-                    // skip segments that do not point to the right segment definition page
-                    if (
-                        curSeg !== 'UNH' &&
-                        curSeg !== 'UNS' &&
-                        curSeg !== 'UNT'
-                    ) {
-                        // console.debug(`Adding promise to lookup segment definition for segment ${curSeg} for URI ${attribs.href}`);
-
-                        const def: EdifactMessageSpecification = definition;
-                        lookupSegmentPromises.push(
-                            this.loadPage(attribs.href).then((result) =>
-                                this.parseSegmentDefinitionPage(
-                                    curSeg,
-                                    result,
-                                    def
-                                )
-                            )
-                        );
-                    }
-                }
-            }
-        };
-        handler.onclosetag = () => {
-            nextState();
-        };
-        const parser: Parser = new Parser(handler);
-        parser.write(page);
-        parser.end();
-
+            nextState()
+          }
+          if (text.includes('DETAIL SECTION')) {
+            section = 'detail'
+          } else if (text.includes('SUMMARY SECTION')) {
+            section = 'summary'
+          }
+        } else {
+          console.warn(`Unknown part: ${text}`)
+        }
+      }
+    }
+    handler.onopentag = (name: string, attribs: { [key: string]: string }) => {
+      if (
+        name === 'p' &&
+        state !== Part.BeforeStructureDef &&
+        state !== Part.AfterStructureDef
+      ) {
+        state = Part.AfterStructureDef
+      }
+      if (state === Part.Tag && attribs.href !== undefined) {
         if (definition) {
-            return Promise.resolve({
-                specObj: definition,
-                promises: lookupSegmentPromises
-            });
-        }
-        return Promise.reject(
-            new Error('Could not extract values from read page successfully')
-        );
-    }
+          const end: number = attribs.href.indexOf('.htm')
+          const curSeg: string = attribs.href
+            .substring(end - 3, end)
+            .toUpperCase()
 
-    loadTypeSpec(): Promise<EdifactMessageSpecification> {
-        const url: string = './' + this.type + '_c.htm';
-        return this.loadPage(url)
-            .then((page: string) => this.parsePage(page))
-            .then((result: ParsingResultType) =>
-                Promise.all(result.promises)
-                    .then(() => result.specObj)
-                    .catch((error: Error) => {
-                        console.warn(
-                            `Error while processing segment definition promises: Reason ${error.message}`
-                        );
-                        return result.specObj;
-                    })
-            );
+          // skip segments that do not point to the right segment definition page
+          if (curSeg !== 'UNH' && curSeg !== 'UNS' && curSeg !== 'UNT') {
+            // console.debug(`Adding promise to lookup segment definition for segment ${curSeg} for URI ${attribs.href}`);
+
+            const def: EdifactMessageSpecification = definition
+            lookupSegmentPromises.push(
+              this.loadPage(attribs.href).then((result) =>
+                this.parseSegmentDefinitionPage(curSeg, result, def),
+              ),
+            )
+          }
+        }
+      }
     }
+    handler.onclosetag = () => {
+      nextState()
+    }
+    const parser: Parser = new Parser(handler)
+    parser.write(page)
+    parser.end()
+
+    if (definition) {
+      return Promise.resolve({
+        specObj: definition,
+        promises: lookupSegmentPromises,
+      })
+    }
+    return Promise.reject(
+      new Error('Could not extract values from read page successfully'),
+    )
+  }
+
+  loadTypeSpec(): Promise<EdifactMessageSpecification> {
+    const url: string = './' + this.type + '_c.htm'
+    return this.loadPage(url)
+      .then((page: string) => this.parsePage(page))
+      .then((result: ParsingResultType) =>
+        Promise.all(result.promises)
+          .then(() => result.specObj)
+          .catch((error: Error) => {
+            console.warn(
+              `Error while processing segment definition promises: Reason ${error.message}`,
+            )
+            return result.specObj
+          }),
+      )
+  }
 }

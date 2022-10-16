@@ -19,45 +19,45 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 
-import * as url from 'url';
-import * as axios from 'axios';
+import * as axios from 'axios'
+import * as url from 'url'
 
 export class HttpClient {
-    baseUrl: string;
+  baseUrl: string
 
-    constructor(baseUrl: string) {
-        this.baseUrl = baseUrl;
-    }
+  constructor(baseUrl: string) {
+    this.baseUrl = baseUrl
+  }
 
-    async get(target: string): Promise<string> {
-        const uri: string = url.resolve(this.baseUrl, target);
+  async get(target: string): Promise<string> {
+    const uri: string = url.resolve(this.baseUrl, target)
 
-        const request: Promise<string> = axios.default
-            .get<string, axios.AxiosResponse<string>>(uri)
-            .then((axiosResponse) => {
-                if (axiosResponse.status === 200) {
-                    const response: string = axiosResponse.data;
-                    // console.log(`Response: ${response}`);
-                    return response;
-                } else {
-                    console.error(
-                        `Unexpected response ${axiosResponse.status}: ${axiosResponse.data}`
-                    );
-                }
-                return '';
-            })
-            .catch((err) => {
-                // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-                console.error(err.message);
-                return '';
-            });
-
-        try {
-            const data: string = await request;
-            return Promise.resolve(data);
-        } catch (error) {
-            console.error(error);
-            return Promise.reject(error);
+    const request: Promise<string> = axios.default
+      .get<string, axios.AxiosResponse<string>>(uri)
+      .then((axiosResponse) => {
+        if (axiosResponse.status === 200) {
+          const response: string = axiosResponse.data
+          // console.log(`Response: ${response}`);
+          return response
+        } else {
+          console.error(
+            `Unexpected response ${axiosResponse.status}: ${axiosResponse.data}`,
+          )
         }
+        return ''
+      })
+      .catch((err) => {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+        console.error(err.message)
+        return ''
+      })
+
+    try {
+      const data: string = await request
+      return Promise.resolve(data)
+    } catch (error) {
+      console.error(error)
+      return Promise.reject(error)
     }
+  }
 }

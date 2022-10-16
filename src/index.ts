@@ -16,82 +16,79 @@
  * limitations under the License.
  */
 
-export { Cache } from './cache';
-export { Configuration } from './configuration';
-export { Tokenizer } from './tokenizer';
-export { Parser } from './parser';
+export { Cache } from './cache'
+export { Configuration } from './configuration'
 export {
-    NullValidator,
-    Validator,
-    ValidatorImpl,
-    Dictionary,
-    SegmentEntry,
-    ElementEntry,
-    ValidatorStates
-} from './validator';
-export { MessageType, Pointer, Tracker } from './tracker';
-export { Reader, ResultType } from './reader';
+  EdifactMessageSpecification,
+  UNECEMessageStructureParser,
+} from './edi/messageStructureParser'
 export {
-    Separators,
-    EdifactSeparatorsBuilder,
-    AnsiX12SeparatorsBuilder,
-    TradacomsSeparatorsBuilder
-} from './edi/separators';
+  AnsiX12SeparatorsBuilder,
+  EdifactSeparatorsBuilder,
+  Separators,
+  TradacomsSeparatorsBuilder,
+} from './edi/separators'
 export {
-    InterchangeBuilder,
-    Edifact,
-    Group,
-    Message,
-    SyntaxIdentifier,
-    RecipientsRef
-} from './interchangeBuilder';
+  BeginOfMessage,
+  LineItem,
+  MonetaryAmount,
+  PriceDetails,
+  Quantity,
+  sanitizeFloat,
+  Segment,
+} from './edifact'
 export {
-    sanitizeFloat,
-    Segment,
-    BeginOfMessage,
-    LineItem,
-    Quantity,
-    PriceDetails,
-    MonetaryAmount
-} from './edifact';
-
+  Edifact,
+  Group,
+  InterchangeBuilder,
+  Message,
+  RecipientsRef,
+  SyntaxIdentifier,
+} from './interchangeBuilder'
+export { Parser } from './parser'
+export { Reader, ResultType } from './reader'
+export { SegmentTableBuilder } from './segments'
+export { Tokenizer } from './tokenizer'
+export { MessageType, Pointer, Tracker } from './tracker'
 export {
-    EdifactMessageSpecification,
-    UNECEMessageStructureParser
-} from './edi/messageStructureParser';
-
-export { SegmentTableBuilder } from './segments';
+  Dictionary,
+  ElementEntry,
+  NullValidator,
+  SegmentEntry,
+  Validator,
+  ValidatorImpl,
+  ValidatorStates,
+} from './validator'
+export {
+  APERAK,
+  AUTHOR,
+  BALANC,
+  DESADV,
+  GENRAL,
+  IFTMIN,
+  INVOIC,
+  INVRPT,
+  ORDERS,
+  OSTENQ,
+  OSTRPT,
+  PARTIN,
+  TAXCON,
+  VATDEC,
+}
 
 // default D01B message specifications
 
-import * as APERAK from './messageSpec/APERAK.struct.json';
-import * as AUTHOR from './messageSpec/AUTHOR.struct.json';
-import * as BALANC from './messageSpec/BALANC.struct.json';
-import * as DESADV from './messageSpec/DESADV.struct.json';
-import * as GENRAL from './messageSpec/GENRAL.struct.json';
-import * as IFTMIN from './messageSpec/IFTMIN.struct.json';
-import * as INVOIC from './messageSpec/INVOIC.struct.json';
-import * as INVRPT from './messageSpec/INVRPT.struct.json';
-import * as ORDERS from './messageSpec/ORDERS.struct.json';
-import * as OSTENQ from './messageSpec/OSTENQ.struct.json';
-import * as OSTRPT from './messageSpec/OSTRPT.struct.json';
-import * as PARTIN from './messageSpec/PARTIN.struct.json';
-import * as TAXCON from './messageSpec/TAXCON.struct.json';
-import * as VATDEC from './messageSpec/VATDEC.struct.json';
-
-export {
-    APERAK,
-    AUTHOR,
-    BALANC,
-    DESADV,
-    GENRAL,
-    IFTMIN,
-    INVOIC,
-    INVRPT,
-    ORDERS,
-    OSTENQ,
-    OSTRPT,
-    PARTIN,
-    TAXCON,
-    VATDEC
-};
+import * as APERAK from './messageSpec/APERAK.struct.json'
+import * as AUTHOR from './messageSpec/AUTHOR.struct.json'
+import * as BALANC from './messageSpec/BALANC.struct.json'
+import * as DESADV from './messageSpec/DESADV.struct.json'
+import * as GENRAL from './messageSpec/GENRAL.struct.json'
+import * as IFTMIN from './messageSpec/IFTMIN.struct.json'
+import * as INVOIC from './messageSpec/INVOIC.struct.json'
+import * as INVRPT from './messageSpec/INVRPT.struct.json'
+import * as ORDERS from './messageSpec/ORDERS.struct.json'
+import * as OSTENQ from './messageSpec/OSTENQ.struct.json'
+import * as OSTRPT from './messageSpec/OSTRPT.struct.json'
+import * as PARTIN from './messageSpec/PARTIN.struct.json'
+import * as TAXCON from './messageSpec/TAXCON.struct.json'
+import * as VATDEC from './messageSpec/VATDEC.struct.json'

@@ -7,7 +7,7 @@
 
 This repository is a fork of RovoMe's version of node-edifact:
 
--   [ts-edifact](https://github.com/RovoMe/ts-edifact)
+- [ts-edifact](https://github.com/RovoMe/ts-edifact)
 
 `ts-edifact` is an _Edifact_ parsing library written in typescript. This implementation was initially based on [node-edifact](https://github.com/tdecaluwe/node-edifact) but has changed a bit since the start of the project. It now is able to build a full object tree based on the general message structure defined in the Edifact documentation and update the tokenizer with the the appropriate charset, which was defined in the `UNB` segment.
 
@@ -15,30 +15,30 @@ By default `ts-edifact` ships with a selection of `D:01B` message structure defi
 
 Currently supported functionality:
 
--   An ES6 streaming parser reading UN/EDIFACT messages.
--   Provide your own event listeners to get the parser to do something useful.
--   Construct structured javascript objects from UN/EDIFACT messages.
--   Support for the UNA header and custom separators.
--   Validating data elements and components accepted by a given segment.
--   Parsing and checking standard UN/EDIFACT messages with segment tables.
--   Support for envelopes.
--   Check for well-formed Edifact documents according to the defined message type, version and revision within the `UNH` message header.
--   Generation of Edifact specification definition files (i.e. `D01B_INVOIC.struct.json` and `D01B_INVOIC.segments.json`) obtained from the UNECE page directly.
--   On using the `Reader` class, updating the charset according to the one specified in the `UNB` segment of the interchange is supported.
+- An ES6 streaming parser reading UN/EDIFACT messages.
+- Provide your own event listeners to get the parser to do something useful.
+- Construct structured javascript objects from UN/EDIFACT messages.
+- Support for the UNA header and custom separators.
+- Validating data elements and components accepted by a given segment.
+- Parsing and checking standard UN/EDIFACT messages with segment tables.
+- Support for envelopes.
+- Check for well-formed Edifact documents according to the defined message type, version and revision within the `UNH` message header.
+- Generation of Edifact specification definition files (i.e. `D01B_INVOIC.struct.json` and `D01B_INVOIC.segments.json`) obtained from the UNECE page directly.
+- On using the `Reader` class, updating the charset according to the one specified in the `UNB` segment of the interchange is supported.
 
 ## Current status
 
 We switched from `ts-edifact` to a currently proprietary Java-based implementation I developed in the past year. During this process I learned a lot in regards to parsing Edifact files and, sadly, the current `ts-edifact` version has its limitations which briefly summarized look as such:
 
--   The syntax version has no impact on the Edifact document. Neither charsets are correctly restricted or timestamps validated here correctly nor are service segments initialized here for the appropriate syntax version
--   Charsets ([v3](https://www.gefeg.com/jswg/cl/v3/21a/cl1.htm), [v4](https://www.gefeg.com/jswg/cl/v4x/40219/cl1.htm)) in `UNB` segments are not correctly supported which can lead to issues for `UNOX` and `UNOY` encodings that may utilize up to 4 bytes per character
--   Code-list values are not parsed and therefore not included in the validation process
--   Objects generated for the object tree do not respect the specifications in different Edifact directories
--   `segments.ts` and `elements.ts` only support basic
--   Parsing and validation should be decoupled
--   More configuration options are needed
--   More sample files are needed, especially ones with uncommon charsets
--   Better mechanism for loading message structure, segments and element definition tables needed to reduce the size of this artifact and to load definitions only when really needed. Any help from more experienced JS/TS developers is more than appreciated here on how such a mechanism may look like.
+- The syntax version has no impact on the Edifact document. Neither charsets are correctly restricted or timestamps validated here correctly nor are service segments initialized here for the appropriate syntax version
+- Charsets ([v3](https://www.gefeg.com/jswg/cl/v3/21a/cl1.htm), [v4](https://www.gefeg.com/jswg/cl/v4x/40219/cl1.htm)) in `UNB` segments are not correctly supported which can lead to issues for `UNOX` and `UNOY` encodings that may utilize up to 4 bytes per character
+- Code-list values are not parsed and therefore not included in the validation process
+- Objects generated for the object tree do not respect the specifications in different Edifact directories
+- `segments.ts` and `elements.ts` only support basic
+- Parsing and validation should be decoupled
+- More configuration options are needed
+- More sample files are needed, especially ones with uncommon charsets
+- Better mechanism for loading message structure, segments and element definition tables needed to reduce the size of this artifact and to load definitions only when really needed. Any help from more experienced JS/TS developers is more than appreciated here on how such a mechanism may look like.
 
 ## Usage
 
@@ -143,10 +143,10 @@ Keep in mind that this is an ES6 library. It currently can be used with node 4.0
 
 This module is build around a central `Parser` class which provides the core UN/EDIFACT parsing functionality. It only exposes four methods:
 
--   the `updateCharset(string)` method updates the charset used by the `Tokenizer` class to determine valid data values. If a charset is provided which the parser does not yet recognize, this method will throw an error.
--   the `write()` method to write some data to the parser
--   the `separators()`method does return the separators which are used by the parser
--   the `end()` method to close an EDI interchange.
+- the `updateCharset(string)` method updates the charset used by the `Tokenizer` class to determine valid data values. If a charset is provided which the parser does not yet recognize, this method will throw an error.
+- the `write()` method to write some data to the parser
+- the `separators()`method does return the separators which are used by the parser
+- the `end()` method to close an EDI interchange.
 
 Data read by the parser can be read by using hooks which will be called on specific parsing events.
 
@@ -183,14 +183,14 @@ The `requires` property indicates the number of elements which are required to o
 
 ```json
 {
-    "C002": {
-        "requires": 4,
-        "components": ["an..3", "an..17", "an..3", "an..35"]
-    },
-    "C106": {
-        "requires": 3,
-        "components": ["an..35", "an..9", "an..6"]
-    }
+  "C002": {
+    "requires": 4,
+    "components": ["an..3", "an..17", "an..3", "an..35"]
+  },
+  "C106": {
+    "requires": 3,
+    "components": ["an..35", "an..9", "an..6"]
+  }
 }
 ```
 
@@ -227,7 +227,7 @@ On using the `Reader` class it will attempt to read such specification files fro
 
 ```typescript
 // use strict validation; will throw an error if unknown segments and elements are found
-const validator: Validator = new ValidatorImpl(true);
+const validator: Validator = new ValidatorImpl(true)
 ```
 
 The `*.struct.json` file is only used in case an object structure should be generated via the `InterchangeBuilder` class.

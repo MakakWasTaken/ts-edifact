@@ -17,40 +17,39 @@
  * limitations under the License.
  */
 
-import { Parser } from './parser';
+import { Cache } from './cache'
+import { Configuration } from './configuration'
+import { Separators } from './edi/separators'
+import { Parser } from './parser'
+import { SegmentTableBuilder } from './segments'
+import { findElement, isDefined } from './util'
 import {
-    Validator,
-    Dictionary,
-    SegmentEntry,
-    ValidatorImpl,
-    ElementEntry,
-    Component
-} from './validator';
-
-import { SegmentTableBuilder } from './segments';
-import { Separators } from './edi/separators';
-import { findElement, isDefined } from './util';
-import { Cache } from './cache';
-import { Configuration } from './configuration';
+  Component,
+  Dictionary,
+  ElementEntry,
+  SegmentEntry,
+  Validator,
+  ValidatorImpl,
+} from './validator'
 
 export type ResultType = {
-    name: string;
-    elements: ElementEntry[];
-};
+  name: string
+  elements: ElementEntry[]
+}
 
 export type Result = {
-    name: string;
-    elements: ResultElement[];
-};
+  name: string
+  elements: ResultElement[]
+}
 
 export type ResultElement = {
-    name: string;
-    components: ResultComponents;
-};
+  name: string
+  components: ResultComponents
+}
 
 export type ResultComponents = {
-    [key: string]: string | undefined;
-};
+  [key: string]: string | undefined
+}
 
 /**
  * The `Reader` class is included for backwards compatibility. It translates an
@@ -60,177 +59,172 @@ export type ResultComponents = {
  * string.
  */
 export class Reader {
-    private result: ResultType[];
-    private elements: ElementEntry[];
-    private element: ElementEntry | undefined;
+  private result: ResultType[]
+  private elements: ElementEntry[]
+  private element: ElementEntry | undefined
 
-    private validator: Validator;
-    private parser: Parser;
+  private validator: Validator
+  private parser: Parser
 
-    private defined = false;
-    private validationTables: Dictionary<SegmentEntry>[] = [];
+  private defined = false
+  private validationTables: Dictionary<SegmentEntry>[] = []
 
-    private definitionCache: Cache<Dictionary<SegmentEntry>> = new Cache(15);
-    private unbCharsetDefined = false;
+  private definitionCache: Cache<Dictionary<SegmentEntry>> = new Cache(15)
+  private unbCharsetDefined = false
 
-    separators: Separators;
+  separators: Separators
 
-    constructor(messageSpecDir?: string, throwOnMissingDefinitions = false) {
-        const config: Configuration = new Configuration({
-            validator: new ValidatorImpl(throwOnMissingDefinitions)
-        });
-        this.parser = new Parser(config);
-        this.validator = config.validator;
+  constructor(messageSpecDir?: string, throwOnMissingDefinitions = false) {
+    const config: Configuration = new Configuration({
+      validator: new ValidatorImpl(throwOnMissingDefinitions),
+    })
+    this.parser = new Parser(config)
+    this.validator = config.validator
 
-        // Holds the results
-        this.result = [];
+    // Holds the results
+    this.result = []
 
-        // Holds the elements
-        this.elements = [];
-        let components: Component[] = [];
+    // Holds the elements
+    this.elements = []
+    let components: Component[] = []
 
-        // Holds the temporary element components.
-        let componentIndex = 0;
+    // Holds the temporary element components.
+    let componentIndex = 0
 
-        let activeSegment: { id: string; segmentEntry: SegmentEntry } | null;
+    let activeSegment: { id: string; segmentEntry: SegmentEntry } | null
 
-        // When a new segment is opened, reset all things element and set the current segment
-        this.parser.onOpenSegment = (
-            segment: string,
-            segmentEntry: SegmentEntry | undefined
-        ): void => {
-            this.elements = [];
-            this.element = undefined;
-            // Set the currently active segments
-            activeSegment = segmentEntry
-                ? { id: segment, segmentEntry: segmentEntry }
-                : null;
-        };
-        this.parser.onElement = (
-            newElement: ElementEntry | undefined
-        ): void => {
-            // Add the previous element
-            if (this.element) {
-                this.elements.push({ ...this.element, components });
-            }
-            // Set the current element
-            this.element = newElement;
-            // Reset component values
-            components = [];
-            componentIndex = 0;
-        };
-        this.parser.onComponent = (value: string): void => {
-            if (activeSegment?.id === 'UNB' && !this.unbCharsetDefined) {
-                this.parser.updateCharset(value);
-                this.unbCharsetDefined = true;
-            }
-            // Replace value at index with correct one
-            if (this.element) {
-                const component = this.element.components[componentIndex];
-                components.push({ ...component, value });
-                componentIndex++;
-            }
-        };
-        this.parser.onCloseSegment = (): void => {
-            if (isDefined(activeSegment)) {
-                if (this.element) {
-                    // Add the final element, when a segment ends (Prevents the final element from missing)
-                    this.elements.push({ ...this.element, components });
-                }
-                // Update the respective segment and element definitions once we know the exact version
-                // of the document
-                if (activeSegment.id === 'UNH') {
-                    const messageIdentifier = findElement(
-                        this.elements,
-                        'S009'
-                    )!.components;
-                    const messageType: string = messageIdentifier[0]!.value!;
-                    const messageVersion: string = messageIdentifier[1]!.value!;
-                    const messageRelease: string = messageIdentifier[2]!.value!;
-
-                    const key: string =
-                        messageVersion + messageRelease + '_' + messageType;
-                    if (this.definitionCache.contains(key)) {
-                        const segmentTable: Dictionary<SegmentEntry> =
-                            this.definitionCache.get(key);
-                        this.validator.define(segmentTable);
-                    } else {
-                        let segmentTableBuilder: SegmentTableBuilder =
-                            new SegmentTableBuilder(messageType);
-                        const version: string = (
-                            messageVersion + messageRelease
-                        ).toUpperCase();
-                        segmentTableBuilder = segmentTableBuilder.forVersion(
-                            version
-                        ) as SegmentTableBuilder;
-
-                        if (messageSpecDir) {
-                            segmentTableBuilder =
-                                segmentTableBuilder.specLocation(
-                                    messageSpecDir
-                                );
-                        } else {
-                            segmentTableBuilder =
-                                segmentTableBuilder.specLocation('./');
-                        }
-                        const segmentTable: Dictionary<SegmentEntry> =
-                            segmentTableBuilder.build();
-                        this.validator.define(segmentTable);
-                        this.definitionCache.insert(key, segmentTable);
-                    }
-                }
-                // Add the current elements to the results array
-                this.result.push({
-                    name: activeSegment.id,
-                    elements: this.elements
-                });
-                activeSegment = null;
-            }
-        };
-
-        // will initialize default separators
-        this.separators = this.parser.separators();
+    // When a new segment is opened, reset all things element and set the current segment
+    this.parser.onOpenSegment = (
+      segment: string,
+      segmentEntry: SegmentEntry | undefined,
+    ): void => {
+      this.elements = []
+      this.element = undefined
+      // Set the currently active segments
+      activeSegment = segmentEntry
+        ? { id: segment, segmentEntry: segmentEntry }
+        : null
     }
-
-    /**
-     * Provide the underlying `Validator` with segment or element definitions.
-     *
-     * @summary Define segment and element structures.
-     * @param definitions An object containing the definitions.
-     */
-    define(definitions: Dictionary<SegmentEntry>): void {
-        this.validator.define(definitions);
+    this.parser.onElement = (newElement: ElementEntry | undefined): void => {
+      // Add the previous element
+      if (this.element) {
+        this.elements.push({ ...this.element, components })
+      }
+      // Set the current element
+      this.element = newElement
+      // Reset component values
+      components = []
+      componentIndex = 0
     }
-
-    private initializeIfNeeded(): void {
-        if (!this.defined) {
-            if (this.validationTables.length > 0) {
-                for (const table of this.validationTables) {
-                    this.validator.define(table);
-                }
-            } else {
-                // basic Edifact envelop validation, i.e. UNB, UNH, UNS and UNZ
-                this.validator.define(
-                    SegmentTableBuilder.enrichWithDefaultSegments(
-                        new Dictionary<SegmentEntry>()
-                    )
-                );
-            }
-            this.defined = true;
+    this.parser.onComponent = (value: string): void => {
+      if (activeSegment?.id === 'UNB' && !this.unbCharsetDefined) {
+        this.parser.updateCharset(value)
+        this.unbCharsetDefined = true
+      }
+      // Replace value at index with correct one
+      if (this.element) {
+        const component = this.element.components[componentIndex]
+        components.push({ ...component, value })
+        componentIndex++
+      }
+    }
+    this.parser.onCloseSegment = (): void => {
+      if (isDefined(activeSegment)) {
+        if (this.element) {
+          // Add the final element, when a segment ends (Prevents the final element from missing)
+          this.elements.push({ ...this.element, components })
         }
+        // Update the respective segment and element definitions once we know the exact version
+        // of the document
+        if (activeSegment.id === 'UNH') {
+          const messageIdentifier = findElement(
+            this.elements,
+            'S009',
+          )!.components
+          const messageType: string = messageIdentifier[0]!.value!
+          const messageVersion: string = messageIdentifier[1]!.value!
+          const messageRelease: string = messageIdentifier[2]!.value!
+
+          const key: string =
+            messageVersion + messageRelease + '_' + messageType
+          if (this.definitionCache.contains(key)) {
+            const segmentTable: Dictionary<SegmentEntry> =
+              this.definitionCache.get(key)
+            this.validator.define(segmentTable)
+          } else {
+            let segmentTableBuilder: SegmentTableBuilder =
+              new SegmentTableBuilder(messageType)
+            const version: string = (
+              messageVersion + messageRelease
+            ).toUpperCase()
+            segmentTableBuilder = segmentTableBuilder.forVersion(
+              version,
+            ) as SegmentTableBuilder
+
+            if (messageSpecDir) {
+              segmentTableBuilder =
+                segmentTableBuilder.specLocation(messageSpecDir)
+            } else {
+              segmentTableBuilder = segmentTableBuilder.specLocation('./')
+            }
+            const segmentTable: Dictionary<SegmentEntry> =
+              segmentTableBuilder.build()
+            this.validator.define(segmentTable)
+            this.definitionCache.insert(key, segmentTable)
+          }
+        }
+        // Add the current elements to the results array
+        this.result.push({
+          name: activeSegment.id,
+          elements: this.elements,
+        })
+        activeSegment = null
+      }
     }
 
-    parse(document: string): ResultType[] {
-        this.initializeIfNeeded();
+    // will initialize default separators
+    this.separators = this.parser.separators()
+  }
 
-        this.result = [];
+  /**
+   * Provide the underlying `Validator` with segment or element definitions.
+   *
+   * @summary Define segment and element structures.
+   * @param definitions An object containing the definitions.
+   */
+  define(definitions: Dictionary<SegmentEntry>): void {
+    this.validator.define(definitions)
+  }
 
-        this.parser.write(document);
-        this.parser.end();
-        // update separators in case the document contained a UNA header
-        // with custom separators
-        this.separators = this.parser.separators();
-
-        return this.result;
+  private initializeIfNeeded(): void {
+    if (!this.defined) {
+      if (this.validationTables.length > 0) {
+        for (const table of this.validationTables) {
+          this.validator.define(table)
+        }
+      } else {
+        // basic Edifact envelop validation, i.e. UNB, UNH, UNS and UNZ
+        this.validator.define(
+          SegmentTableBuilder.enrichWithDefaultSegments(
+            new Dictionary<SegmentEntry>(),
+          ),
+        )
+      }
+      this.defined = true
     }
+  }
+
+  parse(document: string): ResultType[] {
+    this.initializeIfNeeded()
+
+    this.result = []
+
+    this.parser.write(document)
+    this.parser.end()
+    // update separators in case the document contained a UNA header
+    // with custom separators
+    this.separators = this.parser.separators()
+
+    return this.result
+  }
 }

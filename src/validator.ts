@@ -16,142 +16,142 @@
  * limitations under the License.
  */
 
-import { Tokenizer } from './tokenizer';
+import { Tokenizer } from './tokenizer'
 
 export class Dictionary<T> {
-    private entries: { [key: string]: T };
+  private entries: { [key: string]: T }
 
-    constructor(data?: { [key: string]: T }) {
-        this.entries = {};
+  constructor(data?: { [key: string]: T }) {
+    this.entries = {}
 
-        if (data) {
-            for (const key in data) {
-                if (key !== '') {
-                    this.add(key, data[key]);
-                }
-            }
+    if (data) {
+      for (const key in data) {
+        if (key !== '') {
+          this.add(key, data[key])
         }
+      }
     }
+  }
 
-    contains(key: string): boolean {
-        if (Object.prototype.hasOwnProperty.call(this.entries, key)) {
-            return true;
-        }
-        return false;
+  contains(key: string): boolean {
+    if (Object.prototype.hasOwnProperty.call(this.entries, key)) {
+      return true
     }
+    return false
+  }
 
-    get(key: string): T | undefined {
-        if (this.contains(key)) {
-            return this.entries[key];
-        }
-        return undefined;
+  get(key: string): T | undefined {
+    if (this.contains(key)) {
+      return this.entries[key]
     }
+    return undefined
+  }
 
-    keys(): string[] {
-        return Object.keys(this.entries);
-    }
+  keys(): string[] {
+    return Object.keys(this.entries)
+  }
 
-    add(key: string, value: T): T {
-        this.entries[key] = value;
-        return value;
-    }
+  add(key: string, value: T): T {
+    this.entries[key] = value
+    return value
+  }
 
-    length(): number {
-        return this.keys().length;
-    }
+  length(): number {
+    return this.keys().length
+  }
 }
 
 export type Component = {
-    name: string;
-    value?: string;
-    format: string;
-};
+  name: string
+  value?: string
+  format: string
+}
 export type SegmentEntry = {
-    requires: number;
-    elements: ElementEntry[];
-};
+  requires: number
+  elements: ElementEntry[]
+}
 export type ElementEntry = {
-    id: string;
-    name: string;
-    requires: number;
-    components: Component[];
-};
+  id: string
+  name: string
+  requires: number
+  components: Component[]
+}
 
 interface FormatType {
-    alpha: boolean;
-    numeric: boolean;
-    minimum: number;
-    maximum: number;
+  alpha: boolean
+  numeric: boolean
+  minimum: number
+  maximum: number
 }
 
 export enum ValidatorStates {
-    /**
-     * Setting validation to none will disable the validator completely. The
-     * validator will not even try to obtain a segment description for segments
-     * encountered. Almost all overhead is eliminated in this state.
-     */
-    NONE = 0,
-    /**
-     * The segments state implies no segment definition was found for the current
-     * segment, so validation should be disabled for its elements and components.
-     * Normal validation should be resumed, however, as of the next segment.
-     */
-    SEGMENTS = 1,
-    /**
-     * The elements state is equivalent to the segments state, but validation is
-     * only temporary disabled for the current element. Normal validation resumes
-     * as of the next element.
-     */
-    ELEMENTS = 2,
-    /**
-     * Validation is enabled for all entities, including segments, elements and
-     * components.
-     */
-    ALL = 3,
-    ENTER = 4,
-    ENABLE = 5
+  /**
+   * Setting validation to none will disable the validator completely. The
+   * validator will not even try to obtain a segment description for segments
+   * encountered. Almost all overhead is eliminated in this state.
+   */
+  NONE = 0,
+  /**
+   * The segments state implies no segment definition was found for the current
+   * segment, so validation should be disabled for its elements and components.
+   * Normal validation should be resumed, however, as of the next segment.
+   */
+  SEGMENTS = 1,
+  /**
+   * The elements state is equivalent to the segments state, but validation is
+   * only temporary disabled for the current element. Normal validation resumes
+   * as of the next element.
+   */
+  ELEMENTS = 2,
+  /**
+   * Validation is enabled for all entities, including segments, elements and
+   * components.
+   */
+  ALL = 3,
+  ENTER = 4,
+  ENABLE = 5,
 }
 
 export interface Validator {
-    onOpenSegment(segment: string): SegmentEntry | undefined;
-    onElement(): ElementEntry | undefined;
-    onOpenComponent(buffer: Tokenizer): void;
-    onCloseComponent(buffer: Tokenizer): Component | undefined;
-    onCloseSegment(segment: string): void;
+  onOpenSegment(segment: string): SegmentEntry | undefined
+  onElement(): ElementEntry | undefined
+  onOpenComponent(buffer: Tokenizer): void
+  onCloseComponent(buffer: Tokenizer): Component | undefined
+  onCloseSegment(segment: string): void
 
-    disable(): void;
-    enable(): void;
-    define(definitions: Dictionary<SegmentEntry>): void;
-    format(formatString: string): FormatType | undefined;
+  disable(): void
+  enable(): void
+  define(definitions: Dictionary<SegmentEntry>): void
+  format(formatString: string): FormatType | undefined
 }
 
 export class NullValidator implements Validator {
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    onOpenSegment(): undefined {
-        return undefined;
-    }
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    onElement(): undefined {
-        return undefined;
-    }
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    onOpenComponent(): void {}
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    onCloseComponent(): undefined {
-        return undefined;
-    }
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    onCloseSegment(): void {}
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  onOpenSegment(): undefined {
+    return undefined
+  }
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  onElement(): undefined {
+    return undefined
+  }
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  onOpenComponent(): void {}
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  onCloseComponent(): undefined {
+    return undefined
+  }
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  onCloseSegment(): void {}
 
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    disable(): void {}
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    enable(): void {}
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    define(): void {}
-    format(): FormatType | undefined {
-        return undefined;
-    }
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  disable(): void {}
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  enable(): void {}
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  define(): void {}
+  format(): FormatType | undefined {
+    return undefined
+  }
 }
 
 /**
@@ -165,476 +165,454 @@ export class NullValidator implements Validator {
  * * Checking components against they're required format.
  */
 export class ValidatorImpl implements Validator {
-    private segments: Dictionary<SegmentEntry> = new Dictionary<SegmentEntry>();
-    private formats: Dictionary<FormatType> = new Dictionary<FormatType>();
-    private counts = {
-        segment: 0,
-        element: 0,
-        component: 0
-    };
-    private state: ValidatorStates;
+  private segments: Dictionary<SegmentEntry> = new Dictionary<SegmentEntry>()
+  private formats: Dictionary<FormatType> = new Dictionary<FormatType>()
+  private counts = {
+    segment: 0,
+    element: 0,
+    component: 0,
+  }
+  private state: ValidatorStates
 
-    private segment: SegmentEntry | undefined = undefined;
-    private element: ElementEntry | undefined = undefined;
-    private component: FormatType | undefined = undefined;
+  private segment: SegmentEntry | undefined = undefined
+  private element: ElementEntry | undefined = undefined
+  private component: FormatType | undefined = undefined
 
-    private required = 0;
-    private minimum = 0;
-    private maximum = 0;
+  private required = 0
+  private minimum = 0
+  private maximum = 0
 
-    private throwOnMissingDefinitions: boolean;
+  private throwOnMissingDefinitions: boolean
 
-    constructor(throwOnMissingDefinitions = false) {
-        this.state = ValidatorStates.ALL;
-        this.throwOnMissingDefinitions = throwOnMissingDefinitions;
+  constructor(throwOnMissingDefinitions = false) {
+    this.state = ValidatorStates.ALL
+    this.throwOnMissingDefinitions = throwOnMissingDefinitions
+  }
+
+  /**
+   * @summary Enable validation on the next segment.
+   */
+  public disable(): void {
+    this.state = ValidatorStates.NONE
+  }
+
+  /**
+   * @summary Enable validation on the next segment.
+   */
+  public enable(): void {
+    this.state = ValidatorStates.SEGMENTS
+  }
+
+  public define(definitions: Dictionary<SegmentEntry>): void {
+    for (const key of definitions.keys()) {
+      const entry: SegmentEntry | undefined = definitions.get(key)
+      if (entry) {
+        this.segments.add(key, entry)
+      }
     }
+  }
 
-    /**
-     * @summary Enable validation on the next segment.
-     */
-    public disable(): void {
-        this.state = ValidatorStates.NONE;
-    }
-
-    /**
-     * @summary Enable validation on the next segment.
-     */
-    public enable(): void {
-        this.state = ValidatorStates.SEGMENTS;
-    }
-
-    public define(definitions: Dictionary<SegmentEntry>): void {
-        for (const key of definitions.keys()) {
-            const entry: SegmentEntry | undefined = definitions.get(key);
-            if (entry) {
-                this.segments.add(key, entry);
-            }
+  /**
+   * @summary Request a component definition associated with a format string.
+   * @returns A component definition.
+   */
+  format(formatString: string): FormatType | undefined {
+    // Check if we have a component definition in cache for this format string.
+    if (this.formats.contains(formatString)) {
+      return this.formats.get(formatString)
+    } else {
+      let parts: RegExpExecArray | null
+      if ((parts = /^(a|an|n)(\.\.)?([1-9][0-9]*)?$/.exec(formatString))) {
+        const max: number = parseInt(parts[3])
+        const min: number = parts[2] === '..' ? 0 : max
+        let alpha = false
+        let numeric = false
+        switch (parts[1]) {
+          case 'a':
+            alpha = true
+            break
+          case 'n':
+            numeric = true
+            break
+          case 'an':
+            alpha = true
+            numeric = true
+            break
         }
-    }
 
-    /**
-     * @summary Request a component definition associated with a format string.
-     * @returns A component definition.
-     */
-    format(formatString: string): FormatType | undefined {
-        // Check if we have a component definition in cache for this format string.
-        if (this.formats.contains(formatString)) {
-            return this.formats.get(formatString);
+        return this.formats.add(formatString, {
+          alpha: alpha,
+          numeric: numeric,
+          minimum: min,
+          maximum: max,
+        })
+      } else {
+        throw this.errors.invalidFormatString(formatString)
+      }
+    }
+  }
+
+  /**
+   * Called when a adding a new segment to the parser
+   * @param segment The segment as a string
+   * @returns The segment entry
+   */
+  onOpenSegment(segment: string): SegmentEntry | undefined {
+    switch (this.state) {
+      case ValidatorStates.ALL:
+      case ValidatorStates.ELEMENTS:
+      case ValidatorStates.SEGMENTS:
+      case ValidatorStates.ENABLE:
+        // Try to retrieve a segment definition if validation is not turned off.
+        if ((this.segment = this.segments.get(segment))) {
+          // The onelement function will close the previous element, however we
+          // don't want the component counts to be checked. To disable them we put
+          // the validator in the elements state.
+          this.state = ValidatorStates.ELEMENTS
         } else {
-            let parts: RegExpExecArray | null;
-            if (
-                (parts = /^(a|an|n)(\.\.)?([1-9][0-9]*)?$/.exec(formatString))
-            ) {
-                const max: number = parseInt(parts[3]);
-                const min: number = parts[2] === '..' ? 0 : max;
-                let alpha = false;
-                let numeric = false;
-                switch (parts[1]) {
-                    case 'a':
-                        alpha = true;
-                        break;
-                    case 'n':
-                        numeric = true;
-                        break;
-                    case 'an':
-                        alpha = true;
-                        numeric = true;
-                        break;
-                }
-
-                return this.formats.add(formatString, {
-                    alpha: alpha,
-                    numeric: numeric,
-                    minimum: min,
-                    maximum: max
-                });
-            } else {
-                throw this.errors.invalidFormatString(formatString);
-            }
+          const error: Error | undefined = this.errors.missingSegmentDefinition(
+            segment,
+            this.throwOnMissingDefinitions,
+          )
+          if (error) {
+            throw error
+          }
         }
     }
+    this.counts.segment += 1
+    this.counts.element = 0
+    return this.segment
+  }
 
-    /**
-     * Called when a adding a new segment to the parser
-     * @param segment The segment as a string
-     * @returns The segment entry
-     */
-    onOpenSegment(segment: string): SegmentEntry | undefined {
-        switch (this.state) {
-            case ValidatorStates.ALL:
-            case ValidatorStates.ELEMENTS:
-            case ValidatorStates.SEGMENTS:
-            case ValidatorStates.ENABLE:
-                // Try to retrieve a segment definition if validation is not turned off.
-                if ((this.segment = this.segments.get(segment))) {
-                    // The onelement function will close the previous element, however we
-                    // don't want the component counts to be checked. To disable them we put
-                    // the validator in the elements state.
-                    this.state = ValidatorStates.ELEMENTS;
-                } else {
-                    const error: Error | undefined =
-                        this.errors.missingSegmentDefinition(
-                            segment,
-                            this.throwOnMissingDefinitions
-                        );
-                    if (error) {
-                        throw error;
-                    }
-                }
-        }
-        this.counts.segment += 1;
-        this.counts.element = 0;
-        return this.segment;
-    }
+  onElement(): ElementEntry | undefined {
+    let name: string
 
-    onElement(): ElementEntry | undefined {
-        let name: string;
-
-        switch (this.state) {
-            case ValidatorStates.ALL:
-                if (this.segment === undefined) {
-                    const error: Error | undefined =
-                        this.errors.missingSegmentStart(
-                            undefined,
-                            this.throwOnMissingDefinitions
-                        );
-                    if (error) {
-                        throw error;
-                    } else {
-                        return;
-                    }
-                }
-                name = this.segment.elements[this.counts.element]?.id;
-                if (this.element === undefined) {
-                    throw this.errors.missingElementStart(name);
-                }
-
-                // Check component of the previous enter
-                if (
-                    this.counts.component < this.element.requires ||
-                    this.counts.component > this.element.components.length
-                ) {
-                    throw this.errors.countError(
-                        'Element',
-                        name,
-                        this.element,
-                        this.counts.component
-                    );
-                }
-            // Fall through to continue with element count validation
-            case ValidatorStates.ENTER:
-            // Skip component count checks for the first element
-            // eslint-disable-next-line no-fallthrough
-            case ValidatorStates.ELEMENTS:
-                if (this.segment === undefined) {
-                    const error: Error | undefined =
-                        this.errors.missingSegmentStart(
-                            undefined,
-                            this.throwOnMissingDefinitions
-                        );
-                    if (error) {
-                        throw error;
-                    } else {
-                        return;
-                    }
-                }
-                // Get the current element
-                if (
-                    (this.element = this.segment.elements[this.counts.element])
-                ) {
-                    this.state = ValidatorStates.ALL;
-                } else {
-                    this.state = ValidatorStates.ELEMENTS;
-                    if (this.throwOnMissingDefinitions) {
-                        throw this.errors.missingElementDefinition(
-                            this.counts.element.toString()
-                        );
-                    }
-                }
-        }
-        // Move to the next element
-        this.counts.element += 1;
-        // Reset component, as we are done with this element
-        this.counts.component = 0;
-        return this.element;
-    }
-
-    /**
-     * @summary Start validation for a new component.
-     * @param buffer - An object which implements the buffer interface.
-     *
-     * The buffer object should allow the mode to be set to alpha, numeric or
-     * alphanumeric with their corresponding methods.
-     */
-    onOpenComponent(buffer: Tokenizer): void {
+    switch (this.state) {
+      case ValidatorStates.ALL:
         if (this.segment === undefined) {
-            const error: Error | undefined = this.errors.missingSegmentStart(
-                undefined,
-                this.throwOnMissingDefinitions
-            );
-            if (error) {
-                throw error;
-            } else {
-                return;
-            }
+          const error: Error | undefined = this.errors.missingSegmentStart(
+            undefined,
+            this.throwOnMissingDefinitions,
+          )
+          if (error) {
+            throw error
+          } else {
+            return
+          }
+        }
+        name = this.segment.elements[this.counts.element]?.id
+        if (this.element === undefined) {
+          throw this.errors.missingElementStart(name)
         }
 
-        switch (this.state) {
-            case ValidatorStates.ALL:
-                // Used to display the error message
-                // eslint-disable-next-line no-case-declarations
-                const currentElement: ElementEntry =
-                    this.segment.elements[this.counts.element];
-                if (this.element === undefined) {
-                    throw this.errors.missingElementStart(currentElement?.id);
-                }
-                if (typeof this.element === 'string') {
-                    throw new Error(
-                        'Element is a string ' + currentElement?.id ||
-                            this.element
-                    );
-                }
-
-                // Retrieve a component definition if validation is set to all
-
-                this.component = this.format(
-                    this.element.components[this.counts.component]?.format || ''
-                );
-                if (this.component === undefined) {
-                    return;
-                }
-                this.required = this.element.requires;
-                this.minimum = this.component.minimum;
-                this.maximum = this.component.maximum;
-                // Set the corresponding buffer mode
-                if (this.component.alpha) {
-                    if (this.component.numeric) {
-                        buffer.alphanumeric();
-                    } else {
-                        buffer.alpha();
-                    }
-                } else {
-                    if (this.component.numeric) {
-                        buffer.numeric();
-                    } else {
-                        buffer.alphanumeric();
-                    }
-                }
-                break;
-            default:
-                // Set the buffer to its default mode
-                buffer.alphanumeric();
+        // Check component of the previous enter
+        if (
+          this.counts.component < this.element.requires ||
+          this.counts.component > this.element.components.length
+        ) {
+          throw this.errors.countError(
+            'Element',
+            name,
+            this.element,
+            this.counts.component,
+          )
         }
-        this.counts.component += 1;
-    }
-
-    onCloseComponent(buffer: Tokenizer): Component | undefined {
-        let length: number;
-
-        // Hold the component we are closing
-        let currentComponent: Component | undefined;
-        switch (this.state) {
-            case ValidatorStates.ALL:
-                // Component validation is only needed when validation is set to all
-                length = buffer.length();
-                if (this.segment) {
-                    if (this.element) {
-                        currentComponent =
-                            this.element.components[this.counts.component];
-                    } else {
-                        console.error('Element not found');
-                    }
-                } else {
-                    const error: Error | undefined =
-                        this.errors.missingSegmentStart(
-                            this.segment,
-                            this.throwOnMissingDefinitions
-                        );
-                    if (error) {
-                        throw error;
-                    } else {
-                        return;
-                    }
-                }
-
-                // We perform validation if either the required component count is greater than
-                // or equal to the current component count or if a non-empty value was found
-                if (this.required >= this.counts.component || length > 0) {
-                    if (length < this.minimum) {
-                        throw this.errors.invalidData(
-                            this.element,
-                            `'${buffer?.content()}' length is less than minimum length ${
-                                this.minimum
-                            }`
-                        );
-                    } else if (length > this.maximum) {
-                        throw this.errors.invalidData(
-                            this.element,
-                            `'${buffer?.content()}' exceeds maximum length ${
-                                this.maximum
-                            }`
-                        );
-                    }
-                }
+      // Fall through to continue with element count validation
+      case ValidatorStates.ENTER:
+      // Skip component count checks for the first element
+      // eslint-disable-next-line no-fallthrough
+      case ValidatorStates.ELEMENTS:
+        if (this.segment === undefined) {
+          const error: Error | undefined = this.errors.missingSegmentStart(
+            undefined,
+            this.throwOnMissingDefinitions,
+          )
+          if (error) {
+            throw error
+          } else {
+            return
+          }
         }
-        return currentComponent;
-    }
-
-    /**
-     * @summary Finish validation for the current segment.
-     */
-    onCloseSegment(segment: string): void {
-        let name: string;
-
-        switch (this.state) {
-            case ValidatorStates.ALL:
-                if (this.segment === undefined) {
-                    const error: Error | undefined =
-                        this.errors.missingSegmentStart(
-                            segment,
-                            this.throwOnMissingDefinitions
-                        );
-                    if (error) {
-                        throw error;
-                    } else {
-                        return;
-                    }
-                }
-                if (this.element === undefined) {
-                    throw this.errors.missingElementStart(segment);
-                }
-
-                if (
-                    this.counts.component < this.element.requires ||
-                    this.counts.component > this.element.components.length
-                ) {
-                    name = this.segment.elements[this.counts.element].id;
-                    throw this.errors.countError(
-                        'Element',
-                        name,
-                        this.element,
-                        this.counts.component
-                    );
-                }
-            // Fall through to continue with element cound validation
-            case ValidatorStates.ELEMENTS:
-                if (this.segment === undefined) {
-                    const error: Error | undefined =
-                        this.errors.missingSegmentStart(
-                            segment,
-                            this.throwOnMissingDefinitions
-                        );
-                    if (error) {
-                        throw error;
-                    } else {
-                        return;
-                    }
-                }
-
-                if (
-                    this.counts.element < this.segment.requires ||
-                    this.counts.element > this.segment.elements.length
-                ) {
-                    name = segment;
-                    throw this.errors.countError(
-                        'Segment',
-                        name,
-                        this.segment,
-                        this.counts.element
-                    );
-                }
+        // Get the current element
+        if ((this.element = this.segment.elements[this.counts.element])) {
+          this.state = ValidatorStates.ALL
+        } else {
+          this.state = ValidatorStates.ELEMENTS
+          if (this.throwOnMissingDefinitions) {
+            throw this.errors.missingElementDefinition(
+              this.counts.element.toString(),
+            )
+          }
         }
     }
+    // Move to the next element
+    this.counts.element += 1
+    // Reset component, as we are done with this element
+    this.counts.component = 0
+    return this.element
+  }
 
-    private errors = {
-        invalidData: function (
-            element: ElementEntry | undefined,
-            msg: string
-        ): Error {
-            return new Error(
-                `Could not accept data on element ${
-                    element?.id || 'undefined'
-                }: ${msg}`
-            );
-        },
-        invalidFormatString: function (formatString: string): Error {
-            return new Error('Invalid format string ' + formatString);
-        },
-        countError: function (
-            type: string,
-            name: string,
-            definition: ElementEntry | SegmentEntry,
-            count: number
-        ): Error {
-            let array: string;
-            let start: string = type + ' ' + name;
-            let end: string;
+  /**
+   * @summary Start validation for a new component.
+   * @param buffer - An object which implements the buffer interface.
+   *
+   * The buffer object should allow the mode to be set to alpha, numeric or
+   * alphanumeric with their corresponding methods.
+   */
+  onOpenComponent(buffer: Tokenizer): void {
+    if (this.segment === undefined) {
+      const error: Error | undefined = this.errors.missingSegmentStart(
+        undefined,
+        this.throwOnMissingDefinitions,
+      )
+      if (error) {
+        throw error
+      } else {
+        return
+      }
+    }
 
-            let length = 0;
-            if (type === 'Segment') {
-                array = 'elements';
-                const entry: SegmentEntry = definition as SegmentEntry;
-                length = entry.elements.length;
-            } else {
-                array = 'components';
-                const entry: ElementEntry = definition as ElementEntry;
-                length = entry.components.length;
-            }
-
-            if (count < definition.requires) {
-                start += ' only';
-                end = ` but requires at least ${definition.requires}`;
-            } else {
-                end = ` but accepts at most ${length}`;
-            }
-            return new Error(
-                start +
-                    ` got ${count} ` +
-                    array +
-                    end +
-                    JSON.stringify(definition)
-            );
-        },
-        missingElementStart: function (segment: string): Error {
-            const message = `Active open element expected on segment ${segment}`;
-            return new Error(message);
-        },
-        missingElementDefinition: function (element: string): Error {
-            const message = `No definition found for element ${element}`;
-            return new Error(message);
-        },
-        missingSegmentStart: function (
-            segment?: string,
-            throwOnMissingDefinitions?: boolean
-        ): Error | undefined {
-            if (!throwOnMissingDefinitions) {
-                return undefined;
-            }
-
-            let name: string;
-            if (segment) {
-                name = "'" + segment + "'";
-            } else {
-                name = "''";
-            }
-            return new Error(
-                `Active open segment ${name} expected. Found none`
-            );
-        },
-        missingSegmentDefinition: function (
-            segment: string,
-            throwOnMissingDefinitions?: boolean
-        ): Error | undefined {
-            if (throwOnMissingDefinitions) {
-                return new Error(
-                    `No segment definition found for segment name ${segment}`
-                );
-            } else {
-                console.warn(
-                    `No segment definition found for segment name ${segment}`
-                );
-                return undefined;
-            }
+    switch (this.state) {
+      case ValidatorStates.ALL:
+        // Used to display the error message
+        // eslint-disable-next-line no-case-declarations
+        const currentElement: ElementEntry =
+          this.segment.elements[this.counts.element]
+        if (this.element === undefined) {
+          throw this.errors.missingElementStart(currentElement?.id)
         }
-    };
+        if (typeof this.element === 'string') {
+          throw new Error(
+            'Element is a string ' + currentElement?.id || this.element,
+          )
+        }
+
+        // Retrieve a component definition if validation is set to all
+
+        this.component = this.format(
+          this.element.components[this.counts.component]?.format || '',
+        )
+        if (this.component === undefined) {
+          return
+        }
+        this.required = this.element.requires
+        this.minimum = this.component.minimum
+        this.maximum = this.component.maximum
+        // Set the corresponding buffer mode
+        if (this.component.alpha) {
+          if (this.component.numeric) {
+            buffer.alphanumeric()
+          } else {
+            buffer.alpha()
+          }
+        } else {
+          if (this.component.numeric) {
+            buffer.numeric()
+          } else {
+            buffer.alphanumeric()
+          }
+        }
+        break
+      default:
+        // Set the buffer to its default mode
+        buffer.alphanumeric()
+    }
+    this.counts.component += 1
+  }
+
+  onCloseComponent(buffer: Tokenizer): Component | undefined {
+    let length: number
+
+    // Hold the component we are closing
+    let currentComponent: Component | undefined
+    switch (this.state) {
+      case ValidatorStates.ALL:
+        // Component validation is only needed when validation is set to all
+        length = buffer.length()
+        if (this.segment) {
+          if (this.element) {
+            currentComponent = this.element.components[this.counts.component]
+          } else {
+            console.error('Element not found')
+          }
+        } else {
+          const error: Error | undefined = this.errors.missingSegmentStart(
+            this.segment,
+            this.throwOnMissingDefinitions,
+          )
+          if (error) {
+            throw error
+          } else {
+            return
+          }
+        }
+
+        // We perform validation if either the required component count is greater than
+        // or equal to the current component count or if a non-empty value was found
+        if (this.required >= this.counts.component || length > 0) {
+          if (length < this.minimum) {
+            throw this.errors.invalidData(
+              this.element,
+              `'${buffer?.content()}' length is less than minimum length ${
+                this.minimum
+              }`,
+            )
+          } else if (length > this.maximum) {
+            throw this.errors.invalidData(
+              this.element,
+              `'${buffer?.content()}' exceeds maximum length ${this.maximum}`,
+            )
+          }
+        }
+    }
+    return currentComponent
+  }
+
+  /**
+   * @summary Finish validation for the current segment.
+   */
+  onCloseSegment(segment: string): void {
+    let name: string
+
+    switch (this.state) {
+      case ValidatorStates.ALL:
+        if (this.segment === undefined) {
+          const error: Error | undefined = this.errors.missingSegmentStart(
+            segment,
+            this.throwOnMissingDefinitions,
+          )
+          if (error) {
+            throw error
+          } else {
+            return
+          }
+        }
+        if (this.element === undefined) {
+          throw this.errors.missingElementStart(segment)
+        }
+
+        if (
+          this.counts.component < this.element.requires ||
+          this.counts.component > this.element.components.length
+        ) {
+          name = this.segment.elements[this.counts.element].id
+          throw this.errors.countError(
+            'Element',
+            name,
+            this.element,
+            this.counts.component,
+          )
+        }
+      // Fall through to continue with element cound validation
+      case ValidatorStates.ELEMENTS:
+        if (this.segment === undefined) {
+          const error: Error | undefined = this.errors.missingSegmentStart(
+            segment,
+            this.throwOnMissingDefinitions,
+          )
+          if (error) {
+            throw error
+          } else {
+            return
+          }
+        }
+
+        if (
+          this.counts.element < this.segment.requires ||
+          this.counts.element > this.segment.elements.length
+        ) {
+          name = segment
+          throw this.errors.countError(
+            'Segment',
+            name,
+            this.segment,
+            this.counts.element,
+          )
+        }
+    }
+  }
+
+  private errors = {
+    invalidData: function (
+      element: ElementEntry | undefined,
+      msg: string,
+    ): Error {
+      return new Error(
+        `Could not accept data on element ${
+          element?.id || 'undefined'
+        }: ${msg}`,
+      )
+    },
+    invalidFormatString: function (formatString: string): Error {
+      return new Error('Invalid format string ' + formatString)
+    },
+    countError: function (
+      type: string,
+      name: string,
+      definition: ElementEntry | SegmentEntry,
+      count: number,
+    ): Error {
+      let array: string
+      let start: string = type + ' ' + name
+      let end: string
+
+      let length = 0
+      if (type === 'Segment') {
+        array = 'elements'
+        const entry: SegmentEntry = definition as SegmentEntry
+        length = entry.elements.length
+      } else {
+        array = 'components'
+        const entry: ElementEntry = definition as ElementEntry
+        length = entry.components.length
+      }
+
+      if (count < definition.requires) {
+        start += ' only'
+        end = ` but requires at least ${definition.requires}`
+      } else {
+        end = ` but accepts at most ${length}`
+      }
+      return new Error(
+        start + ` got ${count} ` + array + end + JSON.stringify(definition),
+      )
+    },
+    missingElementStart: function (segment: string): Error {
+      const message = `Active open element expected on segment ${segment}`
+      return new Error(message)
+    },
+    missingElementDefinition: function (element: string): Error {
+      const message = `No definition found for element ${element}`
+      return new Error(message)
+    },
+    missingSegmentStart: function (
+      segment?: string,
+      throwOnMissingDefinitions?: boolean,
+    ): Error | undefined {
+      if (!throwOnMissingDefinitions) {
+        return undefined
+      }
+
+      let name: string
+      if (segment) {
+        name = "'" + segment + "'"
+      } else {
+        name = "''"
+      }
+      return new Error(`Active open segment ${name} expected. Found none`)
+    },
+    missingSegmentDefinition: function (
+      segment: string,
+      throwOnMissingDefinitions?: boolean,
+    ): Error | undefined {
+      if (throwOnMissingDefinitions) {
+        return new Error(
+          `No segment definition found for segment name ${segment}`,
+        )
+      } else {
+        console.warn(`No segment definition found for segment name ${segment}`)
+        return undefined
+      }
+    },
+  }
 }

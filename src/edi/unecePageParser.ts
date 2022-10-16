@@ -16,59 +16,58 @@
  * limitations under the License.
  */
 
-import { Parser } from 'htmlparser2';
-import { UNECEDomHandler } from './uneceDomHandler';
-import { StateMachine, StateMachineDefinition } from '@initics/tsm';
-
-import { isDefined } from '../util';
-import { EdifactMessageSpecification } from './messageStructureParser';
+import { StateMachine, StateMachineDefinition } from '@initics/tsm'
+import { Parser } from 'htmlparser2'
+import { isDefined } from '../util'
+import { EdifactMessageSpecification } from './messageStructureParser'
+import { UNECEDomHandler } from './uneceDomHandler'
 
 export abstract class UNECEPageParser {
-    protected sm: StateMachine;
-    protected _spec?: EdifactMessageSpecification;
+  protected sm: StateMachine
+  protected _spec?: EdifactMessageSpecification
 
-    constructor(smdef: StateMachineDefinition) {
-        this.sm = new StateMachine(smdef);
+  constructor(smdef: StateMachineDefinition) {
+    this.sm = new StateMachine(smdef)
+  }
+
+  get spec(): EdifactMessageSpecification {
+    if (!this._spec) {
+      throw new Error(`EdifactMessageSpecification not defined`)
     }
+    return this._spec
+  }
 
-    get spec(): EdifactMessageSpecification {
-        if (!this._spec) {
-            throw new Error(`EdifactMessageSpecification not defined`);
-        }
-        return this._spec;
+  parse(page: string): void {
+    const parser: Parser = new Parser(this.setupHandler())
+    parser.write(page)
+    parser.end()
+  }
+
+  protected setupHandler(): UNECEDomHandler {
+    return new (class extends UNECEDomHandler {
+      public override onOpenTag(): void {
+        //
+      }
+
+      public override onText(): void {
+        //
+      }
+    })()
+  }
+
+  protected extractTextValue(text: string, regex: RegExp, index = 0): string {
+    const arr: RegExpExecArray | null = regex.exec(text)
+    if (isDefined(arr)) {
+      return arr[index]
     }
+    return ''
+  }
 
-    parse(page: string): void {
-        const parser: Parser = new Parser(this.setupHandler());
-        parser.write(page);
-        parser.end();
-    }
+  protected throwInvalidParserState(state: string): void {
+    throw new Error(`Invalid parser state: ${state}`)
+  }
 
-    protected setupHandler(): UNECEDomHandler {
-        return new (class extends UNECEDomHandler {
-            public override onOpenTag(): void {
-                //
-            }
-
-            public override onText(): void {
-                //
-            }
-        })();
-    }
-
-    protected extractTextValue(text: string, regex: RegExp, index = 0): string {
-        const arr: RegExpExecArray | null = regex.exec(text);
-        if (isDefined(arr)) {
-            return arr[index];
-        }
-        return '';
-    }
-
-    protected throwInvalidParserState(state: string): void {
-        throw new Error(`Invalid parser state: ${state}`);
-    }
-
-    protected throwCouldNotParsePage(): void {
-        throw new Error('Could not parse page');
-    }
+  protected throwCouldNotParsePage(): void {
+    throw new Error('Could not parse page')
+  }
 }
