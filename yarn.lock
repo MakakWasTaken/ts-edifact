@@ -1694,10 +1694,9 @@ jasmine-growl-reporter@~2.0.0:
   dependencies:
     growl "^1.10.5"
 
-jasmine-node@^3.0.0:
+"jasmine-node@https://github.com/MakakWasTaken/jasmine-node":
   version "3.0.0"
-  resolved "https://registry.yarnpkg.com/jasmine-node/-/jasmine-node-3.0.0.tgz#f12b6fdd24633402ec23e8ea6fef6ffbcb464f90"
-  integrity sha512-vUa5Q7bQYwHHqi6FlJYndiKqZp+d+c3MKe0QUMwwrC4JRmoRV3zkg0buxB/uQ6qLh0NO34TNstpAnvaZ6xGlAA==
+  resolved "https://github.com/MakakWasTaken/jasmine-node#528c0d10b74097e772ba79d533bd59636ff22035"
   dependencies:
     coffeescript "~1.12.7"
     gaze "~1.1.2"
@@ -1705,7 +1704,7 @@ jasmine-node@^3.0.0:
     jasmine-reporters "~1.0.0"
     mkdirp "~0.3.5"
     requirejs "~2.3.6"
-    underscore "~1.9.1"
+    underscore "^1.13.6"
     walkdir "~0.0.12"
 
 jasmine-reporters@~1.0.0:
@@ -2558,10 +2557,10 @@ unbox-primitive@^1.0.1:
     has-symbols "^1.0.2"
     which-boxed-primitive "^1.0.2"
 
-underscore@~1.9.1:
-  version "1.9.2"
-  resolved "https://registry.yarnpkg.com/underscore/-/underscore-1.9.2.tgz#0c8d6f536d6f378a5af264a72f7bec50feb7cf2f"
-  integrity sha512-D39qtimx0c1fI3ya1Lnhk3E9nONswSKhnffBI0gME9C99fYOkNi04xs8K6pePLhvl1frbDemkaBQ5ikWllR2HQ==
+underscore@^1.13.6:
+  version "1.13.6"
+  resolved "https://registry.yarnpkg.com/underscore/-/underscore-1.13.6.tgz#04786a1f589dc6c09f761fc5f45b89e935136441"
+  integrity sha512-+A5Sja4HP1M08MaXya7p5LvjuM7K6q/2EaC0+iovj/wOcMsTzMvDFbasi/oSapiwOlt252IqsKqPjCl7huKS0A==
 
 uri-js@^4.2.2:
   version "4.4.1"

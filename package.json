@@ -1,7 +1,7 @@
 {
     "name": "@makakwastaken/ts-edifact",
     "description": "Edifact parser library",
-    "version": "0.1.8",
+    "version": "0.1.9",
     "private": false,
     "type": "commonjs",
     "main": "lib/index.js",
@@ -64,7 +64,7 @@
         "glob-parent": "^6.0.1",
         "jasmine": "^3.5.0",
         "jasmine-core": "^3.9.0",
-        "jasmine-node": "^3.0.0",
+        "jasmine-node": "https://github.com/MakakWasTaken/jasmine-node",
         "jasmine-spec-reporter": "^7.0.0",
         "jasmine-ts": "^0.4.0",
         "jasmine-ts-console-reporter": "^3.1.1",
