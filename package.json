@@ -1,7 +1,7 @@
 {
   "name": "@makakwastaken/ts-edifact",
   "description": "Edifact parser library",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "private": false,
   "type": "commonjs",
   "main": "lib/index.js",
