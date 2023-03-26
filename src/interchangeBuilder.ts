@@ -1,3 +1,5 @@
+/* eslint-disable no-case-declarations */
+/* eslint-disable no-redeclare */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 /**
@@ -262,58 +264,57 @@ export class InterchangeBuilder {
 
     let interchange: Edifact | undefined
     for (const segment of parsingResult) {
-      switch (segment.name) {
-        case 'UNB':
-          interchange = new Edifact(segment.elements)
-          break
-        case 'UNZ':
-          // nothing to do
-          break
-        case 'UNT':
-          this.reset()
-          break
-        default:
-          if (segment.name === 'UNH') {
-            const message: Message = new Message(segment)
-            // lookup the message definition for the respective edifact version, i.e. D96A => INVOIC
-            const messageVersion: string =
-              message.messageHeader.messageIdentifier.messageVersionNumber +
-              message.messageHeader.messageIdentifier.messageReleaseNumber
-            const messageType: string =
-              message.messageHeader.messageIdentifier.messageType
-            const table: MessageType[] = this.getMessageStructureDefForMessage(
-              basePath,
-              messageVersion,
-              messageType,
-            )
-            this.stack = [new Pointer(table, 0)]
-            this.curSection = 'header'
+      console.log(segment.name)
+      if (segment.name === 'UNB') {
+        interchange = new Edifact(segment.elements)
+        continue
+      }
+      if (segment.name === 'UNZ') {
+        continue
+      }
+      if (segment.name === 'UNH') {
+        const message: Message = new Message(segment)
+        // lookup the message definition for the respective edifact version, i.e. D96A => INVOIC
+        const messageVersion: string =
+          message.messageHeader.messageIdentifier.messageVersionNumber +
+          message.messageHeader.messageIdentifier.messageReleaseNumber
+        const messageType: string =
+          message.messageHeader.messageIdentifier.messageType
+        const table: MessageType[] = this.getMessageStructureDefForMessage(
+          basePath,
+          messageVersion,
+          messageType,
+        )
+        this.stack = [new Pointer(table, 0)]
+        this.curSection = 'header'
 
-            if (interchange) {
-              interchange.addMessage(message)
-            } else {
-              throw Error('')
-            }
-          }
+        if (interchange) {
+          interchange.addMessage(message)
+        } else {
+          throw Error('')
+        }
+      }
 
-          /* eslint-disable no-case-declarations */
-          const message: Message | undefined =
-            interchange?.messages[interchange.messages.length - 1]
-          if (message) {
-            const messageVersion: string =
-              message.messageHeader.messageIdentifier.messageVersionNumber +
-              message.messageHeader.messageIdentifier.messageReleaseNumber
-            this.accept(
-              segment,
-              message,
-              messageVersion,
-              separators.decimalSeparator,
-            )
-          } else {
-            throw Error(
-              `Couldn't process ${segment.name} segment as no message was found.`,
-            )
-          }
+      /* eslint-disable no-case-declarations */
+      const message: Message | undefined =
+        interchange?.messages[interchange.messages.length - 1]
+      if (message) {
+        const messageVersion: string =
+          message.messageHeader.messageIdentifier.messageVersionNumber +
+          message.messageHeader.messageIdentifier.messageReleaseNumber
+        this.accept(
+          segment,
+          message,
+          messageVersion,
+          separators.decimalSeparator,
+        )
+      } else {
+        throw Error(
+          `Couldn't process ${segment.name} segment as no message was found.`,
+        )
+      }
+      if (segment.name === 'UNT') {
+        this.reset()
       }
     }
 
