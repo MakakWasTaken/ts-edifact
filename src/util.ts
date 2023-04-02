@@ -79,22 +79,25 @@ export const formatComponents = (
   elements.forEach((element) => {
     element.components.forEach((component) => {
       if (component.value) {
+        const actualValue = component.validValues
+          ? component.validValues?.[component.value] || component.value
+          : component.value
         if (element.components.length <= 1) {
-          result[element.name] = component.value
+          result[element.name] = actualValue
           return
         } else {
           if (!result[element.name]) {
             result[element.name] = {}
           }
           if (typeof result[element.name] === 'object') {
-            if (decimalSeparator) {
+            if (decimalSeparator && !component.validValues) {
               // If decimal seperator is defined replace instances
               result[element.name][component.name] = component.value.replace(
                 decimalSeparator,
                 '.',
               )
             } else {
-              result[element.name][component.name] = component.value
+              result[element.name][component.name] = actualValue
             }
           }
         }
@@ -331,6 +334,28 @@ export function storeAllDefaultSpecs(version: string, location: string): void {
     // 'WKGRRE' // 	Work grant request message"
   ]
 
+  // Update INVOIC D07A
+  const structParser: MessageStructureParser = new UNECEMessageStructureParser(
+    'd07a',
+    'INVOIC',
+  )
+  structParser
+    .loadTypeSpec()
+    .then((result: EdifactMessageSpecification) => {
+      persist(result, location, false, true)
+    })
+    .then(() => {
+      console.log(
+        `Stored definition for type INVOIC of version d07a at location ${location}`,
+      )
+    })
+    .catch((error: Error) => {
+      console.warn(
+        `Could not load Message structure and segment/element definitions for message type INVOIC of version d07a. Reason: ${error.message}`,
+      )
+    })
+
+  // Update all other types
   for (const typeName of types) {
     const structParser: MessageStructureParser =
       new UNECEMessageStructureParser(version, typeName)

@@ -1,3 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /**
  * @author Roman Vottner
  * @copyright 2020 Roman Vottner
@@ -376,13 +380,15 @@ describe('InterchangeBuilder', () => {
     expect(
       nadGroups.find(
         (nad) =>
-          (nad.data[0] as NameAndAddress).partyFunctionCodeQualifier === 'FR',
+          (nad.data[0] as NameAndAddress).partyFunctionCodeQualifier.id ===
+          'FR',
       ),
     ).toBeDefined()
     expect(
       nadGroups.find(
         (nad) =>
-          (nad.data[0] as NameAndAddress).partyFunctionCodeQualifier === 'DO',
+          (nad.data[0] as NameAndAddress).partyFunctionCodeQualifier.id ===
+          'DO',
       ),
     ).toBeDefined()
   })

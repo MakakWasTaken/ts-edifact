@@ -20,6 +20,7 @@
 
 import { ResultType } from './reader'
 import { formatComponents } from './util'
+import { ComponentValue } from './validator'
 
 export function sanitizeFloat(str: string, decimalSymbol: string): number {
   const updatedStr: string = str.replace(decimalSymbol, '.')
@@ -261,8 +262,8 @@ interface AllowanceOrChargeInformation {
 
 interface SpecialServicesIdentification {
   specialServiceDescriptionCode: string | undefined
-  codeListIdentificationCode: string | undefined
-  codeListResponsibleAgencyCode: string | undefined
+  codeListIdentificationCode: ComponentValue | undefined
+  codeListResponsibleAgencyCode: ComponentValue | undefined
   specialServiceDescription: string | undefined
   specialServiceDescription2: string | undefined
 }
@@ -270,7 +271,7 @@ interface SpecialServicesIdentification {
 export interface AllowanceOrCharge {
   tag: string
 
-  allowanceOrChargeCodeQualifier: string
+  allowanceOrChargeCodeQualifier: ComponentValue
   allowanceOrChargeInformation: AllowanceOrChargeInformation | undefined
   settlementMeansCode: string | undefined
   calculationSequenceCode: string | undefined
@@ -295,12 +296,12 @@ export interface AdditionalInformation {
 
 interface PriceMultiplierInformation {
   priceMuliplierRate: number
-  priceMuliplierTypeCodeQualifier: string | undefined
+  priceMuliplierTypeCodeQualifier: ComponentValue | undefined
 }
 
 interface ReasonForChange {
   changeReasonDescriptionCode: string | undefined
-  codeListIdentificationCode: string | undefined
+  codeListIdentificationCode: ComponentValue | undefined
   codeListResponsibleAgencyCoe: string | undefined
   changeReasonDescription: string | undefined
 }
@@ -317,15 +318,15 @@ export interface AdditionalPriceInformation {
 
 interface MonetaryAmountFunctionData {
   monetaryAmountFunctionDescriptionCode: string | undefined
-  codeListIdentificationCode: string | undefined
-  codeListResponsibleAgencyCode: string | undefined
+  codeListIdentificationCode: ComponentValue | undefined
+  codeListResponsibleAgencyCode: ComponentValue | undefined
   monetaryAmountFunctionDescription: string | undefined
 }
 
 interface MonetaryAmountFunctionDetail {
   monetaryAmountFunctionDetailDescriptionCode: string | undefined
-  codeListIdentificationCode: string | undefined
-  codeListResponsibleAgencyCode: string | undefined
+  codeListIdentificationCode: ComponentValue | undefined
+  codeListResponsibleAgencyCode: ComponentValue | undefined
   monetaryAmountFunctionDetailDescription: string | undefined
 }
 
@@ -349,8 +350,8 @@ export interface AuthenticationResult {
 
 interface MessageName {
   documentNameCode: string | undefined
-  codeListIdentificationCode: string | undefined
-  codeListResponsibleAgencyCode: string | undefined
+  codeListIdentificationCode: ComponentValue | undefined
+  codeListResponsibleAgencyCode: ComponentValue | undefined
   documentName: string | undefined
 }
 
@@ -365,7 +366,7 @@ export interface BeginOfMessage {
 
   documentMessageName: MessageName | undefined
   documentMessageIdentification: string | undefined
-  messageFunctionCode: string | undefined
+  messageFunctionCode: ComponentValue | undefined
   responseTypeCode: string | undefined
   documentStatusCode: string | undefined
   languageNameCode: string | undefined
@@ -374,17 +375,17 @@ export interface BeginOfMessage {
 // BUS
 
 interface BusinessFunctionData {
-  businessFunctionTypeCodeQualifier: string
-  businessFunctionCode: string
-  codeListIdentificationCode: string | undefined
-  codeListResponsibleAgencyCode: string | undefined
+  businessFunctionTypeCodeQualifier: ComponentValue
+  businessFunctionCode: ComponentValue
+  codeListIdentificationCode: ComponentValue | undefined
+  codeListResponsibleAgencyCode: ComponentValue | undefined
   businessDescription: string | undefined
 }
 
 interface BankOperation {
   bankOperationCode: string
-  codeListIdentificationCode: string | undefined
-  codeListResponsibleAgencyCode: string | undefined
+  codeListIdentificationCode: ComponentValue | undefined
+  codeListResponsibleAgencyCode: ComponentValue | undefined
 }
 
 export interface BusinessFunction {
@@ -401,8 +402,8 @@ export interface BusinessFunction {
 
 interface CharacteristicValueData {
   characteristicValueDescriptionCode: string | undefined
-  codeListIdentificationCode: string | undefined
-  codeListResponsibleAgencyCode: string | undefined
+  codeListIdentificationCode: ComponentValue | undefined
+  codeListResponsibleAgencyCode: ComponentValue | undefined
   characteristicValueDescription: string | undefined
   characteristicValueDescription2: string | undefined
 }
@@ -417,8 +418,8 @@ export interface CharacteristicValue {
 
 interface CharacteristicDescription {
   characteristicDescriptionCode: string
-  codeListIdentificationCode: string | undefined
-  codeListResponsibleAgencyCode: string | undefined
+  codeListIdentificationCode: ComponentValue | undefined
+  codeListResponsibleAgencyCode: ComponentValue | undefined
   characteristicDescription: string | undefined
   characteristicDescription2: string | undefined
 }
@@ -436,8 +437,8 @@ export interface CharacteristicinterfaceID {
 
 interface ComputerEnviornmentIdentification {
   computerEnvironmentNameCode: string | undefined
-  codeListIdentificationCode: string | undefined
-  codeListResponsibleAgencyCode: string | undefined
+  codeListIdentificationCode: ComponentValue | undefined
+  codeListResponsibleAgencyCode: ComponentValue | undefined
   computerEnvironmentName: string | undefined
   versionIdentifier: string | undefined
   releaseIdentifier: string | undefined
@@ -447,7 +448,7 @@ interface ComputerEnviornmentIdentification {
 export interface ComputerEnvironmentDetails {
   tag: string
 
-  computerEnvironmentDetailsCodeQualifier: string
+  computerEnvironmentDetailsCodeQualifier: ComponentValue
   computerEnviornmentIdentification: ComputerEnviornmentIdentification
   fileGenerationCommandName: string | undefined
 }
@@ -455,7 +456,7 @@ export interface ComputerEnvironmentDetails {
 // CNT
 
 interface Control {
-  controlTotalTypeCodeQualifier: string
+  controlTotalTypeCodeQualifier: ComponentValue
   controlTotalValue: number
   measurementUnitCode: string | undefined
 }
@@ -470,15 +471,15 @@ export interface ControlTotal {
 
 interface TypeOfUnit {
   unitOrComponentTypeDescriptionCode: string | undefined
-  codeListIdentificationCode: string | undefined
-  codeListResponsibleAgencyCode: string | undefined
+  codeListIdentificationCode: ComponentValue | undefined
+  codeListResponsibleAgencyCode: ComponentValue | undefined
   unitOrComponentTypeDescription: string | undefined
 }
 
 interface ComponentMaterial {
   componentMaterialDescriptionCode: string | undefined
-  codeListIdentificationCode: string | undefined
-  codeListResponsibleAgencyCode: string | undefined
+  codeListIdentificationCode: ComponentValue | undefined
+  codeListResponsibleAgencyCode: ComponentValue | undefined
   componentMaterialDescription: string | undefined
 }
 
@@ -493,7 +494,7 @@ export interface ComponentDetails {
 
 interface CommunicationContactData {
   communicationAddressIdentifier: string
-  communicationAddressCodeQualifier: string
+  communicationAddressCodeQualifier: ComponentValue
 }
 
 export interface CommunicationContact {
@@ -522,16 +523,16 @@ interface DepartmentOrEmployeeDetails {
 export interface ContactInformation {
   tag: string
 
-  contactFunctionCode: string | undefined
+  contactFunctionCode: ComponentValue | undefined
   departmentOrEmployeeDetails: DepartmentOrEmployeeDetails | undefined
 }
 
 // CUX
 
 interface CurrencyDetails {
-  currencyUsageCodeQualifier: string
+  currencyUsageCodeQualifier: ComponentValue
   currencyIdentificationCode: string | undefined
-  currencyTypeCodeQualifier: string | undefined
+  currencyTypeCodeQualifier: ComponentValue | undefined
   currencyRate: number | undefined
 }
 
@@ -638,7 +639,7 @@ export interface MessageDetails {
 // DTM
 
 interface DateTimePeriodData {
-  dateTimeOrPeriodFunctionCodeQualifier: string
+  dateTimeOrPeriodFunctionCodeQualifier: ComponentValue
   dateTimeOrPeriodText: string | undefined
   dateTimeOrPeriodFormatCode: string | undefined
 }
@@ -677,7 +678,7 @@ export interface ExternalFileLinkIdentification {
 export interface AttachedEquipment {
   tag: string
 
-  equipmentTypeCodeQualifier: string
+  equipmentTypeCodeQualifier: ComponentValue
   equipmentIdentification: EquipmentIdentification | undefined
 }
 
@@ -685,22 +686,22 @@ export interface AttachedEquipment {
 
 interface EquipmentIdentification {
   equipmentIdentifier: string | undefined
-  codeListIdentificationCode: string | undefined
-  codeListResponsibleAgencyCode: string | undefined
+  codeListIdentificationCode: ComponentValue | undefined
+  codeListResponsibleAgencyCode: ComponentValue | undefined
   countryNameCode: string | undefined
 }
 
 interface EquipmentSizeAndType {
   equipmentSizeAndTypeDescriptionCode: string | undefined
-  codeListIdentificationCode: string | undefined
-  codeListResponsibleAgencyCode: string | undefined
+  codeListIdentificationCode: ComponentValue | undefined
+  codeListResponsibleAgencyCode: ComponentValue | undefined
   equipmentSizeAndTypeDescription: string | undefined
 }
 
 export interface EquipmentDetails {
   tag: string
 
-  equipmentTypeCodeQualifier: string
+  equipmentTypeCodeQualifier: ComponentValue
   equipmentIdentification: EquipmentIdentification | undefined
   equipmentSizeAndType: EquipmentSizeAndType | undefined
   equipmentSupplierCode: string | undefined
@@ -712,8 +713,8 @@ export interface EquipmentDetails {
 
 interface ApplicationErrorDetail {
   applicationErrorCode: string
-  codeListIdentificationCode: string | undefined
-  codeListResponsibleAgencyCode: string | undefined
+  codeListIdentificationCode: ComponentValue | undefined
+  codeListResponsibleAgencyCode: ComponentValue | undefined
 }
 
 export interface ApplicationErrorInformation {
@@ -733,8 +734,8 @@ interface AccountHolderIdentification {
 
 interface InstitutionIdentification {
   institutionNameCode: string | undefined
-  codeListIdentificationCode: string | undefined
-  codeListResponsibleAgencyCode: string | undefined
+  codeListIdentificationCode: ComponentValue | undefined
+  codeListResponsibleAgencyCode: ComponentValue | undefined
   institutionBranchIdentifier: string | undefined
   codeListIdentificationCode2: string | undefined
   codeListResponsibleAgencyCode2: string | undefined
@@ -745,7 +746,7 @@ interface InstitutionIdentification {
 export interface FinancialInstitutionInformation {
   tag: string
 
-  partyFunctionCodeQualifier: string
+  partyFunctionCodeQualifier: ComponentValue
   accountHolderIdentification: AccountHolderIdentification | undefined
   institutionIdentification: InstitutionIdentification | undefined
   countryNameCode: string | undefined
@@ -755,8 +756,8 @@ export interface FinancialInstitutionInformation {
 
 interface TextReference {
   freeTextValueCode: string
-  codeListIdentificationCode: string | undefined
-  codeListResponsibleAgencyCode: string | undefined
+  codeListIdentificationCode: ComponentValue | undefined
+  codeListResponsibleAgencyCode: ComponentValue | undefined
 }
 
 interface TextLiteral {
@@ -770,8 +771,8 @@ interface TextLiteral {
 export interface FreeText {
   tag: string
 
-  textSubjectCodeQualifier: string
-  freeTextFunctionCode: string | undefined
+  textSubjectCodeQualifier: ComponentValue
+  freeTextFunctionCode: ComponentValue | undefined
   textReference: TextReference | undefined
   textLiteral: TextLiteral | undefined
   languageNameCode: string | undefined
@@ -782,15 +783,15 @@ export interface FreeText {
 
 interface ProcessingIndicator {
   processingIndicatorDescriptionCode: string
-  codeListIdentificationCode: string | undefined
-  codeListResponsibleAgencyCode: string | undefined
+  codeListIdentificationCode: ComponentValue | undefined
+  codeListResponsibleAgencyCode: ComponentValue | undefined
   processTypeDescriptionCode: string | undefined
 }
 
 export interface ProcessingInformation {
   tag: string
 
-  processingInformationCodeQualifier: string
+  processingInformationCodeQualifier: ComponentValue
   processingIndicator: ProcessingIndicator | undefined
   processTypeDescriptionCode: string | undefined
 }
@@ -805,7 +806,7 @@ interface IdentityNumberRange {
 export interface GoodsIdentityNumber {
   tag: string
 
-  objectIdentificationCodeQualifier: string
+  objectIdentificationCodeQualifier: ComponentValue
   identityNumberRange1: IdentityNumberRange
   identityNumberRange2: IdentityNumberRange | undefined
   identityNumberRange3: IdentityNumberRange | undefined
@@ -817,14 +818,14 @@ export interface GoodsIdentityNumber {
 
 interface IdentificationNumber {
   objectIdentifier: string
-  objectIdentificationCodeQualifier: string | undefined
+  objectIdentificationCodeQualifier: ComponentValue | undefined
   statusDescriptionCode: string | undefined
 }
 
 export interface RelatedInformationNumbers {
   tag: string
 
-  setTypeCodeQualifier: string
+  setTypeCodeQualifier: ComponentValue
   identificationNumber1: IdentificationNumber
   identificationNumber2: IdentificationNumber | undefined
   identificationNumber3: IdentificationNumber | undefined
@@ -844,15 +845,15 @@ export interface GeneralIndicator {
 
 interface HandlingInstructionsData {
   handlingInstructionDescriptionCode: string | undefined
-  codeListIdentificationCode: string | undefined
-  codeListResponsibleAgencyCode: string | undefined
+  codeListIdentificationCode: ComponentValue | undefined
+  codeListResponsibleAgencyCode: ComponentValue | undefined
   handlingInstructionDescription: string | undefined
 }
 
 interface HazardousMaterial {
   hazardousMaterialCategoryNameCode: string | undefined
-  codeListIdentificationCode: string | undefined
-  codeListResponsibleAgencyCode: string | undefined
+  codeListIdentificationCode: ComponentValue | undefined
+  codeListResponsibleAgencyCode: ComponentValue | undefined
   hazardousMaterialCategoryName: string | undefined
 }
 
@@ -868,7 +869,7 @@ export interface HandlingInstructions {
 export interface HierarchyInformation {
   tag: string
 
-  hierarchyObjectCodeQualifier: string
+  hierarchyObjectCodeQualifier: ComponentValue
   hierarchicalStructureRelationshipCode: string | undefined
   actionCode: string | undefined
   itemNumberIdentification: ItemNumberIdentification | undefined
@@ -885,7 +886,7 @@ interface PositionIdentification {
 export interface Identity {
   tag: string
 
-  objectTypeCodeQualifier: string
+  objectTypeCodeQualifier: ComponentValue
   identificationNumber: IdentificationNumber | undefined
   partyIdentificationDetails: PartyIdentificationDetails | undefined
   statusDescriptionCode: string | undefined
@@ -898,14 +899,14 @@ export interface Identity {
 
 interface ItemCharacteristic {
   itemCharacteristicCode: string | undefined
-  codeListIdentificationCode: string | undefined
-  codeListResponsibleAgencyCode: string | undefined
+  codeListIdentificationCode: ComponentValue | undefined
+  codeListResponsibleAgencyCode: ComponentValue | undefined
 }
 
 interface ItemDescriptionData {
   itemDescriptionCode: string | undefined
-  codeListIdentificationCode: string | undefined
-  codeListResponsibleAgencyCode: string | undefined
+  codeListIdentificationCode: ComponentValue | undefined
+  codeListResponsibleAgencyCode: ComponentValue | undefined
   itemDescription: string | undefined
   itemDescription2: string | undefined
   languageNameCode: string | undefined
@@ -928,10 +929,10 @@ interface PartiesToInstruction {
 }
 
 interface Instruction {
-  instructionTypeCodeQualifier: string
+  instructionTypeCodeQualifier: ComponentValue
   instructionDescriptionCode: string | undefined
-  codeListIdentificationCode: string | undefined
-  codeListResponsibleAgencyCode: string | undefined
+  codeListIdentificationCode: ComponentValue | undefined
+  codeListResponsibleAgencyCode: ComponentValue | undefined
   instructionDescription: string | undefined
 }
 
@@ -953,8 +954,8 @@ export interface PartiesAndInstruction {
 
 interface InformationRequest {
   requestInformationDescriptionCode: string | undefined
-  codeListIdentificationCode: string | undefined
-  codeListResponsibleAgencyCode: string | undefined
+  codeListIdentificationCode: ComponentValue | undefined
+  codeListResponsibleAgencyCode: ComponentValue | undefined
   requestInformationDescription: string | undefined
 }
 
@@ -969,8 +970,8 @@ export interface InformationRequired {
 interface ItemNumberIdentification {
   itemIdentifier: string | undefined
   itemTypeIdentificationCode: string | undefined
-  codeListIdentificationCode: string | undefined
-  codeListResponsibleAgencyCode: string | undefined
+  codeListIdentificationCode: ComponentValue | undefined
+  codeListResponsibleAgencyCode: ComponentValue | undefined
 }
 
 interface SubLineInformation {
@@ -993,29 +994,29 @@ export interface LineItem {
 
 interface LocationIdentificationData {
   locationNameCode: string | undefined
-  codeListIdentificationCode: string | undefined
-  codeListResponsibleAgencyCode: string | undefined
+  codeListIdentificationCode: ComponentValue | undefined
+  codeListResponsibleAgencyCode: ComponentValue | undefined
   locationName: string | undefined
 }
 
 interface RelatedLocationOneIdentification {
   firstRelatedLocationNameCode: string | undefined
-  codeListIdentificationCode: string | undefined
-  codeListResponsibleAgencyCode: string | undefined
+  codeListIdentificationCode: ComponentValue | undefined
+  codeListResponsibleAgencyCode: ComponentValue | undefined
   firstRelatedLocationName: string | undefined
 }
 
 interface RelatedLocationTwoIdentification {
   secondRelatedLocationNameCode: string | undefined
-  codeListIdentificationCode: string | undefined
-  codeListResponsibleAgencyCode: string | undefined
+  codeListIdentificationCode: ComponentValue | undefined
+  codeListResponsibleAgencyCode: ComponentValue | undefined
   secondRelatedLocationName: string | undefined
 }
 
 export interface LocationIdentification {
   tag: string
 
-  locationFunctionCodeQualifier: string
+  locationFunctionCodeQualifier: ComponentValue
   locationIdentification: LocationIdentificationData | undefined
   relatedLocationOneIdentification: RelatedLocationOneIdentification | undefined
   relatedLocationTwoIdentification: RelatedLocationTwoIdentification | undefined
@@ -1042,7 +1043,7 @@ interface ValueRange {
 export interface Measurements {
   tag: string
 
-  measurementPurposeCodeQualifier: string
+  measurementPurposeCodeQualifier: ComponentValue
   measurementDetails: MeasurementDetails | undefined
   valueRange: ValueRange | undefined
   surfaceOrLayerCode: string | undefined
@@ -1052,14 +1053,14 @@ export interface Measurements {
 
 interface MarketSalesChannelDetails {
   salesChannelIdentifier: string | undefined
-  codeListIdentificationCode: string | undefined
-  codeListResponsibleAgencyCode: string | undefined
+  codeListIdentificationCode: ComponentValue | undefined
+  codeListResponsibleAgencyCode: ComponentValue | undefined
 }
 
 export interface MarketSalesChannelInformation {
   tag: string
 
-  marketSaleChannelIdentificationCodeQualifier: string | undefined
+  marketSaleChannelIdentificationCodeQualifier: ComponentValue | undefined
   marketSaleChannelSalesDetails: MarketSalesChannelDetails | undefined
   marketSaleChannelActionRequestNotificationDescriptionCode: string | undefined
 }
@@ -1067,10 +1068,10 @@ export interface MarketSalesChannelInformation {
 // MOA
 
 interface MonetaryAmountData {
-  monetaryAmountTypeCodeQualifier: string
+  monetaryAmountTypeCodeQualifier: ComponentValue
   monetaryAmount: number | undefined
   currencyIdentificationCode: string | undefined
-  currencyTypeCodeQualifier: string | undefined
+  currencyTypeCodeQualifier: ComponentValue | undefined
   statusDescriptionCode: string | undefined
 }
 
@@ -1085,7 +1086,7 @@ export interface MonetaryAmount {
 export interface MaintenanceOperationDetails {
   tag: string
 
-  objectTypeCodeQualifier: string
+  objectTypeCodeQualifier: ComponentValue
   maintenanceOperationCode: string | undefined
   maintenanceOperationOperatorCode: string | undefined
   maintenanceOperationPayerCode: string | undefined
@@ -1095,8 +1096,8 @@ export interface MaintenanceOperationDetails {
 
 interface PartyIdentificationDetails {
   partyIdentifier: string
-  codeListIdentificationCode: string | undefined
-  codeListResponsibleAgencyCode: string | undefined
+  codeListIdentificationCode: ComponentValue | undefined
+  codeListResponsibleAgencyCode: ComponentValue | undefined
 }
 
 interface NameAndAddressData {
@@ -1125,15 +1126,15 @@ interface Street {
 
 interface CountrySubEntityDetails {
   countrySubEntityNameCode: string | undefined
-  codeListIdentificationCode: string | undefined
-  codeListResponsibleAgencyCode: string | undefined
+  codeListIdentificationCode: ComponentValue | undefined
+  codeListResponsibleAgencyCode: ComponentValue | undefined
   countrySubEntityName: string | undefined
 }
 
 export interface NameAndAddress {
   tag: string
 
-  partyFunctionCodeQualifier: string
+  partyFunctionCodeQualifier: ComponentValue
   partyIdentificationDetails: PartyIdentificationDetails | undefined
   nameAndAddress: NameAndAddressData | undefined
   partyName: PartyName | undefined
@@ -1154,8 +1155,8 @@ interface PackagingDetails {
 
 interface PackageType {
   packageTypeDescriptionCode: string | undefined
-  codeListIdentificationCode: string | undefined
-  codeListResponsibleAgencyCode: string | undefined
+  codeListIdentificationCode: ComponentValue | undefined
+  codeListResponsibleAgencyCode: ComponentValue | undefined
   typeOfPackages: string | undefined
 }
 
@@ -1191,7 +1192,7 @@ export interface PaymentInstructions {
   paymentGuaranteeMeansCode: string | undefined
   paymentMeansCode: string | undefined
   codeListIdentificatinCode: string | undefined
-  codeListResponsibleAgencyCode: string | undefined
+  codeListResponsibleAgencyCode: ComponentValue | undefined
   paymentChannelCode: string | undefined
 }
 
@@ -1199,8 +1200,8 @@ export interface PaymentInstructions {
 
 interface PATPaymentTerms {
   paymentTermsDescriptionIdentifier: string
-  codeListIdentificationCode: string | undefined
-  codeListResponsibleAgencyCode: string | undefined
+  codeListIdentificationCode: ComponentValue | undefined
+  codeListResponsibleAgencyCode: ComponentValue | undefined
   paymentTermsDescription1: string | undefined
   paymentTermsDescription2: string | undefined
 }
@@ -1215,7 +1216,7 @@ interface TermsTimeInformation {
 export interface PaymentTermsBasis {
   tag: string
 
-  paymentTermsTypeCodeQualifier: string
+  paymentTermsTypeCodeQualifier: ComponentValue
   paymentTerms: PATPaymentTerms | undefined
   termsTimeInformation: TermsTimeInformation | undefined
 }
@@ -1223,11 +1224,11 @@ export interface PaymentTermsBasis {
 // PCD
 
 interface PercentageDetailsData {
-  percentageTypeCodeQualifier: string
+  percentageTypeCodeQualifier: ComponentValue
   percentage: number | undefined
   percentageBasisIdentificationCode: string | undefined
-  codeListIdentificationCode: string | undefined
-  codeListResponsibleAgencyCode: string | undefined
+  codeListIdentificationCode: ComponentValue | undefined
+  codeListResponsibleAgencyCode: ComponentValue | undefined
 }
 
 export interface PercentageDetails {
@@ -1254,8 +1255,8 @@ interface MarksAndLabels {
 
 interface TypeOfMarking {
   markingTypeCode: string
-  codeListIdentificationCode: string | undefined
-  codeListResponsibleAgencyCode: string | undefined
+  codeListIdentificationCode: ComponentValue | undefined
+  codeListResponsibleAgencyCode: ComponentValue | undefined
 }
 
 export interface PackageIdentification {
@@ -1271,8 +1272,8 @@ export interface PackageIdentification {
 
 interface ProductGroup {
   productGroupNameCode: string | undefined
-  codeListIdentificationCode: string | undefined
-  codeListResponsibleAgencyCode: string | undefined
+  codeListIdentificationCode: ComponentValue | undefined
+  codeListResponsibleAgencyCode: ComponentValue | undefined
   productGroupName: string | undefined
 }
 
@@ -1288,7 +1289,7 @@ export interface ProductGroupInformation {
 export interface AdditionalProductId {
   tag: string
 
-  productIdentifierCodeQualifier: string
+  productIdentifierCodeQualifier: ComponentValue
 
   itemNumberIdentification1: ItemNumberIdentification
   itemNumberIdentification2: ItemNumberIdentification | undefined
@@ -1300,7 +1301,7 @@ export interface AdditionalProductId {
 // PRI
 
 interface PriceInformation {
-  priceCodeQualifier: string
+  priceCodeQualifier: ComponentValue
   priceAmount: number | undefined
   priceTypeCode: string | undefined
   priceSpecificationCode: string | undefined
@@ -1319,15 +1320,15 @@ export interface PriceDetails {
 
 interface PaymentTermsData {
   paymentTermsDescriptionIdentifier: string
-  codeListIdentificationCode: string | undefined
-  codeListResponsibleAgencyCode: string | undefined
+  codeListIdentificationCode: ComponentValue | undefined
+  codeListResponsibleAgencyCode: ComponentValue | undefined
   paymentTermsDescription: string | undefined
 }
 
 export interface PaymentTerms {
   tag: string
 
-  paymentTermsTypeCodeQualifier: string
+  paymentTermsTypeCodeQualifier: ComponentValue
   paymentTerms: PaymentTermsData | undefined
   eventTimeReferenceCode: string | undefined
   termsTimeRelationCode: string | undefined
@@ -1338,7 +1339,7 @@ export interface PaymentTerms {
 // QTY
 
 interface QuantityDetails {
-  quantityTypeCodeQualifier: string
+  quantityTypeCodeQualifier: ComponentValue
   quantity: number | undefined
   measurementUnitCode: string | undefined
 }
@@ -1353,7 +1354,7 @@ export interface Quantity {
 
 interface QuantityDifferenceInformation {
   varianceQuantity: number
-  quantityTypeCodeQualifier: string | undefined
+  quantityTypeCodeQualifier: ComponentValue | undefined
 }
 
 export interface QuantityVariances {
@@ -1368,15 +1369,15 @@ export interface QuantityVariances {
 
 interface RequirementOrConditionIdentification {
   requirementOrConditionDescriptionIdentifier: string
-  codeListIdentificationCode: string | undefined
-  codeListResponsibleAgencyCode: string | undefined
+  codeListIdentificationCode: ComponentValue | undefined
+  codeListResponsibleAgencyCode: ComponentValue | undefined
   requirementOrConditionDescription: string | undefined
 }
 
 export interface RequirementsAndConditions {
   tag: string
 
-  sectorAreaIdentificationCodeQualifier: string
+  sectorAreaIdentificationCodeQualifier: ComponentValue
   requirementOrConditionIdentification:
     | RequirementOrConditionIdentification
     | undefined
@@ -1390,7 +1391,7 @@ export interface Reference {
   tag: string
 
   reference: {
-    referenceCodeQualifier: string
+    referenceCodeQualifier: ComponentValue
     referenceIdentifier: string | undefined
     referenceVersionIdentifier: string | undefined
   }
@@ -1402,15 +1403,15 @@ export interface Reference {
 
 interface AccountingJournalIdentificationData {
   accountingJournalIdentification: string
-  codeListIdentificationCode: string | undefined
-  codeListResponsibleAgencyCode: string | undefined
+  codeListIdentificationCode: ComponentValue | undefined
+  codeListResponsibleAgencyCode: ComponentValue | undefined
   accountingJournalName: string | undefined
 }
 
 interface AccountingEntryTypeDetails {
   accountingEntryTypeNameCode: string
-  codeListIdentificationCode: string | undefined
-  codeListResponsibleAgencyCode: string | undefined
+  codeListIdentificationCode: ComponentValue | undefined
+  codeListResponsibleAgencyCode: ComponentValue | undefined
   accountingEntryTypeName: string | undefined
 }
 
@@ -1434,14 +1435,14 @@ interface Range {
 export interface RangeDetails {
   tag: string
 
-  rangeTypeCodeQualifier: string
+  rangeTypeCodeQualifier: ComponentValue
   range: Range | undefined
 }
 
 // RTE
 
 interface RateDetailsData {
-  rateTypeCodeQualifier: string
+  rateTypeCodeQualifier: ComponentValue
   unitPriceBasisRate: number
   unitPriceBasisValue: number | undefined
   measurementUnitCode: string | undefined
@@ -1458,8 +1459,8 @@ export interface RateDetails {
 
 interface SealIssuer {
   sealingPartyNameCode: string | undefined
-  codeListIdentificationCode: string | undefined
-  codeListResponsibleAgencyCode: string | undefined
+  codeListIdentificationCode: ComponentValue | undefined
+  codeListResponsibleAgencyCode: ComponentValue | undefined
   sealingPartyName: string | undefined
 }
 
@@ -1493,8 +1494,8 @@ export interface SchedulingConditions {
 interface SequenceInformation {
   sequencePositionIdentifier: string
   sequenceIdentifierSoruceCode: string | undefined
-  codeListIdentificationCode: string | undefined
-  codeListResponsibleAgencyCode: string | undefined
+  codeListIdentificationCode: ComponentValue | undefined
+  codeListResponsibleAgencyCode: ComponentValue | undefined
 }
 
 export interface SequenceDetails {
@@ -1517,21 +1518,21 @@ export interface SplitGoodsPlacement {
 
 interface StatusCategory {
   statusCategoryCode: string
-  codeListIdentificationCode: string | undefined
-  codeListResponsibleAgencyCode: string | undefined
+  codeListIdentificationCode: ComponentValue | undefined
+  codeListResponsibleAgencyCode: ComponentValue | undefined
 }
 
 interface StatusData {
   statusDescriptionCode: string
-  codeListIdentificationCode: string | undefined
-  codeListResponsibleAgencyCode: string | undefined
+  codeListIdentificationCode: ComponentValue | undefined
+  codeListResponsibleAgencyCode: ComponentValue | undefined
   statusDescription: string | undefined
 }
 
 interface StatusReason {
   statusReasonDescriptionCode: string
-  codeListIdentificationCode: string | undefined
-  codeListResponsibleAgencyCode: string | undefined
+  codeListIdentificationCode: ComponentValue | undefined
+  codeListResponsibleAgencyCode: ComponentValue | undefined
   statusReasonDescription: string | undefined
 }
 
@@ -1551,21 +1552,21 @@ export interface Status {
 
 interface DutyTaxOrFeeType {
   dutyTaxOrFeeTypeNameCode: string | undefined
-  codeListIdentificationCode: string | undefined
-  codeListResponsibleAgencyCode: string | undefined
+  codeListIdentificationCode: ComponentValue | undefined
+  codeListResponsibleAgencyCode: ComponentValue | undefined
   dutyTaxOrFreeTypeName: string | undefined
 }
 
 interface DutyTaxOrFeeAccountDetail {
   dutyTaxOrFeeTypeNameCode: string | undefined
-  codeListIdentificationCode: string | undefined
-  codeListResponsibleAgencyCode: string | undefined
+  codeListIdentificationCode: ComponentValue | undefined
+  codeListResponsibleAgencyCode: ComponentValue | undefined
 }
 
 interface DutyTaxOrFeeDetail {
   dutyTaxOrFeeRateDescriptionCode: string | undefined
-  codeListIdentificationCode: string | undefined
-  codeListResponsibleAgencyCode: string | undefined
+  codeListIdentificationCode: ComponentValue | undefined
+  codeListResponsibleAgencyCode: ComponentValue | undefined
   dutyTaxOrFeeRateDescription: string | undefined
   dutyTaxOrFeeRateBasisCode: string | undefined
   codeListIdentificationCode2: string | undefined
@@ -1575,7 +1576,7 @@ interface DutyTaxOrFeeDetail {
 export interface TaxDetails {
   tag: string
 
-  dutyTaxOrFeeFunctionCodeQualifier: string
+  dutyTaxOrFeeFunctionCodeQualifier: ComponentValue
   dutyTaxOrFeeType: DutyTaxOrFeeType | undefined
   dutyTaxOrFeeAcountDetail: DutyTaxOrFeeAccountDetail | undefined
   dutyTaxOrFreeAssessmentBasisValue: string | undefined
@@ -1599,15 +1600,15 @@ interface TransportMeans {
 
 interface TransportMeansD02b {
   transportMeansDescriptionCode: string | undefined
-  codeListIdentificationCode: string | undefined
-  codeListResponsibleAgencyCode: string | undefined
+  codeListIdentificationCode: ComponentValue | undefined
+  codeListResponsibleAgencyCode: ComponentValue | undefined
   transportMeansDescription: string | undefined
 }
 
 interface Carrier {
   carrierIdentifier: string | undefined
-  codeListIdentificationcode: string | undefined
-  codeListResponsibleAgencyCode: string | undefined
+  codeListIdentificationCode: ComponentValue | undefined
+  codeListResponsibleAgencyCode: ComponentValue | undefined
   carrierName: string | undefined
 }
 
@@ -1619,8 +1620,8 @@ interface ExcessTransportationInformation {
 
 interface TransportIdentification {
   transportMeansIdentificationNameIdentifier: string | undefined
-  codeListIdentificationCode: string | undefined
-  codeListResponsibleAgencyCode: string | undefined
+  codeListIdentificationCode: ComponentValue | undefined
+  codeListResponsibleAgencyCode: ComponentValue | undefined
   transportMeansIdentificationName: string | undefined
   transportMeansNationalityCode: string | undefined
 }
@@ -1628,8 +1629,8 @@ interface TransportIdentification {
 // since D11a
 interface PowerType {
   powerTypeCode: string | undefined
-  codeListIdentificationCode: string | undefined
-  codeListResponsibleAgencyCode: string | undefined
+  codeListIdentificationCode: ComponentValue | undefined
+  codeListResponsibleAgencyCode: ComponentValue | undefined
   powerTypeDescription: string | undefined
 }
 
@@ -1695,8 +1696,8 @@ export interface TransportMovementDetails {
 
 interface TermsOfDeliveryOrTransportData {
   deliveryOrTransportTermsDescriptionCode: string | undefined
-  codeListIdentificationCode: string | undefined
-  codeListResponsibleAgencyCode: string | undefined
+  codeListIdentificationCode: ComponentValue | undefined
+  codeListResponsibleAgencyCode: ComponentValue | undefined
   deliveryOrTransportTermsDescription: string | undefined
   deliveryOrTransportTermsDescription2: string | undefined
 }
@@ -1704,7 +1705,7 @@ interface TermsOfDeliveryOrTransportData {
 export interface TermsOfDeliveryOrTransport {
   tag: string
 
-  deliveryOrTransportTermsFunctionCode: string | undefined
+  deliveryOrTransportTermsFunctionCode: ComponentValue | undefined
   transportChargesPaymentMethodCode: string | undefined
   termsOfDeliveryOrTransport: TermsOfDeliveryOrTransportData | undefined
 }
@@ -1713,14 +1714,14 @@ export interface TermsOfDeliveryOrTransport {
 
 interface ContractAndCarriageCondition {
   contractAndCarriageConditionCode: string
-  codeListIdentificationCode: string | undefined
-  codeListResponsibleAgencyCode: string | undefined
+  codeListIdentificationCode: ComponentValue | undefined
+  codeListResponsibleAgencyCode: ComponentValue | undefined
 }
 
 interface Service {
   serviceRequirementCode: string
-  codeListIdentificationCode: string | undefined
-  codeListResponsibleAgencyCode: string | undefined
+  codeListIdentificationCode: ComponentValue | undefined
+  codeListResponsibleAgencyCode: ComponentValue | undefined
   serviceRequirementCode2: string | undefined
   codeListIdentificationCode2: string | undefined
   codeListResponsibleAgencyCode2: string | undefined
@@ -1728,14 +1729,14 @@ interface Service {
 
 interface TransportPriority {
   transportServicePriorityCode: string
-  codeListIdentificationCode: string | undefined
-  codeListResponsibleAgencyCode: string | undefined
+  codeListIdentificationCode: ComponentValue | undefined
+  codeListResponsibleAgencyCode: ComponentValue | undefined
 }
 
 interface NatureOfCargo {
   cargoTypeinterfaceificationCode: string
-  codeListIdentificationCode: string | undefined
-  codeListResponsibleAgencyCode: string | undefined
+  codeListIdentificationCode: ComponentValue | undefined
+  codeListResponsibleAgencyCode: ComponentValue | undefined
 }
 
 export interface TransportServiceRequirements {

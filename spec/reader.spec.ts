@@ -126,6 +126,6 @@ describe('Edifact Reader', () => {
 
     const parsingResult: ResultType[] = sut.parse(doc)
 
-    expect(parsingResult.length).toEqual(57)
+    expect(parsingResult.length).toEqual(56)
   })
 })
