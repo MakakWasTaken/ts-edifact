@@ -21,6 +21,8 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 
+import { readFileSync } from 'fs'
+import { join } from 'path'
 import {
   EdifactMessageSpecification,
   ParsingResultType,
@@ -28,7 +30,12 @@ import {
 } from '../src/edi/messageStructureParser'
 import { MessageType } from '../src/tracker'
 import { findElement } from '../src/util'
-import { Dictionary, ElementEntry, SegmentEntry } from '../src/validator'
+import {
+  ComponentValueEntry,
+  Dictionary,
+  ElementEntry,
+  SegmentEntry,
+} from '../src/validator'
 
 describe('MessageStructureParser', () => {
   describe('Message Structure Definition Parser', () => {
@@ -158,7 +165,7 @@ describe('MessageStructureParser', () => {
         data: undefined,
         section: 'summary',
       }
-      ;(sut as any).parsePage(page).then((result: ParsingResultType) => {
+      ;(sut as any).parseMessagePage(page).then((result: ParsingResultType) => {
         expect(result.specObj.messageStructureDefinition).toContain(
           expectedBGMEntry,
         )
@@ -173,6 +180,48 @@ describe('MessageStructureParser', () => {
       })
     })
   })
+  describe('Component Value Page Parser', () => {
+    let mockDefinition: EdifactMessageSpecification
+    beforeEach(() => {
+      mockDefinition = {
+        messageType: 'INVOIC',
+        version: 'D01',
+        release: 'B',
+        controllingAgency: 'UN',
+        segmentTable: new Dictionary<SegmentEntry>(),
+        componentValueTable: new Dictionary<ComponentValueEntry>(),
+        messageStructureDefinition: [],
+        type(): string {
+          return this.version + this.release + '_' + this.messageType
+        },
+        versionAbbr(): string {
+          return this.version + this.release
+        },
+      }
+    })
+    it('should parse component value page', (done) => {
+      const page = readFileSync(join(__dirname, 'data', '3035.html'), 'utf-8')
+
+      const sut: UNECEMessageStructureParser = new UNECEMessageStructureParser(
+        'd01b',
+        'invoic',
+      )
+      ;(sut as any)
+        .parseComponentDefinitionPage('3035', page, mockDefinition)
+        .then((response: EdifactMessageSpecification) => {
+          expect(response.componentValueTable.contains('3035')).toBeTruthy()
+
+          const componentValueEntry = response.componentValueTable.get('3035')
+
+          expect(componentValueEntry).toBeDefined()
+
+          expect(Object.keys(componentValueEntry!).length).toEqual(528)
+
+          done()
+        })
+    })
+    // testing private method
+  })
   describe('Segment Detail Page Parser', () => {
     let mockDefinition: EdifactMessageSpecification
     beforeEach(() => {
@@ -182,6 +231,7 @@ describe('MessageStructureParser', () => {
         release: 'B',
         controllingAgency: 'UN',
         segmentTable: new Dictionary<SegmentEntry>(),
+        componentValueTable: new Dictionary<ComponentValueEntry>(),
         messageStructureDefinition: [],
         type(): string {
           return this.version + this.release + '_' + this.messageType

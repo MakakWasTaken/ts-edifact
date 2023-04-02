@@ -44,16 +44,34 @@ describe('Validator', () => {
             name: 'something',
             requires: 1,
             components: [
-              { format: 'a3', name: 'something1' },
-              { format: 'an3', name: 'something2' },
-              { format: 'n3', name: 'something3' },
+              {
+                id: 'A001',
+                format: 'a3',
+                name: 'something1',
+              },
+              {
+                id: 'A002',
+                format: 'an3',
+                name: 'something2',
+              },
+              {
+                id: 'A003',
+                format: 'n3',
+                name: 'something3',
+              },
             ],
           },
           {
             id: 'A001',
             name: 'something1',
             requires: 1,
-            components: [{ format: 'a3', name: 'something1' }],
+            components: [
+              {
+                id: 'A001',
+                format: 'a3',
+                name: 'something1',
+              },
+            ],
           },
         ],
       })
@@ -93,16 +111,34 @@ describe('Validator', () => {
             name: 'something',
             requires: 1,
             components: [
-              { format: 'a3', name: 'something1' },
-              { format: 'an3', name: 'something2' },
-              { format: 'n3', name: 'something3' },
+              {
+                id: 'A001',
+                format: 'a3',
+                name: 'something1',
+              },
+              {
+                id: 'A002',
+                format: 'an3',
+                name: 'something2',
+              },
+              {
+                id: 'A003',
+                format: 'n3',
+                name: 'something3',
+              },
             ],
           },
           {
             id: 'A001',
             name: 'something1',
             requires: 1,
-            components: [{ format: 'a3', name: 'something1' }],
+            components: [
+              {
+                id: 'A001',
+                format: 'a3',
+                name: 'something1',
+              },
+            ],
           },
         ],
       })
@@ -117,7 +153,13 @@ describe('Validator', () => {
           id: 'A000',
           name: 'something',
           requires: 1,
-          components: [{ format: 'a3', name: 'something1' }],
+          components: [
+            {
+              id: 'A001',
+              format: 'a3',
+              name: 'something1',
+            },
+          ],
         },
       ]
       segmentDict.add('AAA', {
@@ -138,7 +180,13 @@ describe('Validator', () => {
           id: 'A000',
           name: 'something',
           requires: 1,
-          components: [{ format: 'a3', name: 'something1' }],
+          components: [
+            {
+              id: 'A001',
+              format: 'a3',
+              name: 'something1',
+            },
+          ],
         },
       ]
       segmentDict.add('AAA', {
@@ -164,9 +212,21 @@ describe('Validator', () => {
           name: 'something',
           requires: 0,
           components: [
-            { format: 'a3', name: 'something1' },
-            { format: 'an3', name: 'something2' },
-            { format: 'n3', name: 'something3' },
+            {
+              id: 'A001',
+              format: 'a3',
+              name: 'something1',
+            },
+            {
+              id: 'A002',
+              format: 'an3',
+              name: 'something2',
+            },
+            {
+              id: 'A003',
+              format: 'n3',
+              name: 'something3',
+            },
           ],
         },
       ]
@@ -197,13 +257,15 @@ describe('Validator', () => {
             name: 'syntaxIdentifier',
             requires: 2,
             components: [
-              { format: 'a4', name: 'syntaxIdentifier' },
-              { format: 'n1', name: 'syntaxVersionNumber' },
+              { id: '0001', format: 'a4', name: 'syntaxIdentifier' },
+              { id: '0002', format: 'n1', name: 'syntaxVersionNumber' },
               {
+                id: '0080',
                 format: 'an..6',
                 name: 'serviceCodeListDirectoryVersionNumber',
               },
-              { format: 'an..3', name: 'characterEncodingCoded' },
+              { id: '0133', format: 'an..3', name: 'characterEncodingCoded' },
+              { id: '0076', format: 'an2', name: 'syntaxReleaseNumber' },
             ],
           },
           {
@@ -212,18 +274,22 @@ describe('Validator', () => {
             requires: 1,
             components: [
               {
+                id: '0004',
                 format: 'an..35',
                 name: 'interchangeSenderIdentification',
               },
               {
+                id: '0007',
                 format: 'an..4',
                 name: 'identificationCodeQualifier',
               },
               {
+                id: '0008',
                 format: 'an..35',
                 name: 'interchangeSenderInternalIdentification',
               },
               {
+                id: '0042',
                 format: 'an..35',
                 name: 'interchangeSenderInternalSubIdentification',
               },
@@ -235,18 +301,22 @@ describe('Validator', () => {
             requires: 1,
             components: [
               {
+                id: '0010',
                 format: 'an..35',
                 name: 'interchangeRecipientIdentification',
               },
               {
+                id: '0007',
                 format: 'an..4',
                 name: 'identificationCodeQualifier',
               },
               {
+                id: '0014',
                 format: 'an..35',
                 name: 'interchangeRecipientInternalIdentification',
               },
               {
+                id: '0046',
                 format: 'an..35',
                 name: 'interchangeRecipientInternalSubIdentification',
               },
@@ -257,8 +327,8 @@ describe('Validator', () => {
             name: 'dateAndTimeOfPreparation',
             requires: 2,
             components: [
-              { format: 'n..8', name: 'date' },
-              { format: 'n4', name: 'time' },
+              { id: '0017', format: 'n..8', name: 'date' },
+              { id: '0019', format: 'n4', name: 'time' },
             ],
           },
           {
@@ -267,6 +337,7 @@ describe('Validator', () => {
             requires: 1,
             components: [
               {
+                id: '0020',
                 format: 'an..14',
                 name: 'interchangeControlReference',
               },
@@ -278,10 +349,12 @@ describe('Validator', () => {
             requires: 1,
             components: [
               {
+                id: '0022',
                 format: 'an..14',
                 name: 'recipientReferencePassword',
               },
               {
+                id: '0025',
                 format: 'an2',
                 name: 'recipientReferencePasswordQualifier',
               },
@@ -291,19 +364,25 @@ describe('Validator', () => {
             id: '0026',
             name: 'applicationReference',
             requires: 0,
-            components: [{ format: 'an..14', name: 'applicationReference' }],
+            components: [
+              { id: '0026', format: 'an..14', name: 'applicationReference' },
+            ],
           },
           {
             id: '0029',
             name: 'processingPriorityCode',
             requires: 0,
-            components: [{ format: 'a1', name: 'processingPriorityCode' }],
+            components: [
+              { id: '0029', format: 'a1', name: 'processingPriorityCode' },
+            ],
           },
           {
             id: '0031',
             name: 'acknowledgementRequest',
             requires: 0,
-            components: [{ format: 'n1', name: 'acknowledgementRequest' }],
+            components: [
+              { id: '0031', format: 'n1', name: 'acknowledgementRequest' },
+            ],
           },
           {
             id: '0032',
@@ -311,6 +390,7 @@ describe('Validator', () => {
             requires: 0,
             components: [
               {
+                id: '0032',
                 format: 'an..35',
                 name: 'interchangeAgreementIdentifier',
               },
@@ -320,7 +400,7 @@ describe('Validator', () => {
             id: '0035',
             name: 'testIndicator',
             requires: 0,
-            components: [{ format: 'n1', name: 'testIndicator' }],
+            components: [{ id: '0035', format: 'n1', name: 'testIndicator' }],
           },
         ],
       })
@@ -451,16 +531,16 @@ describe('Validator', () => {
               name: 'something',
               requires: 1,
               components: [
-                { format: 'a3', name: 'something1' },
-                { format: 'an3', name: 'something2' },
-                { format: 'n3', name: 'something3' },
+                { id: 'A001', format: 'a3', name: 'something1' },
+                { id: 'A002', format: 'an3', name: 'something2' },
+                { id: 'A003', format: 'n3', name: 'something3' },
               ],
             },
             {
               id: 'A001',
               name: 'something1',
               requires: 1,
-              components: [{ format: 'a3', name: 'something1' }],
+              components: [{ id: 'A001', format: 'a3', name: 'something1' }],
             },
           ],
         })
@@ -492,16 +572,16 @@ describe('Validator', () => {
               name: 'something',
               requires: 1,
               components: [
-                { format: 'a3', name: 'something1' },
-                { format: 'an3', name: 'something2' },
-                { format: 'n3', name: 'something3' },
+                { id: 'A001', format: 'a3', name: 'something1' },
+                { id: 'A002', format: 'an3', name: 'something2' },
+                { id: 'A003', format: 'n3', name: 'something3' },
               ],
             },
             {
               id: 'A001',
               name: 'something1',
               requires: 1,
-              components: [{ format: 'a3', name: 'something1' }],
+              components: [{ id: 'A001', format: 'a3', name: 'something1' }],
             },
           ],
         })
@@ -512,7 +592,7 @@ describe('Validator', () => {
           id: 'A001',
           name: 'something',
           requires: 1,
-          components: [{ format: 'a3', name: 'something1' }],
+          components: [{ id: 'A001', format: 'a3', name: 'something1' }],
         })
 
         validator.define(segments)

@@ -263,6 +263,7 @@ export class InterchangeBuilder {
     }
 
     let interchange: Edifact | undefined
+
     for (const segment of parsingResult) {
       if (segment.name === 'UNB') {
         interchange = new Edifact(segment.elements)

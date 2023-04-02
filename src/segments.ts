@@ -36,13 +36,15 @@ export class SegmentTableBuilder extends TableBuilder<SegmentEntry> {
           name: 'syntaxIdentifier',
           requires: 2,
           components: [
-            { format: 'a4', name: 'syntaxIdentifier' },
-            { format: 'n1', name: 'syntaxVersionNumber' },
+            { id: '0001', format: 'a4', name: 'syntaxIdentifier' },
+            { id: '0002', format: 'n1', name: 'syntaxVersionNumber' },
             {
+              id: '0080',
               format: 'an..6',
               name: 'serviceCodeListDirectoryVersionNumber',
             },
-            { format: 'an..3', name: 'characterEncodingCoded' },
+            { id: '0133', format: 'an..3', name: 'characterEncodingCoded' },
+            { id: '0076', format: 'an2', name: 'syntaxReleaseNumber' },
           ],
         },
         {
@@ -51,18 +53,22 @@ export class SegmentTableBuilder extends TableBuilder<SegmentEntry> {
           requires: 1,
           components: [
             {
+              id: '0004',
               format: 'an..35',
               name: 'interchangeSenderIdentification',
             },
             {
+              id: '0007',
               format: 'an..4',
               name: 'identificationCodeQualifier',
             },
             {
+              id: '0008',
               format: 'an..35',
               name: 'interchangeSenderInternalIdentification',
             },
             {
+              id: '0042',
               format: 'an..35',
               name: 'interchangeSenderInternalSubIdentification',
             },
@@ -74,18 +80,22 @@ export class SegmentTableBuilder extends TableBuilder<SegmentEntry> {
           requires: 1,
           components: [
             {
+              id: '0010',
               format: 'an..35',
               name: 'interchangeRecipientIdentification',
             },
             {
+              id: '0007',
               format: 'an..4',
               name: 'identificationCodeQualifier',
             },
             {
+              id: '0014',
               format: 'an..35',
               name: 'interchangeRecipientInternalIdentification',
             },
             {
+              id: '0046',
               format: 'an..35',
               name: 'interchangeRecipientInternalSubIdentification',
             },
@@ -96,8 +106,8 @@ export class SegmentTableBuilder extends TableBuilder<SegmentEntry> {
           name: 'dateAndTimeOfPreparation',
           requires: 2,
           components: [
-            { format: 'n..8', name: 'date' },
-            { format: 'n4', name: 'time' },
+            { id: '0017', format: 'n..8', name: 'date' },
+            { id: '0019', format: 'n4', name: 'time' },
           ],
         },
         {
@@ -106,6 +116,7 @@ export class SegmentTableBuilder extends TableBuilder<SegmentEntry> {
           requires: 1,
           components: [
             {
+              id: '0020',
               format: 'an..14',
               name: 'interchangeControlReference',
             },
@@ -117,10 +128,12 @@ export class SegmentTableBuilder extends TableBuilder<SegmentEntry> {
           requires: 1,
           components: [
             {
+              id: '0022',
               format: 'an..14',
               name: 'recipientReferencePassword',
             },
             {
+              id: '0025',
               format: 'an2',
               name: 'recipientReferencePasswordQualifier',
             },
@@ -130,19 +143,25 @@ export class SegmentTableBuilder extends TableBuilder<SegmentEntry> {
           id: '0026',
           name: 'applicationReference',
           requires: 0,
-          components: [{ format: 'an..14', name: 'applicationReference' }],
+          components: [
+            { id: '0026', format: 'an..14', name: 'applicationReference' },
+          ],
         },
         {
           id: '0029',
           name: 'processingPriorityCode',
           requires: 0,
-          components: [{ format: 'a1', name: 'processingPriorityCode' }],
+          components: [
+            { id: '0029', format: 'a1', name: 'processingPriorityCode' },
+          ],
         },
         {
           id: '0031',
           name: 'acknowledgementRequest',
           requires: 0,
-          components: [{ format: 'n1', name: 'acknowledgementRequest' }],
+          components: [
+            { id: '0031', format: 'n1', name: 'acknowledgementRequest' },
+          ],
         },
         {
           id: '0032',
@@ -150,6 +169,7 @@ export class SegmentTableBuilder extends TableBuilder<SegmentEntry> {
           requires: 0,
           components: [
             {
+              id: '0032',
               format: 'an..35',
               name: 'interchangeAgreementIdentifier',
             },
@@ -159,7 +179,7 @@ export class SegmentTableBuilder extends TableBuilder<SegmentEntry> {
           id: '0035',
           name: 'testIndicator',
           requires: 0,
-          components: [{ format: 'n1', name: 'testIndicator' }],
+          components: [{ id: '0035', format: 'n1', name: 'testIndicator' }],
         },
       ],
     })
@@ -170,23 +190,27 @@ export class SegmentTableBuilder extends TableBuilder<SegmentEntry> {
           id: '0062',
           name: 'messageReferenceNumber',
           requires: 1,
-          components: [{ format: 'an..14', name: 'messageReferenceNumber' }],
+          components: [
+            { id: '0062', format: 'an..14', name: 'messageReferenceNumber' },
+          ],
         },
         {
           id: 'S009',
           name: 'messageIdentifier',
           requires: 4,
           components: [
-            { format: 'an..6', name: 'messageType' },
-            { format: 'an..3', name: 'messageVersionNumber' },
-            { format: 'an..3', name: 'messageReleaseNumber' },
-            { format: 'an..3', name: 'controllingAgencyCoded' },
-            { format: 'an..6', name: 'associationAssignedCode' },
+            { id: '0065', format: 'an..6', name: 'messageType' },
+            { id: '0052', format: 'an..3', name: 'messageVersionNumber' },
+            { id: '0054', format: 'an..3', name: 'messageReleaseNumber' },
+            { id: '0051', format: 'an..3', name: 'controllingAgencyCoded' },
+            { id: '0057', format: 'an..6', name: 'associationAssignedCode' },
             {
+              id: '0110',
               format: 'an..6',
               name: 'codeListDirectoryVersionNumber',
             },
             {
+              id: '0113',
               format: 'an..6',
               name: 'messageTypeSubfunctionIdentification',
             },
@@ -196,15 +220,17 @@ export class SegmentTableBuilder extends TableBuilder<SegmentEntry> {
           id: '0068',
           name: 'commonAccessReference',
           requires: 0,
-          components: [{ format: 'an..35', name: 'commonAccessReference' }],
+          components: [
+            { id: '0068', format: 'an..35', name: 'commonAccessReference' },
+          ],
         },
         {
           id: 'S010',
           name: 'statusOfTheTransfer',
           requires: 1,
           components: [
-            { format: 'n..2', name: 'sequenceOfTransfers' },
-            { format: 'a1', name: 'firstAndLastTransfer' },
+            { id: '0070', format: 'n..2', name: 'sequenceOfTransfers' },
+            { id: '0073', format: 'a1', name: 'firstAndLastTransfer' },
           ],
         },
         {
@@ -213,12 +239,13 @@ export class SegmentTableBuilder extends TableBuilder<SegmentEntry> {
           requires: 1,
           components: [
             {
+              id: '0115',
               format: 'an..14',
               name: 'messageSubsetIdentification',
             },
-            { format: 'an..3', name: 'messageSubsetVersionNumber' },
-            { format: 'an..3', name: 'messageSubsetReleaseNumber' },
-            { format: 'an..3', name: 'controllingAgencyCoded' },
+            { id: '0116', format: 'an..3', name: 'messageSubsetVersionNumber' },
+            { id: '0118', format: 'an..3', name: 'messageSubsetReleaseNumber' },
+            { id: '0051', format: 'an..3', name: 'controllingAgencyCoded' },
           ],
         },
         {
@@ -227,18 +254,21 @@ export class SegmentTableBuilder extends TableBuilder<SegmentEntry> {
           requires: 1,
           components: [
             {
+              id: '0121',
               format: 'an..14',
               name: 'messageImplementationGuidelineIdentification',
             },
             {
+              id: '0122',
               format: 'an..3',
               name: 'messageImplementationGuidelineVersionNumber',
             },
             {
+              id: '0124',
               format: 'an..3',
               name: 'messageImplementationGuidelineReleaseNumber',
             },
-            { format: 'an..3', name: 'controllingAgencyCoded' },
+            { id: '0051', format: 'an..3', name: 'controllingAgencyCoded' },
           ],
         },
         {
@@ -246,10 +276,10 @@ export class SegmentTableBuilder extends TableBuilder<SegmentEntry> {
           name: 'scenarioIdentification',
           requires: 1,
           components: [
-            { format: 'an..14', name: 'scenarioIdentification' },
-            { format: 'an..3', name: 'scenarioVersionNumber' },
-            { format: 'an..3', name: 'scenarioReleaseNumber' },
-            { format: 'an..3', name: 'controllingAgencyCoded' },
+            { id: '0127', format: 'an..14', name: 'scenarioIdentification' },
+            { id: '0128', format: 'an..3', name: 'scenarioVersionNumber' },
+            { id: '0130', format: 'an..3', name: 'scenarioReleaseNumber' },
+            { id: '0051', format: 'an..3', name: 'controllingAgencyCoded' },
           ],
         },
       ],
@@ -261,7 +291,9 @@ export class SegmentTableBuilder extends TableBuilder<SegmentEntry> {
           id: '0081',
           name: 'sectionIdentification',
           requires: 1,
-          components: [{ format: 'a1', name: 'sectionIdentification' }],
+          components: [
+            { id: '0081', format: 'a1', name: 'sectionIdentification' },
+          ],
         },
       ],
     })
@@ -272,13 +304,17 @@ export class SegmentTableBuilder extends TableBuilder<SegmentEntry> {
           id: '0074',
           name: 'numberOfSegmentsInAMessage',
           requires: 1,
-          components: [{ format: 'n..10', name: 'numberOfSegmentsInAMessage' }],
+          components: [
+            { id: '0074', format: 'n..10', name: 'numberOfSegmentsInAMessage' },
+          ],
         },
         {
           id: '0062',
           name: 'messageReferenceNumber',
           requires: 1,
-          components: [{ format: 'an..14', name: 'messageReferenceNumber' }],
+          components: [
+            { id: '0062', format: 'an..14', name: 'messageReferenceNumber' },
+          ],
         },
       ],
     })
@@ -289,7 +325,9 @@ export class SegmentTableBuilder extends TableBuilder<SegmentEntry> {
           id: '0036',
           name: 'interchangeControlCount',
           requires: 1,
-          components: [{ format: 'n..6', name: 'interchangeControlCount' }],
+          components: [
+            { id: '0036', format: 'n..6', name: 'interchangeControlCount' },
+          ],
         },
         {
           id: '0020',
@@ -297,6 +335,7 @@ export class SegmentTableBuilder extends TableBuilder<SegmentEntry> {
           requires: 1,
           components: [
             {
+              id: '0020',
               format: 'an..14',
               name: 'interchangeControlReference',
             },
@@ -311,6 +350,7 @@ export class SegmentTableBuilder extends TableBuilder<SegmentEntry> {
   build(): Dictionary<SegmentEntry> {
     const fileLoc: string | undefined = this.getDefinitionFileLoc()
     let dict: Dictionary<SegmentEntry>
+
     if (fileLoc) {
       const sData: string = fs.readFileSync(fileLoc, {
         encoding: 'utf-8',

@@ -20,13 +20,21 @@ import { DomHandler, Parser } from 'htmlparser2'
 import { HttpClient } from '../httpClient'
 import { MessageType } from '../tracker'
 import { isDefined } from '../util'
-import { Component, Dictionary, ElementEntry, SegmentEntry } from '../validator'
+import {
+  Component,
+  ComponentValueEntry,
+  Dictionary,
+  ElementEntry,
+  SegmentEntry,
+} from '../validator'
 
 export interface EdifactMessageSpecification {
   readonly messageType: string
   readonly version: string
   readonly release: string
   readonly controllingAgency: string
+
+  readonly componentValueTable: Dictionary<ComponentValueEntry>
 
   /**
    * Contains the available segments as key and the respective elements
@@ -52,6 +60,8 @@ export class EdifactMessageSpecificationImpl
 
   segmentTable: Dictionary<SegmentEntry> = new Dictionary<SegmentEntry>()
   elementTable: Dictionary<ElementEntry> = new Dictionary<ElementEntry>()
+  componentValueTable: Dictionary<ComponentValueEntry> =
+    new Dictionary<ComponentValueEntry>()
   messageStructureDefinition: MessageType[] = []
 
   constructor(
@@ -150,6 +160,73 @@ export class UNECEMessageStructureParser implements MessageStructureParser {
     return undefined
   }
 
+  protected async parseComponentDefinitionPage(
+    component: string,
+    page: string,
+    definition: EdifactMessageSpecification,
+  ): Promise<EdifactMessageSpecification> {
+    // Check if the component already exists (Meaning it has been handled)
+    if (definition.componentValueTable.contains(component)) {
+      return definition
+    }
+    if (
+      !page.includes('Code Values:') // Does not contain possible values.
+    ) {
+      return definition
+    }
+
+    let state: SegmentPart = SegmentPart.BeforeStructureDef
+
+    const values: ComponentValueEntry = {}
+
+    for (let line of page.split(/\n\s*\n/)) {
+      line = line.trimEnd()
+
+      if (
+        state === SegmentPart.BeforeStructureDef &&
+        line.toLowerCase().includes('<h3>')
+      ) {
+        state = SegmentPart.Data
+      } else if (
+        state === SegmentPart.Data &&
+        !line.toLowerCase().includes('<p>')
+      ) {
+        const regexp: RegExp = /^(\S)?\s*([A-Z0-9]{1,3}) +(.*)\n*([\w\W]*)/gm
+        const arr: RegExpExecArray | null = regexp.exec(line)
+
+        if (isDefined(arr)) {
+          const deprecated: boolean | undefined =
+            arr[1] === 'X' ? true : undefined
+          const componentKey: string = arr[2]
+
+          const componentValue: string = arr[3]
+          const componentDescription: string = arr[4]
+            .replace(/ {2,}/gm, ' ') // Convert all instances of multiple spaces to a single space
+            .replace(/[\r\n]/gm, '') // Remove all newlines
+            .trim() // Remove excess whitespace
+          values[componentKey] = {
+            id: componentKey,
+            value: componentValue,
+            description: componentDescription,
+            ...(deprecated && { deprecated }), // Only add if deprecated is true
+          }
+        }
+      } else if (
+        state === SegmentPart.Data &&
+        line.toLowerCase().includes('<p>')
+      ) {
+        state = SegmentPart.AfterStructureDef
+        break
+      }
+    }
+
+    if (component !== '' && Object.keys(values).length) {
+      definition.componentValueTable.add(component, values)
+    }
+
+    return Promise.resolve(definition)
+  }
+
   protected async parseSegmentDefinitionPage(
     segment: string,
     page: string,
@@ -187,24 +264,45 @@ export class UNECEMessageStructureParser implements MessageStructureParser {
         state = SegmentPart.Data
       } else if (state === SegmentPart.Data && !line.includes('<P>')) {
         const regexp: RegExp =
-          /^\s*?([\d]*)\s*?([X|\\*]?)\s*<A.*>([a-zA-Z0-9]*)<\/A>([a-zA-Z0-9 ,\-\\/&]{44,})([M|C])\s*([\d]*)\s*([a-zA-Z0-9\\.]*).*$/g
+          /^\s*?([\d]*)\s*?([X|\\*]?)\s*<A(?:.*HREF.*"([\w /.]*)")?>([\w]*)<\/A>([\w ,\-\\/&]*)\W+([M|C])(?:\W|$)\s*([\d]*)\s*([\w\\.]*).*$/g
         const arr: RegExpExecArray | null = regexp.exec(line)
         if (isDefined(arr)) {
           const segGroupId: string | undefined =
             arr[1] === '' ? undefined : arr[1]
           // const deprecated: boolean = arr[2] === "X" ? true : false;
-          const id: string = arr[3]
-          const mandatory: boolean = arr[5] === 'M' ? true : false
-          // const repetition: number | undefined = isDefined(arr[6]) ? parseInt(arr[6]) : undefined;
+          const href: string | undefined = arr[3]
+          const id: string = arr[4]
+          const mandatory: boolean = arr[6] === 'M' ? true : false
+          // const repetition: number | undefined = isDefined(arr[7]) ? parseInt(arr[7]) : undefined;
           const elementDef: string | undefined =
-            arr[7] === '' ? undefined : arr[7]
-          const componentName = this.formatComponentName(arr[4]?.trim())
+            arr[8] === '' ? undefined : arr[8]
+          const componentName = this.formatComponentName(arr[5]?.trim())
+
+          // Check if possibility for coded values
+          let validValues: ComponentValueEntry | undefined
+
+          if (href.includes('/tred/') && componentName?.includes('Code')) {
+            // Check if already exists
+            if (definition.componentValueTable.contains(id)) {
+              // Use cache if it exists
+              validValues = definition.componentValueTable.get(id)
+            } else {
+              const componentResult = await this.parseComponentDefinitionPage(
+                id,
+                await this.loadPage(href),
+                definition,
+              )
+              validValues = componentResult.componentValueTable.get(id)
+            }
+          }
 
           const component: Component | undefined =
-            componentName && elementDef
+            id && componentName && elementDef
               ? {
+                  id,
                   name: componentName,
                   format: elementDef,
+                  ...(validValues && { validValues }),
                 }
               : undefined
 
@@ -245,6 +343,7 @@ export class UNECEMessageStructureParser implements MessageStructureParser {
               if (complexEleEntry !== null && complexEleId !== null) {
                 segEntry.elements.push(complexEleEntry)
               }
+              // If the element already exists
               if (segEntry.elements.some((element) => element.id === id)) {
                 skipAddingElement = true
                 continue
@@ -298,7 +397,7 @@ export class UNECEMessageStructureParser implements MessageStructureParser {
     return Promise.resolve(definition)
   }
 
-  private async parsePage(page: string): Promise<ParsingResultType> {
+  private async parseMessagePage(page: string): Promise<ParsingResultType> {
     let definition: EdifactMessageSpecification | undefined
     const handler: DomHandler = new DomHandler()
 
@@ -362,7 +461,7 @@ export class UNECEMessageStructureParser implements MessageStructureParser {
       ) {
         if (state === Part.RefLink) {
           // ignored
-          // console.debug(`RefLink: ${text}`);
+          console.debug(`RefLink: ${text}`)
         } else if (state === Part.Pos) {
           // console.debug(`Pos: ${text}`);
         } else if (state === Part.Deprecated) {
@@ -499,7 +598,7 @@ export class UNECEMessageStructureParser implements MessageStructureParser {
   loadTypeSpec(): Promise<EdifactMessageSpecification> {
     const url: string = './' + this.type + '_c.htm'
     return this.loadPage(url)
-      .then((page: string) => this.parsePage(page))
+      .then((page: string) => this.parseMessagePage(page))
       .then((result: ParsingResultType) =>
         Promise.all(result.promises)
           .then(() => result.specObj)

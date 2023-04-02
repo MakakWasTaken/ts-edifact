@@ -353,6 +353,7 @@ describe('UNECELegacyMessageStructureParser', () => {
         ).toEqual(
           jasmine.arrayContaining([
             {
+              id: '6311',
               format: 'an..3',
               name: 'measurementPurposeQualifier',
             },
@@ -437,18 +438,25 @@ describe('UNECELegacyMessageStructureParser', () => {
         ).toEqual(
           jasmine.arrayContaining([
             {
+              id: '6347',
               format: 'an..3',
               name: 'currencyDetailsQualifier',
             },
             {
+              id: '6345',
               format: 'an..3',
               name: 'currencyCoded',
             },
             {
+              id: '6343',
               format: 'an..3',
               name: 'currencyQualifier',
             },
-            { format: 'n..4', name: 'currencyRateBase' },
+            {
+              id: '6348',
+              format: 'n..4',
+              name: 'currencyRateBase',
+            },
           ]),
         )
 
@@ -484,7 +492,7 @@ describe('UNECELegacyMessageStructureParser', () => {
         findElement(segments.get('MEA')?.elements, '6311')?.components,
       ).toEqual(
         jasmine.arrayContaining([
-          { name: 'measurementPurposeQualifier', format: 'an..3' },
+          { id: '6311', name: 'measurementPurposeQualifier', format: 'an..3' },
         ]),
       )
       expect(
@@ -494,11 +502,11 @@ describe('UNECELegacyMessageStructureParser', () => {
         findElement(segments.get('MEA')?.elements, 'C174')?.components,
       ).toEqual(
         jasmine.arrayContaining([
-          { format: 'an..3', name: 'measureUnitQualifier' },
-          { format: 'an..18', name: 'measurementValue' },
-          { format: 'n..18', name: 'rangeMinimum' },
-          { format: 'n..18', name: 'rangeMaximum' },
-          { format: 'n..2', name: 'significantDigits' },
+          { id: '6411', format: 'an..3', name: 'measureUnitQualifier' },
+          { id: '6314', format: 'an..18', name: 'measurementValue' },
+          { id: '6162', format: 'n..18', name: 'rangeMinimum' },
+          { id: '6152', format: 'n..18', name: 'rangeMaximum' },
+          { id: '6432', format: 'n..2', name: 'significantDigits' },
         ]),
       )
       expect(
@@ -512,10 +520,10 @@ describe('UNECELegacyMessageStructureParser', () => {
         findElement(segments.get('CUX')?.elements, 'C504')?.components,
       ).toEqual(
         jasmine.arrayContaining([
-          { format: 'an..3', name: 'currencyDetailsQualifier' },
-          { format: 'an..3', name: 'currencyCoded' },
-          { format: 'an..3', name: 'currencyQualifier' },
-          { format: 'n..4', name: 'currencyRateBase' },
+          { id: '6347', format: 'an..3', name: 'currencyDetailsQualifier' },
+          { id: '6345', format: 'an..3', name: 'currencyCoded' },
+          { id: '6343', format: 'an..3', name: 'currencyQualifier' },
+          { id: '6348', format: 'n..4', name: 'currencyRateBase' },
         ]),
       )
       // sub-components should not be stored

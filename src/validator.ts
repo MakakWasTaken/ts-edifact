@@ -62,8 +62,10 @@ export class Dictionary<T> {
 }
 
 export type Component = {
+  id: string
   name: string
   value?: string
+  validValues?: ComponentValueEntry
   format: string
 }
 export type SegmentEntry = {
@@ -76,6 +78,13 @@ export type ElementEntry = {
   requires: number
   components: Component[]
 }
+export type ComponentValue = {
+  id: string
+  value: string
+  description: string
+  deprecated?: boolean
+}
+export type ComponentValueEntry = { [key: string]: ComponentValue }
 
 interface FormatType {
   alpha: boolean
