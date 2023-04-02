@@ -361,4 +361,4 @@ export const findElement = (
 }
 
 // Run with: npx ts-node src/util.ts
-storeAllDefaultSpecs('d01b', './src/messageSpec')
+// storeAllDefaultSpecs('d01b', './src/messageSpec')
