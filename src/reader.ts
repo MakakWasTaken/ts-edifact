@@ -140,9 +140,9 @@ export class Reader {
         if (this.componentValues.contains(component.id)) {
           const componentFormatRegex = /(a)?(n)?(\.\.)?([0-9]*)?/g
 
-          const componentFormat = component.format.match(componentFormatRegex)
+          const componentFormat = componentFormatRegex.exec(component.format)
           if (isDefined(componentFormat)) {
-            const upto = componentFormat[3]
+            const upto = componentFormat[3] === '..'
             const componentValues = this.componentValues.get(
               component.id,
             ) as ComponentValueEntry
@@ -150,11 +150,6 @@ export class Reader {
             if (!componentValue) {
               if (upto) {
                 // If the value is marked as 'upto' it is not required to be in the component value table as it can be ''
-                console.log({
-                  id: value,
-                  value: 'No code provided',
-                  description: 'No code provided',
-                })
                 components.push({
                   ...component,
                   value: {
