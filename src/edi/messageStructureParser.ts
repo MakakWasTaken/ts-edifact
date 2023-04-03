@@ -145,7 +145,7 @@ export class UNECEMessageStructureParser implements MessageStructureParser {
     if (!name || name === '') {
       return undefined
     }
-    let formattedName: string = name.replace(/\//g, 'Or').replace(/&/g, 'And') // Replace / with Or and & with And, to avoid problems with versioning
+    let formattedName: string = name.replace(/\//g, ' or ') // Replace / with Or to avoid problems with versioning
     formattedName = formattedName.replace(/&|,|-/g, ' ')
     const split = formattedName.split(' ')
     if (split.length > 0) {
@@ -155,6 +155,9 @@ export class UNECEMessageStructureParser implements MessageStructureParser {
       )
       const result =
         formattedNames[0].toLowerCase() + formattedNames.slice(1).join('')
+      if (name.includes('/')) {
+        console.log(formattedNames, result)
+      }
 
       return result
     }
