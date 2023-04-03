@@ -1,23 +1,4 @@
 {
-  "CNT": {
-    "requires": 1,
-    "elements": [
-      {
-        "id": "C270",
-        "name": "control",
-        "requires": 2,
-        "components": [
-          {
-            "id": "6069",
-            "name": "controlTotalTypeCodeQualifier",
-            "format": "an..3"
-          },
-          { "id": "6066", "name": "controlTotalValue", "format": "n..18" },
-          { "id": "6411", "name": "measurementUnitCode", "format": "an..3" }
-        ]
-      }
-    ]
-  },
   "BGM": {
     "requires": 0,
     "elements": [
@@ -64,6 +45,25 @@
         "requires": 0,
         "components": [
           { "id": "4343", "name": "responseTypeCode", "format": "an..3" }
+        ]
+      }
+    ]
+  },
+  "CNT": {
+    "requires": 1,
+    "elements": [
+      {
+        "id": "C270",
+        "name": "control",
+        "requires": 2,
+        "components": [
+          {
+            "id": "6069",
+            "name": "controlTotalTypeCodeQualifier",
+            "format": "an..3"
+          },
+          { "id": "6066", "name": "controlTotalValue", "format": "n..18" },
+          { "id": "6411", "name": "measurementUnitCode", "format": "an..3" }
         ]
       }
     ]
@@ -145,142 +145,6 @@
       }
     ]
   },
-  "TAX": {
-    "requires": 1,
-    "elements": [
-      {
-        "id": "5283",
-        "name": "dutyOrTaxOrFeeFunctionCodeQualifier",
-        "requires": 1,
-        "components": [
-          {
-            "id": "5283",
-            "name": "dutyOrTaxOrFeeFunctionCodeQualifier",
-            "format": "an..3"
-          }
-        ]
-      },
-      {
-        "id": "C241",
-        "name": "dutyTaxFeeType",
-        "requires": 0,
-        "components": [
-          {
-            "id": "5153",
-            "name": "dutyOrTaxOrFeeTypeNameCode",
-            "format": "an..3"
-          },
-          {
-            "id": "1131",
-            "name": "codeListIdentificationCode",
-            "format": "an..17"
-          },
-          {
-            "id": "3055",
-            "name": "codeListResponsibleAgencyCode",
-            "format": "an..3"
-          },
-          { "id": "5152", "name": "dutyOrTaxOrFeeTypeName", "format": "an..35" }
-        ]
-      },
-      {
-        "id": "C533",
-        "name": "dutyTaxFeeAccountDetail",
-        "requires": 1,
-        "components": [
-          {
-            "id": "5289",
-            "name": "dutyOrTaxOrFeeAccountCode",
-            "format": "an..6"
-          },
-          {
-            "id": "1131",
-            "name": "codeListIdentificationCode",
-            "format": "an..17"
-          },
-          {
-            "id": "3055",
-            "name": "codeListResponsibleAgencyCode",
-            "format": "an..3"
-          }
-        ]
-      },
-      {
-        "id": "5286",
-        "name": "dutyOrTaxOrFeeAssessmentBasisValue",
-        "requires": 0,
-        "components": [
-          {
-            "id": "5286",
-            "name": "dutyOrTaxOrFeeAssessmentBasisValue",
-            "format": "an..15"
-          }
-        ]
-      },
-      {
-        "id": "C243",
-        "name": "dutyTaxFeeDetail",
-        "requires": 0,
-        "components": [
-          { "id": "5279", "name": "dutyOrTaxOrFeeRateCode", "format": "an..7" },
-          {
-            "id": "1131",
-            "name": "codeListIdentificationCode",
-            "format": "an..17"
-          },
-          {
-            "id": "3055",
-            "name": "codeListResponsibleAgencyCode",
-            "format": "an..3"
-          },
-          { "id": "5278", "name": "dutyOrTaxOrFeeRate", "format": "an..17" },
-          {
-            "id": "5273",
-            "name": "dutyOrTaxOrFeeRateBasisCode",
-            "format": "an..12"
-          },
-          {
-            "id": "1131",
-            "name": "codeListIdentificationCode",
-            "format": "an..17"
-          },
-          {
-            "id": "3055",
-            "name": "codeListResponsibleAgencyCode",
-            "format": "an..3"
-          }
-        ]
-      },
-      {
-        "id": "5305",
-        "name": "dutyOrTaxOrFeeCategoryCode",
-        "requires": 0,
-        "components": [
-          {
-            "id": "5305",
-            "name": "dutyOrTaxOrFeeCategoryCode",
-            "format": "an..3"
-          }
-        ]
-      },
-      {
-        "id": "3446",
-        "name": "partyTaxIdentifier",
-        "requires": 0,
-        "components": [
-          { "id": "3446", "name": "partyTaxIdentifier", "format": "an..20" }
-        ]
-      },
-      {
-        "id": "1227",
-        "name": "calculationSequenceCode",
-        "requires": 0,
-        "components": [
-          { "id": "1227", "name": "calculationSequenceCode", "format": "an..3" }
-        ]
-      }
-    ]
-  },
   "DTM": {
     "requires": 1,
     "elements": [
@@ -304,27 +168,6 @@
             "name": "dateOrTimeOrPeriodFormatCode",
             "format": "an..3"
           }
-        ]
-      }
-    ]
-  },
-  "RFF": {
-    "requires": 1,
-    "elements": [
-      {
-        "id": "C506",
-        "name": "reference",
-        "requires": 1,
-        "components": [
-          { "id": "1153", "name": "referenceCodeQualifier", "format": "an..3" },
-          { "id": "1154", "name": "referenceIdentifier", "format": "an..70" },
-          { "id": "1156", "name": "documentLineIdentifier", "format": "an..6" },
-          {
-            "id": "4000",
-            "name": "referenceVersionIdentifier",
-            "format": "an..35"
-          },
-          { "id": "1060", "name": "revisionIdentifier", "format": "an..6" }
         ]
       }
     ]
@@ -510,6 +353,163 @@
         "requires": 0,
         "components": [
           { "id": "3207", "name": "countryNameCode", "format": "an..3" }
+        ]
+      }
+    ]
+  },
+  "RFF": {
+    "requires": 1,
+    "elements": [
+      {
+        "id": "C506",
+        "name": "reference",
+        "requires": 1,
+        "components": [
+          { "id": "1153", "name": "referenceCodeQualifier", "format": "an..3" },
+          { "id": "1154", "name": "referenceIdentifier", "format": "an..70" },
+          { "id": "1156", "name": "documentLineIdentifier", "format": "an..6" },
+          {
+            "id": "4000",
+            "name": "referenceVersionIdentifier",
+            "format": "an..35"
+          },
+          { "id": "1060", "name": "revisionIdentifier", "format": "an..6" }
+        ]
+      }
+    ]
+  },
+  "TAX": {
+    "requires": 1,
+    "elements": [
+      {
+        "id": "5283",
+        "name": "dutyOrTaxOrFeeFunctionCodeQualifier",
+        "requires": 1,
+        "components": [
+          {
+            "id": "5283",
+            "name": "dutyOrTaxOrFeeFunctionCodeQualifier",
+            "format": "an..3"
+          }
+        ]
+      },
+      {
+        "id": "C241",
+        "name": "dutyTaxFeeType",
+        "requires": 0,
+        "components": [
+          {
+            "id": "5153",
+            "name": "dutyOrTaxOrFeeTypeNameCode",
+            "format": "an..3"
+          },
+          {
+            "id": "1131",
+            "name": "codeListIdentificationCode",
+            "format": "an..17"
+          },
+          {
+            "id": "3055",
+            "name": "codeListResponsibleAgencyCode",
+            "format": "an..3"
+          },
+          { "id": "5152", "name": "dutyOrTaxOrFeeTypeName", "format": "an..35" }
+        ]
+      },
+      {
+        "id": "C533",
+        "name": "dutyTaxFeeAccountDetail",
+        "requires": 1,
+        "components": [
+          {
+            "id": "5289",
+            "name": "dutyOrTaxOrFeeAccountCode",
+            "format": "an..6"
+          },
+          {
+            "id": "1131",
+            "name": "codeListIdentificationCode",
+            "format": "an..17"
+          },
+          {
+            "id": "3055",
+            "name": "codeListResponsibleAgencyCode",
+            "format": "an..3"
+          }
+        ]
+      },
+      {
+        "id": "5286",
+        "name": "dutyOrTaxOrFeeAssessmentBasisValue",
+        "requires": 0,
+        "components": [
+          {
+            "id": "5286",
+            "name": "dutyOrTaxOrFeeAssessmentBasisValue",
+            "format": "an..15"
+          }
+        ]
+      },
+      {
+        "id": "C243",
+        "name": "dutyTaxFeeDetail",
+        "requires": 0,
+        "components": [
+          { "id": "5279", "name": "dutyOrTaxOrFeeRateCode", "format": "an..7" },
+          {
+            "id": "1131",
+            "name": "codeListIdentificationCode",
+            "format": "an..17"
+          },
+          {
+            "id": "3055",
+            "name": "codeListResponsibleAgencyCode",
+            "format": "an..3"
+          },
+          { "id": "5278", "name": "dutyOrTaxOrFeeRate", "format": "an..17" },
+          {
+            "id": "5273",
+            "name": "dutyOrTaxOrFeeRateBasisCode",
+            "format": "an..12"
+          },
+          {
+            "id": "1131",
+            "name": "codeListIdentificationCode",
+            "format": "an..17"
+          },
+          {
+            "id": "3055",
+            "name": "codeListResponsibleAgencyCode",
+            "format": "an..3"
+          }
+        ]
+      },
+      {
+        "id": "5305",
+        "name": "dutyOrTaxOrFeeCategoryCode",
+        "requires": 0,
+        "components": [
+          {
+            "id": "5305",
+            "name": "dutyOrTaxOrFeeCategoryCode",
+            "format": "an..3"
+          }
+        ]
+      },
+      {
+        "id": "3446",
+        "name": "partyTaxIdentifier",
+        "requires": 0,
+        "components": [
+          { "id": "3446", "name": "partyTaxIdentifier", "format": "an..20" }
+        ]
+      },
+      {
+        "id": "1227",
+        "name": "calculationSequenceCode",
+        "requires": 0,
+        "components": [
+          { "id": "1227", "name": "calculationSequenceCode", "format": "an..3" }
         ]
       }
     ]

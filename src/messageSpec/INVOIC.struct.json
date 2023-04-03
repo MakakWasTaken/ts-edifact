@@ -3,7 +3,7 @@
     "content": "UNH",
     "mandatory": true,
     "repetition": 1,
-    "data": ["D07A", "INVOIC"],
+    "data": ["D01B", "INVOIC"],
     "section": "header"
   },
   { "content": "BGM", "mandatory": true, "repetition": 1 },
@@ -13,7 +13,7 @@
   { "content": "IMD", "mandatory": false, "repetition": 1 },
   { "content": "FTX", "mandatory": false, "repetition": 99 },
   { "content": "LOC", "mandatory": false, "repetition": 10 },
-  { "content": "GEI", "mandatory": false, "repetition": 10 },
+  { "content": "GIS", "mandatory": false, "repetition": 10 },
   { "content": "DGS", "mandatory": false, "repetition": 1 },
   { "content": "GIR", "mandatory": false, "repetition": 10 },
   {
@@ -91,7 +91,7 @@
   },
   {
     "content": [
-      { "content": "PYT", "mandatory": true, "repetition": 1 },
+      { "content": "PAT", "mandatory": true, "repetition": 1 },
       { "content": "DTM", "mandatory": false, "repetition": 5 },
       { "content": "PCD", "mandatory": false, "repetition": 1 },
       { "content": "MOA", "mandatory": false, "repetition": 1 },
@@ -291,7 +291,7 @@
       },
       {
         "content": [
-          { "content": "PYT", "mandatory": true, "repetition": 1 },
+          { "content": "PAT", "mandatory": true, "repetition": 1 },
           { "content": "DTM", "mandatory": false, "repetition": 5 },
           { "content": "PCD", "mandatory": false, "repetition": 99 },
           { "content": "MOA", "mandatory": false, "repetition": 1 }
@@ -496,19 +496,18 @@
       },
       {
         "content": [
-          { "content": "GEI", "mandatory": true, "repetition": 1 },
-          { "content": "RFF", "mandatory": false, "repetition": 9 },
-          { "content": "IMD", "mandatory": false, "repetition": 99 },
+          { "content": "GIS", "mandatory": true, "repetition": 1 },
+          { "content": "RFF", "mandatory": false, "repetition": 1 },
           { "content": "DTM", "mandatory": false, "repetition": 5 },
           { "content": "GIR", "mandatory": false, "repetition": 5 },
           { "content": "LOC", "mandatory": false, "repetition": 2 },
           { "content": "MEA", "mandatory": false, "repetition": 5 },
-          { "content": "QTY", "mandatory": false, "repetition": 9 },
+          { "content": "QTY", "mandatory": false, "repetition": 2 },
           { "content": "FTX", "mandatory": false, "repetition": 5 },
           { "content": "MOA", "mandatory": false, "repetition": 2 }
         ],
         "mandatory": false,
-        "repetition": 999,
+        "repetition": 10,
         "name": "Segment group 49"
       }
     ],

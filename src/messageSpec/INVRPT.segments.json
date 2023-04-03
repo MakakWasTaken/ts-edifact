@@ -1,4 +1,33 @@
 {
+  "ALI": {
+    "requires": 0,
+    "elements": [
+      {
+        "id": "3239",
+        "name": "countryOfOriginNameCode",
+        "requires": 0,
+        "components": [
+          { "id": "3239", "name": "countryOfOriginNameCode", "format": "an..3" }
+        ]
+      },
+      {
+        "id": "9213",
+        "name": "dutyRegimeTypeCode",
+        "requires": 0,
+        "components": [
+          { "id": "9213", "name": "dutyRegimeTypeCode", "format": "an..3" }
+        ]
+      },
+      {
+        "id": "4183",
+        "name": "specialConditionCode",
+        "requires": 0,
+        "components": [
+          { "id": "4183", "name": "specialConditionCode", "format": "an..3" }
+        ]
+      }
+    ]
+  },
   "BGM": {
     "requires": 0,
     "elements": [
@@ -49,6 +78,28 @@
       }
     ]
   },
+  "COM": {
+    "requires": 1,
+    "elements": [
+      {
+        "id": "C076",
+        "name": "communicationContact",
+        "requires": 2,
+        "components": [
+          {
+            "id": "3148",
+            "name": "communicationAddressIdentifier",
+            "format": "an..512"
+          },
+          {
+            "id": "3155",
+            "name": "communicationAddressCodeQualifier",
+            "format": "an..3"
+          }
+        ]
+      }
+    ]
+  },
   "CPS": {
     "requires": 1,
     "elements": [
@@ -86,85 +137,31 @@
       }
     ]
   },
-  "GIN": {
-    "requires": 2,
+  "CTA": {
+    "requires": 0,
     "elements": [
       {
-        "id": "7405",
-        "name": "objectIdentificationCodeQualifier",
-        "requires": 1,
+        "id": "3139",
+        "name": "contactFunctionCode",
+        "requires": 0,
+        "components": [
+          { "id": "3139", "name": "contactFunctionCode", "format": "an..3" }
+        ]
+      },
+      {
+        "id": "C056",
+        "name": "departmentOrEmployeeDetails",
+        "requires": 0,
         "components": [
           {
-            "id": "7405",
-            "name": "objectIdentificationCodeQualifier",
-            "format": "an..3"
-          }
-        ]
-      },
-      {
-        "id": "C208",
-        "name": "identityNumberRange",
-        "requires": 1,
-        "components": [
-          { "id": "7402", "name": "objectIdentifier", "format": "an..35" },
-          { "id": "7402", "name": "objectIdentifier", "format": "an..35" }
-        ]
-      },
-      {
-        "id": "C208",
-        "name": "identityNumberRange",
-        "requires": 1,
-        "components": [
-          { "id": "7402", "name": "objectIdentifier", "format": "an..35" },
-          { "id": "7402", "name": "objectIdentifier", "format": "an..35" }
-        ]
-      },
-      {
-        "id": "C208",
-        "name": "identityNumberRange",
-        "requires": 1,
-        "components": [
-          { "id": "7402", "name": "objectIdentifier", "format": "an..35" },
-          { "id": "7402", "name": "objectIdentifier", "format": "an..35" }
-        ]
-      },
-      {
-        "id": "C208",
-        "name": "identityNumberRange",
-        "requires": 1,
-        "components": [
-          { "id": "7402", "name": "objectIdentifier", "format": "an..35" },
-          { "id": "7402", "name": "objectIdentifier", "format": "an..35" }
-        ]
-      },
-      {
-        "id": "C208",
-        "name": "identityNumberRange",
-        "requires": 1,
-        "components": [
-          { "id": "7402", "name": "objectIdentifier", "format": "an..35" },
-          { "id": "7402", "name": "objectIdentifier", "format": "an..35" }
-        ]
-      }
-    ]
-  },
-  "COM": {
-    "requires": 1,
-    "elements": [
-      {
-        "id": "C076",
-        "name": "communicationContact",
-        "requires": 2,
-        "components": [
-          {
-            "id": "3148",
-            "name": "communicationAddressIdentifier",
-            "format": "an..512"
+            "id": "3413",
+            "name": "departmentOrEmployeeNameCode",
+            "format": "an..17"
           },
           {
-            "id": "3155",
-            "name": "communicationAddressCodeQualifier",
-            "format": "an..3"
+            "id": "3412",
+            "name": "departmentOrEmployeeName",
+            "format": "an..35"
           }
         ]
       }
@@ -241,201 +238,62 @@
       }
     ]
   },
-  "QTY": {
+  "DTM": {
     "requires": 1,
     "elements": [
       {
-        "id": "C186",
-        "name": "quantityDetails",
-        "requires": 2,
-        "components": [
-          {
-            "id": "6063",
-            "name": "quantityTypeCodeQualifier",
-            "format": "an..3"
-          },
-          { "id": "6060", "name": "quantity", "format": "an..35" },
-          { "id": "6411", "name": "measurementUnitCode", "format": "an..3" }
-        ]
-      }
-    ]
-  },
-  "ALI": {
-    "requires": 0,
-    "elements": [
-      {
-        "id": "3239",
-        "name": "countryOfOriginNameCode",
-        "requires": 0,
-        "components": [
-          { "id": "3239", "name": "countryOfOriginNameCode", "format": "an..3" }
-        ]
-      },
-      {
-        "id": "9213",
-        "name": "dutyRegimeTypeCode",
-        "requires": 0,
-        "components": [
-          { "id": "9213", "name": "dutyRegimeTypeCode", "format": "an..3" }
-        ]
-      },
-      {
-        "id": "4183",
-        "name": "specialConditionCode",
-        "requires": 0,
-        "components": [
-          { "id": "4183", "name": "specialConditionCode", "format": "an..3" }
-        ]
-      }
-    ]
-  },
-  "PCI": {
-    "requires": 0,
-    "elements": [
-      {
-        "id": "4233",
-        "name": "markingInstructionsCode",
-        "requires": 0,
-        "components": [
-          { "id": "4233", "name": "markingInstructionsCode", "format": "an..3" }
-        ]
-      },
-      {
-        "id": "C210",
-        "name": "marksLabels",
+        "id": "C507",
+        "name": "dateTimePeriod",
         "requires": 1,
         "components": [
           {
-            "id": "7102",
-            "name": "shippingMarksDescription",
+            "id": "2005",
+            "name": "dateOrTimeOrPeriodFunctionCodeQualifier",
+            "format": "an..3"
+          },
+          {
+            "id": "2380",
+            "name": "dateOrTimeOrPeriodValue",
             "format": "an..35"
           },
           {
-            "id": "7102",
-            "name": "shippingMarksDescription",
-            "format": "an..35"
-          },
-          {
-            "id": "7102",
-            "name": "shippingMarksDescription",
-            "format": "an..35"
-          },
-          {
-            "id": "7102",
-            "name": "shippingMarksDescription",
-            "format": "an..35"
-          },
-          {
-            "id": "7102",
-            "name": "shippingMarksDescription",
-            "format": "an..35"
-          },
-          {
-            "id": "7102",
-            "name": "shippingMarksDescription",
-            "format": "an..35"
-          },
-          {
-            "id": "7102",
-            "name": "shippingMarksDescription",
-            "format": "an..35"
-          },
-          {
-            "id": "7102",
-            "name": "shippingMarksDescription",
-            "format": "an..35"
-          },
-          {
-            "id": "7102",
-            "name": "shippingMarksDescription",
-            "format": "an..35"
-          },
-          {
-            "id": "7102",
-            "name": "shippingMarksDescription",
-            "format": "an..35"
-          }
-        ]
-      },
-      {
-        "id": "8275",
-        "name": "containerOrPackageContentsIndicatorCode",
-        "requires": 0,
-        "components": [
-          {
-            "id": "8275",
-            "name": "containerOrPackageContentsIndicatorCode",
+            "id": "2379",
+            "name": "dateOrTimeOrPeriodFormatCode",
             "format": "an..3"
           }
         ]
-      },
+      }
+    ]
+  },
+  "FTX": {
+    "requires": 1,
+    "elements": [
       {
-        "id": "C827",
-        "name": "typeOfMarking",
+        "id": "4451",
+        "name": "textSubjectCodeQualifier",
         "requires": 1,
         "components": [
-          { "id": "7511", "name": "markingTypeCode", "format": "an..3" },
           {
-            "id": "1131",
-            "name": "codeListIdentificationCode",
-            "format": "an..17"
-          },
-          {
-            "id": "3055",
-            "name": "codeListResponsibleAgencyCode",
+            "id": "4451",
+            "name": "textSubjectCodeQualifier",
             "format": "an..3"
           }
         ]
-      }
-    ]
-  },
-  "CTA": {
-    "requires": 0,
-    "elements": [
+      },
       {
-        "id": "3139",
-        "name": "contactFunctionCode",
+        "id": "4453",
+        "name": "freeTextFunctionCode",
         "requires": 0,
         "components": [
-          { "id": "3139", "name": "contactFunctionCode", "format": "an..3" }
+          { "id": "4453", "name": "freeTextFunctionCode", "format": "an..3" }
         ]
       },
       {
-        "id": "C056",
-        "name": "departmentOrEmployeeDetails",
-        "requires": 0,
+        "id": "C107",
+        "name": "textReference",
+        "requires": 1,
         "components": [
-          {
-            "id": "3413",
-            "name": "departmentOrEmployeeNameCode",
-            "format": "an..17"
-          },
-          {
-            "id": "3412",
-            "name": "departmentOrEmployeeName",
-            "format": "an..35"
-          }
-        ]
-      }
-    ]
-  },
-  "IMD": {
-    "requires": 0,
-    "elements": [
-      {
-        "id": "7077",
-        "name": "descriptionFormatCode",
-        "requires": 0,
-        "components": [
-          { "id": "7077", "name": "descriptionFormatCode", "format": "an..3" }
-        ]
-      },
-      {
-        "id": "C272",
-        "name": "itemCharacteristic",
-        "requires": 0,
-        "components": [
-          { "id": "7081", "name": "itemCharacteristicCode", "format": "an..3" },
+          { "id": "4441", "name": "freeTextValueCode", "format": "an..17" },
           {
             "id": "1131",
             "name": "codeListIdentificationCode",
@@ -449,241 +307,93 @@
         ]
       },
       {
-        "id": "C273",
-        "name": "itemDescription",
+        "id": "C108",
+        "name": "textLiteral",
+        "requires": 1,
+        "components": [
+          { "id": "4440", "name": "freeTextValue", "format": "an..512" },
+          { "id": "4440", "name": "freeTextValue", "format": "an..512" },
+          { "id": "4440", "name": "freeTextValue", "format": "an..512" },
+          { "id": "4440", "name": "freeTextValue", "format": "an..512" },
+          { "id": "4440", "name": "freeTextValue", "format": "an..512" }
+        ]
+      },
+      {
+        "id": "3453",
+        "name": "languageNameCode",
         "requires": 0,
         "components": [
-          { "id": "7009", "name": "itemDescriptionCode", "format": "an..17" },
-          {
-            "id": "1131",
-            "name": "codeListIdentificationCode",
-            "format": "an..17"
-          },
-          {
-            "id": "3055",
-            "name": "codeListResponsibleAgencyCode",
-            "format": "an..3"
-          },
-          { "id": "7008", "name": "itemDescription", "format": "an..256" },
-          { "id": "7008", "name": "itemDescription", "format": "an..256" },
           { "id": "3453", "name": "languageNameCode", "format": "an..3" }
         ]
       },
       {
-        "id": "7383",
-        "name": "surfaceOrLayerCode",
+        "id": "4447",
+        "name": "freeTextFormatCode",
         "requires": 0,
         "components": [
-          { "id": "7383", "name": "surfaceOrLayerCode", "format": "an..3" }
+          { "id": "4447", "name": "freeTextFormatCode", "format": "an..3" }
         ]
       }
     ]
   },
-  "LIN": {
-    "requires": 0,
-    "elements": [
-      {
-        "id": "1082",
-        "name": "lineItemIdentifier",
-        "requires": 0,
-        "components": [
-          { "id": "1082", "name": "lineItemIdentifier", "format": "an..6" }
-        ]
-      },
-      {
-        "id": "1229",
-        "name": "actionRequestNotificationDescriptionCode",
-        "requires": 0,
-        "components": [
-          {
-            "id": "1229",
-            "name": "actionRequestNotificationDescriptionCode",
-            "format": "an..3"
-          }
-        ]
-      },
-      {
-        "id": "C212",
-        "name": "itemNumberIdentification",
-        "requires": 0,
-        "components": [
-          { "id": "7140", "name": "itemIdentifier", "format": "an..35" },
-          {
-            "id": "7143",
-            "name": "itemTypeIdentificationCode",
-            "format": "an..3"
-          },
-          {
-            "id": "1131",
-            "name": "codeListIdentificationCode",
-            "format": "an..17"
-          },
-          {
-            "id": "3055",
-            "name": "codeListResponsibleAgencyCode",
-            "format": "an..3"
-          }
-        ]
-      },
-      {
-        "id": "C829",
-        "name": "subLineInformation",
-        "requires": 0,
-        "components": [
-          { "id": "5495", "name": "subLineIndicatorCode", "format": "an..3" },
-          { "id": "1082", "name": "lineItemIdentifier", "format": "an..6" }
-        ]
-      },
-      {
-        "id": "1222",
-        "name": "configurationLevelNumber",
-        "requires": 0,
-        "components": [
-          { "id": "1222", "name": "configurationLevelNumber", "format": "n..2" }
-        ]
-      },
-      {
-        "id": "7083",
-        "name": "configurationOperationCode",
-        "requires": 0,
-        "components": [
-          {
-            "id": "7083",
-            "name": "configurationOperationCode",
-            "format": "an..3"
-          }
-        ]
-      }
-    ]
-  },
-  "PIA": {
+  "GIN": {
     "requires": 2,
     "elements": [
       {
-        "id": "4347",
-        "name": "productIdentifierCodeQualifier",
+        "id": "7405",
+        "name": "objectIdentificationCodeQualifier",
         "requires": 1,
         "components": [
           {
-            "id": "4347",
-            "name": "productIdentifierCodeQualifier",
+            "id": "7405",
+            "name": "objectIdentificationCodeQualifier",
             "format": "an..3"
           }
         ]
       },
       {
-        "id": "C212",
-        "name": "itemNumberIdentification",
-        "requires": 0,
+        "id": "C208",
+        "name": "identityNumberRange",
+        "requires": 1,
         "components": [
-          { "id": "7140", "name": "itemIdentifier", "format": "an..35" },
-          {
-            "id": "7143",
-            "name": "itemTypeIdentificationCode",
-            "format": "an..3"
-          },
-          {
-            "id": "1131",
-            "name": "codeListIdentificationCode",
-            "format": "an..17"
-          },
-          {
-            "id": "3055",
-            "name": "codeListResponsibleAgencyCode",
-            "format": "an..3"
-          }
+          { "id": "7402", "name": "objectIdentifier", "format": "an..35" },
+          { "id": "7402", "name": "objectIdentifier", "format": "an..35" }
         ]
       },
       {
-        "id": "C212",
-        "name": "itemNumberIdentification",
-        "requires": 0,
+        "id": "C208",
+        "name": "identityNumberRange",
+        "requires": 1,
         "components": [
-          { "id": "7140", "name": "itemIdentifier", "format": "an..35" },
-          {
-            "id": "7143",
-            "name": "itemTypeIdentificationCode",
-            "format": "an..3"
-          },
-          {
-            "id": "1131",
-            "name": "codeListIdentificationCode",
-            "format": "an..17"
-          },
-          {
-            "id": "3055",
-            "name": "codeListResponsibleAgencyCode",
-            "format": "an..3"
-          }
+          { "id": "7402", "name": "objectIdentifier", "format": "an..35" },
+          { "id": "7402", "name": "objectIdentifier", "format": "an..35" }
         ]
       },
       {
-        "id": "C212",
-        "name": "itemNumberIdentification",
-        "requires": 0,
+        "id": "C208",
+        "name": "identityNumberRange",
+        "requires": 1,
         "components": [
-          { "id": "7140", "name": "itemIdentifier", "format": "an..35" },
-          {
-            "id": "7143",
-            "name": "itemTypeIdentificationCode",
-            "format": "an..3"
-          },
-          {
-            "id": "1131",
-            "name": "codeListIdentificationCode",
-            "format": "an..17"
-          },
-          {
-            "id": "3055",
-            "name": "codeListResponsibleAgencyCode",
-            "format": "an..3"
-          }
+          { "id": "7402", "name": "objectIdentifier", "format": "an..35" },
+          { "id": "7402", "name": "objectIdentifier", "format": "an..35" }
         ]
       },
       {
-        "id": "C212",
-        "name": "itemNumberIdentification",
-        "requires": 0,
+        "id": "C208",
+        "name": "identityNumberRange",
+        "requires": 1,
         "components": [
-          { "id": "7140", "name": "itemIdentifier", "format": "an..35" },
-          {
-            "id": "7143",
-            "name": "itemTypeIdentificationCode",
-            "format": "an..3"
-          },
-          {
-            "id": "1131",
-            "name": "codeListIdentificationCode",
-            "format": "an..17"
-          },
-          {
-            "id": "3055",
-            "name": "codeListResponsibleAgencyCode",
-            "format": "an..3"
-          }
+          { "id": "7402", "name": "objectIdentifier", "format": "an..35" },
+          { "id": "7402", "name": "objectIdentifier", "format": "an..35" }
         ]
       },
       {
-        "id": "C212",
-        "name": "itemNumberIdentification",
-        "requires": 0,
+        "id": "C208",
+        "name": "identityNumberRange",
+        "requires": 1,
         "components": [
-          { "id": "7140", "name": "itemIdentifier", "format": "an..35" },
-          {
-            "id": "7143",
-            "name": "itemTypeIdentificationCode",
-            "format": "an..3"
-          },
-          {
-            "id": "1131",
-            "name": "codeListIdentificationCode",
-            "format": "an..17"
-          },
-          {
-            "id": "3055",
-            "name": "codeListResponsibleAgencyCode",
-            "format": "an..3"
-          }
+          { "id": "7402", "name": "objectIdentifier", "format": "an..35" },
+          { "id": "7402", "name": "objectIdentifier", "format": "an..35" }
         ]
       }
     ]
@@ -771,35 +481,23 @@
       }
     ]
   },
-  "FTX": {
-    "requires": 1,
+  "IMD": {
+    "requires": 0,
     "elements": [
       {
-        "id": "4451",
-        "name": "textSubjectCodeQualifier",
-        "requires": 1,
-        "components": [
-          {
-            "id": "4451",
-            "name": "textSubjectCodeQualifier",
-            "format": "an..3"
-          }
-        ]
-      },
-      {
-        "id": "4453",
-        "name": "freeTextFunctionCode",
+        "id": "7077",
+        "name": "descriptionFormatCode",
         "requires": 0,
         "components": [
-          { "id": "4453", "name": "freeTextFunctionCode", "format": "an..3" }
+          { "id": "7077", "name": "descriptionFormatCode", "format": "an..3" }
         ]
       },
       {
-        "id": "C107",
-        "name": "textReference",
-        "requires": 1,
+        "id": "C272",
+        "name": "itemCharacteristic",
+        "requires": 0,
         "components": [
-          { "id": "4441", "name": "freeTextValueCode", "format": "an..17" },
+          { "id": "7081", "name": "itemCharacteristicCode", "format": "an..3" },
           {
             "id": "1131",
             "name": "codeListIdentificationCode",
@@ -813,31 +511,186 @@
         ]
       },
       {
-        "id": "C108",
-        "name": "textLiteral",
-        "requires": 1,
-        "components": [
-          { "id": "4440", "name": "freeTextValue", "format": "an..512" },
-          { "id": "4440", "name": "freeTextValue", "format": "an..512" },
-          { "id": "4440", "name": "freeTextValue", "format": "an..512" },
-          { "id": "4440", "name": "freeTextValue", "format": "an..512" },
-          { "id": "4440", "name": "freeTextValue", "format": "an..512" }
-        ]
-      },
-      {
-        "id": "3453",
-        "name": "languageNameCode",
+        "id": "C273",
+        "name": "itemDescription",
         "requires": 0,
         "components": [
+          { "id": "7009", "name": "itemDescriptionCode", "format": "an..17" },
+          {
+            "id": "1131",
+            "name": "codeListIdentificationCode",
+            "format": "an..17"
+          },
+          {
+            "id": "3055",
+            "name": "codeListResponsibleAgencyCode",
+            "format": "an..3"
+          },
+          { "id": "7008", "name": "itemDescription", "format": "an..256" },
+          { "id": "7008", "name": "itemDescription", "format": "an..256" },
           { "id": "3453", "name": "languageNameCode", "format": "an..3" }
         ]
       },
       {
-        "id": "4447",
-        "name": "freeTextFormatCode",
+        "id": "7383",
+        "name": "surfaceOrLayerCode",
         "requires": 0,
         "components": [
-          { "id": "4447", "name": "freeTextFormatCode", "format": "an..3" }
+          { "id": "7383", "name": "surfaceOrLayerCode", "format": "an..3" }
+        ]
+      }
+    ]
+  },
+  "INV": {
+    "requires": 0,
+    "elements": [
+      {
+        "id": "4501",
+        "name": "inventoryMovementDirectionCode",
+        "requires": 0,
+        "components": [
+          {
+            "id": "4501",
+            "name": "inventoryMovementDirectionCode",
+            "format": "an..3"
+          }
+        ]
+      },
+      {
+        "id": "7491",
+        "name": "inventoryTypeCode",
+        "requires": 0,
+        "components": [
+          { "id": "7491", "name": "inventoryTypeCode", "format": "an..3" }
+        ]
+      },
+      {
+        "id": "4499",
+        "name": "inventoryMovementReasonCode",
+        "requires": 0,
+        "components": [
+          {
+            "id": "4499",
+            "name": "inventoryMovementReasonCode",
+            "format": "an..3"
+          }
+        ]
+      },
+      {
+        "id": "4503",
+        "name": "inventoryBalanceMethodCode",
+        "requires": 0,
+        "components": [
+          {
+            "id": "4503",
+            "name": "inventoryBalanceMethodCode",
+            "format": "an..3"
+          }
+        ]
+      },
+      {
+        "id": "C522",
+        "name": "instruction",
+        "requires": 1,
+        "components": [
+          {
+            "id": "4403",
+            "name": "instructionTypeCodeQualifier",
+            "format": "an..3"
+          },
+          {
+            "id": "4401",
+            "name": "instructionDescriptionCode",
+            "format": "an..3"
+          },
+          {
+            "id": "1131",
+            "name": "codeListIdentificationCode",
+            "format": "an..17"
+          },
+          {
+            "id": "3055",
+            "name": "codeListResponsibleAgencyCode",
+            "format": "an..3"
+          },
+          { "id": "4400", "name": "instructionDescription", "format": "an..35" }
+        ]
+      }
+    ]
+  },
+  "LIN": {
+    "requires": 0,
+    "elements": [
+      {
+        "id": "1082",
+        "name": "lineItemIdentifier",
+        "requires": 0,
+        "components": [
+          { "id": "1082", "name": "lineItemIdentifier", "format": "an..6" }
+        ]
+      },
+      {
+        "id": "1229",
+        "name": "actionRequestNotificationDescriptionCode",
+        "requires": 0,
+        "components": [
+          {
+            "id": "1229",
+            "name": "actionRequestNotificationDescriptionCode",
+            "format": "an..3"
+          }
+        ]
+      },
+      {
+        "id": "C212",
+        "name": "itemNumberIdentification",
+        "requires": 0,
+        "components": [
+          { "id": "7140", "name": "itemIdentifier", "format": "an..35" },
+          {
+            "id": "7143",
+            "name": "itemTypeIdentificationCode",
+            "format": "an..3"
+          },
+          {
+            "id": "1131",
+            "name": "codeListIdentificationCode",
+            "format": "an..17"
+          },
+          {
+            "id": "3055",
+            "name": "codeListResponsibleAgencyCode",
+            "format": "an..3"
+          }
+        ]
+      },
+      {
+        "id": "C829",
+        "name": "subLineInformation",
+        "requires": 0,
+        "components": [
+          { "id": "5495", "name": "subLineIndicatorCode", "format": "an..3" },
+          { "id": "1082", "name": "lineItemIdentifier", "format": "an..6" }
+        ]
+      },
+      {
+        "id": "1222",
+        "name": "configurationLevelNumber",
+        "requires": 0,
+        "components": [
+          { "id": "1222", "name": "configurationLevelNumber", "format": "n..2" }
+        ]
+      },
+      {
+        "id": "7083",
+        "name": "configurationOperationCode",
+        "requires": 0,
+        "components": [
+          {
+            "id": "7083",
+            "name": "configurationOperationCode",
+            "format": "an..3"
+          }
         ]
       }
     ]
@@ -1004,6 +857,162 @@
       }
     ]
   },
+  "NAD": {
+    "requires": 1,
+    "elements": [
+      {
+        "id": "3035",
+        "name": "partyFunctionCodeQualifier",
+        "requires": 1,
+        "components": [
+          {
+            "id": "3035",
+            "name": "partyFunctionCodeQualifier",
+            "format": "an..3"
+          }
+        ]
+      },
+      {
+        "id": "C082",
+        "name": "partyIdentificationDetails",
+        "requires": 1,
+        "components": [
+          { "id": "3039", "name": "partyIdentifier", "format": "an..35" },
+          {
+            "id": "1131",
+            "name": "codeListIdentificationCode",
+            "format": "an..17"
+          },
+          {
+            "id": "3055",
+            "name": "codeListResponsibleAgencyCode",
+            "format": "an..3"
+          }
+        ]
+      },
+      {
+        "id": "C058",
+        "name": "nameAndAddress",
+        "requires": 1,
+        "components": [
+          {
+            "id": "3124",
+            "name": "nameAndAddressDescription",
+            "format": "an..35"
+          },
+          {
+            "id": "3124",
+            "name": "nameAndAddressDescription",
+            "format": "an..35"
+          },
+          {
+            "id": "3124",
+            "name": "nameAndAddressDescription",
+            "format": "an..35"
+          },
+          {
+            "id": "3124",
+            "name": "nameAndAddressDescription",
+            "format": "an..35"
+          },
+          {
+            "id": "3124",
+            "name": "nameAndAddressDescription",
+            "format": "an..35"
+          }
+        ]
+      },
+      {
+        "id": "C080",
+        "name": "partyName",
+        "requires": 1,
+        "components": [
+          { "id": "3036", "name": "partyName", "format": "an..35" },
+          { "id": "3036", "name": "partyName", "format": "an..35" },
+          { "id": "3036", "name": "partyName", "format": "an..35" },
+          { "id": "3036", "name": "partyName", "format": "an..35" },
+          { "id": "3036", "name": "partyName", "format": "an..35" },
+          { "id": "3045", "name": "partyNameFormatCode", "format": "an..3" }
+        ]
+      },
+      {
+        "id": "C059",
+        "name": "street",
+        "requires": 1,
+        "components": [
+          {
+            "id": "3042",
+            "name": "streetAndNumberOrPostOfficeBoxIdentifier",
+            "format": "an..35"
+          },
+          {
+            "id": "3042",
+            "name": "streetAndNumberOrPostOfficeBoxIdentifier",
+            "format": "an..35"
+          },
+          {
+            "id": "3042",
+            "name": "streetAndNumberOrPostOfficeBoxIdentifier",
+            "format": "an..35"
+          },
+          {
+            "id": "3042",
+            "name": "streetAndNumberOrPostOfficeBoxIdentifier",
+            "format": "an..35"
+          }
+        ]
+      },
+      {
+        "id": "3164",
+        "name": "cityName",
+        "requires": 0,
+        "components": [{ "id": "3164", "name": "cityName", "format": "an..35" }]
+      },
+      {
+        "id": "C819",
+        "name": "countrySubEntityDetails",
+        "requires": 0,
+        "components": [
+          {
+            "id": "3229",
+            "name": "countrySubEntityNameCode",
+            "format": "an..9"
+          },
+          {
+            "id": "1131",
+            "name": "codeListIdentificationCode",
+            "format": "an..17"
+          },
+          {
+            "id": "3055",
+            "name": "codeListResponsibleAgencyCode",
+            "format": "an..3"
+          },
+          { "id": "3228", "name": "countrySubEntityName", "format": "an..70" }
+        ]
+      },
+      {
+        "id": "3251",
+        "name": "postalIdentificationCode",
+        "requires": 0,
+        "components": [
+          {
+            "id": "3251",
+            "name": "postalIdentificationCode",
+            "format": "an..17"
+          }
+        ]
+      },
+      {
+        "id": "3207",
+        "name": "countryNameCode",
+        "requires": 0,
+        "components": [
+          { "id": "3207", "name": "countryNameCode", "format": "an..3" }
+        ]
+      }
+    ]
+  },
   "PAC": {
     "requires": 0,
     "elements": [
@@ -1091,6 +1100,308 @@
             "name": "returnablePackageLoadContentsCode",
             "format": "an..3"
           }
+        ]
+      }
+    ]
+  },
+  "PCI": {
+    "requires": 0,
+    "elements": [
+      {
+        "id": "4233",
+        "name": "markingInstructionsCode",
+        "requires": 0,
+        "components": [
+          { "id": "4233", "name": "markingInstructionsCode", "format": "an..3" }
+        ]
+      },
+      {
+        "id": "C210",
+        "name": "marksLabels",
+        "requires": 1,
+        "components": [
+          {
+            "id": "7102",
+            "name": "shippingMarksDescription",
+            "format": "an..35"
+          },
+          {
+            "id": "7102",
+            "name": "shippingMarksDescription",
+            "format": "an..35"
+          },
+          {
+            "id": "7102",
+            "name": "shippingMarksDescription",
+            "format": "an..35"
+          },
+          {
+            "id": "7102",
+            "name": "shippingMarksDescription",
+            "format": "an..35"
+          },
+          {
+            "id": "7102",
+            "name": "shippingMarksDescription",
+            "format": "an..35"
+          },
+          {
+            "id": "7102",
+            "name": "shippingMarksDescription",
+            "format": "an..35"
+          },
+          {
+            "id": "7102",
+            "name": "shippingMarksDescription",
+            "format": "an..35"
+          },
+          {
+            "id": "7102",
+            "name": "shippingMarksDescription",
+            "format": "an..35"
+          },
+          {
+            "id": "7102",
+            "name": "shippingMarksDescription",
+            "format": "an..35"
+          },
+          {
+            "id": "7102",
+            "name": "shippingMarksDescription",
+            "format": "an..35"
+          }
+        ]
+      },
+      {
+        "id": "8275",
+        "name": "containerOrPackageContentsIndicatorCode",
+        "requires": 0,
+        "components": [
+          {
+            "id": "8275",
+            "name": "containerOrPackageContentsIndicatorCode",
+            "format": "an..3"
+          }
+        ]
+      },
+      {
+        "id": "C827",
+        "name": "typeOfMarking",
+        "requires": 1,
+        "components": [
+          { "id": "7511", "name": "markingTypeCode", "format": "an..3" },
+          {
+            "id": "1131",
+            "name": "codeListIdentificationCode",
+            "format": "an..17"
+          },
+          {
+            "id": "3055",
+            "name": "codeListResponsibleAgencyCode",
+            "format": "an..3"
+          }
+        ]
+      }
+    ]
+  },
+  "PIA": {
+    "requires": 2,
+    "elements": [
+      {
+        "id": "4347",
+        "name": "productIdentifierCodeQualifier",
+        "requires": 1,
+        "components": [
+          {
+            "id": "4347",
+            "name": "productIdentifierCodeQualifier",
+            "format": "an..3"
+          }
+        ]
+      },
+      {
+        "id": "C212",
+        "name": "itemNumberIdentification",
+        "requires": 0,
+        "components": [
+          { "id": "7140", "name": "itemIdentifier", "format": "an..35" },
+          {
+            "id": "7143",
+            "name": "itemTypeIdentificationCode",
+            "format": "an..3"
+          },
+          {
+            "id": "1131",
+            "name": "codeListIdentificationCode",
+            "format": "an..17"
+          },
+          {
+            "id": "3055",
+            "name": "codeListResponsibleAgencyCode",
+            "format": "an..3"
+          }
+        ]
+      },
+      {
+        "id": "C212",
+        "name": "itemNumberIdentification",
+        "requires": 0,
+        "components": [
+          { "id": "7140", "name": "itemIdentifier", "format": "an..35" },
+          {
+            "id": "7143",
+            "name": "itemTypeIdentificationCode",
+            "format": "an..3"
+          },
+          {
+            "id": "1131",
+            "name": "codeListIdentificationCode",
+            "format": "an..17"
+          },
+          {
+            "id": "3055",
+            "name": "codeListResponsibleAgencyCode",
+            "format": "an..3"
+          }
+        ]
+      },
+      {
+        "id": "C212",
+        "name": "itemNumberIdentification",
+        "requires": 0,
+        "components": [
+          { "id": "7140", "name": "itemIdentifier", "format": "an..35" },
+          {
+            "id": "7143",
+            "name": "itemTypeIdentificationCode",
+            "format": "an..3"
+          },
+          {
+            "id": "1131",
+            "name": "codeListIdentificationCode",
+            "format": "an..17"
+          },
+          {
+            "id": "3055",
+            "name": "codeListResponsibleAgencyCode",
+            "format": "an..3"
+          }
+        ]
+      },
+      {
+        "id": "C212",
+        "name": "itemNumberIdentification",
+        "requires": 0,
+        "components": [
+          { "id": "7140", "name": "itemIdentifier", "format": "an..35" },
+          {
+            "id": "7143",
+            "name": "itemTypeIdentificationCode",
+            "format": "an..3"
+          },
+          {
+            "id": "1131",
+            "name": "codeListIdentificationCode",
+            "format": "an..17"
+          },
+          {
+            "id": "3055",
+            "name": "codeListResponsibleAgencyCode",
+            "format": "an..3"
+          }
+        ]
+      },
+      {
+        "id": "C212",
+        "name": "itemNumberIdentification",
+        "requires": 0,
+        "components": [
+          { "id": "7140", "name": "itemIdentifier", "format": "an..35" },
+          {
+            "id": "7143",
+            "name": "itemTypeIdentificationCode",
+            "format": "an..3"
+          },
+          {
+            "id": "1131",
+            "name": "codeListIdentificationCode",
+            "format": "an..17"
+          },
+          {
+            "id": "3055",
+            "name": "codeListResponsibleAgencyCode",
+            "format": "an..3"
+          }
+        ]
+      }
+    ]
+  },
+  "PRI": {
+    "requires": 0,
+    "elements": [
+      {
+        "id": "C509",
+        "name": "priceInformation",
+        "requires": 1,
+        "components": [
+          { "id": "5125", "name": "priceCodeQualifier", "format": "an..3" },
+          { "id": "5118", "name": "priceAmount", "format": "n..15" },
+          { "id": "5375", "name": "priceTypeCode", "format": "an..3" },
+          { "id": "5387", "name": "priceSpecificationCode", "format": "an..3" },
+          { "id": "5284", "name": "unitPriceBasisValue", "format": "n..9" },
+          { "id": "6411", "name": "measurementUnitCode", "format": "an..3" }
+        ]
+      },
+      {
+        "id": "5213",
+        "name": "subLineItemPriceChangeOperationCode",
+        "requires": 0,
+        "components": [
+          {
+            "id": "5213",
+            "name": "subLineItemPriceChangeOperationCode",
+            "format": "an..3"
+          }
+        ]
+      }
+    ]
+  },
+  "QTY": {
+    "requires": 1,
+    "elements": [
+      {
+        "id": "C186",
+        "name": "quantityDetails",
+        "requires": 2,
+        "components": [
+          {
+            "id": "6063",
+            "name": "quantityTypeCodeQualifier",
+            "format": "an..3"
+          },
+          { "id": "6060", "name": "quantity", "format": "an..35" },
+          { "id": "6411", "name": "measurementUnitCode", "format": "an..3" }
+        ]
+      }
+    ]
+  },
+  "RFF": {
+    "requires": 1,
+    "elements": [
+      {
+        "id": "C506",
+        "name": "reference",
+        "requires": 1,
+        "components": [
+          { "id": "1153", "name": "referenceCodeQualifier", "format": "an..3" },
+          { "id": "1154", "name": "referenceIdentifier", "format": "an..70" },
+          { "id": "1156", "name": "documentLineIdentifier", "format": "an..6" },
+          {
+            "id": "4000",
+            "name": "referenceVersionIdentifier",
+            "format": "an..35"
+          },
+          { "id": "1060", "name": "revisionIdentifier", "format": "an..6" }
         ]
       }
     ]
@@ -1268,317 +1579,6 @@
             "name": "statusReasonDescription",
             "format": "an..256"
           }
-        ]
-      }
-    ]
-  },
-  "PRI": {
-    "requires": 0,
-    "elements": [
-      {
-        "id": "C509",
-        "name": "priceInformation",
-        "requires": 1,
-        "components": [
-          { "id": "5125", "name": "priceCodeQualifier", "format": "an..3" },
-          { "id": "5118", "name": "priceAmount", "format": "n..15" },
-          { "id": "5375", "name": "priceTypeCode", "format": "an..3" },
-          { "id": "5387", "name": "priceSpecificationCode", "format": "an..3" },
-          { "id": "5284", "name": "unitPriceBasisValue", "format": "n..9" },
-          { "id": "6411", "name": "measurementUnitCode", "format": "an..3" }
-        ]
-      },
-      {
-        "id": "5213",
-        "name": "subLineItemPriceChangeOperationCode",
-        "requires": 0,
-        "components": [
-          {
-            "id": "5213",
-            "name": "subLineItemPriceChangeOperationCode",
-            "format": "an..3"
-          }
-        ]
-      }
-    ]
-  },
-  "DTM": {
-    "requires": 1,
-    "elements": [
-      {
-        "id": "C507",
-        "name": "dateTimePeriod",
-        "requires": 1,
-        "components": [
-          {
-            "id": "2005",
-            "name": "dateOrTimeOrPeriodFunctionCodeQualifier",
-            "format": "an..3"
-          },
-          {
-            "id": "2380",
-            "name": "dateOrTimeOrPeriodValue",
-            "format": "an..35"
-          },
-          {
-            "id": "2379",
-            "name": "dateOrTimeOrPeriodFormatCode",
-            "format": "an..3"
-          }
-        ]
-      }
-    ]
-  },
-  "INV": {
-    "requires": 0,
-    "elements": [
-      {
-        "id": "4501",
-        "name": "inventoryMovementDirectionCode",
-        "requires": 0,
-        "components": [
-          {
-            "id": "4501",
-            "name": "inventoryMovementDirectionCode",
-            "format": "an..3"
-          }
-        ]
-      },
-      {
-        "id": "7491",
-        "name": "inventoryTypeCode",
-        "requires": 0,
-        "components": [
-          { "id": "7491", "name": "inventoryTypeCode", "format": "an..3" }
-        ]
-      },
-      {
-        "id": "4499",
-        "name": "inventoryMovementReasonCode",
-        "requires": 0,
-        "components": [
-          {
-            "id": "4499",
-            "name": "inventoryMovementReasonCode",
-            "format": "an..3"
-          }
-        ]
-      },
-      {
-        "id": "4503",
-        "name": "inventoryBalanceMethodCode",
-        "requires": 0,
-        "components": [
-          {
-            "id": "4503",
-            "name": "inventoryBalanceMethodCode",
-            "format": "an..3"
-          }
-        ]
-      },
-      {
-        "id": "C522",
-        "name": "instruction",
-        "requires": 1,
-        "components": [
-          {
-            "id": "4403",
-            "name": "instructionTypeCodeQualifier",
-            "format": "an..3"
-          },
-          {
-            "id": "4401",
-            "name": "instructionDescriptionCode",
-            "format": "an..3"
-          },
-          {
-            "id": "1131",
-            "name": "codeListIdentificationCode",
-            "format": "an..17"
-          },
-          {
-            "id": "3055",
-            "name": "codeListResponsibleAgencyCode",
-            "format": "an..3"
-          },
-          { "id": "4400", "name": "instructionDescription", "format": "an..35" }
-        ]
-      }
-    ]
-  },
-  "RFF": {
-    "requires": 1,
-    "elements": [
-      {
-        "id": "C506",
-        "name": "reference",
-        "requires": 1,
-        "components": [
-          { "id": "1153", "name": "referenceCodeQualifier", "format": "an..3" },
-          { "id": "1154", "name": "referenceIdentifier", "format": "an..70" },
-          { "id": "1156", "name": "documentLineIdentifier", "format": "an..6" },
-          {
-            "id": "4000",
-            "name": "referenceVersionIdentifier",
-            "format": "an..35"
-          },
-          { "id": "1060", "name": "revisionIdentifier", "format": "an..6" }
-        ]
-      }
-    ]
-  },
-  "NAD": {
-    "requires": 1,
-    "elements": [
-      {
-        "id": "3035",
-        "name": "partyFunctionCodeQualifier",
-        "requires": 1,
-        "components": [
-          {
-            "id": "3035",
-            "name": "partyFunctionCodeQualifier",
-            "format": "an..3"
-          }
-        ]
-      },
-      {
-        "id": "C082",
-        "name": "partyIdentificationDetails",
-        "requires": 1,
-        "components": [
-          { "id": "3039", "name": "partyIdentifier", "format": "an..35" },
-          {
-            "id": "1131",
-            "name": "codeListIdentificationCode",
-            "format": "an..17"
-          },
-          {
-            "id": "3055",
-            "name": "codeListResponsibleAgencyCode",
-            "format": "an..3"
-          }
-        ]
-      },
-      {
-        "id": "C058",
-        "name": "nameAndAddress",
-        "requires": 1,
-        "components": [
-          {
-            "id": "3124",
-            "name": "nameAndAddressDescription",
-            "format": "an..35"
-          },
-          {
-            "id": "3124",
-            "name": "nameAndAddressDescription",
-            "format": "an..35"
-          },
-          {
-            "id": "3124",
-            "name": "nameAndAddressDescription",
-            "format": "an..35"
-          },
-          {
-            "id": "3124",
-            "name": "nameAndAddressDescription",
-            "format": "an..35"
-          },
-          {
-            "id": "3124",
-            "name": "nameAndAddressDescription",
-            "format": "an..35"
-          }
-        ]
-      },
-      {
-        "id": "C080",
-        "name": "partyName",
-        "requires": 1,
-        "components": [
-          { "id": "3036", "name": "partyName", "format": "an..35" },
-          { "id": "3036", "name": "partyName", "format": "an..35" },
-          { "id": "3036", "name": "partyName", "format": "an..35" },
-          { "id": "3036", "name": "partyName", "format": "an..35" },
-          { "id": "3036", "name": "partyName", "format": "an..35" },
-          { "id": "3045", "name": "partyNameFormatCode", "format": "an..3" }
-        ]
-      },
-      {
-        "id": "C059",
-        "name": "street",
-        "requires": 1,
-        "components": [
-          {
-            "id": "3042",
-            "name": "streetAndNumberOrPostOfficeBoxIdentifier",
-            "format": "an..35"
-          },
-          {
-            "id": "3042",
-            "name": "streetAndNumberOrPostOfficeBoxIdentifier",
-            "format": "an..35"
-          },
-          {
-            "id": "3042",
-            "name": "streetAndNumberOrPostOfficeBoxIdentifier",
-            "format": "an..35"
-          },
-          {
-            "id": "3042",
-            "name": "streetAndNumberOrPostOfficeBoxIdentifier",
-            "format": "an..35"
-          }
-        ]
-      },
-      {
-        "id": "3164",
-        "name": "cityName",
-        "requires": 0,
-        "components": [{ "id": "3164", "name": "cityName", "format": "an..35" }]
-      },
-      {
-        "id": "C819",
-        "name": "countrySubEntityDetails",
-        "requires": 0,
-        "components": [
-          {
-            "id": "3229",
-            "name": "countrySubEntityNameCode",
-            "format": "an..9"
-          },
-          {
-            "id": "1131",
-            "name": "codeListIdentificationCode",
-            "format": "an..17"
-          },
-          {
-            "id": "3055",
-            "name": "codeListResponsibleAgencyCode",
-            "format": "an..3"
-          },
-          { "id": "3228", "name": "countrySubEntityName", "format": "an..70" }
-        ]
-      },
-      {
-        "id": "3251",
-        "name": "postalIdentificationCode",
-        "requires": 0,
-        "components": [
-          {
-            "id": "3251",
-            "name": "postalIdentificationCode",
-            "format": "an..17"
-          }
-        ]
-      },
-      {
-        "id": "3207",
-        "name": "countryNameCode",
-        "requires": 0,
-        "components": [
-          { "id": "3207", "name": "countryNameCode", "format": "an..3" }
         ]
       }
     ]

@@ -1,23 +1,17 @@
 {
-  "DMS": {
+  "ARD": {
     "requires": 0,
     "elements": [
       {
-        "id": "C106",
-        "name": "documentMessageIdentification",
+        "id": "C549",
+        "name": "monetaryAmountFunction",
         "requires": 0,
         "components": [
-          { "id": "1004", "name": "documentIdentifier", "format": "an..35" },
-          { "id": "1056", "name": "versionIdentifier", "format": "an..9" },
-          { "id": "1060", "name": "revisionIdentifier", "format": "an..6" }
-        ]
-      },
-      {
-        "id": "C002",
-        "name": "documentMessageName",
-        "requires": 0,
-        "components": [
-          { "id": "1001", "name": "documentNameCode", "format": "an..3" },
+          {
+            "id": "5007",
+            "name": "monetaryAmountFunctionDescriptionCode",
+            "format": "an..3"
+          },
           {
             "id": "1131",
             "name": "codeListIdentificationCode",
@@ -28,15 +22,38 @@
             "name": "codeListResponsibleAgencyCode",
             "format": "an..3"
           },
-          { "id": "1000", "name": "documentName", "format": "an..35" }
+          {
+            "id": "5006",
+            "name": "monetaryAmountFunctionDescription",
+            "format": "an..70"
+          }
         ]
       },
       {
-        "id": "7240",
-        "name": "itemTotalQuantity",
+        "id": "C008",
+        "name": "monetaryAmountFunctionDetail",
         "requires": 0,
         "components": [
-          { "id": "7240", "name": "itemTotalQuantity", "format": "n..15" }
+          {
+            "id": "5105",
+            "name": "monetaryAmountFunctionDetailDescriptionCode",
+            "format": "an..17"
+          },
+          {
+            "id": "1131",
+            "name": "codeListIdentificationCode",
+            "format": "an..17"
+          },
+          {
+            "id": "3055",
+            "name": "codeListResponsibleAgencyCode",
+            "format": "an..3"
+          },
+          {
+            "id": "5104",
+            "name": "monetaryAmountFunctionDetailDescription",
+            "format": "an..70"
+          }
         ]
       }
     ]
@@ -116,6 +133,25 @@
       }
     ]
   },
+  "CNT": {
+    "requires": 1,
+    "elements": [
+      {
+        "id": "C270",
+        "name": "control",
+        "requires": 2,
+        "components": [
+          {
+            "id": "6069",
+            "name": "controlTotalTypeCodeQualifier",
+            "format": "an..3"
+          },
+          { "id": "6066", "name": "controlTotalValue", "format": "n..18" },
+          { "id": "6411", "name": "measurementUnitCode", "format": "an..3" }
+        ]
+      }
+    ]
+  },
   "COM": {
     "requires": 1,
     "elements": [
@@ -168,78 +204,25 @@
       }
     ]
   },
-  "GIS": {
-    "requires": 1,
-    "elements": [
-      {
-        "id": "C529",
-        "name": "processingIndicator",
-        "requires": 1,
-        "components": [
-          {
-            "id": "7365",
-            "name": "processingIndicatorDescriptionCode",
-            "format": "an..3"
-          },
-          {
-            "id": "1131",
-            "name": "codeListIdentificationCode",
-            "format": "an..17"
-          },
-          {
-            "id": "3055",
-            "name": "codeListResponsibleAgencyCode",
-            "format": "an..3"
-          },
-          {
-            "id": "7187",
-            "name": "processTypeDescriptionCode",
-            "format": "an..17"
-          }
-        ]
-      }
-    ]
-  },
-  "ARD": {
+  "DMS": {
     "requires": 0,
     "elements": [
       {
-        "id": "C549",
-        "name": "monetaryAmountFunction",
+        "id": "C106",
+        "name": "documentMessageIdentification",
         "requires": 0,
         "components": [
-          {
-            "id": "5007",
-            "name": "monetaryAmountFunctionDescriptionCode",
-            "format": "an..3"
-          },
-          {
-            "id": "1131",
-            "name": "codeListIdentificationCode",
-            "format": "an..17"
-          },
-          {
-            "id": "3055",
-            "name": "codeListResponsibleAgencyCode",
-            "format": "an..3"
-          },
-          {
-            "id": "5006",
-            "name": "monetaryAmountFunctionDescription",
-            "format": "an..70"
-          }
+          { "id": "1004", "name": "documentIdentifier", "format": "an..35" },
+          { "id": "1056", "name": "versionIdentifier", "format": "an..9" },
+          { "id": "1060", "name": "revisionIdentifier", "format": "an..6" }
         ]
       },
       {
-        "id": "C008",
-        "name": "monetaryAmountFunctionDetail",
+        "id": "C002",
+        "name": "documentMessageName",
         "requires": 0,
         "components": [
-          {
-            "id": "5105",
-            "name": "monetaryAmountFunctionDetailDescriptionCode",
-            "format": "an..17"
-          },
+          { "id": "1001", "name": "documentNameCode", "format": "an..3" },
           {
             "id": "1131",
             "name": "codeListIdentificationCode",
@@ -250,71 +233,15 @@
             "name": "codeListResponsibleAgencyCode",
             "format": "an..3"
           },
-          {
-            "id": "5104",
-            "name": "monetaryAmountFunctionDetailDescription",
-            "format": "an..70"
-          }
-        ]
-      }
-    ]
-  },
-  "CNT": {
-    "requires": 1,
-    "elements": [
-      {
-        "id": "C270",
-        "name": "control",
-        "requires": 2,
-        "components": [
-          {
-            "id": "6069",
-            "name": "controlTotalTypeCodeQualifier",
-            "format": "an..3"
-          },
-          { "id": "6066", "name": "controlTotalValue", "format": "n..18" },
-          { "id": "6411", "name": "measurementUnitCode", "format": "an..3" }
-        ]
-      }
-    ]
-  },
-  "PCD": {
-    "requires": 1,
-    "elements": [
-      {
-        "id": "C501",
-        "name": "percentageDetails",
-        "requires": 1,
-        "components": [
-          {
-            "id": "5245",
-            "name": "percentageTypeCodeQualifier",
-            "format": "an..3"
-          },
-          { "id": "5482", "name": "percentage", "format": "n..10" },
-          {
-            "id": "5249",
-            "name": "percentageBasisIdentificationCode",
-            "format": "an..3"
-          },
-          {
-            "id": "1131",
-            "name": "codeListIdentificationCode",
-            "format": "an..17"
-          },
-          {
-            "id": "3055",
-            "name": "codeListResponsibleAgencyCode",
-            "format": "an..3"
-          }
+          { "id": "1000", "name": "documentName", "format": "an..35" }
         ]
       },
       {
-        "id": "4405",
-        "name": "statusDescriptionCode",
+        "id": "7240",
+        "name": "itemTotalQuantity",
         "requires": 0,
         "components": [
-          { "id": "4405", "name": "statusDescriptionCode", "format": "an..3" }
+          { "id": "7240", "name": "itemTotalQuantity", "format": "n..15" }
         ]
       }
     ]
@@ -429,21 +356,90 @@
       }
     ]
   },
-  "PAI": {
+  "FTX": {
     "requires": 1,
     "elements": [
       {
-        "id": "C534",
-        "name": "paymentInstructionDetails",
+        "id": "4451",
+        "name": "textSubjectCodeQualifier",
+        "requires": 1,
+        "components": [
+          {
+            "id": "4451",
+            "name": "textSubjectCodeQualifier",
+            "format": "an..3"
+          }
+        ]
+      },
+      {
+        "id": "4453",
+        "name": "freeTextFunctionCode",
         "requires": 0,
         "components": [
-          { "id": "4439", "name": "paymentConditionsCode", "format": "an..3" },
+          { "id": "4453", "name": "freeTextFunctionCode", "format": "an..3" }
+        ]
+      },
+      {
+        "id": "C107",
+        "name": "textReference",
+        "requires": 1,
+        "components": [
+          { "id": "4441", "name": "freeTextValueCode", "format": "an..17" },
           {
-            "id": "4431",
-            "name": "paymentGuaranteeMeansCode",
+            "id": "1131",
+            "name": "codeListIdentificationCode",
+            "format": "an..17"
+          },
+          {
+            "id": "3055",
+            "name": "codeListResponsibleAgencyCode",
+            "format": "an..3"
+          }
+        ]
+      },
+      {
+        "id": "C108",
+        "name": "textLiteral",
+        "requires": 1,
+        "components": [
+          { "id": "4440", "name": "freeTextValue", "format": "an..512" },
+          { "id": "4440", "name": "freeTextValue", "format": "an..512" },
+          { "id": "4440", "name": "freeTextValue", "format": "an..512" },
+          { "id": "4440", "name": "freeTextValue", "format": "an..512" },
+          { "id": "4440", "name": "freeTextValue", "format": "an..512" }
+        ]
+      },
+      {
+        "id": "3453",
+        "name": "languageNameCode",
+        "requires": 0,
+        "components": [
+          { "id": "3453", "name": "languageNameCode", "format": "an..3" }
+        ]
+      },
+      {
+        "id": "4447",
+        "name": "freeTextFormatCode",
+        "requires": 0,
+        "components": [
+          { "id": "4447", "name": "freeTextFormatCode", "format": "an..3" }
+        ]
+      }
+    ]
+  },
+  "GIS": {
+    "requires": 1,
+    "elements": [
+      {
+        "id": "C529",
+        "name": "processingIndicator",
+        "requires": 1,
+        "components": [
+          {
+            "id": "7365",
+            "name": "processingIndicatorDescriptionCode",
             "format": "an..3"
           },
-          { "id": "4461", "name": "paymentMeansCode", "format": "an..3" },
           {
             "id": "1131",
             "name": "codeListIdentificationCode",
@@ -454,7 +450,11 @@
             "name": "codeListResponsibleAgencyCode",
             "format": "an..3"
           },
-          { "id": "4435", "name": "paymentChannelCode", "format": "an..3" }
+          {
+            "id": "7187",
+            "name": "processTypeDescriptionCode",
+            "format": "an..17"
+          }
         ]
       }
     ]
@@ -536,6 +536,104 @@
       }
     ]
   },
+  "LOC": {
+    "requires": 1,
+    "elements": [
+      {
+        "id": "3227",
+        "name": "locationFunctionCodeQualifier",
+        "requires": 1,
+        "components": [
+          {
+            "id": "3227",
+            "name": "locationFunctionCodeQualifier",
+            "format": "an..3"
+          }
+        ]
+      },
+      {
+        "id": "C517",
+        "name": "locationIdentification",
+        "requires": 0,
+        "components": [
+          { "id": "3225", "name": "locationNameCode", "format": "an..25" },
+          {
+            "id": "1131",
+            "name": "codeListIdentificationCode",
+            "format": "an..17"
+          },
+          {
+            "id": "3055",
+            "name": "codeListResponsibleAgencyCode",
+            "format": "an..3"
+          },
+          { "id": "3224", "name": "locationName", "format": "an..256" }
+        ]
+      },
+      {
+        "id": "C519",
+        "name": "relatedLocationOneIdentification",
+        "requires": 0,
+        "components": [
+          {
+            "id": "3223",
+            "name": "firstRelatedLocationNameCode",
+            "format": "an..25"
+          },
+          {
+            "id": "1131",
+            "name": "codeListIdentificationCode",
+            "format": "an..17"
+          },
+          {
+            "id": "3055",
+            "name": "codeListResponsibleAgencyCode",
+            "format": "an..3"
+          },
+          {
+            "id": "3222",
+            "name": "firstRelatedLocationName",
+            "format": "an..70"
+          }
+        ]
+      },
+      {
+        "id": "C553",
+        "name": "relatedLocationTwoIdentification",
+        "requires": 0,
+        "components": [
+          {
+            "id": "3233",
+            "name": "secondRelatedLocationNameCode",
+            "format": "an..25"
+          },
+          {
+            "id": "1131",
+            "name": "codeListIdentificationCode",
+            "format": "an..17"
+          },
+          {
+            "id": "3055",
+            "name": "codeListResponsibleAgencyCode",
+            "format": "an..3"
+          },
+          {
+            "id": "3232",
+            "name": "secondRelatedLocationName",
+            "format": "an..70"
+          }
+        ]
+      },
+      {
+        "id": "5479",
+        "name": "relationCode",
+        "requires": 0,
+        "components": [
+          { "id": "5479", "name": "relationCode", "format": "an..3" }
+        ]
+      }
+    ]
+  },
   "MEA": {
     "requires": 1,
     "elements": [
@@ -596,77 +694,6 @@
         "requires": 0,
         "components": [
           { "id": "7383", "name": "surfaceOrLayerCode", "format": "an..3" }
-        ]
-      }
-    ]
-  },
-  "FTX": {
-    "requires": 1,
-    "elements": [
-      {
-        "id": "4451",
-        "name": "textSubjectCodeQualifier",
-        "requires": 1,
-        "components": [
-          {
-            "id": "4451",
-            "name": "textSubjectCodeQualifier",
-            "format": "an..3"
-          }
-        ]
-      },
-      {
-        "id": "4453",
-        "name": "freeTextFunctionCode",
-        "requires": 0,
-        "components": [
-          { "id": "4453", "name": "freeTextFunctionCode", "format": "an..3" }
-        ]
-      },
-      {
-        "id": "C107",
-        "name": "textReference",
-        "requires": 1,
-        "components": [
-          { "id": "4441", "name": "freeTextValueCode", "format": "an..17" },
-          {
-            "id": "1131",
-            "name": "codeListIdentificationCode",
-            "format": "an..17"
-          },
-          {
-            "id": "3055",
-            "name": "codeListResponsibleAgencyCode",
-            "format": "an..3"
-          }
-        ]
-      },
-      {
-        "id": "C108",
-        "name": "textLiteral",
-        "requires": 1,
-        "components": [
-          { "id": "4440", "name": "freeTextValue", "format": "an..512" },
-          { "id": "4440", "name": "freeTextValue", "format": "an..512" },
-          { "id": "4440", "name": "freeTextValue", "format": "an..512" },
-          { "id": "4440", "name": "freeTextValue", "format": "an..512" },
-          { "id": "4440", "name": "freeTextValue", "format": "an..512" }
-        ]
-      },
-      {
-        "id": "3453",
-        "name": "languageNameCode",
-        "requires": 0,
-        "components": [
-          { "id": "3453", "name": "languageNameCode", "format": "an..3" }
-        ]
-      },
-      {
-        "id": "4447",
-        "name": "freeTextFormatCode",
-        "requires": 0,
-        "components": [
-          { "id": "4447", "name": "freeTextFormatCode", "format": "an..3" }
         ]
       }
     ]
@@ -856,6 +883,77 @@
       }
     ]
   },
+  "PAI": {
+    "requires": 1,
+    "elements": [
+      {
+        "id": "C534",
+        "name": "paymentInstructionDetails",
+        "requires": 0,
+        "components": [
+          { "id": "4439", "name": "paymentConditionsCode", "format": "an..3" },
+          {
+            "id": "4431",
+            "name": "paymentGuaranteeMeansCode",
+            "format": "an..3"
+          },
+          { "id": "4461", "name": "paymentMeansCode", "format": "an..3" },
+          {
+            "id": "1131",
+            "name": "codeListIdentificationCode",
+            "format": "an..17"
+          },
+          {
+            "id": "3055",
+            "name": "codeListResponsibleAgencyCode",
+            "format": "an..3"
+          },
+          { "id": "4435", "name": "paymentChannelCode", "format": "an..3" }
+        ]
+      }
+    ]
+  },
+  "PCD": {
+    "requires": 1,
+    "elements": [
+      {
+        "id": "C501",
+        "name": "percentageDetails",
+        "requires": 1,
+        "components": [
+          {
+            "id": "5245",
+            "name": "percentageTypeCodeQualifier",
+            "format": "an..3"
+          },
+          { "id": "5482", "name": "percentage", "format": "n..10" },
+          {
+            "id": "5249",
+            "name": "percentageBasisIdentificationCode",
+            "format": "an..3"
+          },
+          {
+            "id": "1131",
+            "name": "codeListIdentificationCode",
+            "format": "an..17"
+          },
+          {
+            "id": "3055",
+            "name": "codeListResponsibleAgencyCode",
+            "format": "an..3"
+          }
+        ]
+      },
+      {
+        "id": "4405",
+        "name": "statusDescriptionCode",
+        "requires": 0,
+        "components": [
+          { "id": "4405", "name": "statusDescriptionCode", "format": "an..3" }
+        ]
+      }
+    ]
+  },
   "RFF": {
     "requires": 1,
     "elements": [
@@ -873,104 +971,6 @@
             "format": "an..35"
           },
           { "id": "1060", "name": "revisionIdentifier", "format": "an..6" }
-        ]
-      }
-    ]
-  },
-  "LOC": {
-    "requires": 1,
-    "elements": [
-      {
-        "id": "3227",
-        "name": "locationFunctionCodeQualifier",
-        "requires": 1,
-        "components": [
-          {
-            "id": "3227",
-            "name": "locationFunctionCodeQualifier",
-            "format": "an..3"
-          }
-        ]
-      },
-      {
-        "id": "C517",
-        "name": "locationIdentification",
-        "requires": 0,
-        "components": [
-          { "id": "3225", "name": "locationNameCode", "format": "an..25" },
-          {
-            "id": "1131",
-            "name": "codeListIdentificationCode",
-            "format": "an..17"
-          },
-          {
-            "id": "3055",
-            "name": "codeListResponsibleAgencyCode",
-            "format": "an..3"
-          },
-          { "id": "3224", "name": "locationName", "format": "an..256" }
-        ]
-      },
-      {
-        "id": "C519",
-        "name": "relatedLocationOneIdentification",
-        "requires": 0,
-        "components": [
-          {
-            "id": "3223",
-            "name": "firstRelatedLocationNameCode",
-            "format": "an..25"
-          },
-          {
-            "id": "1131",
-            "name": "codeListIdentificationCode",
-            "format": "an..17"
-          },
-          {
-            "id": "3055",
-            "name": "codeListResponsibleAgencyCode",
-            "format": "an..3"
-          },
-          {
-            "id": "3222",
-            "name": "firstRelatedLocationName",
-            "format": "an..70"
-          }
-        ]
-      },
-      {
-        "id": "C553",
-        "name": "relatedLocationTwoIdentification",
-        "requires": 0,
-        "components": [
-          {
-            "id": "3233",
-            "name": "secondRelatedLocationNameCode",
-            "format": "an..25"
-          },
-          {
-            "id": "1131",
-            "name": "codeListIdentificationCode",
-            "format": "an..17"
-          },
-          {
-            "id": "3055",
-            "name": "codeListResponsibleAgencyCode",
-            "format": "an..3"
-          },
-          {
-            "id": "3232",
-            "name": "secondRelatedLocationName",
-            "format": "an..70"
-          }
-        ]
-      },
-      {
-        "id": "5479",
-        "name": "relationCode",
-        "requires": 0,
-        "components": [
-          { "id": "5479", "name": "relationCode", "format": "an..3" }
         ]
       }
     ]

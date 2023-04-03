@@ -1,127 +1,4 @@
 {
-  "COM": {
-    "requires": 1,
-    "elements": [
-      {
-        "id": "C076",
-        "name": "communicationContact",
-        "requires": 2,
-        "components": [
-          {
-            "id": "3148",
-            "name": "communicationAddressIdentifier",
-            "format": "an..512"
-          },
-          {
-            "id": "3155",
-            "name": "communicationAddressCodeQualifier",
-            "format": "an..3"
-          }
-        ]
-      }
-    ]
-  },
-  "ERC": {
-    "requires": 1,
-    "elements": [
-      {
-        "id": "C901",
-        "name": "applicationErrorDetail",
-        "requires": 1,
-        "components": [
-          { "id": "9321", "name": "applicationErrorCode", "format": "an..8" },
-          {
-            "id": "1131",
-            "name": "codeListIdentificationCode",
-            "format": "an..17"
-          },
-          {
-            "id": "3055",
-            "name": "codeListResponsibleAgencyCode",
-            "format": "an..3"
-          }
-        ]
-      }
-    ]
-  },
-  "CTA": {
-    "requires": 0,
-    "elements": [
-      {
-        "id": "3139",
-        "name": "contactFunctionCode",
-        "requires": 0,
-        "components": [
-          { "id": "3139", "name": "contactFunctionCode", "format": "an..3" }
-        ]
-      },
-      {
-        "id": "C056",
-        "name": "departmentOrEmployeeDetails",
-        "requires": 0,
-        "components": [
-          {
-            "id": "3413",
-            "name": "departmentOrEmployeeNameCode",
-            "format": "an..17"
-          },
-          {
-            "id": "3412",
-            "name": "departmentOrEmployeeName",
-            "format": "an..35"
-          }
-        ]
-      }
-    ]
-  },
-  "DTM": {
-    "requires": 1,
-    "elements": [
-      {
-        "id": "C507",
-        "name": "dateTimePeriod",
-        "requires": 1,
-        "components": [
-          {
-            "id": "2005",
-            "name": "dateOrTimeOrPeriodFunctionCodeQualifier",
-            "format": "an..3"
-          },
-          {
-            "id": "2380",
-            "name": "dateOrTimeOrPeriodValue",
-            "format": "an..35"
-          },
-          {
-            "id": "2379",
-            "name": "dateOrTimeOrPeriodFormatCode",
-            "format": "an..3"
-          }
-        ]
-      }
-    ]
-  },
-  "RFF": {
-    "requires": 1,
-    "elements": [
-      {
-        "id": "C506",
-        "name": "reference",
-        "requires": 1,
-        "components": [
-          { "id": "1153", "name": "referenceCodeQualifier", "format": "an..3" },
-          { "id": "1154", "name": "referenceIdentifier", "format": "an..70" },
-          { "id": "1156", "name": "documentLineIdentifier", "format": "an..6" },
-          {
-            "id": "4000",
-            "name": "referenceVersionIdentifier",
-            "format": "an..35"
-          },
-          { "id": "1060", "name": "revisionIdentifier", "format": "an..6" }
-        ]
-      }
-    ]
-  },
   "BGM": {
     "requires": 0,
     "elements": [
@@ -187,6 +64,185 @@
           },
           { "id": "6066", "name": "controlTotalValue", "format": "n..18" },
           { "id": "6411", "name": "measurementUnitCode", "format": "an..3" }
+        ]
+      }
+    ]
+  },
+  "COM": {
+    "requires": 1,
+    "elements": [
+      {
+        "id": "C076",
+        "name": "communicationContact",
+        "requires": 2,
+        "components": [
+          {
+            "id": "3148",
+            "name": "communicationAddressIdentifier",
+            "format": "an..512"
+          },
+          {
+            "id": "3155",
+            "name": "communicationAddressCodeQualifier",
+            "format": "an..3"
+          }
+        ]
+      }
+    ]
+  },
+  "CTA": {
+    "requires": 0,
+    "elements": [
+      {
+        "id": "3139",
+        "name": "contactFunctionCode",
+        "requires": 0,
+        "components": [
+          { "id": "3139", "name": "contactFunctionCode", "format": "an..3" }
+        ]
+      },
+      {
+        "id": "C056",
+        "name": "departmentOrEmployeeDetails",
+        "requires": 0,
+        "components": [
+          {
+            "id": "3413",
+            "name": "departmentOrEmployeeNameCode",
+            "format": "an..17"
+          },
+          {
+            "id": "3412",
+            "name": "departmentOrEmployeeName",
+            "format": "an..35"
+          }
+        ]
+      }
+    ]
+  },
+  "DOC": {
+    "requires": 1,
+    "elements": [
+      {
+        "id": "C002",
+        "name": "documentMessageName",
+        "requires": 0,
+        "components": [
+          { "id": "1001", "name": "documentNameCode", "format": "an..3" },
+          {
+            "id": "1131",
+            "name": "codeListIdentificationCode",
+            "format": "an..17"
+          },
+          {
+            "id": "3055",
+            "name": "codeListResponsibleAgencyCode",
+            "format": "an..3"
+          },
+          { "id": "1000", "name": "documentName", "format": "an..35" }
+        ]
+      },
+      {
+        "id": "C503",
+        "name": "documentMessageDetails",
+        "requires": 0,
+        "components": [
+          { "id": "1004", "name": "documentIdentifier", "format": "an..35" },
+          { "id": "1373", "name": "documentStatusCode", "format": "an..3" },
+          {
+            "id": "1366",
+            "name": "documentSourceDescription",
+            "format": "an..70"
+          },
+          { "id": "3453", "name": "languageNameCode", "format": "an..3" },
+          { "id": "1056", "name": "versionIdentifier", "format": "an..9" },
+          { "id": "1060", "name": "revisionIdentifier", "format": "an..6" }
+        ]
+      },
+      {
+        "id": "3153",
+        "name": "communicationMediumTypeCode",
+        "requires": 0,
+        "components": [
+          {
+            "id": "3153",
+            "name": "communicationMediumTypeCode",
+            "format": "an..3"
+          }
+        ]
+      },
+      {
+        "id": "1220",
+        "name": "documentCopiesRequiredQuantity",
+        "requires": 0,
+        "components": [
+          {
+            "id": "1220",
+            "name": "documentCopiesRequiredQuantity",
+            "format": "n..2"
+          }
+        ]
+      },
+      {
+        "id": "1218",
+        "name": "documentOriginalsRequiredQuantity",
+        "requires": 0,
+        "components": [
+          {
+            "id": "1218",
+            "name": "documentOriginalsRequiredQuantity",
+            "format": "n..2"
+          }
+        ]
+      }
+    ]
+  },
+  "DTM": {
+    "requires": 1,
+    "elements": [
+      {
+        "id": "C507",
+        "name": "dateTimePeriod",
+        "requires": 1,
+        "components": [
+          {
+            "id": "2005",
+            "name": "dateOrTimeOrPeriodFunctionCodeQualifier",
+            "format": "an..3"
+          },
+          {
+            "id": "2380",
+            "name": "dateOrTimeOrPeriodValue",
+            "format": "an..35"
+          },
+          {
+            "id": "2379",
+            "name": "dateOrTimeOrPeriodFormatCode",
+            "format": "an..3"
+          }
+        ]
+      }
+    ]
+  },
+  "ERC": {
+    "requires": 1,
+    "elements": [
+      {
+        "id": "C901",
+        "name": "applicationErrorDetail",
+        "requires": 1,
+        "components": [
+          { "id": "9321", "name": "applicationErrorCode", "format": "an..8" },
+          {
+            "id": "1131",
+            "name": "codeListIdentificationCode",
+            "format": "an..17"
+          },
+          {
+            "id": "3055",
+            "name": "codeListResponsibleAgencyCode",
+            "format": "an..3"
+          }
         ]
       }
     ]
@@ -418,79 +474,23 @@
       }
     ]
   },
-  "DOC": {
+  "RFF": {
     "requires": 1,
     "elements": [
       {
-        "id": "C002",
-        "name": "documentMessageName",
-        "requires": 0,
+        "id": "C506",
+        "name": "reference",
+        "requires": 1,
         "components": [
-          { "id": "1001", "name": "documentNameCode", "format": "an..3" },
+          { "id": "1153", "name": "referenceCodeQualifier", "format": "an..3" },
+          { "id": "1154", "name": "referenceIdentifier", "format": "an..70" },
+          { "id": "1156", "name": "documentLineIdentifier", "format": "an..6" },
           {
-            "id": "1131",
-            "name": "codeListIdentificationCode",
-            "format": "an..17"
+            "id": "4000",
+            "name": "referenceVersionIdentifier",
+            "format": "an..35"
           },
-          {
-            "id": "3055",
-            "name": "codeListResponsibleAgencyCode",
-            "format": "an..3"
-          },
-          { "id": "1000", "name": "documentName", "format": "an..35" }
-        ]
-      },
-      {
-        "id": "C503",
-        "name": "documentMessageDetails",
-        "requires": 0,
-        "components": [
-          { "id": "1004", "name": "documentIdentifier", "format": "an..35" },
-          { "id": "1373", "name": "documentStatusCode", "format": "an..3" },
-          {
-            "id": "1366",
-            "name": "documentSourceDescription",
-            "format": "an..70"
-          },
-          { "id": "3453", "name": "languageNameCode", "format": "an..3" },
-          { "id": "1056", "name": "versionIdentifier", "format": "an..9" },
           { "id": "1060", "name": "revisionIdentifier", "format": "an..6" }
-        ]
-      },
-      {
-        "id": "3153",
-        "name": "communicationMediumTypeCode",
-        "requires": 0,
-        "components": [
-          {
-            "id": "3153",
-            "name": "communicationMediumTypeCode",
-            "format": "an..3"
-          }
-        ]
-      },
-      {
-        "id": "1220",
-        "name": "documentCopiesRequiredQuantity",
-        "requires": 0,
-        "components": [
-          {
-            "id": "1220",
-            "name": "documentCopiesRequiredQuantity",
-            "format": "n..2"
-          }
-        ]
-      },
-      {
-        "id": "1218",
-        "name": "documentOriginalsRequiredQuantity",
-        "requires": 0,
-        "components": [
-          {
-            "id": "1218",
-            "name": "documentOriginalsRequiredQuantity",
-            "format": "n..2"
-          }
         ]
       }
     ]

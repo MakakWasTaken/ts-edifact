@@ -481,8 +481,6 @@ export class ValidatorImpl implements Validator {
    * @summary Finish validation for the current segment.
    */
   onCloseSegment(segment: string): void {
-    let name: string
-
     switch (this.state) {
       case ValidatorStates.ALL:
         if (this.segment === undefined) {
@@ -504,10 +502,9 @@ export class ValidatorImpl implements Validator {
           this.counts.component < this.element.requires ||
           this.counts.component > this.element.components.length
         ) {
-          name = this.segment.elements[this.counts.element].id
           throw this.errors.countError(
             'Element',
-            name,
+            this.segment.elements[this.counts.element].id,
             this.element,
             this.counts.component,
           )
@@ -530,10 +527,9 @@ export class ValidatorImpl implements Validator {
           this.counts.element < this.segment.requires ||
           this.counts.element > this.segment.elements.length
         ) {
-          name = segment
           throw this.errors.countError(
             'Segment',
-            name,
+            segment,
             this.segment,
             this.counts.element,
           )

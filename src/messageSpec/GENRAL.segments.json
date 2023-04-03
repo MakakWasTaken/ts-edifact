@@ -1,26 +1,4 @@
 {
-  "COM": {
-    "requires": 1,
-    "elements": [
-      {
-        "id": "C076",
-        "name": "communicationContact",
-        "requires": 2,
-        "components": [
-          {
-            "id": "3148",
-            "name": "communicationAddressIdentifier",
-            "format": "an..512"
-          },
-          {
-            "id": "3155",
-            "name": "communicationAddressCodeQualifier",
-            "format": "an..3"
-          }
-        ]
-      }
-    ]
-  },
   "BGM": {
     "requires": 0,
     "elements": [
@@ -71,6 +49,28 @@
       }
     ]
   },
+  "COM": {
+    "requires": 1,
+    "elements": [
+      {
+        "id": "C076",
+        "name": "communicationContact",
+        "requires": 2,
+        "components": [
+          {
+            "id": "3148",
+            "name": "communicationAddressIdentifier",
+            "format": "an..512"
+          },
+          {
+            "id": "3155",
+            "name": "communicationAddressCodeQualifier",
+            "format": "an..3"
+          }
+        ]
+      }
+    ]
+  },
   "CTA": {
     "requires": 0,
     "elements": [
@@ -97,6 +97,104 @@
             "name": "departmentOrEmployeeName",
             "format": "an..35"
           }
+        ]
+      }
+    ]
+  },
+  "DTM": {
+    "requires": 1,
+    "elements": [
+      {
+        "id": "C507",
+        "name": "dateTimePeriod",
+        "requires": 1,
+        "components": [
+          {
+            "id": "2005",
+            "name": "dateOrTimeOrPeriodFunctionCodeQualifier",
+            "format": "an..3"
+          },
+          {
+            "id": "2380",
+            "name": "dateOrTimeOrPeriodValue",
+            "format": "an..35"
+          },
+          {
+            "id": "2379",
+            "name": "dateOrTimeOrPeriodFormatCode",
+            "format": "an..3"
+          }
+        ]
+      }
+    ]
+  },
+  "FTX": {
+    "requires": 1,
+    "elements": [
+      {
+        "id": "4451",
+        "name": "textSubjectCodeQualifier",
+        "requires": 1,
+        "components": [
+          {
+            "id": "4451",
+            "name": "textSubjectCodeQualifier",
+            "format": "an..3"
+          }
+        ]
+      },
+      {
+        "id": "4453",
+        "name": "freeTextFunctionCode",
+        "requires": 0,
+        "components": [
+          { "id": "4453", "name": "freeTextFunctionCode", "format": "an..3" }
+        ]
+      },
+      {
+        "id": "C107",
+        "name": "textReference",
+        "requires": 1,
+        "components": [
+          { "id": "4441", "name": "freeTextValueCode", "format": "an..17" },
+          {
+            "id": "1131",
+            "name": "codeListIdentificationCode",
+            "format": "an..17"
+          },
+          {
+            "id": "3055",
+            "name": "codeListResponsibleAgencyCode",
+            "format": "an..3"
+          }
+        ]
+      },
+      {
+        "id": "C108",
+        "name": "textLiteral",
+        "requires": 1,
+        "components": [
+          { "id": "4440", "name": "freeTextValue", "format": "an..512" },
+          { "id": "4440", "name": "freeTextValue", "format": "an..512" },
+          { "id": "4440", "name": "freeTextValue", "format": "an..512" },
+          { "id": "4440", "name": "freeTextValue", "format": "an..512" },
+          { "id": "4440", "name": "freeTextValue", "format": "an..512" }
+        ]
+      },
+      {
+        "id": "3453",
+        "name": "languageNameCode",
+        "requires": 0,
+        "components": [
+          { "id": "3453", "name": "languageNameCode", "format": "an..3" }
+        ]
+      },
+      {
+        "id": "4447",
+        "name": "freeTextFormatCode",
+        "requires": 0,
+        "components": [
+          { "id": "4447", "name": "freeTextFormatCode", "format": "an..3" }
         ]
       }
     ]
@@ -195,77 +293,6 @@
         "requires": 0,
         "components": [
           { "id": "5479", "name": "relationCode", "format": "an..3" }
-        ]
-      }
-    ]
-  },
-  "FTX": {
-    "requires": 1,
-    "elements": [
-      {
-        "id": "4451",
-        "name": "textSubjectCodeQualifier",
-        "requires": 1,
-        "components": [
-          {
-            "id": "4451",
-            "name": "textSubjectCodeQualifier",
-            "format": "an..3"
-          }
-        ]
-      },
-      {
-        "id": "4453",
-        "name": "freeTextFunctionCode",
-        "requires": 0,
-        "components": [
-          { "id": "4453", "name": "freeTextFunctionCode", "format": "an..3" }
-        ]
-      },
-      {
-        "id": "C107",
-        "name": "textReference",
-        "requires": 1,
-        "components": [
-          { "id": "4441", "name": "freeTextValueCode", "format": "an..17" },
-          {
-            "id": "1131",
-            "name": "codeListIdentificationCode",
-            "format": "an..17"
-          },
-          {
-            "id": "3055",
-            "name": "codeListResponsibleAgencyCode",
-            "format": "an..3"
-          }
-        ]
-      },
-      {
-        "id": "C108",
-        "name": "textLiteral",
-        "requires": 1,
-        "components": [
-          { "id": "4440", "name": "freeTextValue", "format": "an..512" },
-          { "id": "4440", "name": "freeTextValue", "format": "an..512" },
-          { "id": "4440", "name": "freeTextValue", "format": "an..512" },
-          { "id": "4440", "name": "freeTextValue", "format": "an..512" },
-          { "id": "4440", "name": "freeTextValue", "format": "an..512" }
-        ]
-      },
-      {
-        "id": "3453",
-        "name": "languageNameCode",
-        "requires": 0,
-        "components": [
-          { "id": "3453", "name": "languageNameCode", "format": "an..3" }
-        ]
-      },
-      {
-        "id": "4447",
-        "name": "freeTextFormatCode",
-        "requires": 0,
-        "components": [
-          { "id": "4447", "name": "freeTextFormatCode", "format": "an..3" }
         ]
       }
     ]
@@ -443,33 +470,6 @@
             "format": "an..35"
           },
           { "id": "1060", "name": "revisionIdentifier", "format": "an..6" }
-        ]
-      }
-    ]
-  },
-  "DTM": {
-    "requires": 1,
-    "elements": [
-      {
-        "id": "C507",
-        "name": "dateTimePeriod",
-        "requires": 1,
-        "components": [
-          {
-            "id": "2005",
-            "name": "dateOrTimeOrPeriodFunctionCodeQualifier",
-            "format": "an..3"
-          },
-          {
-            "id": "2380",
-            "name": "dateOrTimeOrPeriodValue",
-            "format": "an..35"
-          },
-          {
-            "id": "2379",
-            "name": "dateOrTimeOrPeriodFormatCode",
-            "format": "an..3"
-          }
         ]
       }
     ]

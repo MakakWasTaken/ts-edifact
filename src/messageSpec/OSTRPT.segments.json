@@ -1,98 +1,4 @@
 {
-  "GIN": {
-    "requires": 2,
-    "elements": [
-      {
-        "id": "7405",
-        "name": "objectIdentificationCodeQualifier",
-        "requires": 1,
-        "components": [
-          {
-            "id": "7405",
-            "name": "objectIdentificationCodeQualifier",
-            "format": "an..3"
-          }
-        ]
-      },
-      {
-        "id": "C208",
-        "name": "identityNumberRange",
-        "requires": 1,
-        "components": [
-          { "id": "7402", "name": "objectIdentifier", "format": "an..35" },
-          { "id": "7402", "name": "objectIdentifier", "format": "an..35" }
-        ]
-      },
-      {
-        "id": "C208",
-        "name": "identityNumberRange",
-        "requires": 1,
-        "components": [
-          { "id": "7402", "name": "objectIdentifier", "format": "an..35" },
-          { "id": "7402", "name": "objectIdentifier", "format": "an..35" }
-        ]
-      },
-      {
-        "id": "C208",
-        "name": "identityNumberRange",
-        "requires": 1,
-        "components": [
-          { "id": "7402", "name": "objectIdentifier", "format": "an..35" },
-          { "id": "7402", "name": "objectIdentifier", "format": "an..35" }
-        ]
-      },
-      {
-        "id": "C208",
-        "name": "identityNumberRange",
-        "requires": 1,
-        "components": [
-          { "id": "7402", "name": "objectIdentifier", "format": "an..35" },
-          { "id": "7402", "name": "objectIdentifier", "format": "an..35" }
-        ]
-      },
-      {
-        "id": "C208",
-        "name": "identityNumberRange",
-        "requires": 1,
-        "components": [
-          { "id": "7402", "name": "objectIdentifier", "format": "an..35" },
-          { "id": "7402", "name": "objectIdentifier", "format": "an..35" }
-        ]
-      }
-    ]
-  },
-  "IRQ": {
-    "requires": 1,
-    "elements": [
-      {
-        "id": "C333",
-        "name": "informationRequest",
-        "requires": 0,
-        "components": [
-          {
-            "id": "4511",
-            "name": "requestedInformationDescriptionCode",
-            "format": "an..3"
-          },
-          {
-            "id": "1131",
-            "name": "codeListIdentificationCode",
-            "format": "an..17"
-          },
-          {
-            "id": "3055",
-            "name": "codeListResponsibleAgencyCode",
-            "format": "an..3"
-          },
-          {
-            "id": "4510",
-            "name": "requestedInformationDescription",
-            "format": "an..35"
-          }
-        ]
-      }
-    ]
-  },
   "BGM": {
     "requires": 0,
     "elements": [
@@ -143,6 +49,25 @@
       }
     ]
   },
+  "CNT": {
+    "requires": 1,
+    "elements": [
+      {
+        "id": "C270",
+        "name": "control",
+        "requires": 2,
+        "components": [
+          {
+            "id": "6069",
+            "name": "controlTotalTypeCodeQualifier",
+            "format": "an..3"
+          },
+          { "id": "6066", "name": "controlTotalValue", "format": "n..18" },
+          { "id": "6411", "name": "measurementUnitCode", "format": "an..3" }
+        ]
+      }
+    ]
+  },
   "COM": {
     "requires": 1,
     "elements": [
@@ -165,80 +90,32 @@
       }
     ]
   },
-  "HAN": {
+  "CTA": {
     "requires": 0,
     "elements": [
       {
-        "id": "C524",
-        "name": "handlingInstructions",
+        "id": "3139",
+        "name": "contactFunctionCode",
         "requires": 0,
         "components": [
-          {
-            "id": "4079",
-            "name": "handlingInstructionDescriptionCode",
-            "format": "an..3"
-          },
-          {
-            "id": "1131",
-            "name": "codeListIdentificationCode",
-            "format": "an..17"
-          },
-          {
-            "id": "3055",
-            "name": "codeListResponsibleAgencyCode",
-            "format": "an..3"
-          },
-          {
-            "id": "4078",
-            "name": "handlingInstructionDescription",
-            "format": "an..70"
-          }
+          { "id": "3139", "name": "contactFunctionCode", "format": "an..3" }
         ]
       },
       {
-        "id": "C218",
-        "name": "hazardousMaterial",
+        "id": "C056",
+        "name": "departmentOrEmployeeDetails",
         "requires": 0,
         "components": [
           {
-            "id": "7419",
-            "name": "hazardousMaterialCategoryNameCode",
-            "format": "an..7"
-          },
-          {
-            "id": "1131",
-            "name": "codeListIdentificationCode",
+            "id": "3413",
+            "name": "departmentOrEmployeeNameCode",
             "format": "an..17"
           },
           {
-            "id": "3055",
-            "name": "codeListResponsibleAgencyCode",
-            "format": "an..3"
-          },
-          {
-            "id": "7418",
-            "name": "hazardousMaterialCategoryName",
+            "id": "3412",
+            "name": "departmentOrEmployeeName",
             "format": "an..35"
           }
-        ]
-      }
-    ]
-  },
-  "CNT": {
-    "requires": 1,
-    "elements": [
-      {
-        "id": "C270",
-        "name": "control",
-        "requires": 2,
-        "components": [
-          {
-            "id": "6069",
-            "name": "controlTotalTypeCodeQualifier",
-            "format": "an..3"
-          },
-          { "id": "6066", "name": "controlTotalValue", "format": "n..18" },
-          { "id": "6411", "name": "measurementUnitCode", "format": "an..3" }
         ]
       }
     ]
@@ -316,6 +193,935 @@
             "name": "documentOriginalsRequiredQuantity",
             "format": "n..2"
           }
+        ]
+      }
+    ]
+  },
+  "DTM": {
+    "requires": 1,
+    "elements": [
+      {
+        "id": "C507",
+        "name": "dateTimePeriod",
+        "requires": 1,
+        "components": [
+          {
+            "id": "2005",
+            "name": "dateOrTimeOrPeriodFunctionCodeQualifier",
+            "format": "an..3"
+          },
+          {
+            "id": "2380",
+            "name": "dateOrTimeOrPeriodValue",
+            "format": "an..35"
+          },
+          {
+            "id": "2379",
+            "name": "dateOrTimeOrPeriodFormatCode",
+            "format": "an..3"
+          }
+        ]
+      }
+    ]
+  },
+  "EQD": {
+    "requires": 1,
+    "elements": [
+      {
+        "id": "8053",
+        "name": "equipmentTypeCodeQualifier",
+        "requires": 1,
+        "components": [
+          {
+            "id": "8053",
+            "name": "equipmentTypeCodeQualifier",
+            "format": "an..3"
+          }
+        ]
+      },
+      {
+        "id": "C237",
+        "name": "equipmentIdentification",
+        "requires": 0,
+        "components": [
+          { "id": "8260", "name": "equipmentIdentifier", "format": "an..17" },
+          {
+            "id": "1131",
+            "name": "codeListIdentificationCode",
+            "format": "an..17"
+          },
+          {
+            "id": "3055",
+            "name": "codeListResponsibleAgencyCode",
+            "format": "an..3"
+          },
+          { "id": "3207", "name": "countryNameCode", "format": "an..3" }
+        ]
+      },
+      {
+        "id": "C224",
+        "name": "equipmentSizeAndType",
+        "requires": 0,
+        "components": [
+          {
+            "id": "8155",
+            "name": "equipmentSizeAndTypeDescriptionCode",
+            "format": "an..10"
+          },
+          {
+            "id": "1131",
+            "name": "codeListIdentificationCode",
+            "format": "an..17"
+          },
+          {
+            "id": "3055",
+            "name": "codeListResponsibleAgencyCode",
+            "format": "an..3"
+          },
+          {
+            "id": "8154",
+            "name": "equipmentSizeAndTypeDescription",
+            "format": "an..35"
+          }
+        ]
+      },
+      {
+        "id": "8077",
+        "name": "equipmentSupplierCode",
+        "requires": 0,
+        "components": [
+          { "id": "8077", "name": "equipmentSupplierCode", "format": "an..3" }
+        ]
+      },
+      {
+        "id": "8249",
+        "name": "equipmentStatusCode",
+        "requires": 0,
+        "components": [
+          { "id": "8249", "name": "equipmentStatusCode", "format": "an..3" }
+        ]
+      },
+      {
+        "id": "8169",
+        "name": "fullOrEmptyIndicatorCode",
+        "requires": 0,
+        "components": [
+          {
+            "id": "8169",
+            "name": "fullOrEmptyIndicatorCode",
+            "format": "an..3"
+          }
+        ]
+      }
+    ]
+  },
+  "FTX": {
+    "requires": 1,
+    "elements": [
+      {
+        "id": "4451",
+        "name": "textSubjectCodeQualifier",
+        "requires": 1,
+        "components": [
+          {
+            "id": "4451",
+            "name": "textSubjectCodeQualifier",
+            "format": "an..3"
+          }
+        ]
+      },
+      {
+        "id": "4453",
+        "name": "freeTextFunctionCode",
+        "requires": 0,
+        "components": [
+          { "id": "4453", "name": "freeTextFunctionCode", "format": "an..3" }
+        ]
+      },
+      {
+        "id": "C107",
+        "name": "textReference",
+        "requires": 1,
+        "components": [
+          { "id": "4441", "name": "freeTextValueCode", "format": "an..17" },
+          {
+            "id": "1131",
+            "name": "codeListIdentificationCode",
+            "format": "an..17"
+          },
+          {
+            "id": "3055",
+            "name": "codeListResponsibleAgencyCode",
+            "format": "an..3"
+          }
+        ]
+      },
+      {
+        "id": "C108",
+        "name": "textLiteral",
+        "requires": 1,
+        "components": [
+          { "id": "4440", "name": "freeTextValue", "format": "an..512" },
+          { "id": "4440", "name": "freeTextValue", "format": "an..512" },
+          { "id": "4440", "name": "freeTextValue", "format": "an..512" },
+          { "id": "4440", "name": "freeTextValue", "format": "an..512" },
+          { "id": "4440", "name": "freeTextValue", "format": "an..512" }
+        ]
+      },
+      {
+        "id": "3453",
+        "name": "languageNameCode",
+        "requires": 0,
+        "components": [
+          { "id": "3453", "name": "languageNameCode", "format": "an..3" }
+        ]
+      },
+      {
+        "id": "4447",
+        "name": "freeTextFormatCode",
+        "requires": 0,
+        "components": [
+          { "id": "4447", "name": "freeTextFormatCode", "format": "an..3" }
+        ]
+      }
+    ]
+  },
+  "GIN": {
+    "requires": 2,
+    "elements": [
+      {
+        "id": "7405",
+        "name": "objectIdentificationCodeQualifier",
+        "requires": 1,
+        "components": [
+          {
+            "id": "7405",
+            "name": "objectIdentificationCodeQualifier",
+            "format": "an..3"
+          }
+        ]
+      },
+      {
+        "id": "C208",
+        "name": "identityNumberRange",
+        "requires": 1,
+        "components": [
+          { "id": "7402", "name": "objectIdentifier", "format": "an..35" },
+          { "id": "7402", "name": "objectIdentifier", "format": "an..35" }
+        ]
+      },
+      {
+        "id": "C208",
+        "name": "identityNumberRange",
+        "requires": 1,
+        "components": [
+          { "id": "7402", "name": "objectIdentifier", "format": "an..35" },
+          { "id": "7402", "name": "objectIdentifier", "format": "an..35" }
+        ]
+      },
+      {
+        "id": "C208",
+        "name": "identityNumberRange",
+        "requires": 1,
+        "components": [
+          { "id": "7402", "name": "objectIdentifier", "format": "an..35" },
+          { "id": "7402", "name": "objectIdentifier", "format": "an..35" }
+        ]
+      },
+      {
+        "id": "C208",
+        "name": "identityNumberRange",
+        "requires": 1,
+        "components": [
+          { "id": "7402", "name": "objectIdentifier", "format": "an..35" },
+          { "id": "7402", "name": "objectIdentifier", "format": "an..35" }
+        ]
+      },
+      {
+        "id": "C208",
+        "name": "identityNumberRange",
+        "requires": 1,
+        "components": [
+          { "id": "7402", "name": "objectIdentifier", "format": "an..35" },
+          { "id": "7402", "name": "objectIdentifier", "format": "an..35" }
+        ]
+      }
+    ]
+  },
+  "HAN": {
+    "requires": 0,
+    "elements": [
+      {
+        "id": "C524",
+        "name": "handlingInstructions",
+        "requires": 0,
+        "components": [
+          {
+            "id": "4079",
+            "name": "handlingInstructionDescriptionCode",
+            "format": "an..3"
+          },
+          {
+            "id": "1131",
+            "name": "codeListIdentificationCode",
+            "format": "an..17"
+          },
+          {
+            "id": "3055",
+            "name": "codeListResponsibleAgencyCode",
+            "format": "an..3"
+          },
+          {
+            "id": "4078",
+            "name": "handlingInstructionDescription",
+            "format": "an..70"
+          }
+        ]
+      },
+      {
+        "id": "C218",
+        "name": "hazardousMaterial",
+        "requires": 0,
+        "components": [
+          {
+            "id": "7419",
+            "name": "hazardousMaterialCategoryNameCode",
+            "format": "an..7"
+          },
+          {
+            "id": "1131",
+            "name": "codeListIdentificationCode",
+            "format": "an..17"
+          },
+          {
+            "id": "3055",
+            "name": "codeListResponsibleAgencyCode",
+            "format": "an..3"
+          },
+          {
+            "id": "7418",
+            "name": "hazardousMaterialCategoryName",
+            "format": "an..35"
+          }
+        ]
+      }
+    ]
+  },
+  "IMD": {
+    "requires": 0,
+    "elements": [
+      {
+        "id": "7077",
+        "name": "descriptionFormatCode",
+        "requires": 0,
+        "components": [
+          { "id": "7077", "name": "descriptionFormatCode", "format": "an..3" }
+        ]
+      },
+      {
+        "id": "C272",
+        "name": "itemCharacteristic",
+        "requires": 0,
+        "components": [
+          { "id": "7081", "name": "itemCharacteristicCode", "format": "an..3" },
+          {
+            "id": "1131",
+            "name": "codeListIdentificationCode",
+            "format": "an..17"
+          },
+          {
+            "id": "3055",
+            "name": "codeListResponsibleAgencyCode",
+            "format": "an..3"
+          }
+        ]
+      },
+      {
+        "id": "C273",
+        "name": "itemDescription",
+        "requires": 0,
+        "components": [
+          { "id": "7009", "name": "itemDescriptionCode", "format": "an..17" },
+          {
+            "id": "1131",
+            "name": "codeListIdentificationCode",
+            "format": "an..17"
+          },
+          {
+            "id": "3055",
+            "name": "codeListResponsibleAgencyCode",
+            "format": "an..3"
+          },
+          { "id": "7008", "name": "itemDescription", "format": "an..256" },
+          { "id": "7008", "name": "itemDescription", "format": "an..256" },
+          { "id": "3453", "name": "languageNameCode", "format": "an..3" }
+        ]
+      },
+      {
+        "id": "7383",
+        "name": "surfaceOrLayerCode",
+        "requires": 0,
+        "components": [
+          { "id": "7383", "name": "surfaceOrLayerCode", "format": "an..3" }
+        ]
+      }
+    ]
+  },
+  "IRQ": {
+    "requires": 1,
+    "elements": [
+      {
+        "id": "C333",
+        "name": "informationRequest",
+        "requires": 0,
+        "components": [
+          {
+            "id": "4511",
+            "name": "requestedInformationDescriptionCode",
+            "format": "an..3"
+          },
+          {
+            "id": "1131",
+            "name": "codeListIdentificationCode",
+            "format": "an..17"
+          },
+          {
+            "id": "3055",
+            "name": "codeListResponsibleAgencyCode",
+            "format": "an..3"
+          },
+          {
+            "id": "4510",
+            "name": "requestedInformationDescription",
+            "format": "an..35"
+          }
+        ]
+      }
+    ]
+  },
+  "LIN": {
+    "requires": 0,
+    "elements": [
+      {
+        "id": "1082",
+        "name": "lineItemIdentifier",
+        "requires": 0,
+        "components": [
+          { "id": "1082", "name": "lineItemIdentifier", "format": "an..6" }
+        ]
+      },
+      {
+        "id": "1229",
+        "name": "actionRequestNotificationDescriptionCode",
+        "requires": 0,
+        "components": [
+          {
+            "id": "1229",
+            "name": "actionRequestNotificationDescriptionCode",
+            "format": "an..3"
+          }
+        ]
+      },
+      {
+        "id": "C212",
+        "name": "itemNumberIdentification",
+        "requires": 0,
+        "components": [
+          { "id": "7140", "name": "itemIdentifier", "format": "an..35" },
+          {
+            "id": "7143",
+            "name": "itemTypeIdentificationCode",
+            "format": "an..3"
+          },
+          {
+            "id": "1131",
+            "name": "codeListIdentificationCode",
+            "format": "an..17"
+          },
+          {
+            "id": "3055",
+            "name": "codeListResponsibleAgencyCode",
+            "format": "an..3"
+          }
+        ]
+      },
+      {
+        "id": "C829",
+        "name": "subLineInformation",
+        "requires": 0,
+        "components": [
+          { "id": "5495", "name": "subLineIndicatorCode", "format": "an..3" },
+          { "id": "1082", "name": "lineItemIdentifier", "format": "an..6" }
+        ]
+      },
+      {
+        "id": "1222",
+        "name": "configurationLevelNumber",
+        "requires": 0,
+        "components": [
+          { "id": "1222", "name": "configurationLevelNumber", "format": "n..2" }
+        ]
+      },
+      {
+        "id": "7083",
+        "name": "configurationOperationCode",
+        "requires": 0,
+        "components": [
+          {
+            "id": "7083",
+            "name": "configurationOperationCode",
+            "format": "an..3"
+          }
+        ]
+      }
+    ]
+  },
+  "LOC": {
+    "requires": 1,
+    "elements": [
+      {
+        "id": "3227",
+        "name": "locationFunctionCodeQualifier",
+        "requires": 1,
+        "components": [
+          {
+            "id": "3227",
+            "name": "locationFunctionCodeQualifier",
+            "format": "an..3"
+          }
+        ]
+      },
+      {
+        "id": "C517",
+        "name": "locationIdentification",
+        "requires": 0,
+        "components": [
+          { "id": "3225", "name": "locationNameCode", "format": "an..25" },
+          {
+            "id": "1131",
+            "name": "codeListIdentificationCode",
+            "format": "an..17"
+          },
+          {
+            "id": "3055",
+            "name": "codeListResponsibleAgencyCode",
+            "format": "an..3"
+          },
+          { "id": "3224", "name": "locationName", "format": "an..256" }
+        ]
+      },
+      {
+        "id": "C519",
+        "name": "relatedLocationOneIdentification",
+        "requires": 0,
+        "components": [
+          {
+            "id": "3223",
+            "name": "firstRelatedLocationNameCode",
+            "format": "an..25"
+          },
+          {
+            "id": "1131",
+            "name": "codeListIdentificationCode",
+            "format": "an..17"
+          },
+          {
+            "id": "3055",
+            "name": "codeListResponsibleAgencyCode",
+            "format": "an..3"
+          },
+          {
+            "id": "3222",
+            "name": "firstRelatedLocationName",
+            "format": "an..70"
+          }
+        ]
+      },
+      {
+        "id": "C553",
+        "name": "relatedLocationTwoIdentification",
+        "requires": 0,
+        "components": [
+          {
+            "id": "3233",
+            "name": "secondRelatedLocationNameCode",
+            "format": "an..25"
+          },
+          {
+            "id": "1131",
+            "name": "codeListIdentificationCode",
+            "format": "an..17"
+          },
+          {
+            "id": "3055",
+            "name": "codeListResponsibleAgencyCode",
+            "format": "an..3"
+          },
+          {
+            "id": "3232",
+            "name": "secondRelatedLocationName",
+            "format": "an..70"
+          }
+        ]
+      },
+      {
+        "id": "5479",
+        "name": "relationCode",
+        "requires": 0,
+        "components": [
+          { "id": "5479", "name": "relationCode", "format": "an..3" }
+        ]
+      }
+    ]
+  },
+  "MEA": {
+    "requires": 1,
+    "elements": [
+      {
+        "id": "6311",
+        "name": "measurementPurposeCodeQualifier",
+        "requires": 1,
+        "components": [
+          {
+            "id": "6311",
+            "name": "measurementPurposeCodeQualifier",
+            "format": "an..3"
+          }
+        ]
+      },
+      {
+        "id": "C502",
+        "name": "measurementDetails",
+        "requires": 0,
+        "components": [
+          { "id": "6313", "name": "measuredAttributeCode", "format": "an..3" },
+          {
+            "id": "6321",
+            "name": "measurementSignificanceCode",
+            "format": "an..3"
+          },
+          {
+            "id": "6155",
+            "name": "nonDiscreteMeasurementNameCode",
+            "format": "an..17"
+          },
+          {
+            "id": "6154",
+            "name": "nonDiscreteMeasurementName",
+            "format": "an..70"
+          }
+        ]
+      },
+      {
+        "id": "C174",
+        "name": "valueRange",
+        "requires": 1,
+        "components": [
+          { "id": "6411", "name": "measurementUnitCode", "format": "an..3" },
+          { "id": "6314", "name": "measurementValue", "format": "an..18" },
+          { "id": "6162", "name": "rangeMinimumValue", "format": "n..18" },
+          { "id": "6152", "name": "rangeMaximumValue", "format": "n..18" },
+          {
+            "id": "6432",
+            "name": "significantDigitsQuantity",
+            "format": "n..2"
+          }
+        ]
+      },
+      {
+        "id": "7383",
+        "name": "surfaceOrLayerCode",
+        "requires": 0,
+        "components": [
+          { "id": "7383", "name": "surfaceOrLayerCode", "format": "an..3" }
+        ]
+      }
+    ]
+  },
+  "NAD": {
+    "requires": 1,
+    "elements": [
+      {
+        "id": "3035",
+        "name": "partyFunctionCodeQualifier",
+        "requires": 1,
+        "components": [
+          {
+            "id": "3035",
+            "name": "partyFunctionCodeQualifier",
+            "format": "an..3"
+          }
+        ]
+      },
+      {
+        "id": "C082",
+        "name": "partyIdentificationDetails",
+        "requires": 1,
+        "components": [
+          { "id": "3039", "name": "partyIdentifier", "format": "an..35" },
+          {
+            "id": "1131",
+            "name": "codeListIdentificationCode",
+            "format": "an..17"
+          },
+          {
+            "id": "3055",
+            "name": "codeListResponsibleAgencyCode",
+            "format": "an..3"
+          }
+        ]
+      },
+      {
+        "id": "C058",
+        "name": "nameAndAddress",
+        "requires": 1,
+        "components": [
+          {
+            "id": "3124",
+            "name": "nameAndAddressDescription",
+            "format": "an..35"
+          },
+          {
+            "id": "3124",
+            "name": "nameAndAddressDescription",
+            "format": "an..35"
+          },
+          {
+            "id": "3124",
+            "name": "nameAndAddressDescription",
+            "format": "an..35"
+          },
+          {
+            "id": "3124",
+            "name": "nameAndAddressDescription",
+            "format": "an..35"
+          },
+          {
+            "id": "3124",
+            "name": "nameAndAddressDescription",
+            "format": "an..35"
+          }
+        ]
+      },
+      {
+        "id": "C080",
+        "name": "partyName",
+        "requires": 1,
+        "components": [
+          { "id": "3036", "name": "partyName", "format": "an..35" },
+          { "id": "3036", "name": "partyName", "format": "an..35" },
+          { "id": "3036", "name": "partyName", "format": "an..35" },
+          { "id": "3036", "name": "partyName", "format": "an..35" },
+          { "id": "3036", "name": "partyName", "format": "an..35" },
+          { "id": "3045", "name": "partyNameFormatCode", "format": "an..3" }
+        ]
+      },
+      {
+        "id": "C059",
+        "name": "street",
+        "requires": 1,
+        "components": [
+          {
+            "id": "3042",
+            "name": "streetAndNumberOrPostOfficeBoxIdentifier",
+            "format": "an..35"
+          },
+          {
+            "id": "3042",
+            "name": "streetAndNumberOrPostOfficeBoxIdentifier",
+            "format": "an..35"
+          },
+          {
+            "id": "3042",
+            "name": "streetAndNumberOrPostOfficeBoxIdentifier",
+            "format": "an..35"
+          },
+          {
+            "id": "3042",
+            "name": "streetAndNumberOrPostOfficeBoxIdentifier",
+            "format": "an..35"
+          }
+        ]
+      },
+      {
+        "id": "3164",
+        "name": "cityName",
+        "requires": 0,
+        "components": [{ "id": "3164", "name": "cityName", "format": "an..35" }]
+      },
+      {
+        "id": "C819",
+        "name": "countrySubEntityDetails",
+        "requires": 0,
+        "components": [
+          {
+            "id": "3229",
+            "name": "countrySubEntityNameCode",
+            "format": "an..9"
+          },
+          {
+            "id": "1131",
+            "name": "codeListIdentificationCode",
+            "format": "an..17"
+          },
+          {
+            "id": "3055",
+            "name": "codeListResponsibleAgencyCode",
+            "format": "an..3"
+          },
+          { "id": "3228", "name": "countrySubEntityName", "format": "an..70" }
+        ]
+      },
+      {
+        "id": "3251",
+        "name": "postalIdentificationCode",
+        "requires": 0,
+        "components": [
+          {
+            "id": "3251",
+            "name": "postalIdentificationCode",
+            "format": "an..17"
+          }
+        ]
+      },
+      {
+        "id": "3207",
+        "name": "countryNameCode",
+        "requires": 0,
+        "components": [
+          { "id": "3207", "name": "countryNameCode", "format": "an..3" }
+        ]
+      }
+    ]
+  },
+  "PAC": {
+    "requires": 0,
+    "elements": [
+      {
+        "id": "7224",
+        "name": "packageQuantity",
+        "requires": 0,
+        "components": [
+          { "id": "7224", "name": "packageQuantity", "format": "n..8" }
+        ]
+      },
+      {
+        "id": "C531",
+        "name": "packagingDetails",
+        "requires": 0,
+        "components": [
+          { "id": "7075", "name": "packagingLevelCode", "format": "an..3" },
+          {
+            "id": "7233",
+            "name": "packagingRelatedDescriptionCode",
+            "format": "an..3"
+          },
+          {
+            "id": "7073",
+            "name": "packagingTermsAndConditionsCode",
+            "format": "an..3"
+          }
+        ]
+      },
+      {
+        "id": "C202",
+        "name": "packageType",
+        "requires": 0,
+        "components": [
+          {
+            "id": "7065",
+            "name": "packageTypeDescriptionCode",
+            "format": "an..17"
+          },
+          {
+            "id": "1131",
+            "name": "codeListIdentificationCode",
+            "format": "an..17"
+          },
+          {
+            "id": "3055",
+            "name": "codeListResponsibleAgencyCode",
+            "format": "an..3"
+          },
+          { "id": "7064", "name": "typeOfPackages", "format": "an..35" }
+        ]
+      },
+      {
+        "id": "C402",
+        "name": "packageTypeIdentification",
+        "requires": 2,
+        "components": [
+          { "id": "7077", "name": "descriptionFormatCode", "format": "an..3" },
+          { "id": "7064", "name": "typeOfPackages", "format": "an..35" },
+          {
+            "id": "7143",
+            "name": "itemTypeIdentificationCode",
+            "format": "an..3"
+          },
+          { "id": "7064", "name": "typeOfPackages", "format": "an..35" },
+          {
+            "id": "7143",
+            "name": "itemTypeIdentificationCode",
+            "format": "an..3"
+          }
+        ]
+      },
+      {
+        "id": "C532",
+        "name": "returnablePackageDetails",
+        "requires": 0,
+        "components": [
+          {
+            "id": "8395",
+            "name": "returnablePackageFreightPaymentResponsibilityCode",
+            "format": "an..3"
+          },
+          {
+            "id": "8393",
+            "name": "returnablePackageLoadContentsCode",
+            "format": "an..3"
+          }
+        ]
+      }
+    ]
+  },
+  "PCD": {
+    "requires": 1,
+    "elements": [
+      {
+        "id": "C501",
+        "name": "percentageDetails",
+        "requires": 1,
+        "components": [
+          {
+            "id": "5245",
+            "name": "percentageTypeCodeQualifier",
+            "format": "an..3"
+          },
+          { "id": "5482", "name": "percentage", "format": "n..10" },
+          {
+            "id": "5249",
+            "name": "percentageBasisIdentificationCode",
+            "format": "an..3"
+          },
+          {
+            "id": "1131",
+            "name": "codeListIdentificationCode",
+            "format": "an..17"
+          },
+          {
+            "id": "3055",
+            "name": "codeListResponsibleAgencyCode",
+            "format": "an..3"
+          }
+        ]
+      },
+      {
+        "id": "4405",
+        "name": "statusDescriptionCode",
+        "requires": 0,
+        "components": [
+          { "id": "4405", "name": "statusDescriptionCode", "format": "an..3" }
         ]
       }
     ]
@@ -420,84 +1226,30 @@
       }
     ]
   },
-  "TOD": {
-    "requires": 0,
+  "PIA": {
+    "requires": 2,
     "elements": [
       {
-        "id": "4055",
-        "name": "deliveryOrTransportTermsFunctionCode",
-        "requires": 0,
-        "components": [
-          {
-            "id": "4055",
-            "name": "deliveryOrTransportTermsFunctionCode",
-            "format": "an..3"
-          }
-        ]
-      },
-      {
-        "id": "4215",
-        "name": "transportChargesPaymentMethodCode",
-        "requires": 0,
-        "components": [
-          {
-            "id": "4215",
-            "name": "transportChargesPaymentMethodCode",
-            "format": "an..3"
-          }
-        ]
-      },
-      {
-        "id": "C100",
-        "name": "termsOfDeliveryOrTransport",
-        "requires": 0,
-        "components": [
-          {
-            "id": "4053",
-            "name": "deliveryOrTransportTermsDescriptionCode",
-            "format": "an..3"
-          },
-          {
-            "id": "1131",
-            "name": "codeListIdentificationCode",
-            "format": "an..17"
-          },
-          {
-            "id": "3055",
-            "name": "codeListResponsibleAgencyCode",
-            "format": "an..3"
-          },
-          {
-            "id": "4052",
-            "name": "deliveryOrTransportTermsDescription",
-            "format": "an..70"
-          },
-          {
-            "id": "4052",
-            "name": "deliveryOrTransportTermsDescription",
-            "format": "an..70"
-          }
-        ]
-      }
-    ]
-  },
-  "PCD": {
-    "requires": 1,
-    "elements": [
-      {
-        "id": "C501",
-        "name": "percentageDetails",
+        "id": "4347",
+        "name": "productIdentifierCodeQualifier",
         "requires": 1,
         "components": [
           {
-            "id": "5245",
-            "name": "percentageTypeCodeQualifier",
+            "id": "4347",
+            "name": "productIdentifierCodeQualifier",
             "format": "an..3"
-          },
-          { "id": "5482", "name": "percentage", "format": "n..10" },
+          }
+        ]
+      },
+      {
+        "id": "C212",
+        "name": "itemNumberIdentification",
+        "requires": 0,
+        "components": [
+          { "id": "7140", "name": "itemIdentifier", "format": "an..35" },
           {
-            "id": "5249",
-            "name": "percentageBasisIdentificationCode",
+            "id": "7143",
+            "name": "itemTypeIdentificationCode",
             "format": "an..3"
           },
           {
@@ -513,40 +1265,237 @@
         ]
       },
       {
-        "id": "4405",
-        "name": "statusDescriptionCode",
+        "id": "C212",
+        "name": "itemNumberIdentification",
         "requires": 0,
         "components": [
-          { "id": "4405", "name": "statusDescriptionCode", "format": "an..3" }
+          { "id": "7140", "name": "itemIdentifier", "format": "an..35" },
+          {
+            "id": "7143",
+            "name": "itemTypeIdentificationCode",
+            "format": "an..3"
+          },
+          {
+            "id": "1131",
+            "name": "codeListIdentificationCode",
+            "format": "an..17"
+          },
+          {
+            "id": "3055",
+            "name": "codeListResponsibleAgencyCode",
+            "format": "an..3"
+          }
+        ]
+      },
+      {
+        "id": "C212",
+        "name": "itemNumberIdentification",
+        "requires": 0,
+        "components": [
+          { "id": "7140", "name": "itemIdentifier", "format": "an..35" },
+          {
+            "id": "7143",
+            "name": "itemTypeIdentificationCode",
+            "format": "an..3"
+          },
+          {
+            "id": "1131",
+            "name": "codeListIdentificationCode",
+            "format": "an..17"
+          },
+          {
+            "id": "3055",
+            "name": "codeListResponsibleAgencyCode",
+            "format": "an..3"
+          }
+        ]
+      },
+      {
+        "id": "C212",
+        "name": "itemNumberIdentification",
+        "requires": 0,
+        "components": [
+          { "id": "7140", "name": "itemIdentifier", "format": "an..35" },
+          {
+            "id": "7143",
+            "name": "itemTypeIdentificationCode",
+            "format": "an..3"
+          },
+          {
+            "id": "1131",
+            "name": "codeListIdentificationCode",
+            "format": "an..17"
+          },
+          {
+            "id": "3055",
+            "name": "codeListResponsibleAgencyCode",
+            "format": "an..3"
+          }
+        ]
+      },
+      {
+        "id": "C212",
+        "name": "itemNumberIdentification",
+        "requires": 0,
+        "components": [
+          { "id": "7140", "name": "itemIdentifier", "format": "an..35" },
+          {
+            "id": "7143",
+            "name": "itemTypeIdentificationCode",
+            "format": "an..3"
+          },
+          {
+            "id": "1131",
+            "name": "codeListIdentificationCode",
+            "format": "an..17"
+          },
+          {
+            "id": "3055",
+            "name": "codeListResponsibleAgencyCode",
+            "format": "an..3"
+          }
         ]
       }
     ]
   },
-  "CTA": {
-    "requires": 0,
+  "QTY": {
+    "requires": 1,
     "elements": [
       {
-        "id": "3139",
-        "name": "contactFunctionCode",
-        "requires": 0,
+        "id": "C186",
+        "name": "quantityDetails",
+        "requires": 2,
         "components": [
-          { "id": "3139", "name": "contactFunctionCode", "format": "an..3" }
+          {
+            "id": "6063",
+            "name": "quantityTypeCodeQualifier",
+            "format": "an..3"
+          },
+          { "id": "6060", "name": "quantity", "format": "an..35" },
+          { "id": "6411", "name": "measurementUnitCode", "format": "an..3" }
+        ]
+      }
+    ]
+  },
+  "RCS": {
+    "requires": 1,
+    "elements": [
+      {
+        "id": "7293",
+        "name": "sectorAreaIdentificationCodeQualifier",
+        "requires": 1,
+        "components": [
+          {
+            "id": "7293",
+            "name": "sectorAreaIdentificationCodeQualifier",
+            "format": "an..3"
+          }
         ]
       },
       {
-        "id": "C056",
-        "name": "departmentOrEmployeeDetails",
-        "requires": 0,
+        "id": "C550",
+        "name": "requirementConditionIdentification",
+        "requires": 1,
         "components": [
           {
-            "id": "3413",
-            "name": "departmentOrEmployeeNameCode",
+            "id": "7295",
+            "name": "requirementOrConditionDescriptionIdentifier",
             "format": "an..17"
           },
           {
-            "id": "3412",
-            "name": "departmentOrEmployeeName",
+            "id": "1131",
+            "name": "codeListIdentificationCode",
+            "format": "an..17"
+          },
+          {
+            "id": "3055",
+            "name": "codeListResponsibleAgencyCode",
+            "format": "an..3"
+          },
+          {
+            "id": "7294",
+            "name": "requirementOrConditionDescription",
             "format": "an..35"
+          }
+        ]
+      },
+      {
+        "id": "1229",
+        "name": "actionRequestNotificationDescriptionCode",
+        "requires": 0,
+        "components": [
+          {
+            "id": "1229",
+            "name": "actionRequestNotificationDescriptionCode",
+            "format": "an..3"
+          }
+        ]
+      },
+      {
+        "id": "3207",
+        "name": "countryNameCode",
+        "requires": 0,
+        "components": [
+          { "id": "3207", "name": "countryNameCode", "format": "an..3" }
+        ]
+      }
+    ]
+  },
+  "RFF": {
+    "requires": 1,
+    "elements": [
+      {
+        "id": "C506",
+        "name": "reference",
+        "requires": 1,
+        "components": [
+          { "id": "1153", "name": "referenceCodeQualifier", "format": "an..3" },
+          { "id": "1154", "name": "referenceIdentifier", "format": "an..70" },
+          { "id": "1156", "name": "documentLineIdentifier", "format": "an..6" },
+          {
+            "id": "4000",
+            "name": "referenceVersionIdentifier",
+            "format": "an..35"
+          },
+          { "id": "1060", "name": "revisionIdentifier", "format": "an..6" }
+        ]
+      }
+    ]
+  },
+  "SCC": {
+    "requires": 1,
+    "elements": [
+      {
+        "id": "4017",
+        "name": "deliveryPlanCommitmentLevelCode",
+        "requires": 1,
+        "components": [
+          {
+            "id": "4017",
+            "name": "deliveryPlanCommitmentLevelCode",
+            "format": "an..3"
+          }
+        ]
+      },
+      {
+        "id": "4493",
+        "name": "deliveryInstructionCode",
+        "requires": 0,
+        "components": [
+          { "id": "4493", "name": "deliveryInstructionCode", "format": "an..3" }
+        ]
+      },
+      {
+        "id": "C329",
+        "name": "patternDescription",
+        "requires": 0,
+        "components": [
+          { "id": "2013", "name": "frequencyCode", "format": "an..3" },
+          { "id": "2015", "name": "despatchPatternCode", "format": "an..3" },
+          {
+            "id": "2017",
+            "name": "despatchPatternTimingCode",
+            "format": "an..3"
           }
         ]
       }
@@ -729,853 +1678,6 @@
       }
     ]
   },
-  "FTX": {
-    "requires": 1,
-    "elements": [
-      {
-        "id": "4451",
-        "name": "textSubjectCodeQualifier",
-        "requires": 1,
-        "components": [
-          {
-            "id": "4451",
-            "name": "textSubjectCodeQualifier",
-            "format": "an..3"
-          }
-        ]
-      },
-      {
-        "id": "4453",
-        "name": "freeTextFunctionCode",
-        "requires": 0,
-        "components": [
-          { "id": "4453", "name": "freeTextFunctionCode", "format": "an..3" }
-        ]
-      },
-      {
-        "id": "C107",
-        "name": "textReference",
-        "requires": 1,
-        "components": [
-          { "id": "4441", "name": "freeTextValueCode", "format": "an..17" },
-          {
-            "id": "1131",
-            "name": "codeListIdentificationCode",
-            "format": "an..17"
-          },
-          {
-            "id": "3055",
-            "name": "codeListResponsibleAgencyCode",
-            "format": "an..3"
-          }
-        ]
-      },
-      {
-        "id": "C108",
-        "name": "textLiteral",
-        "requires": 1,
-        "components": [
-          { "id": "4440", "name": "freeTextValue", "format": "an..512" },
-          { "id": "4440", "name": "freeTextValue", "format": "an..512" },
-          { "id": "4440", "name": "freeTextValue", "format": "an..512" },
-          { "id": "4440", "name": "freeTextValue", "format": "an..512" },
-          { "id": "4440", "name": "freeTextValue", "format": "an..512" }
-        ]
-      },
-      {
-        "id": "3453",
-        "name": "languageNameCode",
-        "requires": 0,
-        "components": [
-          { "id": "3453", "name": "languageNameCode", "format": "an..3" }
-        ]
-      },
-      {
-        "id": "4447",
-        "name": "freeTextFormatCode",
-        "requires": 0,
-        "components": [
-          { "id": "4447", "name": "freeTextFormatCode", "format": "an..3" }
-        ]
-      }
-    ]
-  },
-  "RCS": {
-    "requires": 1,
-    "elements": [
-      {
-        "id": "7293",
-        "name": "sectorAreaIdentificationCodeQualifier",
-        "requires": 1,
-        "components": [
-          {
-            "id": "7293",
-            "name": "sectorAreaIdentificationCodeQualifier",
-            "format": "an..3"
-          }
-        ]
-      },
-      {
-        "id": "C550",
-        "name": "requirementConditionIdentification",
-        "requires": 1,
-        "components": [
-          {
-            "id": "7295",
-            "name": "requirementOrConditionDescriptionIdentifier",
-            "format": "an..17"
-          },
-          {
-            "id": "1131",
-            "name": "codeListIdentificationCode",
-            "format": "an..17"
-          },
-          {
-            "id": "3055",
-            "name": "codeListResponsibleAgencyCode",
-            "format": "an..3"
-          },
-          {
-            "id": "7294",
-            "name": "requirementOrConditionDescription",
-            "format": "an..35"
-          }
-        ]
-      },
-      {
-        "id": "1229",
-        "name": "actionRequestNotificationDescriptionCode",
-        "requires": 0,
-        "components": [
-          {
-            "id": "1229",
-            "name": "actionRequestNotificationDescriptionCode",
-            "format": "an..3"
-          }
-        ]
-      },
-      {
-        "id": "3207",
-        "name": "countryNameCode",
-        "requires": 0,
-        "components": [
-          { "id": "3207", "name": "countryNameCode", "format": "an..3" }
-        ]
-      }
-    ]
-  },
-  "PIA": {
-    "requires": 2,
-    "elements": [
-      {
-        "id": "4347",
-        "name": "productIdentifierCodeQualifier",
-        "requires": 1,
-        "components": [
-          {
-            "id": "4347",
-            "name": "productIdentifierCodeQualifier",
-            "format": "an..3"
-          }
-        ]
-      },
-      {
-        "id": "C212",
-        "name": "itemNumberIdentification",
-        "requires": 0,
-        "components": [
-          { "id": "7140", "name": "itemIdentifier", "format": "an..35" },
-          {
-            "id": "7143",
-            "name": "itemTypeIdentificationCode",
-            "format": "an..3"
-          },
-          {
-            "id": "1131",
-            "name": "codeListIdentificationCode",
-            "format": "an..17"
-          },
-          {
-            "id": "3055",
-            "name": "codeListResponsibleAgencyCode",
-            "format": "an..3"
-          }
-        ]
-      },
-      {
-        "id": "C212",
-        "name": "itemNumberIdentification",
-        "requires": 0,
-        "components": [
-          { "id": "7140", "name": "itemIdentifier", "format": "an..35" },
-          {
-            "id": "7143",
-            "name": "itemTypeIdentificationCode",
-            "format": "an..3"
-          },
-          {
-            "id": "1131",
-            "name": "codeListIdentificationCode",
-            "format": "an..17"
-          },
-          {
-            "id": "3055",
-            "name": "codeListResponsibleAgencyCode",
-            "format": "an..3"
-          }
-        ]
-      },
-      {
-        "id": "C212",
-        "name": "itemNumberIdentification",
-        "requires": 0,
-        "components": [
-          { "id": "7140", "name": "itemIdentifier", "format": "an..35" },
-          {
-            "id": "7143",
-            "name": "itemTypeIdentificationCode",
-            "format": "an..3"
-          },
-          {
-            "id": "1131",
-            "name": "codeListIdentificationCode",
-            "format": "an..17"
-          },
-          {
-            "id": "3055",
-            "name": "codeListResponsibleAgencyCode",
-            "format": "an..3"
-          }
-        ]
-      },
-      {
-        "id": "C212",
-        "name": "itemNumberIdentification",
-        "requires": 0,
-        "components": [
-          { "id": "7140", "name": "itemIdentifier", "format": "an..35" },
-          {
-            "id": "7143",
-            "name": "itemTypeIdentificationCode",
-            "format": "an..3"
-          },
-          {
-            "id": "1131",
-            "name": "codeListIdentificationCode",
-            "format": "an..17"
-          },
-          {
-            "id": "3055",
-            "name": "codeListResponsibleAgencyCode",
-            "format": "an..3"
-          }
-        ]
-      },
-      {
-        "id": "C212",
-        "name": "itemNumberIdentification",
-        "requires": 0,
-        "components": [
-          { "id": "7140", "name": "itemIdentifier", "format": "an..35" },
-          {
-            "id": "7143",
-            "name": "itemTypeIdentificationCode",
-            "format": "an..3"
-          },
-          {
-            "id": "1131",
-            "name": "codeListIdentificationCode",
-            "format": "an..17"
-          },
-          {
-            "id": "3055",
-            "name": "codeListResponsibleAgencyCode",
-            "format": "an..3"
-          }
-        ]
-      }
-    ]
-  },
-  "PAC": {
-    "requires": 0,
-    "elements": [
-      {
-        "id": "7224",
-        "name": "packageQuantity",
-        "requires": 0,
-        "components": [
-          { "id": "7224", "name": "packageQuantity", "format": "n..8" }
-        ]
-      },
-      {
-        "id": "C531",
-        "name": "packagingDetails",
-        "requires": 0,
-        "components": [
-          { "id": "7075", "name": "packagingLevelCode", "format": "an..3" },
-          {
-            "id": "7233",
-            "name": "packagingRelatedDescriptionCode",
-            "format": "an..3"
-          },
-          {
-            "id": "7073",
-            "name": "packagingTermsAndConditionsCode",
-            "format": "an..3"
-          }
-        ]
-      },
-      {
-        "id": "C202",
-        "name": "packageType",
-        "requires": 0,
-        "components": [
-          {
-            "id": "7065",
-            "name": "packageTypeDescriptionCode",
-            "format": "an..17"
-          },
-          {
-            "id": "1131",
-            "name": "codeListIdentificationCode",
-            "format": "an..17"
-          },
-          {
-            "id": "3055",
-            "name": "codeListResponsibleAgencyCode",
-            "format": "an..3"
-          },
-          { "id": "7064", "name": "typeOfPackages", "format": "an..35" }
-        ]
-      },
-      {
-        "id": "C402",
-        "name": "packageTypeIdentification",
-        "requires": 2,
-        "components": [
-          { "id": "7077", "name": "descriptionFormatCode", "format": "an..3" },
-          { "id": "7064", "name": "typeOfPackages", "format": "an..35" },
-          {
-            "id": "7143",
-            "name": "itemTypeIdentificationCode",
-            "format": "an..3"
-          },
-          { "id": "7064", "name": "typeOfPackages", "format": "an..35" },
-          {
-            "id": "7143",
-            "name": "itemTypeIdentificationCode",
-            "format": "an..3"
-          }
-        ]
-      },
-      {
-        "id": "C532",
-        "name": "returnablePackageDetails",
-        "requires": 0,
-        "components": [
-          {
-            "id": "8395",
-            "name": "returnablePackageFreightPaymentResponsibilityCode",
-            "format": "an..3"
-          },
-          {
-            "id": "8393",
-            "name": "returnablePackageLoadContentsCode",
-            "format": "an..3"
-          }
-        ]
-      }
-    ]
-  },
-  "LIN": {
-    "requires": 0,
-    "elements": [
-      {
-        "id": "1082",
-        "name": "lineItemIdentifier",
-        "requires": 0,
-        "components": [
-          { "id": "1082", "name": "lineItemIdentifier", "format": "an..6" }
-        ]
-      },
-      {
-        "id": "1229",
-        "name": "actionRequestNotificationDescriptionCode",
-        "requires": 0,
-        "components": [
-          {
-            "id": "1229",
-            "name": "actionRequestNotificationDescriptionCode",
-            "format": "an..3"
-          }
-        ]
-      },
-      {
-        "id": "C212",
-        "name": "itemNumberIdentification",
-        "requires": 0,
-        "components": [
-          { "id": "7140", "name": "itemIdentifier", "format": "an..35" },
-          {
-            "id": "7143",
-            "name": "itemTypeIdentificationCode",
-            "format": "an..3"
-          },
-          {
-            "id": "1131",
-            "name": "codeListIdentificationCode",
-            "format": "an..17"
-          },
-          {
-            "id": "3055",
-            "name": "codeListResponsibleAgencyCode",
-            "format": "an..3"
-          }
-        ]
-      },
-      {
-        "id": "C829",
-        "name": "subLineInformation",
-        "requires": 0,
-        "components": [
-          { "id": "5495", "name": "subLineIndicatorCode", "format": "an..3" },
-          { "id": "1082", "name": "lineItemIdentifier", "format": "an..6" }
-        ]
-      },
-      {
-        "id": "1222",
-        "name": "configurationLevelNumber",
-        "requires": 0,
-        "components": [
-          { "id": "1222", "name": "configurationLevelNumber", "format": "n..2" }
-        ]
-      },
-      {
-        "id": "7083",
-        "name": "configurationOperationCode",
-        "requires": 0,
-        "components": [
-          {
-            "id": "7083",
-            "name": "configurationOperationCode",
-            "format": "an..3"
-          }
-        ]
-      }
-    ]
-  },
-  "QTY": {
-    "requires": 1,
-    "elements": [
-      {
-        "id": "C186",
-        "name": "quantityDetails",
-        "requires": 2,
-        "components": [
-          {
-            "id": "6063",
-            "name": "quantityTypeCodeQualifier",
-            "format": "an..3"
-          },
-          { "id": "6060", "name": "quantity", "format": "an..35" },
-          { "id": "6411", "name": "measurementUnitCode", "format": "an..3" }
-        ]
-      }
-    ]
-  },
-  "LOC": {
-    "requires": 1,
-    "elements": [
-      {
-        "id": "3227",
-        "name": "locationFunctionCodeQualifier",
-        "requires": 1,
-        "components": [
-          {
-            "id": "3227",
-            "name": "locationFunctionCodeQualifier",
-            "format": "an..3"
-          }
-        ]
-      },
-      {
-        "id": "C517",
-        "name": "locationIdentification",
-        "requires": 0,
-        "components": [
-          { "id": "3225", "name": "locationNameCode", "format": "an..25" },
-          {
-            "id": "1131",
-            "name": "codeListIdentificationCode",
-            "format": "an..17"
-          },
-          {
-            "id": "3055",
-            "name": "codeListResponsibleAgencyCode",
-            "format": "an..3"
-          },
-          { "id": "3224", "name": "locationName", "format": "an..256" }
-        ]
-      },
-      {
-        "id": "C519",
-        "name": "relatedLocationOneIdentification",
-        "requires": 0,
-        "components": [
-          {
-            "id": "3223",
-            "name": "firstRelatedLocationNameCode",
-            "format": "an..25"
-          },
-          {
-            "id": "1131",
-            "name": "codeListIdentificationCode",
-            "format": "an..17"
-          },
-          {
-            "id": "3055",
-            "name": "codeListResponsibleAgencyCode",
-            "format": "an..3"
-          },
-          {
-            "id": "3222",
-            "name": "firstRelatedLocationName",
-            "format": "an..70"
-          }
-        ]
-      },
-      {
-        "id": "C553",
-        "name": "relatedLocationTwoIdentification",
-        "requires": 0,
-        "components": [
-          {
-            "id": "3233",
-            "name": "secondRelatedLocationNameCode",
-            "format": "an..25"
-          },
-          {
-            "id": "1131",
-            "name": "codeListIdentificationCode",
-            "format": "an..17"
-          },
-          {
-            "id": "3055",
-            "name": "codeListResponsibleAgencyCode",
-            "format": "an..3"
-          },
-          {
-            "id": "3232",
-            "name": "secondRelatedLocationName",
-            "format": "an..70"
-          }
-        ]
-      },
-      {
-        "id": "5479",
-        "name": "relationCode",
-        "requires": 0,
-        "components": [
-          { "id": "5479", "name": "relationCode", "format": "an..3" }
-        ]
-      }
-    ]
-  },
-  "NAD": {
-    "requires": 1,
-    "elements": [
-      {
-        "id": "3035",
-        "name": "partyFunctionCodeQualifier",
-        "requires": 1,
-        "components": [
-          {
-            "id": "3035",
-            "name": "partyFunctionCodeQualifier",
-            "format": "an..3"
-          }
-        ]
-      },
-      {
-        "id": "C082",
-        "name": "partyIdentificationDetails",
-        "requires": 1,
-        "components": [
-          { "id": "3039", "name": "partyIdentifier", "format": "an..35" },
-          {
-            "id": "1131",
-            "name": "codeListIdentificationCode",
-            "format": "an..17"
-          },
-          {
-            "id": "3055",
-            "name": "codeListResponsibleAgencyCode",
-            "format": "an..3"
-          }
-        ]
-      },
-      {
-        "id": "C058",
-        "name": "nameAndAddress",
-        "requires": 1,
-        "components": [
-          {
-            "id": "3124",
-            "name": "nameAndAddressDescription",
-            "format": "an..35"
-          },
-          {
-            "id": "3124",
-            "name": "nameAndAddressDescription",
-            "format": "an..35"
-          },
-          {
-            "id": "3124",
-            "name": "nameAndAddressDescription",
-            "format": "an..35"
-          },
-          {
-            "id": "3124",
-            "name": "nameAndAddressDescription",
-            "format": "an..35"
-          },
-          {
-            "id": "3124",
-            "name": "nameAndAddressDescription",
-            "format": "an..35"
-          }
-        ]
-      },
-      {
-        "id": "C080",
-        "name": "partyName",
-        "requires": 1,
-        "components": [
-          { "id": "3036", "name": "partyName", "format": "an..35" },
-          { "id": "3036", "name": "partyName", "format": "an..35" },
-          { "id": "3036", "name": "partyName", "format": "an..35" },
-          { "id": "3036", "name": "partyName", "format": "an..35" },
-          { "id": "3036", "name": "partyName", "format": "an..35" },
-          { "id": "3045", "name": "partyNameFormatCode", "format": "an..3" }
-        ]
-      },
-      {
-        "id": "C059",
-        "name": "street",
-        "requires": 1,
-        "components": [
-          {
-            "id": "3042",
-            "name": "streetAndNumberOrPostOfficeBoxIdentifier",
-            "format": "an..35"
-          },
-          {
-            "id": "3042",
-            "name": "streetAndNumberOrPostOfficeBoxIdentifier",
-            "format": "an..35"
-          },
-          {
-            "id": "3042",
-            "name": "streetAndNumberOrPostOfficeBoxIdentifier",
-            "format": "an..35"
-          },
-          {
-            "id": "3042",
-            "name": "streetAndNumberOrPostOfficeBoxIdentifier",
-            "format": "an..35"
-          }
-        ]
-      },
-      {
-        "id": "3164",
-        "name": "cityName",
-        "requires": 0,
-        "components": [{ "id": "3164", "name": "cityName", "format": "an..35" }]
-      },
-      {
-        "id": "C819",
-        "name": "countrySubEntityDetails",
-        "requires": 0,
-        "components": [
-          {
-            "id": "3229",
-            "name": "countrySubEntityNameCode",
-            "format": "an..9"
-          },
-          {
-            "id": "1131",
-            "name": "codeListIdentificationCode",
-            "format": "an..17"
-          },
-          {
-            "id": "3055",
-            "name": "codeListResponsibleAgencyCode",
-            "format": "an..3"
-          },
-          { "id": "3228", "name": "countrySubEntityName", "format": "an..70" }
-        ]
-      },
-      {
-        "id": "3251",
-        "name": "postalIdentificationCode",
-        "requires": 0,
-        "components": [
-          {
-            "id": "3251",
-            "name": "postalIdentificationCode",
-            "format": "an..17"
-          }
-        ]
-      },
-      {
-        "id": "3207",
-        "name": "countryNameCode",
-        "requires": 0,
-        "components": [
-          { "id": "3207", "name": "countryNameCode", "format": "an..3" }
-        ]
-      }
-    ]
-  },
-  "RFF": {
-    "requires": 1,
-    "elements": [
-      {
-        "id": "C506",
-        "name": "reference",
-        "requires": 1,
-        "components": [
-          { "id": "1153", "name": "referenceCodeQualifier", "format": "an..3" },
-          { "id": "1154", "name": "referenceIdentifier", "format": "an..70" },
-          { "id": "1156", "name": "documentLineIdentifier", "format": "an..6" },
-          {
-            "id": "4000",
-            "name": "referenceVersionIdentifier",
-            "format": "an..35"
-          },
-          { "id": "1060", "name": "revisionIdentifier", "format": "an..6" }
-        ]
-      }
-    ]
-  },
-  "EQD": {
-    "requires": 1,
-    "elements": [
-      {
-        "id": "8053",
-        "name": "equipmentTypeCodeQualifier",
-        "requires": 1,
-        "components": [
-          {
-            "id": "8053",
-            "name": "equipmentTypeCodeQualifier",
-            "format": "an..3"
-          }
-        ]
-      },
-      {
-        "id": "C237",
-        "name": "equipmentIdentification",
-        "requires": 0,
-        "components": [
-          { "id": "8260", "name": "equipmentIdentifier", "format": "an..17" },
-          {
-            "id": "1131",
-            "name": "codeListIdentificationCode",
-            "format": "an..17"
-          },
-          {
-            "id": "3055",
-            "name": "codeListResponsibleAgencyCode",
-            "format": "an..3"
-          },
-          { "id": "3207", "name": "countryNameCode", "format": "an..3" }
-        ]
-      },
-      {
-        "id": "C224",
-        "name": "equipmentSizeAndType",
-        "requires": 0,
-        "components": [
-          {
-            "id": "8155",
-            "name": "equipmentSizeAndTypeDescriptionCode",
-            "format": "an..10"
-          },
-          {
-            "id": "1131",
-            "name": "codeListIdentificationCode",
-            "format": "an..17"
-          },
-          {
-            "id": "3055",
-            "name": "codeListResponsibleAgencyCode",
-            "format": "an..3"
-          },
-          {
-            "id": "8154",
-            "name": "equipmentSizeAndTypeDescription",
-            "format": "an..35"
-          }
-        ]
-      },
-      {
-        "id": "8077",
-        "name": "equipmentSupplierCode",
-        "requires": 0,
-        "components": [
-          { "id": "8077", "name": "equipmentSupplierCode", "format": "an..3" }
-        ]
-      },
-      {
-        "id": "8249",
-        "name": "equipmentStatusCode",
-        "requires": 0,
-        "components": [
-          { "id": "8249", "name": "equipmentStatusCode", "format": "an..3" }
-        ]
-      },
-      {
-        "id": "8169",
-        "name": "fullOrEmptyIndicatorCode",
-        "requires": 0,
-        "components": [
-          {
-            "id": "8169",
-            "name": "fullOrEmptyIndicatorCode",
-            "format": "an..3"
-          }
-        ]
-      }
-    ]
-  },
-  "DTM": {
-    "requires": 1,
-    "elements": [
-      {
-        "id": "C507",
-        "name": "dateTimePeriod",
-        "requires": 1,
-        "components": [
-          {
-            "id": "2005",
-            "name": "dateOrTimeOrPeriodFunctionCodeQualifier",
-            "format": "an..3"
-          },
-          {
-            "id": "2380",
-            "name": "dateOrTimeOrPeriodValue",
-            "format": "an..35"
-          },
-          {
-            "id": "2379",
-            "name": "dateOrTimeOrPeriodFormatCode",
-            "format": "an..3"
-          }
-        ]
-      }
-    ]
-  },
   "TDT": {
     "requires": 1,
     "elements": [
@@ -1728,144 +1830,43 @@
       }
     ]
   },
-  "MEA": {
-    "requires": 1,
-    "elements": [
-      {
-        "id": "6311",
-        "name": "measurementPurposeCodeQualifier",
-        "requires": 1,
-        "components": [
-          {
-            "id": "6311",
-            "name": "measurementPurposeCodeQualifier",
-            "format": "an..3"
-          }
-        ]
-      },
-      {
-        "id": "C502",
-        "name": "measurementDetails",
-        "requires": 0,
-        "components": [
-          { "id": "6313", "name": "measuredAttributeCode", "format": "an..3" },
-          {
-            "id": "6321",
-            "name": "measurementSignificanceCode",
-            "format": "an..3"
-          },
-          {
-            "id": "6155",
-            "name": "nonDiscreteMeasurementNameCode",
-            "format": "an..17"
-          },
-          {
-            "id": "6154",
-            "name": "nonDiscreteMeasurementName",
-            "format": "an..70"
-          }
-        ]
-      },
-      {
-        "id": "C174",
-        "name": "valueRange",
-        "requires": 1,
-        "components": [
-          { "id": "6411", "name": "measurementUnitCode", "format": "an..3" },
-          { "id": "6314", "name": "measurementValue", "format": "an..18" },
-          { "id": "6162", "name": "rangeMinimumValue", "format": "n..18" },
-          { "id": "6152", "name": "rangeMaximumValue", "format": "n..18" },
-          {
-            "id": "6432",
-            "name": "significantDigitsQuantity",
-            "format": "n..2"
-          }
-        ]
-      },
-      {
-        "id": "7383",
-        "name": "surfaceOrLayerCode",
-        "requires": 0,
-        "components": [
-          { "id": "7383", "name": "surfaceOrLayerCode", "format": "an..3" }
-        ]
-      }
-    ]
-  },
-  "SCC": {
-    "requires": 1,
-    "elements": [
-      {
-        "id": "4017",
-        "name": "deliveryPlanCommitmentLevelCode",
-        "requires": 1,
-        "components": [
-          {
-            "id": "4017",
-            "name": "deliveryPlanCommitmentLevelCode",
-            "format": "an..3"
-          }
-        ]
-      },
-      {
-        "id": "4493",
-        "name": "deliveryInstructionCode",
-        "requires": 0,
-        "components": [
-          { "id": "4493", "name": "deliveryInstructionCode", "format": "an..3" }
-        ]
-      },
-      {
-        "id": "C329",
-        "name": "patternDescription",
-        "requires": 0,
-        "components": [
-          { "id": "2013", "name": "frequencyCode", "format": "an..3" },
-          { "id": "2015", "name": "despatchPatternCode", "format": "an..3" },
-          {
-            "id": "2017",
-            "name": "despatchPatternTimingCode",
-            "format": "an..3"
-          }
-        ]
-      }
-    ]
-  },
-  "IMD": {
+  "TOD": {
     "requires": 0,
     "elements": [
       {
-        "id": "7077",
-        "name": "descriptionFormatCode",
+        "id": "4055",
+        "name": "deliveryOrTransportTermsFunctionCode",
         "requires": 0,
         "components": [
-          { "id": "7077", "name": "descriptionFormatCode", "format": "an..3" }
-        ]
-      },
-      {
-        "id": "C272",
-        "name": "itemCharacteristic",
-        "requires": 0,
-        "components": [
-          { "id": "7081", "name": "itemCharacteristicCode", "format": "an..3" },
           {
-            "id": "1131",
-            "name": "codeListIdentificationCode",
-            "format": "an..17"
-          },
-          {
-            "id": "3055",
-            "name": "codeListResponsibleAgencyCode",
+            "id": "4055",
+            "name": "deliveryOrTransportTermsFunctionCode",
             "format": "an..3"
           }
         ]
       },
       {
-        "id": "C273",
-        "name": "itemDescription",
+        "id": "4215",
+        "name": "transportChargesPaymentMethodCode",
         "requires": 0,
         "components": [
-          { "id": "7009", "name": "itemDescriptionCode", "format": "an..17" },
+          {
+            "id": "4215",
+            "name": "transportChargesPaymentMethodCode",
+            "format": "an..3"
+          }
+        ]
+      },
+      {
+        "id": "C100",
+        "name": "termsOfDeliveryOrTransport",
+        "requires": 0,
+        "components": [
+          {
+            "id": "4053",
+            "name": "deliveryOrTransportTermsDescriptionCode",
+            "format": "an..3"
+          },
           {
             "id": "1131",
             "name": "codeListIdentificationCode",
@@ -1876,17 +1877,16 @@
             "name": "codeListResponsibleAgencyCode",
             "format": "an..3"
           },
-          { "id": "7008", "name": "itemDescription", "format": "an..256" },
-          { "id": "7008", "name": "itemDescription", "format": "an..256" },
-          { "id": "3453", "name": "languageNameCode", "format": "an..3" }
-        ]
-      },
-      {
-        "id": "7383",
-        "name": "surfaceOrLayerCode",
-        "requires": 0,
-        "components": [
-          { "id": "7383", "name": "surfaceOrLayerCode", "format": "an..3" }
+          {
+            "id": "4052",
+            "name": "deliveryOrTransportTermsDescription",
+            "format": "an..70"
+          },
+          {
+            "id": "4052",
+            "name": "deliveryOrTransportTermsDescription",
+            "format": "an..70"
+          }
         ]
       }
     ]

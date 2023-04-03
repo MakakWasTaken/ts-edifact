@@ -24,6 +24,56 @@
       }
     ]
   },
+  "BGM": {
+    "requires": 0,
+    "elements": [
+      {
+        "id": "C002",
+        "name": "documentMessageName",
+        "requires": 0,
+        "components": [
+          { "id": "1001", "name": "documentNameCode", "format": "an..3" },
+          {
+            "id": "1131",
+            "name": "codeListIdentificationCode",
+            "format": "an..17"
+          },
+          {
+            "id": "3055",
+            "name": "codeListResponsibleAgencyCode",
+            "format": "an..3"
+          },
+          { "id": "1000", "name": "documentName", "format": "an..35" }
+        ]
+      },
+      {
+        "id": "C106",
+        "name": "documentMessageIdentification",
+        "requires": 0,
+        "components": [
+          { "id": "1004", "name": "documentIdentifier", "format": "an..35" },
+          { "id": "1056", "name": "versionIdentifier", "format": "an..9" },
+          { "id": "1060", "name": "revisionIdentifier", "format": "an..6" }
+        ]
+      },
+      {
+        "id": "1225",
+        "name": "messageFunctionCode",
+        "requires": 0,
+        "components": [
+          { "id": "1225", "name": "messageFunctionCode", "format": "an..3" }
+        ]
+      },
+      {
+        "id": "4343",
+        "name": "responseTypeCode",
+        "requires": 0,
+        "components": [
+          { "id": "4343", "name": "responseTypeCode", "format": "an..3" }
+        ]
+      }
+    ]
+  },
   "CAV": {
     "requires": 1,
     "elements": [
@@ -61,16 +111,82 @@
       }
     ]
   },
-  "EQN": {
-    "requires": 1,
+  "CCI": {
+    "requires": 0,
     "elements": [
       {
-        "id": "C523",
-        "name": "numberOfUnitDetails",
+        "id": "7059",
+        "name": "classTypeCode",
         "requires": 0,
         "components": [
-          { "id": "6350", "name": "unitsQuantity", "format": "n..15" },
-          { "id": "6353", "name": "unitTypeCodeQualifier", "format": "an..3" }
+          { "id": "7059", "name": "classTypeCode", "format": "an..3" }
+        ]
+      },
+      {
+        "id": "C502",
+        "name": "measurementDetails",
+        "requires": 0,
+        "components": [
+          { "id": "6313", "name": "measuredAttributeCode", "format": "an..3" },
+          {
+            "id": "6321",
+            "name": "measurementSignificanceCode",
+            "format": "an..3"
+          },
+          {
+            "id": "6155",
+            "name": "nonDiscreteMeasurementNameCode",
+            "format": "an..17"
+          },
+          {
+            "id": "6154",
+            "name": "nonDiscreteMeasurementName",
+            "format": "an..70"
+          }
+        ]
+      },
+      {
+        "id": "C240",
+        "name": "productCharacteristic",
+        "requires": 1,
+        "components": [
+          {
+            "id": "7037",
+            "name": "characteristicDescriptionCode",
+            "format": "an..17"
+          },
+          {
+            "id": "1131",
+            "name": "codeListIdentificationCode",
+            "format": "an..17"
+          },
+          {
+            "id": "3055",
+            "name": "codeListResponsibleAgencyCode",
+            "format": "an..3"
+          },
+          {
+            "id": "7036",
+            "name": "characteristicDescription",
+            "format": "an..35"
+          },
+          {
+            "id": "7036",
+            "name": "characteristicDescription",
+            "format": "an..35"
+          }
+        ]
+      },
+      {
+        "id": "4051",
+        "name": "characteristicRelevanceCode",
+        "requires": 0,
+        "components": [
+          {
+            "id": "4051",
+            "name": "characteristicRelevanceCode",
+            "format": "an..3"
+          }
         ]
       }
     ]
@@ -174,56 +290,6 @@
       }
     ]
   },
-  "BGM": {
-    "requires": 0,
-    "elements": [
-      {
-        "id": "C002",
-        "name": "documentMessageName",
-        "requires": 0,
-        "components": [
-          { "id": "1001", "name": "documentNameCode", "format": "an..3" },
-          {
-            "id": "1131",
-            "name": "codeListIdentificationCode",
-            "format": "an..17"
-          },
-          {
-            "id": "3055",
-            "name": "codeListResponsibleAgencyCode",
-            "format": "an..3"
-          },
-          { "id": "1000", "name": "documentName", "format": "an..35" }
-        ]
-      },
-      {
-        "id": "C106",
-        "name": "documentMessageIdentification",
-        "requires": 0,
-        "components": [
-          { "id": "1004", "name": "documentIdentifier", "format": "an..35" },
-          { "id": "1056", "name": "versionIdentifier", "format": "an..9" },
-          { "id": "1060", "name": "revisionIdentifier", "format": "an..6" }
-        ]
-      },
-      {
-        "id": "1225",
-        "name": "messageFunctionCode",
-        "requires": 0,
-        "components": [
-          { "id": "1225", "name": "messageFunctionCode", "format": "an..3" }
-        ]
-      },
-      {
-        "id": "4343",
-        "name": "responseTypeCode",
-        "requires": 0,
-        "components": [
-          { "id": "4343", "name": "responseTypeCode", "format": "an..3" }
-        ]
-      }
-    ]
-  },
   "CUX": {
     "requires": 0,
     "elements": [
@@ -291,6 +357,118 @@
             "name": "exchangeRateCurrencyMarketIdentifier",
             "format": "an..3"
           }
+        ]
+      }
+    ]
+  },
+  "DTM": {
+    "requires": 1,
+    "elements": [
+      {
+        "id": "C507",
+        "name": "dateTimePeriod",
+        "requires": 1,
+        "components": [
+          {
+            "id": "2005",
+            "name": "dateOrTimeOrPeriodFunctionCodeQualifier",
+            "format": "an..3"
+          },
+          {
+            "id": "2380",
+            "name": "dateOrTimeOrPeriodValue",
+            "format": "an..35"
+          },
+          {
+            "id": "2379",
+            "name": "dateOrTimeOrPeriodFormatCode",
+            "format": "an..3"
+          }
+        ]
+      }
+    ]
+  },
+  "EQN": {
+    "requires": 1,
+    "elements": [
+      {
+        "id": "C523",
+        "name": "numberOfUnitDetails",
+        "requires": 0,
+        "components": [
+          { "id": "6350", "name": "unitsQuantity", "format": "n..15" },
+          { "id": "6353", "name": "unitTypeCodeQualifier", "format": "an..3" }
+        ]
+      }
+    ]
+  },
+  "FTX": {
+    "requires": 1,
+    "elements": [
+      {
+        "id": "4451",
+        "name": "textSubjectCodeQualifier",
+        "requires": 1,
+        "components": [
+          {
+            "id": "4451",
+            "name": "textSubjectCodeQualifier",
+            "format": "an..3"
+          }
+        ]
+      },
+      {
+        "id": "4453",
+        "name": "freeTextFunctionCode",
+        "requires": 0,
+        "components": [
+          { "id": "4453", "name": "freeTextFunctionCode", "format": "an..3" }
+        ]
+      },
+      {
+        "id": "C107",
+        "name": "textReference",
+        "requires": 1,
+        "components": [
+          { "id": "4441", "name": "freeTextValueCode", "format": "an..17" },
+          {
+            "id": "1131",
+            "name": "codeListIdentificationCode",
+            "format": "an..17"
+          },
+          {
+            "id": "3055",
+            "name": "codeListResponsibleAgencyCode",
+            "format": "an..3"
+          }
+        ]
+      },
+      {
+        "id": "C108",
+        "name": "textLiteral",
+        "requires": 1,
+        "components": [
+          { "id": "4440", "name": "freeTextValue", "format": "an..512" },
+          { "id": "4440", "name": "freeTextValue", "format": "an..512" },
+          { "id": "4440", "name": "freeTextValue", "format": "an..512" },
+          { "id": "4440", "name": "freeTextValue", "format": "an..512" },
+          { "id": "4440", "name": "freeTextValue", "format": "an..512" }
+        ]
+      },
+      {
+        "id": "3453",
+        "name": "languageNameCode",
+        "requires": 0,
+        "components": [
+          { "id": "3453", "name": "languageNameCode", "format": "an..3" }
+        ]
+      },
+      {
+        "id": "4447",
+        "name": "freeTextFormatCode",
+        "requires": 0,
+        "components": [
+          { "id": "4447", "name": "freeTextFormatCode", "format": "an..3" }
         ]
       }
     ]
@@ -372,126 +550,6 @@
       }
     ]
   },
-  "QTY": {
-    "requires": 1,
-    "elements": [
-      {
-        "id": "C186",
-        "name": "quantityDetails",
-        "requires": 2,
-        "components": [
-          {
-            "id": "6063",
-            "name": "quantityTypeCodeQualifier",
-            "format": "an..3"
-          },
-          { "id": "6060", "name": "quantity", "format": "an..35" },
-          { "id": "6411", "name": "measurementUnitCode", "format": "an..3" }
-        ]
-      }
-    ]
-  },
-  "CCI": {
-    "requires": 0,
-    "elements": [
-      {
-        "id": "7059",
-        "name": "classTypeCode",
-        "requires": 0,
-        "components": [
-          { "id": "7059", "name": "classTypeCode", "format": "an..3" }
-        ]
-      },
-      {
-        "id": "C502",
-        "name": "measurementDetails",
-        "requires": 0,
-        "components": [
-          { "id": "6313", "name": "measuredAttributeCode", "format": "an..3" },
-          {
-            "id": "6321",
-            "name": "measurementSignificanceCode",
-            "format": "an..3"
-          },
-          {
-            "id": "6155",
-            "name": "nonDiscreteMeasurementNameCode",
-            "format": "an..17"
-          },
-          {
-            "id": "6154",
-            "name": "nonDiscreteMeasurementName",
-            "format": "an..70"
-          }
-        ]
-      },
-      {
-        "id": "C240",
-        "name": "productCharacteristic",
-        "requires": 1,
-        "components": [
-          {
-            "id": "7037",
-            "name": "characteristicDescriptionCode",
-            "format": "an..17"
-          },
-          {
-            "id": "1131",
-            "name": "codeListIdentificationCode",
-            "format": "an..17"
-          },
-          {
-            "id": "3055",
-            "name": "codeListResponsibleAgencyCode",
-            "format": "an..3"
-          },
-          {
-            "id": "7036",
-            "name": "characteristicDescription",
-            "format": "an..35"
-          },
-          {
-            "id": "7036",
-            "name": "characteristicDescription",
-            "format": "an..35"
-          }
-        ]
-      },
-      {
-        "id": "4051",
-        "name": "characteristicRelevanceCode",
-        "requires": 0,
-        "components": [
-          {
-            "id": "4051",
-            "name": "characteristicRelevanceCode",
-            "format": "an..3"
-          }
-        ]
-      }
-    ]
-  },
-  "RFF": {
-    "requires": 1,
-    "elements": [
-      {
-        "id": "C506",
-        "name": "reference",
-        "requires": 1,
-        "components": [
-          { "id": "1153", "name": "referenceCodeQualifier", "format": "an..3" },
-          { "id": "1154", "name": "referenceIdentifier", "format": "an..70" },
-          { "id": "1156", "name": "documentLineIdentifier", "format": "an..6" },
-          {
-            "id": "4000",
-            "name": "referenceVersionIdentifier",
-            "format": "an..35"
-          },
-          { "id": "1060", "name": "revisionIdentifier", "format": "an..6" }
-        ]
-      }
-    ]
-  },
   "MOA": {
     "requires": 1,
     "elements": [
@@ -517,104 +575,6 @@
             "format": "an..3"
           },
           { "id": "4405", "name": "statusDescriptionCode", "format": "an..3" }
-        ]
-      }
-    ]
-  },
-  "FTX": {
-    "requires": 1,
-    "elements": [
-      {
-        "id": "4451",
-        "name": "textSubjectCodeQualifier",
-        "requires": 1,
-        "components": [
-          {
-            "id": "4451",
-            "name": "textSubjectCodeQualifier",
-            "format": "an..3"
-          }
-        ]
-      },
-      {
-        "id": "4453",
-        "name": "freeTextFunctionCode",
-        "requires": 0,
-        "components": [
-          { "id": "4453", "name": "freeTextFunctionCode", "format": "an..3" }
-        ]
-      },
-      {
-        "id": "C107",
-        "name": "textReference",
-        "requires": 1,
-        "components": [
-          { "id": "4441", "name": "freeTextValueCode", "format": "an..17" },
-          {
-            "id": "1131",
-            "name": "codeListIdentificationCode",
-            "format": "an..17"
-          },
-          {
-            "id": "3055",
-            "name": "codeListResponsibleAgencyCode",
-            "format": "an..3"
-          }
-        ]
-      },
-      {
-        "id": "C108",
-        "name": "textLiteral",
-        "requires": 1,
-        "components": [
-          { "id": "4440", "name": "freeTextValue", "format": "an..512" },
-          { "id": "4440", "name": "freeTextValue", "format": "an..512" },
-          { "id": "4440", "name": "freeTextValue", "format": "an..512" },
-          { "id": "4440", "name": "freeTextValue", "format": "an..512" },
-          { "id": "4440", "name": "freeTextValue", "format": "an..512" }
-        ]
-      },
-      {
-        "id": "3453",
-        "name": "languageNameCode",
-        "requires": 0,
-        "components": [
-          { "id": "3453", "name": "languageNameCode", "format": "an..3" }
-        ]
-      },
-      {
-        "id": "4447",
-        "name": "freeTextFormatCode",
-        "requires": 0,
-        "components": [
-          { "id": "4447", "name": "freeTextFormatCode", "format": "an..3" }
-        ]
-      }
-    ]
-  },
-  "DTM": {
-    "requires": 1,
-    "elements": [
-      {
-        "id": "C507",
-        "name": "dateTimePeriod",
-        "requires": 1,
-        "components": [
-          {
-            "id": "2005",
-            "name": "dateOrTimeOrPeriodFunctionCodeQualifier",
-            "format": "an..3"
-          },
-          {
-            "id": "2380",
-            "name": "dateOrTimeOrPeriodValue",
-            "format": "an..35"
-          },
-          {
-            "id": "2379",
-            "name": "dateOrTimeOrPeriodFormatCode",
-            "format": "an..3"
-          }
         ]
       }
     ]
@@ -771,6 +731,46 @@
         "requires": 0,
         "components": [
           { "id": "3207", "name": "countryNameCode", "format": "an..3" }
+        ]
+      }
+    ]
+  },
+  "QTY": {
+    "requires": 1,
+    "elements": [
+      {
+        "id": "C186",
+        "name": "quantityDetails",
+        "requires": 2,
+        "components": [
+          {
+            "id": "6063",
+            "name": "quantityTypeCodeQualifier",
+            "format": "an..3"
+          },
+          { "id": "6060", "name": "quantity", "format": "an..35" },
+          { "id": "6411", "name": "measurementUnitCode", "format": "an..3" }
+        ]
+      }
+    ]
+  },
+  "RFF": {
+    "requires": 1,
+    "elements": [
+      {
+        "id": "C506",
+        "name": "reference",
+        "requires": 1,
+        "components": [
+          { "id": "1153", "name": "referenceCodeQualifier", "format": "an..3" },
+          { "id": "1154", "name": "referenceIdentifier", "format": "an..70" },
+          { "id": "1156", "name": "documentLineIdentifier", "format": "an..6" },
+          {
+            "id": "4000",
+            "name": "referenceVersionIdentifier",
+            "format": "an..35"
+          },
+          { "id": "1060", "name": "revisionIdentifier", "format": "an..6" }
         ]
       }
     ]
