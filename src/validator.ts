@@ -349,6 +349,7 @@ export class ValidatorImpl implements Validator {
           if (this.throwOnMissingDefinitions) {
             throw this.errors.missingElementDefinition(
               this.counts.element.toString(),
+              this.counts.segment.toString(),
             )
           }
         }
@@ -589,8 +590,13 @@ export class ValidatorImpl implements Validator {
       const message = `Active open element expected on segment ${segment}`
       return new Error(message)
     },
-    missingElementDefinition: function (element: string): Error {
-      const message = `No definition found for element ${element}`
+    missingElementDefinition: function (
+      element: string,
+      segment?: string,
+    ): Error {
+      const message =
+        `No definition found for element ${element}` +
+        (segment ? ` on segment ${segment}` : '')
       return new Error(message)
     },
     missingSegmentStart: function (

@@ -639,9 +639,9 @@ export interface MessageDetails {
 // DTM
 
 interface DateTimePeriodData {
-  dateTimeOrPeriodFunctionCodeQualifier: ComponentValue
-  dateTimeOrPeriodText: string | undefined
-  dateTimeOrPeriodFormatCode: string | undefined
+  dateOrTimeOrPeriodFunctionCodeQualifier: ComponentValue
+  dateOrTimeOrPeriodText: string | undefined
+  dateOrTimeOrPeriodFormatCode: ComponentValue | undefined
 }
 
 export interface DateTimePeriod {
@@ -776,7 +776,7 @@ export interface FreeText {
   textReference: TextReference | undefined
   textLiteral: TextLiteral | undefined
   languageNameCode: string | undefined
-  freeTextFormatCode: string | undefined
+  freeTextFormatCode: ComponentValue | undefined
 }
 
 // GEI
@@ -915,7 +915,7 @@ interface ItemDescriptionData {
 export interface ItemDescription {
   tag: string
 
-  descriptionFormatCode: string | undefined
+  descriptionFormatCode: ComponentValue | undefined
   itemCharacteristic: ItemCharacteristic | undefined
   itemDescription: ItemDescriptionData | undefined
   surfaceOrLayerCode: string | undefined
@@ -1114,7 +1114,7 @@ interface PartyName {
   partyName3: string | undefined
   partyName4: string | undefined
   partyName5: string | undefined
-  partyNameFormatCode: string | undefined
+  partyNameFormatCode: ComponentValue | undefined
 }
 
 interface Street {
@@ -1161,7 +1161,7 @@ interface PackageType {
 }
 
 interface PackageTypeIdentification {
-  descriptionFormatCode: string
+  descriptionFormatCode: ComponentValue
   typeOfPackages: string
   itemTypeIdentificationCode: string | undefined
   typeOfPackages2: string | undefined

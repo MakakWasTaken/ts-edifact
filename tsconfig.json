@@ -40,12 +40,13 @@
     // these files will be target for linting, compiling and stuff
     "src/**/*.ts",
     "src/messageSpec/**/*.json",
-    "./node_modules/vscode/vscode.d.ts",
-    "./node_modules/vscode/lib/*"
+    "spec/**/*.spec.ts"
   ],
   "exclude": [
     // don't include these files in the final artifact
     "node_modules",
-    ".vscode-test"
+    ".vscode",
+    "lib",
+    ".github"
   ]
 }
