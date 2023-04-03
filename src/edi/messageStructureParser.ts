@@ -145,8 +145,7 @@ export class UNECEMessageStructureParser implements MessageStructureParser {
     if (!name || name === '') {
       return undefined
     }
-    let formattedName: string = name.replace(/\//g, ' or ') // Replace / with Or to avoid problems with versioning
-    formattedName = formattedName.replace(/&|,|-/g, ' ')
+    const formattedName = name.replace(/\/|&|,|-/g, ' ')
     const split = formattedName.split(' ')
     if (split.length > 0) {
       const formattedNames = split.map(
