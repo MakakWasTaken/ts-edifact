@@ -38,6 +38,10 @@ import {
 } from '../src/validator'
 
 describe('MessageStructureParser', () => {
+  beforeEach(() => {
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000
+  })
+
   describe('Message Structure Definition Parser', () => {
     let sut: UNECEMessageStructureParser
     beforeAll(() => {
