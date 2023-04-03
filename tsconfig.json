@@ -39,8 +39,7 @@
   "include": [
     // these files will be target for linting, compiling and stuff
     "src/**/*.ts",
-    "src/messageSpec/**/*.json",
-    "spec/**/*.spec.ts"
+    "src/messageSpec/**/*.json"
   ],
   "exclude": [
     // don't include these files in the final artifact
