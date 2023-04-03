@@ -4,6 +4,25 @@ All notable changes to the "ts-edifact" library will be documented in this file.
 
 ## Releases
 
+### 0.2.0
+
+- Added support for getting the component values from predefined values.
+
+#### Migration
+
+- Some of the values that previously contained a code as a string will now instead contain an object with the following schema:
+
+```ts
+const item: {
+  id: string
+  value: string
+  description: string
+  deprecated?: boolean
+}
+```
+
+The previous value can be accessed through the `id` property. The `deprecated` property will be set to `true` if the value is deprecated, otherwise it won't be present. The `description` property will contain a detailed description of the value.
+
 ### 0.0.14
 
 - Applied fix for UNECELegacyMessageStructureParser provided by Stefan Partheym
