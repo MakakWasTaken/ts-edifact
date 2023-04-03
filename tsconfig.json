@@ -46,6 +46,7 @@
     "node_modules",
     ".vscode",
     "lib",
-    ".github"
+    ".github",
+    "coverage"
   ]
 }

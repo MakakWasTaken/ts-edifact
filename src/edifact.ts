@@ -31,6 +31,7 @@ export interface Segment {
   tag: string
 }
 
+/* istanbul ignore next */
 export function toSegmentObject(
   data: ResultType,
   version: string,
@@ -249,7 +250,7 @@ export function toSegmentObject(
 export interface AdjustmentDetails {
   tag: string
 
-  adjustmentReasonDescriptionCode: string
+  adjustmentReasonDescriptionCode: ComponentValue
   lineItemIdentifier: string | undefined
 }
 
@@ -257,11 +258,11 @@ export interface AdjustmentDetails {
 
 interface AllowanceOrChargeInformation {
   allowanceOrChargeIdentifier: string | undefined
-  allowanceOrChargeIdentificationCode: string | undefined
+  allowanceOrChargeIdentificationCode: ComponentValue | undefined
 }
 
 interface SpecialServicesIdentification {
-  specialServiceDescriptionCode: string | undefined
+  specialServiceDescriptionCode: ComponentValue | undefined
   codeListIdentificationCode: ComponentValue | undefined
   codeListResponsibleAgencyCode: ComponentValue | undefined
   specialServiceDescription: string | undefined
@@ -273,8 +274,8 @@ export interface AllowanceOrCharge {
 
   allowanceOrChargeCodeQualifier: ComponentValue
   allowanceOrChargeInformation: AllowanceOrChargeInformation | undefined
-  settlementMeansCode: string | undefined
-  calculationSequenceCode: string | undefined
+  settlementMeansCode: ComponentValue | undefined
+  calculationSequenceCode: ComponentValue | undefined
   specialServicesIdentification: SpecialServicesIdentification | undefined
 }
 
@@ -284,7 +285,7 @@ export interface AdditionalInformation {
   tag: string
 
   countryOfOriginIdentifier: string | undefined
-  dutyRegimeTypeCode: string | undefined
+  dutyRegimeTypeCode: ComponentValue | undefined
   specialConditionCode1: string | undefined
   specialConditionCode2: string | undefined
   specialConditionCode3: string | undefined
@@ -300,7 +301,7 @@ interface PriceMultiplierInformation {
 }
 
 interface ReasonForChange {
-  changeReasonDescriptionCode: string | undefined
+  changeReasonDescriptionCode: ComponentValue | undefined
   codeListIdentificationCode: ComponentValue | undefined
   codeListResponsibleAgencyCoe: string | undefined
   changeReasonDescription: string | undefined
@@ -309,7 +310,7 @@ interface ReasonForChange {
 export interface AdditionalPriceInformation {
   tag: string
 
-  tradeinterfaceCode: string | undefined
+  tradeClassCode: ComponentValue | undefined
   priceMultiplierInformation: PriceMultiplierInformation | undefined
   reasonForChange: ReasonForChange | undefined
 }
@@ -317,7 +318,7 @@ export interface AdditionalPriceInformation {
 // ARD
 
 interface MonetaryAmountFunctionData {
-  monetaryAmountFunctionDescriptionCode: string | undefined
+  monetaryAmountFunctionDescriptionCode: ComponentValue | undefined
   codeListIdentificationCode: ComponentValue | undefined
   codeListResponsibleAgencyCode: ComponentValue | undefined
   monetaryAmountFunctionDescription: string | undefined
@@ -349,7 +350,7 @@ export interface AuthenticationResult {
 // BGM
 
 interface MessageName {
-  documentNameCode: string | undefined
+  documentNameCode: ComponentValue | undefined
   codeListIdentificationCode: ComponentValue | undefined
   codeListResponsibleAgencyCode: ComponentValue | undefined
   documentName: string | undefined
@@ -367,8 +368,8 @@ export interface BeginOfMessage {
   documentMessageName: MessageName | undefined
   documentMessageIdentification: string | undefined
   messageFunctionCode: ComponentValue | undefined
-  responseTypeCode: string | undefined
-  documentStatusCode: string | undefined
+  responseTypeCode: ComponentValue | undefined
+  documentStatusCode: ComponentValue | undefined
   languageNameCode: string | undefined
 }
 
@@ -383,7 +384,7 @@ interface BusinessFunctionData {
 }
 
 interface BankOperation {
-  bankOperationCode: string
+  bankOperationCode: ComponentValue
   codeListIdentificationCode: ComponentValue | undefined
   codeListResponsibleAgencyCode: ComponentValue | undefined
 }
@@ -392,10 +393,10 @@ export interface BusinessFunction {
   tag: string
 
   businessFunction: BusinessFunctionData | undefined
-  geographicAreaCode: string | undefined
-  financialTransactionTypeCode: string | undefined
+  geographicAreaCode: ComponentValue | undefined
+  financialTransactionTypeCode: ComponentValue | undefined
   bankOperation: BankOperation | undefined
-  intraCompanyPaymentIndicatorCode: string | undefined
+  intraCompanyPaymentIndicatorCode: ComponentValue | undefined
 }
 
 // CAV
@@ -427,16 +428,16 @@ interface CharacteristicDescription {
 export interface CharacteristicinterfaceID {
   tag: string
 
-  interfaceTypeCode: string | undefined
-  measurementDetails: string | undefined
+  classTypeCode: ComponentValue | undefined
+  measurementDetails: ComponentValue | undefined
   characteristicDescription: CharacteristicDescription | undefined
-  characteristicRelevanceCode: string | undefined
+  characteristicRelevanceCode: ComponentValue | undefined
 }
 
 // CED
 
 interface ComputerEnviornmentIdentification {
-  computerEnvironmentNameCode: string | undefined
+  computerEnvironmentDetailsCodeQualifier: ComponentValue | undefined
   codeListIdentificationCode: ComponentValue | undefined
   codeListResponsibleAgencyCode: ComponentValue | undefined
   computerEnvironmentName: string | undefined
@@ -510,7 +511,7 @@ export interface ConsignmentPackingSequence {
 
   hierarchicalStructureLevelIdentifier: string
   hierarchicalStructureParentIdentifier: string | undefined
-  packagingLevelCode: string | undefined
+  packagingLevelCode: ComponentValue | undefined
 }
 
 // CTA
@@ -577,11 +578,11 @@ interface DangerousGoodsLabel {
 export interface DangerousGoods {
   tag: string
 
-  dangerousGoodsRegulationsCode: string
+  dangerousGoodsRegulationsCode: ComponentValue
   hazardCode: HazardCode | undefined
   undgInformation: UnitedNationsDagneoursGoodsInformation | undefined
   dangerousGoodsShipmentFlashpoint: DangerousGoodsShipmentFlashpoint | undefined
-  packagingDangerLevelCode: string | undefined
+  packagingDangerLevelCode: ComponentValue | undefined
   emergencyProcedureForShipsIdentifier: string | undefined
   hazardMedicalFirstAidGuideIdentifier: string | undefined
   transportEmergencyCardIdentifier: string | undefined
@@ -590,7 +591,7 @@ export interface DangerousGoods {
     | undefined
   dangerousGoodsLabel: DangerousGoodsLabel | undefined
   packingInstructionTypeCode: string | undefined
-  hazardousMeansOfTransportCategoryCode: string | undefined
+  hazardousMeansOfTransportCategoryCode: ComponentValue | undefined
   hazardousCargoTransportAuthorizationCode: string | undefined
 }
 
@@ -599,10 +600,10 @@ export interface DangerousGoods {
 export interface DeliveryLimitations {
   tag: string
 
-  backOrderArrangementTypeCode: string | undefined
+  backOrderArrangementTypeCode: ComponentValue | undefined
   instruction: Instruction | undefined
   specialServicesIdentification: SpecialServicesIdentification | undefined
-  substitutionConditionCode: string | undefined
+  substitutionConditionCode: ComponentValue | undefined
 }
 
 // DMS
@@ -619,7 +620,7 @@ export interface MessageSummary {
 
 interface MessageDetailsData {
   documentIdentifer: string | undefined
-  documentStatusCode: string | undefined
+  documentStatusCode: ComponentValue | undefined
   documentSourceDescription: string | undefined
   languageNameCode: string | undefined
   versionIdentifier: string | undefined
@@ -631,7 +632,7 @@ export interface MessageDetails {
 
   messageName: MessageName
   messageDetails: MessageDetailsData | undefined
-  communicationMediumTypeCode: string | undefined
+  communicationMediumTypeCode: ComponentValue | undefined
   documentCopiesRequiredQuantity: number | undefined
   doucmentOriginalsRequiredQuantity: number | undefined
 }
@@ -704,9 +705,9 @@ export interface EquipmentDetails {
   equipmentTypeCodeQualifier: ComponentValue
   equipmentIdentification: EquipmentIdentification | undefined
   equipmentSizeAndType: EquipmentSizeAndType | undefined
-  equipmentSupplierCode: string | undefined
-  equipmentStatusCode: string | undefined
-  fullOrEmptyIndicatorCode: string | undefined
+  equipmentSupplierCode: ComponentValue | undefined
+  equipmentStatusCode: ComponentValue | undefined
+  fullOrEmptyIndicatorCode: ComponentValue | undefined
 }
 
 // ERC
@@ -870,8 +871,8 @@ export interface HierarchyInformation {
   tag: string
 
   hierarchyObjectCodeQualifier: ComponentValue
-  hierarchicalStructureRelationshipCode: string | undefined
-  actionCode: string | undefined
+  hierarchicalStructureRelationshipCode: ComponentValue | undefined
+  actionCode: ComponentValue | undefined
   itemNumberIdentification: ItemNumberIdentification | undefined
   hierarchicalStructureParentIdentifier: string | undefined
 }
@@ -898,7 +899,7 @@ export interface Identity {
 // IMD
 
 interface ItemCharacteristic {
-  itemCharacteristicCode: string | undefined
+  itemCharacteristicCode: ComponentValue | undefined
   codeListIdentificationCode: ComponentValue | undefined
   codeListResponsibleAgencyCode: ComponentValue | undefined
 }
@@ -918,7 +919,7 @@ export interface ItemDescription {
   descriptionFormatCode: ComponentValue | undefined
   itemCharacteristic: ItemCharacteristic | undefined
   itemDescription: ItemDescriptionData | undefined
-  surfaceOrLayerCode: string | undefined
+  surfaceOrLayerCode: ComponentValue | undefined
 }
 
 // INP
@@ -969,13 +970,13 @@ export interface InformationRequired {
 
 interface ItemNumberIdentification {
   itemIdentifier: string | undefined
-  itemTypeIdentificationCode: string | undefined
+  itemTypeIdentificationCode: ComponentValue | undefined
   codeListIdentificationCode: ComponentValue | undefined
   codeListResponsibleAgencyCode: ComponentValue | undefined
 }
 
 interface SubLineInformation {
-  subLineIndicatorCode: string | undefined
+  subLineIndicatorCode: ComponentValue | undefined
   lineItemIdentifier: string | undefined
 }
 
@@ -987,7 +988,7 @@ export interface LineItem {
   itemNumberIdentification: ItemNumberIdentification | undefined
   subLineInformatin: SubLineInformation | undefined
   configurationLevelNumber: number | undefined
-  configurationOperationCode: string | undefined
+  configurationOperationCode: ComponentValue | undefined
 }
 
 // LOC
@@ -1026,8 +1027,8 @@ export interface LocationIdentification {
 // MEA
 
 interface MeasurementDetails {
-  measuredAttributeCode: string | undefined
-  measurementSignificanceCode: string | undefined
+  measuredAttributeCode: ComponentValue | undefined
+  measurementSignificanceCode: ComponentValue | undefined
   nonDiscreteMeasurementNameCode: string | undefined
   nonDiscreteMeasurementName: string | undefined
 }
@@ -1046,7 +1047,7 @@ export interface Measurements {
   measurementPurposeCodeQualifier: ComponentValue
   measurementDetails: MeasurementDetails | undefined
   valueRange: ValueRange | undefined
-  surfaceOrLayerCode: string | undefined
+  surfaceOrLayerCode: ComponentValue | undefined
 }
 
 // MKS
@@ -1087,9 +1088,9 @@ export interface MaintenanceOperationDetails {
   tag: string
 
   objectTypeCodeQualifier: ComponentValue
-  maintenanceOperationCode: string | undefined
-  maintenanceOperationOperatorCode: string | undefined
-  maintenanceOperationPayerCode: string | undefined
+  maintenanceOperationCode: ComponentValue | undefined
+  maintenanceOperationOperatorCode: ComponentValue | undefined
+  maintenanceOperationPayerCode: ComponentValue | undefined
 }
 
 // NAD
@@ -1148,9 +1149,9 @@ export interface NameAndAddress {
 // PAC
 
 interface PackagingDetails {
-  packagingLevelCode: string | undefined
-  packagingRelatedDescriptionCode: string | undefined
-  packagingTermsAndConditionsCode: string | undefined
+  packagingLevelCode: ComponentValue | undefined
+  packagingRelatedDescriptionCode: ComponentValue | undefined
+  packagingTermsAndConditionsCode: ComponentValue | undefined
 }
 
 interface PackageType {
@@ -1163,14 +1164,14 @@ interface PackageType {
 interface PackageTypeIdentification {
   descriptionFormatCode: ComponentValue
   typeOfPackages: string
-  itemTypeIdentificationCode: string | undefined
+  itemTypeIdentificationCode: ComponentValue | undefined
   typeOfPackages2: string | undefined
   itemTypeIdentificationCode2: string | undefined
 }
 
 interface ReturnablePackageDetails {
-  returnablePackageFreightPaymentResponsibilityCode: string | undefined
-  returnablePackageLoadContentsCode: string | undefined
+  returnablePackageFreightPaymentResponsibilityCode: ComponentValue | undefined
+  returnablePackageLoadContentsCode: ComponentValue | undefined
 }
 
 export interface Package {
@@ -1188,12 +1189,12 @@ export interface Package {
 export interface PaymentInstructions {
   tag: string
 
-  paymendConditionsCode: string | undefined
-  paymentGuaranteeMeansCode: string | undefined
-  paymentMeansCode: string | undefined
-  codeListIdentificatinCode: string | undefined
+  paymendConditionsCode: ComponentValue | undefined
+  paymentGuaranteeMeansCode: ComponentValue | undefined
+  paymentMeansCode: ComponentValue | undefined
+  codeListIdentificatinCode: ComponentValue | undefined
   codeListResponsibleAgencyCode: ComponentValue | undefined
-  paymentChannelCode: string | undefined
+  paymentChannelCode: ComponentValue | undefined
 }
 
 // PAT - removed with D02B
@@ -1207,9 +1208,9 @@ interface PATPaymentTerms {
 }
 
 interface TermsTimeInformation {
-  timeReferenceCode: string
-  termsTimeRelationCode: string | undefined
-  periodTypeCode: string | undefined
+  timeReferenceCode: ComponentValue
+  termsTimeRelationCode: ComponentValue | undefined
+  periodTypeCode: ComponentValue | undefined
   periodCountQuality: number | undefined
 }
 
@@ -1226,7 +1227,7 @@ export interface PaymentTermsBasis {
 interface PercentageDetailsData {
   percentageTypeCodeQualifier: ComponentValue
   percentage: number | undefined
-  percentageBasisIdentificationCode: string | undefined
+  percentageBasisIdentificationCode: ComponentValue | undefined
   codeListIdentificationCode: ComponentValue | undefined
   codeListResponsibleAgencyCode: ComponentValue | undefined
 }
@@ -1254,7 +1255,7 @@ interface MarksAndLabels {
 }
 
 interface TypeOfMarking {
-  markingTypeCode: string
+  markingTypeCode: ComponentValue
   codeListIdentificationCode: ComponentValue | undefined
   codeListResponsibleAgencyCode: ComponentValue | undefined
 }
@@ -1262,9 +1263,9 @@ interface TypeOfMarking {
 export interface PackageIdentification {
   tag: string
 
-  markingInstructionCode: string | undefined
+  markingInstructionCode: ComponentValue | undefined
   marksAndLabels: MarksAndLabels | undefined
-  containerOrPackageContentsIndicatorCode: string | undefined
+  containerOrPackageContentsIndicatorCode: ComponentValue | undefined
   typeOfMarking: TypeOfMarking | undefined
 }
 
@@ -1280,7 +1281,7 @@ interface ProductGroup {
 export interface ProductGroupInformation {
   tag: string
 
-  productGroupTypeCode: string
+  productGroupTypeCode: ComponentValue
   productGroup: ProductGroup | undefined
 }
 
@@ -1303,8 +1304,8 @@ export interface AdditionalProductId {
 interface PriceInformation {
   priceCodeQualifier: ComponentValue
   priceAmount: number | undefined
-  priceTypeCode: string | undefined
-  priceSpecificationCode: string | undefined
+  priceTypeCode: ComponentValue | undefined
+  priceSpecificationCode: ComponentValue | undefined
   unitPriceBasisValue: number | undefined
   measurementUnitCode: string | undefined
 }
@@ -1313,7 +1314,7 @@ export interface PriceDetails {
   tag: string
 
   priceInformation: PriceInformation | undefined
-  subLineItemPriceChangeOperationCode: string | undefined
+  subLineItemPriceChangeOperationCode: ComponentValue | undefined
 }
 
 // PYT
@@ -1330,9 +1331,9 @@ export interface PaymentTerms {
 
   paymentTermsTypeCodeQualifier: ComponentValue
   paymentTerms: PaymentTermsData | undefined
-  eventTimeReferenceCode: string | undefined
-  termsTimeRelationCode: string | undefined
-  periodTypeCode: string | undefined
+  timeReferenceCode: ComponentValue | undefined
+  termsTimeRelationCode: ComponentValue | undefined
+  periodTypeCode: ComponentValue | undefined
   periodCountQuantity: number | undefined
 }
 
@@ -1361,7 +1362,7 @@ export interface QuantityVariances {
   tag: string
 
   quantityDifferenceInformation: QuantityDifferenceInformation | undefined
-  discrepancyNatureIdentificationCode: string | undefined
+  discrepancyNatureIdentificationCode: ComponentValue | undefined
   reasonForChange: ReasonForChange | undefined
 }
 
@@ -1469,23 +1470,23 @@ export interface SealNumber {
 
   sealIdentifier: string | undefined
   sealIssuer: SealIssuer | undefined
-  sealConditionCode: string | undefined
+  sealConditionCode: ComponentValue | undefined
   identityNumberRange: IdentityNumberRange | undefined
 }
 
 // SCC
 
 interface PatternDescription {
-  frequencyCode: string | undefined
-  despatchPatternCode: string | undefined
-  despatchPatternTimingCode: string | undefined
+  frequencyCode: ComponentValue | undefined
+  despatchPatternCode: ComponentValue | undefined
+  despatchPatternTimingCode: ComponentValue | undefined
 }
 
 export interface SchedulingConditions {
   tag: string
 
-  deliveryPlanCommitmentLevelCode: string
-  deliveryInstructionCode: string | undefined
+  deliveryPlanCommitmentLevelCode: ComponentValue
+  deliveryInstructionCode: ComponentValue | undefined
   patternDescription: PatternDescription | undefined
 }
 
@@ -1493,7 +1494,7 @@ export interface SchedulingConditions {
 
 interface SequenceInformation {
   sequencePositionIdentifier: string
-  sequenceIdentifierSoruceCode: string | undefined
+  sequenceIdentifierSoruceCode: ComponentValue | undefined
   codeListIdentificationCode: ComponentValue | undefined
   codeListResponsibleAgencyCode: ComponentValue | undefined
 }
@@ -1501,7 +1502,7 @@ interface SequenceInformation {
 export interface SequenceDetails {
   tag: string
 
-  actionCode: string | undefined
+  actionCode: ComponentValue | undefined
   sequenceInformation: SequenceInformation | undefined
 }
 
@@ -1517,20 +1518,20 @@ export interface SplitGoodsPlacement {
 // STS
 
 interface StatusCategory {
-  statusCategoryCode: string
+  statusCategoryCode: ComponentValue
   codeListIdentificationCode: ComponentValue | undefined
   codeListResponsibleAgencyCode: ComponentValue | undefined
 }
 
 interface StatusData {
-  statusDescriptionCode: string
+  statusDescriptionCode: ComponentValue
   codeListIdentificationCode: ComponentValue | undefined
   codeListResponsibleAgencyCode: ComponentValue | undefined
   statusDescription: string | undefined
 }
 
 interface StatusReason {
-  statusReasonDescriptionCode: string
+  statusReasonDescriptionCode: ComponentValue
   codeListIdentificationCode: ComponentValue | undefined
   codeListResponsibleAgencyCode: ComponentValue | undefined
   statusReasonDescription: string | undefined
@@ -1568,9 +1569,9 @@ interface DutyTaxOrFeeDetail {
   codeListIdentificationCode: ComponentValue | undefined
   codeListResponsibleAgencyCode: ComponentValue | undefined
   dutyTaxOrFeeRateDescription: string | undefined
-  dutyTaxOrFeeRateBasisCode: string | undefined
-  codeListIdentificationCode2: string | undefined
-  codeListResponsibleAgencyCode2: string | undefined
+  dutyTaxOrFeeRateBasisCode: ComponentValue | undefined
+  codeListIdentificationCode2: ComponentValue | undefined
+  codeListResponsibleAgencyCode2: ComponentValue | undefined
 }
 
 export interface TaxDetails {
@@ -1581,9 +1582,9 @@ export interface TaxDetails {
   dutyTaxOrFeeAcountDetail: DutyTaxOrFeeAccountDetail | undefined
   dutyTaxOrFreeAssessmentBasisValue: string | undefined
   dutyTaxOrFeeDetail: DutyTaxOrFeeDetail | undefined
-  dutyTaxOrFeeCategoryCode: string | undefined
+  dutyTaxOrFeeCategoryCode: ComponentValue | undefined
   partyTaxIdentifier: string | undefined
-  calculationSequenceCode: string | undefined
+  calculationSequenceCode: ComponentValue | undefined
 }
 
 // TDT
@@ -1613,8 +1614,8 @@ interface Carrier {
 }
 
 interface ExcessTransportationInformation {
-  excessTransportationReasonCode: string
-  excessTransportationResponsibilityCode: string
+  excessTransportationReasonCode: ComponentValue
+  excessTransportationResponsibilityCode: ComponentValue
   customerShipmentAuthorisationIdentifier: string | undefined
 }
 
@@ -1628,7 +1629,7 @@ interface TransportIdentification {
 
 // since D11a
 interface PowerType {
-  powerTypeCode: string | undefined
+  powerTypeCode: ComponentValue | undefined
   codeListIdentificationCode: ComponentValue | undefined
   codeListResponsibleAgencyCode: ComponentValue | undefined
   powerTypeDescription: string | undefined
@@ -1642,10 +1643,10 @@ export interface DetailsOfTransport {
   modeOfTransport: ModeOfTransport | undefined
   transportMeans: TransportMeans | undefined
   carrier: Carrier | undefined
-  transitDirectionIndicatorCode: string | undefined
+  transitDirectionIndicatorCode: ComponentValue | undefined
   excessTransportationInformation: ExcessTransportationInformation | undefined
   transportIdentification: TransportIdentification | undefined
-  transportMeansOwnershipIndicatorCode: string | undefined
+  transportMeansOwnershipIndicatorCode: ComponentValue | undefined
 }
 
 export interface TransportInformationD02b {
@@ -1656,10 +1657,10 @@ export interface TransportInformationD02b {
   modeOfTransport: ModeOfTransport | undefined
   transportMeans: TransportMeansD02b | undefined
   carrier: Carrier | undefined
-  transitDirectionIndicatorCode: string | undefined
+  transitDirectionIndicatorCode: ComponentValue | undefined
   excessTransportationInformation: ExcessTransportationInformation | undefined
   transportIdentification: TransportIdentification | undefined
-  transportMeansOwnershipIndicatorCode: string | undefined
+  transportMeansOwnershipIndicatorCode: ComponentValue | undefined
 }
 
 export interface TransportInformationD11a {
@@ -1670,17 +1671,17 @@ export interface TransportInformationD11a {
   modeOfTransport: ModeOfTransport | undefined
   transportMeans: TransportMeansD02b | undefined
   carrier: Carrier | undefined
-  transitDirectionIndicatorCode: string | undefined
+  transitDirectionIndicatorCode: ComponentValue | undefined
   excessTransportationInformation: ExcessTransportationInformation | undefined
   transportIdentification: TransportIdentification | undefined
-  transportMeansOwnershipIndicatorCode: string | undefined
+  transportMeansOwnershipIndicatorCode: ComponentValue | undefined
   powerTypeDescription: PowerType | undefined
 }
 
 // TMD
 
 interface MovementType {
-  movementTypeDescriptionCode: string | undefined
+  movementTypeDescriptionCode: ComponentValue | undefined
   movementTypeDescription: string | undefined
 }
 
@@ -1689,7 +1690,7 @@ export interface TransportMovementDetails {
 
   movementType: MovementType | undefined
   equipmentPlanDescription: string | undefined
-  haulageArrangementsCode: string | undefined
+  haulageArrangementsCode: ComponentValue | undefined
 }
 
 // TOD
@@ -1706,20 +1707,20 @@ export interface TermsOfDeliveryOrTransport {
   tag: string
 
   deliveryOrTransportTermsFunctionCode: ComponentValue | undefined
-  transportChargesPaymentMethodCode: string | undefined
+  transportChargesPaymentMethodCode: ComponentValue | undefined
   termsOfDeliveryOrTransport: TermsOfDeliveryOrTransportData | undefined
 }
 
 // TSR
 
 interface ContractAndCarriageCondition {
-  contractAndCarriageConditionCode: string
+  contractAndCarriageConditionCode: ComponentValue
   codeListIdentificationCode: ComponentValue | undefined
   codeListResponsibleAgencyCode: ComponentValue | undefined
 }
 
 interface Service {
-  serviceRequirementCode: string
+  serviceRequirementCode: ComponentValue
   codeListIdentificationCode: ComponentValue | undefined
   codeListResponsibleAgencyCode: ComponentValue | undefined
   serviceRequirementCode2: string | undefined
@@ -1728,13 +1729,13 @@ interface Service {
 }
 
 interface TransportPriority {
-  transportServicePriorityCode: string
+  transportServicePriorityCode: ComponentValue
   codeListIdentificationCode: ComponentValue | undefined
   codeListResponsibleAgencyCode: ComponentValue | undefined
 }
 
 interface NatureOfCargo {
-  cargoTypeinterfaceificationCode: string
+  cargoTypeinterfaceificationCode: ComponentValue
   codeListIdentificationCode: ComponentValue | undefined
   codeListResponsibleAgencyCode: ComponentValue | undefined
 }
