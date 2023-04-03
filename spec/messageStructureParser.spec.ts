@@ -29,7 +29,7 @@ import {
   UNECEMessageStructureParser,
 } from '../src/edi/messageStructureParser'
 import { MessageType } from '../src/tracker'
-import { findElement } from '../src/util'
+import { findElement, persist } from '../src/util'
 import {
   ComponentValueEntry,
   Dictionary,
@@ -563,7 +563,9 @@ describe('MessageStructureParser', () => {
       sut
         .loadTypeSpec()
         .then((response: EdifactMessageSpecification) => {
-          // persist(response, "./src/messageSpec");
+          // Will make sure that tests are not run against outdated versions
+          persist(response, './src/messageSpec')
+
           expect(response.type()).toEqual('D01B_INVOIC')
           expect(response.messageStructureDefinition.length).not.toEqual(0)
           done()

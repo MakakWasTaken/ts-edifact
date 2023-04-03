@@ -60,6 +60,12 @@ export function persist(
     data.messageType +
     '.segments.json'
 
+  const components: string = toString((data.componentValueTable as any).entries)
+  const componentsFileName: string =
+    (defaultVersion ? '' : data.version + data.release + '_') +
+    data.messageType +
+    '.components.json'
+
   let p: string = path
   if (!p.endsWith('/')) {
     p += '/'
@@ -67,6 +73,7 @@ export function persist(
 
   fs.writeFileSync(p + messageStructDefFileName, messageStructDef)
   fs.writeFileSync(p + segmentsFileName, segments)
+  fs.writeFileSync(p + componentsFileName, components)
 }
 
 export const formatComponents = (
@@ -78,26 +85,23 @@ export const formatComponents = (
   result['tag'] = segmentId
   elements.forEach((element) => {
     element.components.forEach((component) => {
-      if (component.value) {
-        const actualValue = component.validValues
-          ? component.validValues?.[component.value] || component.value
-          : component.value
-        if (element.components.length <= 1) {
-          result[element.name] = actualValue
-          return
-        } else {
+      if (element.components.length <= 1) {
+        result[element.name] = component.value
+      } else {
+        if (component.value) {
           if (!result[element.name]) {
             result[element.name] = {}
           }
           if (typeof result[element.name] === 'object') {
-            if (decimalSeparator && !component.validValues) {
+            // Codes does not have any decimal separators
+            if (decimalSeparator && typeof component.value === 'string') {
               // If decimal seperator is defined replace instances
               result[element.name][component.name] = component.value.replace(
                 decimalSeparator,
                 '.',
               )
             } else {
-              result[element.name][component.name] = actualValue
+              result[element.name][component.name] = component.value
             }
           }
         }
@@ -148,7 +152,7 @@ export function storeAllDefaultSpecs(version: string, location: string): void {
     // 'COACSU', // 	Commercial account summary message
     // 'COARRI', // 	Container discharge/loading report message
     // 'CODECO', // 	Container gate-in/gate-out report message
-    // 'CODENO', //	Permit expiration/clearance ready notice message
+    // 'CODENO', //	  Permit expiration/clearance ready notice message
     // 'COEDOR', // 	Container stock report message
     // 'COHAOR', // 	Container special handling order message
     // 'COLREQ', // 	Request for a documentary collection message
@@ -331,7 +335,7 @@ export function storeAllDefaultSpecs(version: string, location: string): void {
     // 'VESDEP', // 	Vessel departure message
     // 'WASDIS', // 	Waste disposal information message
     // 'WKGRDC', // 	Work grant decision message
-    // 'WKGRRE' // 	Work grant request message"
+    // 'WKGRRE'  //  	Work grant request message"
   ]
 
   // Update INVOIC D07A

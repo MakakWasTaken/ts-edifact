@@ -364,19 +364,21 @@ describe('InterchangeBuilder', () => {
   })
 
   it('should construct correct interchange', () => {
-    const document = `UNA:+.? 'UNB+UNOC:3+91100:ZZ:PRODAT+92015:ZZ+220223:2014+E220223842164++27-DDQ-PRODAT'UNH+1+APERAK:D:96A:UN:E2SE6B'BGM+++34'DTM+137:202202232014:203'DTM+178:202202232012:203'RFF+ACW:E223201218334'NAD+FR+91100:160:SVK+++++++SE'NAD+DO+92015:160:SVK+++++++SE'ERC+100::260'FTX+AAO+++OK'RFF+Z07:ANLID-10120'RFF+LI:ANLID-10120'UNT+12+1'UNZ+1+E220223842164'`
+    const document = `UNA:+.? 'UNB+UNOC:3+22222:ZZ:PRODAT+11111:ZZ+220223:2014+test++27-DDQ-PRODAT'UNH+1+APERAK:D:96A:UN:E2SE6B'BGM+++34'DTM+137:202202232014:203'DTM+178:202202232012:203'RFF+ACW:test'NAD+FR+22222:160:111+++++++SE'NAD+DO+11111:160:111+++++++SE'ERC+100::260'FTX+AAO+++OK'RFF+Z07:meter'RFF+LI:meter'UNT+12+1'UNZ+1+E220223842164'`
 
-    const sut: Reader = new Reader('./src/messageSpec')
-    const results = sut.parse(document)
+    const reader: Reader = new Reader('./src/messageSpec')
+    const results = reader.parse(document)
+
     // Error is in reader
     const interchange = new InterchangeBuilder(
       results,
-      sut.separators,
+      reader.separators,
       './src/messageSpec',
     ).interchange
     expect(interchange.messages.length === 1)
     const nadGroups = interchange.messages[0].groupByName('Segment group 3')
       ?.data as Group[]
+    console.log(nadGroups.map((nad) => nad.data[0]))
     expect(
       nadGroups.find(
         (nad) =>

@@ -348,7 +348,7 @@ export class SegmentTableBuilder extends TableBuilder<SegmentEntry> {
   }
 
   build(): Dictionary<SegmentEntry> {
-    const fileLoc: string | undefined = this.getDefinitionFileLoc()
+    const fileLoc: string | undefined = this.getDefinitionFileLoc('segments')
     let dict: Dictionary<SegmentEntry>
 
     if (fileLoc) {

@@ -279,20 +279,15 @@ export class UNECEMessageStructureParser implements MessageStructureParser {
           const componentName = this.formatComponentName(arr[5]?.trim())
 
           // Check if possibility for coded values
-          let validValues: ComponentValueEntry | undefined
 
           if (href.includes('/tred/') && componentName?.includes('Code')) {
             // Check if already exists
-            if (definition.componentValueTable.contains(id)) {
-              // Use cache if it exists
-              validValues = definition.componentValueTable.get(id)
-            } else {
-              const componentResult = await this.parseComponentDefinitionPage(
+            if (!definition.componentValueTable.contains(id)) {
+              void this.parseComponentDefinitionPage(
                 id,
                 await this.loadPage(href),
                 definition,
               )
-              validValues = componentResult.componentValueTable.get(id)
             }
           }
 
@@ -302,7 +297,6 @@ export class UNECEMessageStructureParser implements MessageStructureParser {
                   id,
                   name: componentName,
                   format: elementDef,
-                  ...(validValues && { validValues }),
                 }
               : undefined
 

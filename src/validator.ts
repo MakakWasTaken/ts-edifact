@@ -64,8 +64,7 @@ export class Dictionary<T> {
 export type Component = {
   id: string
   name: string
-  value?: string
-  validValues?: ComponentValueEntry
+  value?: string | ComponentValue
   format: string
 }
 export type SegmentEntry = {

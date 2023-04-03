@@ -39,7 +39,9 @@ export abstract class TableBuilder<T> {
     return this
   }
 
-  protected getDefinitionFileLoc(): string | undefined {
+  protected getDefinitionFileLoc(
+    type: 'segments' | 'components',
+  ): string | undefined {
     let defaultFilePath: string
 
     if (this.location) {
@@ -51,15 +53,11 @@ export abstract class TableBuilder<T> {
       defaultFilePath = './'
     }
 
-    const baseFileName: string =
-      defaultFilePath + this.type.toUpperCase() + '.segments.json'
+    const baseFileName: string = `${
+      defaultFilePath + this.type.toUpperCase()
+    }.${type}.json`
     if (this.version) {
-      const versionedFileName: string =
-        defaultFilePath +
-        this.version.toUpperCase() +
-        '_' +
-        this.type.toUpperCase() +
-        '.segments.json'
+      const versionedFileName: string = `${defaultFilePath}${this.version.toUpperCase()}_${this.type.toUpperCase()}.${type}.json`
 
       if (fs.existsSync(versionedFileName)) {
         return versionedFileName

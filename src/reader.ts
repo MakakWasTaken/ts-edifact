@@ -18,6 +18,7 @@
  */
 
 import { Cache } from './cache'
+import { ComponentValueTableBuilder } from './components'
 import { Configuration } from './configuration'
 import { Separators } from './edi/separators'
 import { Parser } from './parser'
@@ -25,6 +26,7 @@ import { SegmentTableBuilder } from './segments'
 import { findElement, isDefined } from './util'
 import {
   Component,
+  ComponentValueEntry,
   Dictionary,
   ElementEntry,
   SegmentEntry,
@@ -51,6 +53,11 @@ export type ResultComponents = {
   [key: string]: string | undefined
 }
 
+export interface ReaderConfig {
+  throwOnMissingSegments?: boolean
+  throwOnInvalidComponentValue?: boolean
+}
+
 /**
  * The `Reader` class is included for backwards compatibility. It translates an
  * UN/EDIFACT document to an array of segments. Each segment has a `name` and
@@ -68,18 +75,23 @@ export class Reader {
 
   private defined = false
   private validationTables: Dictionary<SegmentEntry>[] = []
+  private componentValues: Dictionary<ComponentValueEntry> =
+    new Dictionary<ComponentValueEntry>()
 
-  private definitionCache: Cache<Dictionary<SegmentEntry>> = new Cache(15)
+  private definitionCache: Cache<{
+    segmentTable: Dictionary<SegmentEntry>
+    componentValueTable: Dictionary<ComponentValueEntry>
+  }> = new Cache(15)
   private unbCharsetDefined = false
 
   separators: Separators
 
-  constructor(messageSpecDir?: string, throwOnMissingDefinitions = false) {
-    const config: Configuration = new Configuration({
-      validator: new ValidatorImpl(throwOnMissingDefinitions),
+  constructor(messageSpecDir?: string, config: ReaderConfig = {}) {
+    const configuration: Configuration = new Configuration({
+      validator: new ValidatorImpl(config.throwOnMissingSegments || false),
     })
-    this.parser = new Parser(config)
-    this.validator = config.validator
+    this.parser = new Parser(configuration)
+    this.validator = configuration.validator
 
     // Holds the results
     this.result = []
@@ -124,7 +136,33 @@ export class Reader {
       // Replace value at index with correct one
       if (this.element) {
         const component = this.element.components[componentIndex]
-        components.push({ ...component, value })
+        // Check if it is a coded value
+        if (this.componentValues.contains(component.id)) {
+          const componentValues = this.componentValues.get(
+            component.id,
+          ) as ComponentValueEntry
+          const componentValue = componentValues[value]
+          if (!componentValue) {
+            if (config.throwOnInvalidComponentValue) {
+              throw new Error(
+                `Invalid component value '${value}' for component '${component.id}'`,
+              )
+            } else {
+              components.push({
+                ...component,
+                value: {
+                  id: value,
+                  value,
+                  description: 'Code not found',
+                },
+              })
+            }
+          } else {
+            components.push({ ...component, value: componentValue })
+          }
+        } else {
+          components.push({ ...component, value })
+        }
         componentIndex++
       }
     }
@@ -141,36 +179,53 @@ export class Reader {
             this.elements,
             'S009',
           )!.components
-          const messageType: string = messageIdentifier[0]!.value!
-          const messageVersion: string = messageIdentifier[1]!.value!
-          const messageRelease: string = messageIdentifier[2]!.value!
+          const messageType = messageIdentifier[0]!.value as string
+          const messageVersion = messageIdentifier[1]!.value as string
+          const messageRelease = messageIdentifier[2]!.value as string
 
           const key: string =
             messageVersion + messageRelease + '_' + messageType
           if (this.definitionCache.contains(key)) {
-            const segmentTable: Dictionary<SegmentEntry> =
+            const { segmentTable, componentValueTable } =
               this.definitionCache.get(key)
+            this.componentValues = componentValueTable
             this.validator.define(segmentTable)
           } else {
+            // Get the segments and component definitions
             let segmentTableBuilder: SegmentTableBuilder =
               new SegmentTableBuilder(messageType)
+            let componentValueTableBuilder: ComponentValueTableBuilder =
+              new ComponentValueTableBuilder(messageType)
             const version: string = (
               messageVersion + messageRelease
             ).toUpperCase()
             segmentTableBuilder = segmentTableBuilder.forVersion(
               version,
             ) as SegmentTableBuilder
+            componentValueTableBuilder = componentValueTableBuilder.forVersion(
+              version,
+            ) as ComponentValueTableBuilder
 
             if (messageSpecDir) {
               segmentTableBuilder =
                 segmentTableBuilder.specLocation(messageSpecDir)
+              componentValueTableBuilder.specLocation(messageSpecDir)
             } else {
               segmentTableBuilder = segmentTableBuilder.specLocation('./')
+              componentValueTableBuilder =
+                componentValueTableBuilder.specLocation('./')
             }
             const segmentTable: Dictionary<SegmentEntry> =
               segmentTableBuilder.build()
+            const componentValueTable: Dictionary<ComponentValueEntry> =
+              componentValueTableBuilder.build()
+
+            this.componentValues = componentValueTable
             this.validator.define(segmentTable)
-            this.definitionCache.insert(key, segmentTable)
+            this.definitionCache.insert(key, {
+              segmentTable,
+              componentValueTable,
+            })
           }
         }
         // Add the current elements to the results array

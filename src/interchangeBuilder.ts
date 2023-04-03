@@ -200,7 +200,7 @@ export class Edifact {
     this.date = formattedElements.dateAndTimeOfPreparation?.date as string | ''
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     this.time = formattedElements.dateAndTimeOfPreparation?.time as string | ''
-    this.interchangeNumber = elements[4].components[0].value!
+    this.interchangeNumber = elements[4].components[0].value as string
     if (elements.length >= 6) {
       this.recipientsRef =
         formattedElements.interchangeControlReference as RecipientsRef
