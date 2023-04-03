@@ -16,8 +16,8 @@
  * limitations under the License.
  */
 
+import { Element, Node } from 'domhandler'
 import { DomHandler, DomHandlerOptions } from 'htmlparser2'
-import { Element, Node } from 'htmlparser2/node_modules/domhandler'
 
 type Callback = (error: Error | null, dom: Node[]) => void
 type ElementCallback = (element: Element) => void
