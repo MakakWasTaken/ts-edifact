@@ -169,6 +169,22 @@ export class UNECEMessageStructureParser implements MessageStructureParser {
     if (definition.componentValueTable.contains(component)) {
       return definition
     }
+    if (page.includes('Use code list for data element')) {
+      const regexp = /Use code list for data element ([0-9]*)/gm
+      const arr: RegExpExecArray | null = regexp.exec(page)
+
+      if (isDefined(arr)) {
+        const referencedComponent = arr[1]
+        const referencedComponentPage: string = await this.loadPage(
+          '../tred/tred' + referencedComponent + '.htm',
+        )
+        return this.parseComponentDefinitionPage(
+          component,
+          referencedComponentPage,
+          definition,
+        )
+      }
+    }
     if (
       !page.includes('Code Values:') // Does not contain possible values.
     ) {
@@ -283,7 +299,7 @@ export class UNECEMessageStructureParser implements MessageStructureParser {
           if (href.includes('/tred/') && componentName?.includes('Code')) {
             // Check if already exists
             if (!definition.componentValueTable.contains(id)) {
-              void this.parseComponentDefinitionPage(
+              await this.parseComponentDefinitionPage(
                 id,
                 await this.loadPage(href),
                 definition,
