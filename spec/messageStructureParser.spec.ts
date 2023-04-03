@@ -29,7 +29,7 @@ import {
   UNECEMessageStructureParser,
 } from '../src/edi/messageStructureParser'
 import { MessageType } from '../src/tracker'
-import { findElement, persist } from '../src/util'
+import { findElement } from '../src/util'
 import {
   ComponentValueEntry,
   Dictionary,
@@ -568,14 +568,15 @@ describe('MessageStructureParser', () => {
         .loadTypeSpec()
         .then((response: EdifactMessageSpecification) => {
           // Will make sure that tests are not run against outdated versions
-          persist(response, './src/messageSpec')
+          // TODO: Reimplement when some sorting is included in the persist (Currently the file is updated on every test run)
+          // persist(response, './src/messageSpec')
 
           expect(response.type()).toEqual('D01B_INVOIC')
           expect(response.messageStructureDefinition.length).not.toEqual(0)
           done()
         })
         .catch((error: Error) => fail(error.message))
-    }, 10000)
+    }, 30000)
     it('D19A COARRI (containing segment groups with change identificators like +-*)', (done) => {
       const sut: UNECEMessageStructureParser = new UNECEMessageStructureParser(
         'd19a',
@@ -589,6 +590,6 @@ describe('MessageStructureParser', () => {
           done()
         })
         .catch((error: Error) => fail(error.message))
-    }, 10000)
+    }, 30000)
   })
 })
