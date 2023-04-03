@@ -155,9 +155,6 @@ export class UNECEMessageStructureParser implements MessageStructureParser {
       )
       const result =
         formattedNames[0].toLowerCase() + formattedNames.slice(1).join('')
-      if (name.includes('/')) {
-        console.log(formattedNames, result)
-      }
 
       return result
     }
