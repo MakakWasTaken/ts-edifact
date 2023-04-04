@@ -1,7 +1,7 @@
 {
   "name": "@makakwastaken/ts-edifact",
   "description": "Edifact parser library",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "private": false,
   "type": "commonjs",
   "main": "lib/index.js",
@@ -46,8 +46,7 @@
     "pretest": "yarn build",
     "test": "jasmine-ts --config=spec/support/jasmine.json",
     "coverage": "nyc -r lcov -e .ts -x \"*.spec.ts\" jasmine-ts JASMINE_CONFIG_PATH=spec/support/jasmine.json",
-    "prepublishOnly": "yarn lint && yarn build",
-    "prepare": "yarn lint && yarn build"
+    "prepack": "yarn lint && yarn build"
   },
   "devDependencies": {
     "@initics/tsm": "^1.0.2",
