@@ -762,7 +762,7 @@ interface TextReference {
 }
 
 interface TextLiteral {
-  freeTextValue1: string
+  freeTextValue: string
   freeTextValue2: string | undefined
   freeTextValue3: string | undefined
   freeTextValue4: string | undefined
@@ -800,7 +800,7 @@ export interface ProcessingInformation {
 // GIN
 
 interface IdentityNumberRange {
-  objectIdentifier1: string
+  objectIdentifier: string
   objectIdentifier2: string | undefined
 }
 
