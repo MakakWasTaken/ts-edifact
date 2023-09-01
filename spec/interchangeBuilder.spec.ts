@@ -378,7 +378,6 @@ describe('InterchangeBuilder', () => {
     expect(interchange.messages.length === 1)
     const nadGroups = interchange.messages[0].groupByName('Segment group 3')
       ?.data as Group[]
-    console.log(nadGroups.map((nad) => nad.data[0]))
     expect(
       nadGroups.find(
         (nad) =>

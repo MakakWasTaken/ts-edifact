@@ -316,9 +316,15 @@ export class UNECEMessageStructureParser implements MessageStructureParser {
                 }
               : undefined
 
+          const similarElements = segEntry.elements.filter(
+            (ele) => ele.id === id,
+          ).length
+
           const eleEntry: ElementEntry = {
             id,
-            name: componentName || '',
+            name:
+              (componentName || '') +
+              (similarElements > 1 ? similarElements.toString() : ''),
             requires: 0,
             components: [],
           }

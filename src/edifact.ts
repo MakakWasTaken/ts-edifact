@@ -286,7 +286,7 @@ export interface AdditionalInformation {
 
   countryOfOriginIdentifier: string | undefined
   dutyRegimeTypeCode: ComponentValue | undefined
-  specialConditionCode1: string | undefined
+  specialConditionCode: string | undefined
   specialConditionCode2: string | undefined
   specialConditionCode3: string | undefined
   specialConditionCode4: string | undefined
@@ -540,7 +540,7 @@ interface CurrencyDetails {
 export interface Currencies {
   tag: string
 
-  currencyDetails1: CurrencyDetails | undefined
+  currencyDetails: CurrencyDetails | undefined
   currencyDetails2: CurrencyDetails | undefined
   currencyExchangeRate: number | undefined
   exchangeRateCurrencyMarketIdentifier: string | undefined
@@ -570,7 +570,7 @@ interface HazardIdentificationPlacardDetails {
 }
 
 interface DangerousGoodsLabel {
-  dangerousGoodsMarkingIdentifier1: string | undefined
+  dangerousGoodsMarkingIdentifier: string | undefined
   dangerousGoodsMarkingIdentifier2: string | undefined
   dangerousGoodsMarkingIdentifier3: string | undefined
 }
@@ -808,7 +808,7 @@ export interface GoodsIdentityNumber {
   tag: string
 
   objectIdentificationCodeQualifier: ComponentValue
-  identityNumberRange1: IdentityNumberRange
+  identityNumberRange: IdentityNumberRange
   identityNumberRange2: IdentityNumberRange | undefined
   identityNumberRange3: IdentityNumberRange | undefined
   identityNumberRange4: IdentityNumberRange | undefined
@@ -827,7 +827,7 @@ export interface RelatedInformationNumbers {
   tag: string
 
   setTypeCodeQualifier: ComponentValue
-  identificationNumber1: IdentificationNumber
+  identificationNumber: IdentificationNumber
   identificationNumber2: IdentificationNumber | undefined
   identificationNumber3: IdentificationNumber | undefined
   identificationNumber4: IdentificationNumber | undefined
@@ -1102,7 +1102,7 @@ interface PartyIdentificationDetails {
 }
 
 interface NameAndAddressData {
-  nameAndAddressDescription1: string
+  nameAndAddressDescription: string
   nameAndAddressDescription2: string | undefined
   nameAndAddressDescription3: string | undefined
   nameAndAddressDescription4: string | undefined
@@ -1110,7 +1110,7 @@ interface NameAndAddressData {
 }
 
 interface PartyName {
-  partyName1: string
+  partyName: string
   partyName2: string | undefined
   partyName3: string | undefined
   partyName4: string | undefined
@@ -1119,7 +1119,7 @@ interface PartyName {
 }
 
 interface Street {
-  streetAndNumberOrPostOfficeBoxIdentifier1: string
+  streetAndNumberOrPostOfficeBoxIdentifier: string
   streetAndNumberOrPostOfficeBoxIdentifier2: string | undefined
   streetAndNumberOrPostOfficeBoxIdentifier3: string | undefined
   streetAndNumberOrPostOfficeBoxIdentifier4: string | undefined
@@ -1203,7 +1203,7 @@ interface PATPaymentTerms {
   paymentTermsDescriptionIdentifier: string
   codeListIdentificationCode: ComponentValue | undefined
   codeListResponsibleAgencyCode: ComponentValue | undefined
-  paymentTermsDescription1: string | undefined
+  paymentTermsDescription: string | undefined
   paymentTermsDescription2: string | undefined
 }
 
@@ -1242,7 +1242,7 @@ export interface PercentageDetails {
 // PCI
 
 interface MarksAndLabels {
-  shippingMarksDescription1: string
+  shippingMarksDescription: string
   shippingMarksDescription2: string | undefined
   shippingMarksDescription3: string | undefined
   shippingMarksDescription4: string | undefined
@@ -1292,7 +1292,7 @@ export interface AdditionalProductId {
 
   productIdentifierCodeQualifier: ComponentValue
 
-  itemNumberIdentification1: ItemNumberIdentification
+  itemNumberIdentification: ItemNumberIdentification
   itemNumberIdentification2: ItemNumberIdentification | undefined
   itemNumberIdentification3: ItemNumberIdentification | undefined
   itemNumberIdentification4: ItemNumberIdentification | undefined
@@ -1542,7 +1542,7 @@ export interface Status {
 
   statusCategory: StatusCategory | undefined
   status: StatusData | undefined
-  statusReason1: StatusReason | undefined
+  statusReason: StatusReason | undefined
   statusReason2: StatusReason | undefined
   statusReason3: StatusReason | undefined
   statusReason4: StatusReason | undefined
