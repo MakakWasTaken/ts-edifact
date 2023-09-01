@@ -138,27 +138,43 @@ export class Reader {
         const component = this.element.components[componentIndex]
         // Check if it is a coded value
         if (this.componentValues.contains(component.id)) {
-          const componentValues = this.componentValues.get(
-            component.id,
-          ) as ComponentValueEntry
-          const componentValue = componentValues[value]
-          if (!componentValue) {
-            if (config.throwOnInvalidComponentValue) {
-              throw new Error(
-                `Invalid component value '${value}' for component '${component.id}'`,
-              )
+          const componentFormatRegex = /(a)?(n)?(\.\.)?([0-9]*)?/g
+
+          const componentFormat = componentFormatRegex.exec(component.format)
+          if (isDefined(componentFormat)) {
+            const upto = componentFormat[3] === '..'
+            const componentValues = this.componentValues.get(
+              component.id,
+            ) as ComponentValueEntry
+            const componentValue = componentValues[value]
+            if (!componentValue) {
+              if (upto) {
+                // If the value is marked as 'upto' it is not required to be in the component value table as it can be ''
+                components.push({
+                  ...component,
+                  value: {
+                    id: value,
+                    value: 'No code provided', // Can't be '' as it is marked as failure if id and value are the same
+                    description: 'No code provided',
+                  },
+                })
+              } else if (config.throwOnInvalidComponentValue) {
+                throw new Error(
+                  `Invalid component value '${value}' for component '${component.id}'`,
+                )
+              } else {
+                components.push({
+                  ...component,
+                  value: {
+                    id: value,
+                    value,
+                    description: 'Code not found',
+                  },
+                })
+              }
             } else {
-              components.push({
-                ...component,
-                value: {
-                  id: value,
-                  value,
-                  description: 'Code not found',
-                },
-              })
+              components.push({ ...component, value: componentValue })
             }
-          } else {
-            components.push({ ...component, value: componentValue })
           }
         } else {
           components.push({ ...component, value })
