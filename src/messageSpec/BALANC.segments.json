@@ -1,29 +1,5 @@
 {
-  "AUT": {
-    "requires": 1,
-    "elements": [
-      {
-        "id": "9280",
-        "name": "validationResultValue",
-        "requires": 1,
-        "components": [
-          { "id": "9280", "name": "validationResultValue", "format": "an..35" }
-        ]
-      },
-      {
-        "id": "9282",
-        "name": "validationKeyIdentifier",
-        "requires": 0,
-        "components": [
-          {
-            "id": "9282",
-            "name": "validationKeyIdentifier",
-            "format": "an..35"
-          }
-        ]
-      }
-    ]
-  },
+  "AUT": { "requires": 0, "elements": [] },
   "BGM": {
     "requires": 0,
     "elements": [
@@ -104,7 +80,7 @@
           },
           {
             "id": "7110",
-            "name": "characteristicValueDescription",
+            "name": "characteristicValueDescription2",
             "format": "an..35"
           }
         ]
@@ -172,7 +148,7 @@
           },
           {
             "id": "7036",
-            "name": "characteristicDescription",
+            "name": "characteristicDescription2",
             "format": "an..35"
           }
         ]
@@ -250,7 +226,7 @@
             "format": "an..17"
           },
           { "id": "1146", "name": "accountName", "format": "an..35" },
-          { "id": "1146", "name": "accountName", "format": "an..35" },
+          { "id": "1146", "name": "accountName2", "format": "an..35" },
           {
             "id": "6345",
             "name": "currencyIdentificationCode",
@@ -361,33 +337,7 @@
       }
     ]
   },
-  "DTM": {
-    "requires": 1,
-    "elements": [
-      {
-        "id": "C507",
-        "name": "dateTimePeriod",
-        "requires": 1,
-        "components": [
-          {
-            "id": "2005",
-            "name": "dateOrTimeOrPeriodFunctionCodeQualifier",
-            "format": "an..3"
-          },
-          {
-            "id": "2380",
-            "name": "dateOrTimeOrPeriodValue",
-            "format": "an..35"
-          },
-          {
-            "id": "2379",
-            "name": "dateOrTimeOrPeriodFormatCode",
-            "format": "an..3"
-          }
-        ]
-      }
-    ]
-  },
+  "DTM": { "requires": 0, "elements": [] },
   "EQN": {
     "requires": 1,
     "elements": [
@@ -449,10 +399,10 @@
         "requires": 1,
         "components": [
           { "id": "4440", "name": "freeTextValue", "format": "an..512" },
-          { "id": "4440", "name": "freeTextValue", "format": "an..512" },
-          { "id": "4440", "name": "freeTextValue", "format": "an..512" },
-          { "id": "4440", "name": "freeTextValue", "format": "an..512" },
-          { "id": "4440", "name": "freeTextValue", "format": "an..512" }
+          { "id": "4440", "name": "freeTextValue2", "format": "an..512" },
+          { "id": "4440", "name": "freeTextValue3", "format": "an..512" },
+          { "id": "4440", "name": "freeTextValue4", "format": "an..512" },
+          { "id": "4440", "name": "freeTextValue5", "format": "an..512" }
         ]
       },
       {
@@ -624,22 +574,22 @@
           },
           {
             "id": "3124",
-            "name": "nameAndAddressDescription",
+            "name": "nameAndAddressDescription2",
             "format": "an..35"
           },
           {
             "id": "3124",
-            "name": "nameAndAddressDescription",
+            "name": "nameAndAddressDescription3",
             "format": "an..35"
           },
           {
             "id": "3124",
-            "name": "nameAndAddressDescription",
+            "name": "nameAndAddressDescription4",
             "format": "an..35"
           },
           {
             "id": "3124",
-            "name": "nameAndAddressDescription",
+            "name": "nameAndAddressDescription5",
             "format": "an..35"
           }
         ]
@@ -650,10 +600,10 @@
         "requires": 1,
         "components": [
           { "id": "3036", "name": "partyName", "format": "an..35" },
-          { "id": "3036", "name": "partyName", "format": "an..35" },
-          { "id": "3036", "name": "partyName", "format": "an..35" },
-          { "id": "3036", "name": "partyName", "format": "an..35" },
-          { "id": "3036", "name": "partyName", "format": "an..35" },
+          { "id": "3036", "name": "partyName2", "format": "an..35" },
+          { "id": "3036", "name": "partyName3", "format": "an..35" },
+          { "id": "3036", "name": "partyName4", "format": "an..35" },
+          { "id": "3036", "name": "partyName5", "format": "an..35" },
           { "id": "3045", "name": "partyNameFormatCode", "format": "an..3" }
         ]
       },
@@ -669,17 +619,17 @@
           },
           {
             "id": "3042",
-            "name": "streetAndNumberOrPostOfficeBoxIdentifier",
+            "name": "streetAndNumberOrPostOfficeBoxIdentifier2",
             "format": "an..35"
           },
           {
             "id": "3042",
-            "name": "streetAndNumberOrPostOfficeBoxIdentifier",
+            "name": "streetAndNumberOrPostOfficeBoxIdentifier3",
             "format": "an..35"
           },
           {
             "id": "3042",
-            "name": "streetAndNumberOrPostOfficeBoxIdentifier",
+            "name": "streetAndNumberOrPostOfficeBoxIdentifier4",
             "format": "an..35"
           }
         ]
@@ -754,25 +704,5 @@
       }
     ]
   },
-  "RFF": {
-    "requires": 1,
-    "elements": [
-      {
-        "id": "C506",
-        "name": "reference",
-        "requires": 1,
-        "components": [
-          { "id": "1153", "name": "referenceCodeQualifier", "format": "an..3" },
-          { "id": "1154", "name": "referenceIdentifier", "format": "an..70" },
-          { "id": "1156", "name": "documentLineIdentifier", "format": "an..6" },
-          {
-            "id": "4000",
-            "name": "referenceVersionIdentifier",
-            "format": "an..35"
-          },
-          { "id": "1060", "name": "revisionIdentifier", "format": "an..6" }
-        ]
-      }
-    ]
-  }
+  "RFF": { "requires": 0, "elements": [] }
 }

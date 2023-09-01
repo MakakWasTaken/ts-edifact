@@ -451,12 +451,12 @@
           },
           {
             "id": "8246",
-            "name": "dangerousGoodsMarkingIdentifier",
+            "name": "dangerousGoodsMarkingIdentifier2",
             "format": "an..4"
           },
           {
             "id": "8246",
-            "name": "dangerousGoodsMarkingIdentifier",
+            "name": "dangerousGoodsMarkingIdentifier3",
             "format": "an..4"
           }
         ]
@@ -569,7 +569,7 @@
           },
           {
             "id": "7160",
-            "name": "specialServiceDescription",
+            "name": "specialServiceDescription2",
             "format": "an..35"
           }
         ]
@@ -789,10 +789,10 @@
         "requires": 1,
         "components": [
           { "id": "4440", "name": "freeTextValue", "format": "an..512" },
-          { "id": "4440", "name": "freeTextValue", "format": "an..512" },
-          { "id": "4440", "name": "freeTextValue", "format": "an..512" },
-          { "id": "4440", "name": "freeTextValue", "format": "an..512" },
-          { "id": "4440", "name": "freeTextValue", "format": "an..512" }
+          { "id": "4440", "name": "freeTextValue2", "format": "an..512" },
+          { "id": "4440", "name": "freeTextValue3", "format": "an..512" },
+          { "id": "4440", "name": "freeTextValue4", "format": "an..512" },
+          { "id": "4440", "name": "freeTextValue5", "format": "an..512" }
         ]
       },
       {
@@ -834,7 +834,7 @@
         "requires": 1,
         "components": [
           { "id": "7402", "name": "objectIdentifier", "format": "an..35" },
-          { "id": "7402", "name": "objectIdentifier", "format": "an..35" }
+          { "id": "7402", "name": "objectIdentifier2", "format": "an..35" }
         ]
       },
       {
@@ -843,7 +843,7 @@
         "requires": 1,
         "components": [
           { "id": "7402", "name": "objectIdentifier", "format": "an..35" },
-          { "id": "7402", "name": "objectIdentifier", "format": "an..35" }
+          { "id": "7402", "name": "objectIdentifier2", "format": "an..35" }
         ]
       },
       {
@@ -852,7 +852,7 @@
         "requires": 1,
         "components": [
           { "id": "7402", "name": "objectIdentifier", "format": "an..35" },
-          { "id": "7402", "name": "objectIdentifier", "format": "an..35" }
+          { "id": "7402", "name": "objectIdentifier2", "format": "an..35" }
         ]
       },
       {
@@ -861,7 +861,7 @@
         "requires": 1,
         "components": [
           { "id": "7402", "name": "objectIdentifier", "format": "an..35" },
-          { "id": "7402", "name": "objectIdentifier", "format": "an..35" }
+          { "id": "7402", "name": "objectIdentifier2", "format": "an..35" }
         ]
       },
       {
@@ -870,7 +870,7 @@
         "requires": 1,
         "components": [
           { "id": "7402", "name": "objectIdentifier", "format": "an..35" },
-          { "id": "7402", "name": "objectIdentifier", "format": "an..35" }
+          { "id": "7402", "name": "objectIdentifier2", "format": "an..35" }
         ]
       }
     ]
@@ -1063,7 +1063,7 @@
             "format": "an..3"
           },
           { "id": "7008", "name": "itemDescription", "format": "an..256" },
-          { "id": "7008", "name": "itemDescription", "format": "an..256" },
+          { "id": "7008", "name": "itemDescription2", "format": "an..256" },
           { "id": "3453", "name": "languageNameCode", "format": "an..3" }
         ]
       },
@@ -1390,22 +1390,22 @@
           },
           {
             "id": "3124",
-            "name": "nameAndAddressDescription",
+            "name": "nameAndAddressDescription2",
             "format": "an..35"
           },
           {
             "id": "3124",
-            "name": "nameAndAddressDescription",
+            "name": "nameAndAddressDescription3",
             "format": "an..35"
           },
           {
             "id": "3124",
-            "name": "nameAndAddressDescription",
+            "name": "nameAndAddressDescription4",
             "format": "an..35"
           },
           {
             "id": "3124",
-            "name": "nameAndAddressDescription",
+            "name": "nameAndAddressDescription5",
             "format": "an..35"
           }
         ]
@@ -1416,10 +1416,10 @@
         "requires": 1,
         "components": [
           { "id": "3036", "name": "partyName", "format": "an..35" },
-          { "id": "3036", "name": "partyName", "format": "an..35" },
-          { "id": "3036", "name": "partyName", "format": "an..35" },
-          { "id": "3036", "name": "partyName", "format": "an..35" },
-          { "id": "3036", "name": "partyName", "format": "an..35" },
+          { "id": "3036", "name": "partyName2", "format": "an..35" },
+          { "id": "3036", "name": "partyName3", "format": "an..35" },
+          { "id": "3036", "name": "partyName4", "format": "an..35" },
+          { "id": "3036", "name": "partyName5", "format": "an..35" },
           { "id": "3045", "name": "partyNameFormatCode", "format": "an..3" }
         ]
       },
@@ -1435,17 +1435,17 @@
           },
           {
             "id": "3042",
-            "name": "streetAndNumberOrPostOfficeBoxIdentifier",
+            "name": "streetAndNumberOrPostOfficeBoxIdentifier2",
             "format": "an..35"
           },
           {
             "id": "3042",
-            "name": "streetAndNumberOrPostOfficeBoxIdentifier",
+            "name": "streetAndNumberOrPostOfficeBoxIdentifier3",
             "format": "an..35"
           },
           {
             "id": "3042",
-            "name": "streetAndNumberOrPostOfficeBoxIdentifier",
+            "name": "streetAndNumberOrPostOfficeBoxIdentifier4",
             "format": "an..35"
           }
         ]
@@ -1565,10 +1565,10 @@
             "name": "itemTypeIdentificationCode",
             "format": "an..3"
           },
-          { "id": "7064", "name": "typeOfPackages", "format": "an..35" },
+          { "id": "7064", "name": "typeOfPackages2", "format": "an..35" },
           {
             "id": "7143",
-            "name": "itemTypeIdentificationCode",
+            "name": "itemTypeIdentificationCode2",
             "format": "an..3"
           }
         ]
@@ -1656,47 +1656,47 @@
           },
           {
             "id": "7102",
-            "name": "shippingMarksDescription",
+            "name": "shippingMarksDescription2",
             "format": "an..35"
           },
           {
             "id": "7102",
-            "name": "shippingMarksDescription",
+            "name": "shippingMarksDescription3",
             "format": "an..35"
           },
           {
             "id": "7102",
-            "name": "shippingMarksDescription",
+            "name": "shippingMarksDescription4",
             "format": "an..35"
           },
           {
             "id": "7102",
-            "name": "shippingMarksDescription",
+            "name": "shippingMarksDescription5",
             "format": "an..35"
           },
           {
             "id": "7102",
-            "name": "shippingMarksDescription",
+            "name": "shippingMarksDescription6",
             "format": "an..35"
           },
           {
             "id": "7102",
-            "name": "shippingMarksDescription",
+            "name": "shippingMarksDescription7",
             "format": "an..35"
           },
           {
             "id": "7102",
-            "name": "shippingMarksDescription",
+            "name": "shippingMarksDescription8",
             "format": "an..35"
           },
           {
             "id": "7102",
-            "name": "shippingMarksDescription",
+            "name": "shippingMarksDescription9",
             "format": "an..35"
           },
           {
             "id": "7102",
-            "name": "shippingMarksDescription",
+            "name": "shippingMarksDescription10",
             "format": "an..35"
           }
         ]
@@ -2006,7 +2006,7 @@
         "requires": 1,
         "components": [
           { "id": "7402", "name": "objectIdentifier", "format": "an..35" },
-          { "id": "7402", "name": "objectIdentifier", "format": "an..35" }
+          { "id": "7402", "name": "objectIdentifier2", "format": "an..35" }
         ]
       }
     ]
@@ -2291,7 +2291,7 @@
           },
           {
             "id": "4052",
-            "name": "deliveryOrTransportTermsDescription",
+            "name": "deliveryOrTransportTermsDescription2",
             "format": "an..70"
           }
         ]

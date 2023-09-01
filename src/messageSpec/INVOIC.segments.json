@@ -99,7 +99,7 @@
           },
           {
             "id": "7160",
-            "name": "specialServiceDescription",
+            "name": "specialServiceDescription2",
             "format": "an..35"
           }
         ]
@@ -111,10 +111,14 @@
     "elements": [
       {
         "id": "3239",
-        "name": "countryOfOriginNameCode",
+        "name": "countryOfOriginIdentifier",
         "requires": 0,
         "components": [
-          { "id": "3239", "name": "countryOfOriginNameCode", "format": "an..3" }
+          {
+            "id": "3239",
+            "name": "countryOfOriginIdentifier",
+            "format": "an..3"
+          }
         ]
       },
       {
@@ -251,8 +255,8 @@
             "name": "controlTotalTypeCodeQualifier",
             "format": "an..3"
           },
-          { "id": "6066", "name": "controlTotalValue", "format": "n..18" },
-          { "id": "6411", "name": "measurementUnitCode", "format": "an..3" }
+          { "id": "6066", "name": "controlTotalQuantity", "format": "n..18" },
+          { "id": "6411", "name": "measurementUnitCode", "format": "an..8" }
         ]
       }
     ]
@@ -272,7 +276,7 @@
           },
           {
             "id": "3155",
-            "name": "communicationAddressCodeQualifier",
+            "name": "communicationMeansTypeCode",
             "format": "an..3"
           }
         ]
@@ -292,19 +296,11 @@
       },
       {
         "id": "C056",
-        "name": "departmentOrEmployeeDetails",
+        "name": "contactDetails",
         "requires": 0,
         "components": [
-          {
-            "id": "3413",
-            "name": "departmentOrEmployeeNameCode",
-            "format": "an..17"
-          },
-          {
-            "id": "3412",
-            "name": "departmentOrEmployeeName",
-            "format": "an..35"
-          }
+          { "id": "3413", "name": "contactIdentifier", "format": "an..17" },
+          { "id": "3412", "name": "contactName", "format": "an..256" }
         ]
       }
     ]
@@ -332,7 +328,7 @@
             "name": "currencyTypeCodeQualifier",
             "format": "an..3"
           },
-          { "id": "6348", "name": "currencyRateValue", "format": "n..4" }
+          { "id": "6348", "name": "currencyRate", "format": "n..4" }
         ]
       },
       {
@@ -355,7 +351,7 @@
             "name": "currencyTypeCodeQualifier",
             "format": "an..3"
           },
-          { "id": "6348", "name": "currencyRateValue", "format": "n..4" }
+          { "id": "6348", "name": "currencyRate", "format": "n..4" }
         ]
       },
       {
@@ -424,7 +420,7 @@
         "components": [
           {
             "id": "7088",
-            "name": "dangerousGoodsFlashpointValue",
+            "name": "dangerousGoodsFlashpointDescription",
             "format": "an..8"
           }
         ]
@@ -434,8 +430,8 @@
         "name": "dangerousGoodsShipmentFlashpoint",
         "requires": 0,
         "components": [
-          { "id": "7106", "name": "shipmentFlashpointValue", "format": "n3" },
-          { "id": "6411", "name": "measurementUnitCode", "format": "an..3" }
+          { "id": "7106", "name": "shipmentFlashpointDegree", "format": "n3" },
+          { "id": "6411", "name": "measurementUnitCode", "format": "an..8" }
         ]
       },
       {
@@ -515,12 +511,12 @@
           },
           {
             "id": "8246",
-            "name": "dangerousGoodsMarkingIdentifier",
+            "name": "dangerousGoodsMarkingIdentifier2",
             "format": "an..4"
           },
           {
             "id": "8246",
-            "name": "dangerousGoodsMarkingIdentifier",
+            "name": "dangerousGoodsMarkingIdentifier3",
             "format": "an..4"
           }
         ]
@@ -538,14 +534,14 @@
         ]
       },
       {
-        "id": "8325",
-        "name": "hazardousMeansOfTransportCategoryCode",
+        "id": "8179",
+        "name": "transportMeansDescriptionCode",
         "requires": 0,
         "components": [
           {
-            "id": "8325",
-            "name": "hazardousMeansOfTransportCategoryCode",
-            "format": "an..3"
+            "id": "8179",
+            "name": "transportMeansDescriptionCode",
+            "format": "an..8"
           }
         ]
       },
@@ -655,7 +651,7 @@
           },
           {
             "id": "2380",
-            "name": "dateOrTimeOrPeriodValue",
+            "name": "dateOrTimeOrPeriodText",
             "format": "an..35"
           },
           {
@@ -698,7 +694,7 @@
             "name": "codeListResponsibleAgencyCode",
             "format": "an..3"
           },
-          { "id": "3207", "name": "countryNameCode", "format": "an..3" }
+          { "id": "3207", "name": "countryIdentifier", "format": "an..3" }
         ]
       },
       {
@@ -755,6 +751,14 @@
             "format": "an..3"
           }
         ]
+      },
+      {
+        "id": "4233",
+        "name": "markingInstructionsCode",
+        "requires": 0,
+        "components": [
+          { "id": "4233", "name": "markingInstructionsCode", "format": "an..3" }
+        ]
       }
     ]
   },
@@ -784,7 +788,7 @@
             "format": "an..35"
           },
           { "id": "3192", "name": "accountHolderName", "format": "an..35" },
-          { "id": "3192", "name": "accountHolderName", "format": "an..35" },
+          { "id": "3192", "name": "accountHolderName2", "format": "an..35" },
           {
             "id": "6345",
             "name": "currencyIdentificationCode",
@@ -815,12 +819,12 @@
           },
           {
             "id": "1131",
-            "name": "codeListIdentificationCode",
+            "name": "codeListIdentificationCode2",
             "format": "an..17"
           },
           {
             "id": "3055",
-            "name": "codeListResponsibleAgencyCode",
+            "name": "codeListResponsibleAgencyCode2",
             "format": "an..3"
           },
           { "id": "3432", "name": "institutionName", "format": "an..70" },
@@ -833,10 +837,10 @@
       },
       {
         "id": "3207",
-        "name": "countryNameCode",
+        "name": "countryIdentifier",
         "requires": 0,
         "components": [
-          { "id": "3207", "name": "countryNameCode", "format": "an..3" }
+          { "id": "3207", "name": "countryIdentifier", "format": "an..3" }
         ]
       }
     ]
@@ -869,7 +873,11 @@
         "name": "textReference",
         "requires": 1,
         "components": [
-          { "id": "4441", "name": "freeTextValueCode", "format": "an..17" },
+          {
+            "id": "4441",
+            "name": "freeTextDescriptionCode",
+            "format": "an..17"
+          },
           {
             "id": "1131",
             "name": "codeListIdentificationCode",
@@ -887,11 +895,11 @@
         "name": "textLiteral",
         "requires": 1,
         "components": [
-          { "id": "4440", "name": "freeTextValue", "format": "an..512" },
-          { "id": "4440", "name": "freeTextValue", "format": "an..512" },
-          { "id": "4440", "name": "freeTextValue", "format": "an..512" },
-          { "id": "4440", "name": "freeTextValue", "format": "an..512" },
-          { "id": "4440", "name": "freeTextValue", "format": "an..512" }
+          { "id": "4440", "name": "freeText", "format": "an..512" },
+          { "id": "4440", "name": "freeText2", "format": "an..512" },
+          { "id": "4440", "name": "freeText3", "format": "an..512" },
+          { "id": "4440", "name": "freeText4", "format": "an..512" },
+          { "id": "4440", "name": "freeText5", "format": "an..512" }
         ]
       },
       {
@@ -908,6 +916,62 @@
         "requires": 0,
         "components": [
           { "id": "4447", "name": "freeTextFormatCode", "format": "an..3" }
+        ]
+      }
+    ]
+  },
+  "GEI": {
+    "requires": 1,
+    "elements": [
+      {
+        "id": "9649",
+        "name": "processingInformationCodeQualifier",
+        "requires": 1,
+        "components": [
+          {
+            "id": "9649",
+            "name": "processingInformationCodeQualifier",
+            "format": "an..3"
+          }
+        ]
+      },
+      {
+        "id": "C012",
+        "name": "processingIndicator",
+        "requires": 0,
+        "components": [
+          {
+            "id": "7365",
+            "name": "processingIndicatorDescriptionCode",
+            "format": "an..3"
+          },
+          {
+            "id": "1131",
+            "name": "codeListIdentificationCode",
+            "format": "an..17"
+          },
+          {
+            "id": "3055",
+            "name": "codeListResponsibleAgencyCode",
+            "format": "an..3"
+          },
+          {
+            "id": "7364",
+            "name": "processingIndicatorDescription",
+            "format": "an..35"
+          }
+        ]
+      },
+      {
+        "id": "7187",
+        "name": "processTypeDescriptionCode",
+        "requires": 0,
+        "components": [
+          {
+            "id": "7187",
+            "name": "processTypeDescriptionCode",
+            "format": "an..17"
+          }
         ]
       }
     ]
@@ -933,7 +997,7 @@
         "requires": 1,
         "components": [
           { "id": "7402", "name": "objectIdentifier", "format": "an..35" },
-          { "id": "7402", "name": "objectIdentifier", "format": "an..35" }
+          { "id": "7402", "name": "objectIdentifier2", "format": "an..35" }
         ]
       },
       {
@@ -942,7 +1006,7 @@
         "requires": 1,
         "components": [
           { "id": "7402", "name": "objectIdentifier", "format": "an..35" },
-          { "id": "7402", "name": "objectIdentifier", "format": "an..35" }
+          { "id": "7402", "name": "objectIdentifier2", "format": "an..35" }
         ]
       },
       {
@@ -951,7 +1015,7 @@
         "requires": 1,
         "components": [
           { "id": "7402", "name": "objectIdentifier", "format": "an..35" },
-          { "id": "7402", "name": "objectIdentifier", "format": "an..35" }
+          { "id": "7402", "name": "objectIdentifier2", "format": "an..35" }
         ]
       },
       {
@@ -960,7 +1024,7 @@
         "requires": 1,
         "components": [
           { "id": "7402", "name": "objectIdentifier", "format": "an..35" },
-          { "id": "7402", "name": "objectIdentifier", "format": "an..35" }
+          { "id": "7402", "name": "objectIdentifier2", "format": "an..35" }
         ]
       },
       {
@@ -969,7 +1033,7 @@
         "requires": 1,
         "components": [
           { "id": "7402", "name": "objectIdentifier", "format": "an..35" },
-          { "id": "7402", "name": "objectIdentifier", "format": "an..35" }
+          { "id": "7402", "name": "objectIdentifier2", "format": "an..35" }
         ]
       }
     ]
@@ -1057,38 +1121,6 @@
       }
     ]
   },
-  "GIS": {
-    "requires": 1,
-    "elements": [
-      {
-        "id": "C529",
-        "name": "processingIndicator",
-        "requires": 1,
-        "components": [
-          {
-            "id": "7365",
-            "name": "processingIndicatorDescriptionCode",
-            "format": "an..3"
-          },
-          {
-            "id": "1131",
-            "name": "codeListIdentificationCode",
-            "format": "an..17"
-          },
-          {
-            "id": "3055",
-            "name": "codeListResponsibleAgencyCode",
-            "format": "an..3"
-          },
-          {
-            "id": "7187",
-            "name": "processTypeDescriptionCode",
-            "format": "an..17"
-          }
-        ]
-      }
-    ]
-  },
   "IMD": {
     "requires": 0,
     "elements": [
@@ -1135,7 +1167,7 @@
             "format": "an..3"
           },
           { "id": "7008", "name": "itemDescription", "format": "an..256" },
-          { "id": "7008", "name": "itemDescription", "format": "an..256" },
+          { "id": "7008", "name": "itemDescription2", "format": "an..256" },
           { "id": "3453", "name": "languageNameCode", "format": "an..3" }
         ]
       },
@@ -1208,14 +1240,10 @@
       },
       {
         "id": "1229",
-        "name": "actionRequestNotificationDescriptionCode",
+        "name": "actionCode",
         "requires": 0,
         "components": [
-          {
-            "id": "1229",
-            "name": "actionRequestNotificationDescriptionCode",
-            "format": "an..3"
-          }
+          { "id": "1229", "name": "actionCode", "format": "an..3" }
         ]
       }
     ]
@@ -1233,14 +1261,10 @@
       },
       {
         "id": "1229",
-        "name": "actionRequestNotificationDescriptionCode",
+        "name": "actionCode",
         "requires": 0,
         "components": [
-          {
-            "id": "1229",
-            "name": "actionRequestNotificationDescriptionCode",
-            "format": "an..3"
-          }
+          { "id": "1229", "name": "actionCode", "format": "an..3" }
         ]
       },
       {
@@ -1317,7 +1341,7 @@
         "name": "locationIdentification",
         "requires": 0,
         "components": [
-          { "id": "3225", "name": "locationNameCode", "format": "an..25" },
+          { "id": "3225", "name": "locationIdentifier", "format": "an..35" },
           {
             "id": "1131",
             "name": "codeListIdentificationCode",
@@ -1338,8 +1362,8 @@
         "components": [
           {
             "id": "3223",
-            "name": "firstRelatedLocationNameCode",
-            "format": "an..25"
+            "name": "firstRelatedLocationIdentifier",
+            "format": "an..35"
           },
           {
             "id": "1131",
@@ -1365,8 +1389,8 @@
         "components": [
           {
             "id": "3233",
-            "name": "secondRelatedLocationNameCode",
-            "format": "an..25"
+            "name": "secondRelatedLocationIdentifier",
+            "format": "an..35"
           },
           {
             "id": "1131",
@@ -1438,10 +1462,10 @@
         "name": "valueRange",
         "requires": 1,
         "components": [
-          { "id": "6411", "name": "measurementUnitCode", "format": "an..3" },
-          { "id": "6314", "name": "measurementValue", "format": "an..18" },
-          { "id": "6162", "name": "rangeMinimumValue", "format": "n..18" },
-          { "id": "6152", "name": "rangeMaximumValue", "format": "n..18" },
+          { "id": "6411", "name": "measurementUnitCode", "format": "an..8" },
+          { "id": "6314", "name": "measure", "format": "an..18" },
+          { "id": "6162", "name": "rangeMinimumQuantity", "format": "n..18" },
+          { "id": "6152", "name": "rangeMaximumQuantity", "format": "n..18" },
           {
             "id": "6432",
             "name": "significantDigitsQuantity",
@@ -1533,22 +1557,22 @@
           },
           {
             "id": "3124",
-            "name": "nameAndAddressDescription",
+            "name": "nameAndAddressDescription2",
             "format": "an..35"
           },
           {
             "id": "3124",
-            "name": "nameAndAddressDescription",
+            "name": "nameAndAddressDescription3",
             "format": "an..35"
           },
           {
             "id": "3124",
-            "name": "nameAndAddressDescription",
+            "name": "nameAndAddressDescription4",
             "format": "an..35"
           },
           {
             "id": "3124",
-            "name": "nameAndAddressDescription",
+            "name": "nameAndAddressDescription5",
             "format": "an..35"
           }
         ]
@@ -1559,10 +1583,10 @@
         "requires": 1,
         "components": [
           { "id": "3036", "name": "partyName", "format": "an..35" },
-          { "id": "3036", "name": "partyName", "format": "an..35" },
-          { "id": "3036", "name": "partyName", "format": "an..35" },
-          { "id": "3036", "name": "partyName", "format": "an..35" },
-          { "id": "3036", "name": "partyName", "format": "an..35" },
+          { "id": "3036", "name": "partyName2", "format": "an..35" },
+          { "id": "3036", "name": "partyName3", "format": "an..35" },
+          { "id": "3036", "name": "partyName4", "format": "an..35" },
+          { "id": "3036", "name": "partyName5", "format": "an..35" },
           { "id": "3045", "name": "partyNameFormatCode", "format": "an..3" }
         ]
       },
@@ -1578,17 +1602,17 @@
           },
           {
             "id": "3042",
-            "name": "streetAndNumberOrPostOfficeBoxIdentifier",
+            "name": "streetAndNumberOrPostOfficeBoxIdentifier2",
             "format": "an..35"
           },
           {
             "id": "3042",
-            "name": "streetAndNumberOrPostOfficeBoxIdentifier",
+            "name": "streetAndNumberOrPostOfficeBoxIdentifier3",
             "format": "an..35"
           },
           {
             "id": "3042",
-            "name": "streetAndNumberOrPostOfficeBoxIdentifier",
+            "name": "streetAndNumberOrPostOfficeBoxIdentifier4",
             "format": "an..35"
           }
         ]
@@ -1601,12 +1625,12 @@
       },
       {
         "id": "C819",
-        "name": "countrySubEntityDetails",
+        "name": "countrySubdivisionDetails",
         "requires": 0,
         "components": [
           {
             "id": "3229",
-            "name": "countrySubEntityNameCode",
+            "name": "countrySubdivisionIdentifier",
             "format": "an..9"
           },
           {
@@ -1619,7 +1643,7 @@
             "name": "codeListResponsibleAgencyCode",
             "format": "an..3"
           },
-          { "id": "3228", "name": "countrySubEntityName", "format": "an..70" }
+          { "id": "3228", "name": "countrySubdivisionName", "format": "an..70" }
         ]
       },
       {
@@ -1636,10 +1660,10 @@
       },
       {
         "id": "3207",
-        "name": "countryNameCode",
+        "name": "countryIdentifier",
         "requires": 0,
         "components": [
-          { "id": "3207", "name": "countryNameCode", "format": "an..3" }
+          { "id": "3207", "name": "countryIdentifier", "format": "an..3" }
         ]
       }
     ]
@@ -1708,10 +1732,10 @@
             "name": "itemTypeIdentificationCode",
             "format": "an..3"
           },
-          { "id": "7064", "name": "typeOfPackages", "format": "an..35" },
+          { "id": "7064", "name": "typeOfPackages2", "format": "an..35" },
           {
             "id": "7143",
-            "name": "itemTypeIdentificationCode",
+            "name": "itemTypeIdentificationCode2",
             "format": "an..3"
           }
         ]
@@ -1761,66 +1785,6 @@
             "format": "an..3"
           },
           { "id": "4435", "name": "paymentChannelCode", "format": "an..3" }
-        ]
-      }
-    ]
-  },
-  "PAT": {
-    "requires": 1,
-    "elements": [
-      {
-        "id": "4279",
-        "name": "paymentTermsTypeCodeQualifier",
-        "requires": 1,
-        "components": [
-          {
-            "id": "4279",
-            "name": "paymentTermsTypeCodeQualifier",
-            "format": "an..3"
-          }
-        ]
-      },
-      {
-        "id": "C110",
-        "name": "paymentTerms",
-        "requires": 1,
-        "components": [
-          {
-            "id": "4277",
-            "name": "paymentTermsDescriptionIdentifier",
-            "format": "an..17"
-          },
-          {
-            "id": "1131",
-            "name": "codeListIdentificationCode",
-            "format": "an..17"
-          },
-          {
-            "id": "3055",
-            "name": "codeListResponsibleAgencyCode",
-            "format": "an..3"
-          },
-          {
-            "id": "4276",
-            "name": "paymentTermsDescription",
-            "format": "an..35"
-          },
-          {
-            "id": "4276",
-            "name": "paymentTermsDescription",
-            "format": "an..35"
-          }
-        ]
-      },
-      {
-        "id": "C112",
-        "name": "termsTimeInformation",
-        "requires": 1,
-        "components": [
-          { "id": "2475", "name": "timeReferenceCode", "format": "an..3" },
-          { "id": "2009", "name": "termsTimeRelationCode", "format": "an..3" },
-          { "id": "2151", "name": "periodTypeCode", "format": "an..3" },
-          { "id": "2152", "name": "periodCountQuantity", "format": "n..3" }
         ]
       }
     ]
@@ -1889,59 +1853,59 @@
           },
           {
             "id": "7102",
-            "name": "shippingMarksDescription",
+            "name": "shippingMarksDescription2",
             "format": "an..35"
           },
           {
             "id": "7102",
-            "name": "shippingMarksDescription",
+            "name": "shippingMarksDescription3",
             "format": "an..35"
           },
           {
             "id": "7102",
-            "name": "shippingMarksDescription",
+            "name": "shippingMarksDescription4",
             "format": "an..35"
           },
           {
             "id": "7102",
-            "name": "shippingMarksDescription",
+            "name": "shippingMarksDescription5",
             "format": "an..35"
           },
           {
             "id": "7102",
-            "name": "shippingMarksDescription",
+            "name": "shippingMarksDescription6",
             "format": "an..35"
           },
           {
             "id": "7102",
-            "name": "shippingMarksDescription",
+            "name": "shippingMarksDescription7",
             "format": "an..35"
           },
           {
             "id": "7102",
-            "name": "shippingMarksDescription",
+            "name": "shippingMarksDescription8",
             "format": "an..35"
           },
           {
             "id": "7102",
-            "name": "shippingMarksDescription",
+            "name": "shippingMarksDescription9",
             "format": "an..35"
           },
           {
             "id": "7102",
-            "name": "shippingMarksDescription",
+            "name": "shippingMarksDescription10",
             "format": "an..35"
           }
         ]
       },
       {
-        "id": "8275",
-        "name": "containerOrPackageContentsIndicatorCode",
+        "id": "8169",
+        "name": "fullOrEmptyIndicatorCode",
         "requires": 0,
         "components": [
           {
-            "id": "8275",
-            "name": "containerOrPackageContentsIndicatorCode",
+            "id": "8169",
+            "name": "fullOrEmptyIndicatorCode",
             "format": "an..3"
           }
         ]
@@ -2142,8 +2106,8 @@
           { "id": "5118", "name": "priceAmount", "format": "n..15" },
           { "id": "5375", "name": "priceTypeCode", "format": "an..3" },
           { "id": "5387", "name": "priceSpecificationCode", "format": "an..3" },
-          { "id": "5284", "name": "unitPriceBasisValue", "format": "n..9" },
-          { "id": "6411", "name": "measurementUnitCode", "format": "an..3" }
+          { "id": "5284", "name": "unitPriceBasisQuantity", "format": "n..9" },
+          { "id": "6411", "name": "measurementUnitCode", "format": "an..8" }
         ]
       },
       {
@@ -2156,6 +2120,82 @@
             "name": "subLineItemPriceChangeOperationCode",
             "format": "an..3"
           }
+        ]
+      }
+    ]
+  },
+  "PYT": {
+    "requires": 1,
+    "elements": [
+      {
+        "id": "4279",
+        "name": "paymentTermsTypeCodeQualifier",
+        "requires": 1,
+        "components": [
+          {
+            "id": "4279",
+            "name": "paymentTermsTypeCodeQualifier",
+            "format": "an..3"
+          }
+        ]
+      },
+      {
+        "id": "C019",
+        "name": "paymentTerms",
+        "requires": 0,
+        "components": [
+          {
+            "id": "4277",
+            "name": "paymentTermsDescriptionIdentifier",
+            "format": "an..17"
+          },
+          {
+            "id": "1131",
+            "name": "codeListIdentificationCode",
+            "format": "an..17"
+          },
+          {
+            "id": "3055",
+            "name": "codeListResponsibleAgencyCode",
+            "format": "an..3"
+          },
+          {
+            "id": "4276",
+            "name": "paymentTermsDescription",
+            "format": "an..35"
+          }
+        ]
+      },
+      {
+        "id": "2475",
+        "name": "eventTimeReferenceCode",
+        "requires": 0,
+        "components": [
+          { "id": "2475", "name": "eventTimeReferenceCode", "format": "an..3" }
+        ]
+      },
+      {
+        "id": "2009",
+        "name": "termsTimeRelationCode",
+        "requires": 0,
+        "components": [
+          { "id": "2009", "name": "termsTimeRelationCode", "format": "an..3" }
+        ]
+      },
+      {
+        "id": "2151",
+        "name": "periodTypeCode",
+        "requires": 0,
+        "components": [
+          { "id": "2151", "name": "periodTypeCode", "format": "an..3" }
+        ]
+      },
+      {
+        "id": "2152",
+        "name": "periodCountQuantity",
+        "requires": 0,
+        "components": [
+          { "id": "2152", "name": "periodCountQuantity", "format": "n..3" }
         ]
       }
     ]
@@ -2174,7 +2214,7 @@
             "format": "an..3"
           },
           { "id": "6060", "name": "quantity", "format": "an..35" },
-          { "id": "6411", "name": "measurementUnitCode", "format": "an..3" }
+          { "id": "6411", "name": "measurementUnitCode", "format": "an..8" }
         ]
       }
     ]
@@ -2187,7 +2227,7 @@
         "name": "quantityDifferenceInformation",
         "requires": 1,
         "components": [
-          { "id": "6064", "name": "quantityVarianceValue", "format": "n..15" },
+          { "id": "6064", "name": "varianceQuantity", "format": "n..15" },
           {
             "id": "6063",
             "name": "quantityTypeCodeQualifier",
@@ -2280,22 +2320,18 @@
       },
       {
         "id": "1229",
-        "name": "actionRequestNotificationDescriptionCode",
+        "name": "actionCode",
         "requires": 0,
         "components": [
-          {
-            "id": "1229",
-            "name": "actionRequestNotificationDescriptionCode",
-            "format": "an..3"
-          }
+          { "id": "1229", "name": "actionCode", "format": "an..3" }
         ]
       },
       {
         "id": "3207",
-        "name": "countryNameCode",
+        "name": "countryIdentifier",
         "requires": 0,
         "components": [
-          { "id": "3207", "name": "countryNameCode", "format": "an..3" }
+          { "id": "3207", "name": "countryIdentifier", "format": "an..3" }
         ]
       }
     ]
@@ -2311,11 +2347,7 @@
           { "id": "1153", "name": "referenceCodeQualifier", "format": "an..3" },
           { "id": "1154", "name": "referenceIdentifier", "format": "an..70" },
           { "id": "1156", "name": "documentLineIdentifier", "format": "an..6" },
-          {
-            "id": "4000",
-            "name": "referenceVersionIdentifier",
-            "format": "an..35"
-          },
+          { "id": "1056", "name": "versionIdentifier", "format": "an..9" },
           { "id": "1060", "name": "revisionIdentifier", "format": "an..6" }
         ]
       }
@@ -2337,9 +2369,9 @@
         "name": "range",
         "requires": 1,
         "components": [
-          { "id": "6411", "name": "measurementUnitCode", "format": "an..3" },
-          { "id": "6162", "name": "rangeMinimumValue", "format": "n..18" },
-          { "id": "6152", "name": "rangeMaximumValue", "format": "n..18" }
+          { "id": "6411", "name": "measurementUnitCode", "format": "an..8" },
+          { "id": "6162", "name": "rangeMinimumQuantity", "format": "n..18" },
+          { "id": "6152", "name": "rangeMaximumQuantity", "format": "n..18" }
         ]
       }
     ]
@@ -2354,8 +2386,8 @@
         "components": [
           { "id": "5419", "name": "rateTypeCodeQualifier", "format": "an..3" },
           { "id": "5420", "name": "unitPriceBasisRate", "format": "n..15" },
-          { "id": "5284", "name": "unitPriceBasisValue", "format": "n..9" },
-          { "id": "6411", "name": "measurementUnitCode", "format": "an..3" }
+          { "id": "5284", "name": "unitPriceBasisQuantity", "format": "n..9" },
+          { "id": "6411", "name": "measurementUnitCode", "format": "an..8" }
         ]
       },
       {
@@ -2373,10 +2405,14 @@
     "elements": [
       {
         "id": "9308",
-        "name": "sealIdentifier",
+        "name": "transportUnitSealIdentifier",
         "requires": 0,
         "components": [
-          { "id": "9308", "name": "sealIdentifier", "format": "an..35" }
+          {
+            "id": "9308",
+            "name": "transportUnitSealIdentifier",
+            "format": "an..35"
+          }
         ]
       },
       {
@@ -2412,7 +2448,7 @@
         "requires": 1,
         "components": [
           { "id": "7402", "name": "objectIdentifier", "format": "an..35" },
-          { "id": "7402", "name": "objectIdentifier", "format": "an..35" }
+          { "id": "7402", "name": "objectIdentifier2", "format": "an..35" }
         ]
       }
     ]
@@ -2479,12 +2515,12 @@
       },
       {
         "id": "5286",
-        "name": "dutyOrTaxOrFeeAssessmentBasisValue",
+        "name": "dutyOrTaxOrFeeAssessmentBasisQuantity",
         "requires": 0,
         "components": [
           {
             "id": "5286",
-            "name": "dutyOrTaxOrFeeAssessmentBasisValue",
+            "name": "dutyOrTaxOrFeeAssessmentBasisQuantity",
             "format": "an..15"
           }
         ]
@@ -2513,12 +2549,12 @@
           },
           {
             "id": "1131",
-            "name": "codeListIdentificationCode",
+            "name": "codeListIdentificationCode2",
             "format": "an..17"
           },
           {
             "id": "3055",
-            "name": "codeListResponsibleAgencyCode",
+            "name": "codeListResponsibleAgencyCode2",
             "format": "an..3"
           }
         ]
@@ -2590,7 +2626,7 @@
         ]
       },
       {
-        "id": "C228",
+        "id": "C001",
         "name": "transportMeans",
         "requires": 0,
         "components": [
@@ -2598,6 +2634,16 @@
             "id": "8179",
             "name": "transportMeansDescriptionCode",
             "format": "an..8"
+          },
+          {
+            "id": "1131",
+            "name": "codeListIdentificationCode",
+            "format": "an..17"
+          },
+          {
+            "id": "3055",
+            "name": "codeListResponsibleAgencyCode",
+            "format": "an..3"
           },
           {
             "id": "8178",
@@ -2622,7 +2668,7 @@
             "name": "codeListResponsibleAgencyCode",
             "format": "an..3"
           },
-          { "id": "3128", "name": "carrierName", "format": "an..35" }
+          { "id": "3126", "name": "carrierName", "format": "an..35" }
         ]
       },
       {
@@ -2667,7 +2713,7 @@
           {
             "id": "8213",
             "name": "transportMeansIdentificationNameIdentifier",
-            "format": "an..9"
+            "format": "an..35"
           },
           {
             "id": "1131",
@@ -2682,7 +2728,7 @@
           {
             "id": "8212",
             "name": "transportMeansIdentificationName",
-            "format": "an..35"
+            "format": "an..70"
           },
           {
             "id": "8453",
@@ -2759,7 +2805,7 @@
           },
           {
             "id": "4052",
-            "name": "deliveryOrTransportTermsDescription",
+            "name": "deliveryOrTransportTermsDescription2",
             "format": "an..70"
           }
         ]
@@ -2807,15 +2853,19 @@
             "name": "codeListResponsibleAgencyCode",
             "format": "an..3"
           },
-          { "id": "7273", "name": "serviceRequirementCode", "format": "an..3" },
+          {
+            "id": "7273",
+            "name": "serviceRequirementCode2",
+            "format": "an..3"
+          },
           {
             "id": "1131",
-            "name": "codeListIdentificationCode",
+            "name": "codeListIdentificationCode2",
             "format": "an..17"
           },
           {
             "id": "3055",
-            "name": "codeListResponsibleAgencyCode",
+            "name": "codeListResponsibleAgencyCode2",
             "format": "an..3"
           }
         ]

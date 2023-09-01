@@ -307,11 +307,20 @@ export class UNECEMessageStructureParser implements MessageStructureParser {
             }
           }
 
+          const similarComponents =
+            complexEleEntry?.components.filter(
+              (component) => component.id === id,
+            )?.length || 0
+
           const component: Component | undefined =
             id && componentName && elementDef
               ? {
                   id,
-                  name: componentName,
+                  name:
+                    componentName +
+                    (similarComponents >= 1
+                      ? (similarComponents + 1).toString()
+                      : ''),
                   format: elementDef,
                 }
               : undefined
@@ -324,7 +333,7 @@ export class UNECEMessageStructureParser implements MessageStructureParser {
             id,
             name:
               (componentName || '') +
-              (similarElements > 1 ? similarElements.toString() : ''),
+              (similarElements >= 1 ? (similarElements + 1).toString() : ''),
             requires: 0,
             components: [],
           }

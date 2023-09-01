@@ -246,22 +246,22 @@
           },
           {
             "id": "3124",
-            "name": "nameAndAddressDescription",
+            "name": "nameAndAddressDescription2",
             "format": "an..35"
           },
           {
             "id": "3124",
-            "name": "nameAndAddressDescription",
+            "name": "nameAndAddressDescription3",
             "format": "an..35"
           },
           {
             "id": "3124",
-            "name": "nameAndAddressDescription",
+            "name": "nameAndAddressDescription4",
             "format": "an..35"
           },
           {
             "id": "3124",
-            "name": "nameAndAddressDescription",
+            "name": "nameAndAddressDescription5",
             "format": "an..35"
           }
         ]
@@ -272,10 +272,10 @@
         "requires": 1,
         "components": [
           { "id": "3036", "name": "partyName", "format": "an..35" },
-          { "id": "3036", "name": "partyName", "format": "an..35" },
-          { "id": "3036", "name": "partyName", "format": "an..35" },
-          { "id": "3036", "name": "partyName", "format": "an..35" },
-          { "id": "3036", "name": "partyName", "format": "an..35" },
+          { "id": "3036", "name": "partyName2", "format": "an..35" },
+          { "id": "3036", "name": "partyName3", "format": "an..35" },
+          { "id": "3036", "name": "partyName4", "format": "an..35" },
+          { "id": "3036", "name": "partyName5", "format": "an..35" },
           { "id": "3045", "name": "partyNameFormatCode", "format": "an..3" }
         ]
       },
@@ -291,17 +291,17 @@
           },
           {
             "id": "3042",
-            "name": "streetAndNumberOrPostOfficeBoxIdentifier",
+            "name": "streetAndNumberOrPostOfficeBoxIdentifier2",
             "format": "an..35"
           },
           {
             "id": "3042",
-            "name": "streetAndNumberOrPostOfficeBoxIdentifier",
+            "name": "streetAndNumberOrPostOfficeBoxIdentifier3",
             "format": "an..35"
           },
           {
             "id": "3042",
-            "name": "streetAndNumberOrPostOfficeBoxIdentifier",
+            "name": "streetAndNumberOrPostOfficeBoxIdentifier4",
             "format": "an..35"
           }
         ]
@@ -474,12 +474,12 @@
           },
           {
             "id": "1131",
-            "name": "codeListIdentificationCode",
+            "name": "codeListIdentificationCode2",
             "format": "an..17"
           },
           {
             "id": "3055",
-            "name": "codeListResponsibleAgencyCode",
+            "name": "codeListResponsibleAgencyCode2",
             "format": "an..3"
           }
         ]
