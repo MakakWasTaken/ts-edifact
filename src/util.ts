@@ -35,10 +35,13 @@ function toString(data: any, pretty?: boolean): string {
   const ordered = !Array.isArray(data) // Only order if assoc array
     ? Object.keys(data as { [key: string]: any })
         .sort()
-        .reduce((obj, key) => {
-          obj[key] = data[key] as { [key: string]: any }
-          return obj
-        }, {} as { [key: string]: any })
+        .reduce(
+          (obj, key) => {
+            obj[key] = data[key] as { [key: string]: any }
+            return obj
+          },
+          {} as { [key: string]: any },
+        )
     : data
   if (pretty) {
     return JSON.stringify(ordered, null, 2)
