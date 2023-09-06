@@ -197,9 +197,11 @@ export class Edifact {
     this.sender = formattedElements.interchangeSender as Participant
     this.receiver = formattedElements.interchangeRecipient as Participant
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-    this.date = formattedElements.dateAndTimeOfPreparation?.date as string | ''
+    this.date = (formattedElements.dateAndTimeOfPreparation?.date ||
+      '') as string
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-    this.time = formattedElements.dateAndTimeOfPreparation?.time as string | ''
+    this.time = (formattedElements.dateAndTimeOfPreparation?.time ||
+      '') as string
     this.interchangeNumber = elements[4].components[0].value as string
     if (elements.length >= 6) {
       this.recipientsRef =
@@ -214,11 +216,12 @@ export class Edifact {
     }
     if (elements.length >= 9) {
       this.ackRequest = parseInt(
-        (formattedElements.acknowledgementRequested as string) || '',
+        (formattedElements.acknowledgementRequest as string) || '',
       )
     }
     if (elements.length >= 10) {
-      this.agreementId = formattedElements.agreementIdentifier as string
+      this.agreementId =
+        formattedElements.interchangeAgreementIdentifier as string
     }
     if (elements.length === 11) {
       this.testIndicator = parseInt(
@@ -474,6 +477,7 @@ export class InterchangeBuilder {
               }
             } else {
               throw Error(
+                // eslint-disable-next-line @typescript-eslint/no-base-to-string
                 `Could not find group ${groupName} as part of ${curObj.toString()}`,
               )
             }
