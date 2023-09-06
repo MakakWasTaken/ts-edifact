@@ -15,11 +15,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - name: Install Yarn
-        uses: actions/setup-node@v3
+      - uses: actions/setup-node@v3
         with:
-          node-version: '14'
-          cache: 'yarn'
-      - name: Install Yarn dependencies
-        run: yarn --production=false --frozen-lockfile
+          node-version: 16
+      - run: yarn install --frozen-lockfile
       - run: yarn test
