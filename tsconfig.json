@@ -3,7 +3,9 @@
     "module": "commonjs",
     "target": "esnext",
     "moduleResolution": "node",
-    "lib": ["esnext"],
+    "lib": [
+      "esnext"
+    ],
     "rootDir": "src",
     /* The source root path for debuggers to find the reference source code */
     "sourceRoot": "./lib",
@@ -17,14 +19,11 @@
     "declarationMap": true,
     /* Create a source mapping debuggers can use to trace back from JS code to TS code */
     "sourceMap": true,
-
     /* Strict Type-Checking Options */
     "strict": true,
     /* Enable emit interop between CommonJS and ES modules via creation of namespace objects for all imports */
     "esModuleInterop": true,
-
     /* Advanced Options */
-
     /* Remove comments from generated files to reduce size */
     "removeComments": true,
     /* Do not include unsued local variables in the generaed output */
@@ -39,7 +38,7 @@
   "include": [
     // these files will be target for linting, compiling and stuff
     "src/**/*.ts",
-    "src/messageSpec/**/*.json"
+    "src/messageSpec/**/*.json",
   ],
   "exclude": [
     // don't include these files in the final artifact
