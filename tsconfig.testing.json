@@ -3,9 +3,5 @@
   "compilerOptions": {
     "rootDir": "."
   },
-  "include": [
-    "spec/**/*.ts",
-    "src/*.ts",
-    "spec/data/**/*.*"
-  ],
+  "include": ["spec/**/*.ts", "src/*.ts", "spec/data/**/*.*"]
 }

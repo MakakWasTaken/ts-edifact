@@ -214,14 +214,14 @@ describe('UNECELegacyMessageStructureParser', () => {
       )
 
       expect(segmentNames).toEqual(expectedSegmentNames)
-      expect(spec.messageStructureDefinition).toContainEqual (expectedBGMEntry)
-      expect(spec.messageStructureDefinition).toContainEqual (expectedUNSEntry)
+      expect(spec.messageStructureDefinition).toContainEqual(expectedBGMEntry)
+      expect(spec.messageStructureDefinition).toContainEqual(expectedUNSEntry)
       const sg26: MessageType | undefined =
         spec.messageStructureDefinition.find(
           (item) => item.name === 'Segment group 26',
         )
       expect(sg26).toBeDefined()
-      expect((sg26 as any).content).toContainEqual (expectedSegmentGroup27Entry)
+      expect((sg26 as any).content).toContainEqual(expectedSegmentGroup27Entry)
     })
 
     it('should correctly parse D99A APERAK structure page (no header section)', () => {
@@ -275,12 +275,14 @@ describe('UNECELegacyMessageStructureParser', () => {
 
       expect(segmentNames).toEqual(expectedSegmentNames)
 
-      expect(spec.messageStructureDefinition).toContainEqual (expectedBGMEntry_APERAK)
+      expect(spec.messageStructureDefinition).toContainEqual(
+        expectedBGMEntry_APERAK,
+      )
       const sg4: MessageType | undefined = spec.messageStructureDefinition.find(
         (item) => item.name === 'Segment group 4',
       )
       expect(sg4).toBeDefined()
-      expect((sg4 as any).content).toContainEqual (expectedSegmentGroup5Entry)
+      expect((sg4 as any).content).toContainEqual(expectedSegmentGroup5Entry)
     })
 
     it('should correctly parse D96A ORDERS structure page', () => {
@@ -288,11 +290,11 @@ describe('UNECELegacyMessageStructureParser', () => {
         new EdifactMessageSpecificationImpl('ORDERS', 'D', '96A', 'UN')
       sut.parseStructurePage(D96A_ORDERS_STRUCTURE_PAGE, spec)
 
-      expect(spec.messageStructureDefinition).toContainEqual ({
+      expect(spec.messageStructureDefinition).toContainEqual({
         ...expectedBGMEntry,
         section: 'header',
       })
-      expect(spec.messageStructureDefinition).toContainEqual (expectedUNSEntry)
+      expect(spec.messageStructureDefinition).toContainEqual(expectedUNSEntry)
       expect(spec.messageStructureDefinition[7]).toBeDefined()
       expect(spec.messageStructureDefinition[7].name).toBe('Segment group 1')
       expect(spec.messageStructureDefinition[8]).toBeDefined()
@@ -367,13 +369,7 @@ describe('UNECELegacyMessageStructureParser', () => {
             (c) => c.format,
           ),
         ).toEqual(
-          expect.arrayContaining([
-            'an..3',
-            'an..18',
-            'n..18',
-            'n..18',
-            'n..2',
-          ]),
+          expect.arrayContaining(['an..3', 'an..18', 'n..18', 'n..18', 'n..2']),
         )
         expect(
           findElement(segments.get('MEA')?.elements, 'C174')?.requires,
@@ -530,14 +526,14 @@ describe('UNECELegacyMessageStructureParser', () => {
       expect(findElement(segments.get('MEA')?.elements, '6411')).toBeUndefined()
 
       // check message structure
-      expect(spec.messageStructureDefinition).toContainEqual (expectedBGMEntry)
-      expect(spec.messageStructureDefinition).toContainEqual (expectedUNSEntry)
+      expect(spec.messageStructureDefinition).toContainEqual(expectedBGMEntry)
+      expect(spec.messageStructureDefinition).toContainEqual(expectedUNSEntry)
       const sg26: MessageType | undefined =
         spec.messageStructureDefinition.find(
           (item) => item.name === 'Segment group 26',
         )
       expect(sg26).toBeDefined()
-      expect((sg26 as any).content).toContainEqual (expectedSegmentGroup27Entry)
+      expect((sg26 as any).content).toContainEqual(expectedSegmentGroup27Entry)
     })
   })
 })

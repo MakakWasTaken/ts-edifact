@@ -95,11 +95,19 @@ export const formatComponents = (
   const result: { [key: string]: any } = {}
   result['tag'] = segmentId
   elements.forEach((element) => {
-    if (element.name === '__proto__' || element.name === 'constructor' || element.name === 'prototype') {
+    if (
+      element.name === '__proto__' ||
+      element.name === 'constructor' ||
+      element.name === 'prototype'
+    ) {
       return
     }
     element.components.forEach((component) => {
-      if (component.name === '__proto__' || component.name === 'constructor' || component.name === 'prototype') {
+      if (
+        component.name === '__proto__' ||
+        component.name === 'constructor' ||
+        component.name === 'prototype'
+      ) {
         return
       }
       if (element.components.length <= 1) {

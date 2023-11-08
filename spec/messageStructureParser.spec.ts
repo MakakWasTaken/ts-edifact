@@ -166,13 +166,13 @@ describe('MessageStructureParser', () => {
         section: 'summary',
       }
       ;(sut as any).parseMessagePage(page).then((result: ParsingResultType) => {
-        expect(result.specObj.messageStructureDefinition).toContainEqual (
+        expect(result.specObj.messageStructureDefinition).toContainEqual(
           expectedBGMEntry,
         )
-        expect(result.specObj.messageStructureDefinition).toContainEqual (
+        expect(result.specObj.messageStructureDefinition).toContainEqual(
           expectedSegmentGroup26Entry,
         )
-        expect(result.specObj.messageStructureDefinition).toContainEqual (
+        expect(result.specObj.messageStructureDefinition).toContainEqual(
           expectedUNSEntry,
         )
         expect(result.promises).not.toEqual([])
@@ -409,9 +409,7 @@ describe('MessageStructureParser', () => {
           expect(findElement(elements, 'C504')?.components.length).toEqual(4)
           expect(
             findElement(elements, 'C504')?.components.map((c) => c.format),
-          ).toEqual(
-            expect.arrayContaining(['an..3', 'an..3', 'an..3', 'n..4']),
-          )
+          ).toEqual(expect.arrayContaining(['an..3', 'an..3', 'an..3', 'n..4']))
           done()
         })
     })

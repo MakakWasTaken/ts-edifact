@@ -17,9 +17,7 @@ module.exports = {
 
   testPathIgnorePatterns: ['<rootDir>/build'],
 
-  coveragePathIgnorePatterns: [
-    '<rootDir>/spec/.*',
-  ],
+  coveragePathIgnorePatterns: ['<rootDir>/spec/.*'],
   testTimeout: 30000,
   // detectOpenHandles: true,
 }
