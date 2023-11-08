@@ -27,11 +27,11 @@ describe('Cache', () => {
     it('should only contain the last insterted key', () => {
       cache.insert('a', 'value')
       cache.insert('b', 'value')
-      expect(cache.contains('a')).toBeFalse()
-      expect(cache.contains('b')).toBeTrue()
+      expect(cache.contains('a')).toBe(false)
+      expect(cache.contains('b')).toBe(true)
       cache.insert('c', 'value')
-      expect(cache.contains('b')).toBeFalse()
-      expect(cache.contains('c')).toBeTrue()
+      expect(cache.contains('b')).toBe(false)
+      expect(cache.contains('c')).toBe(true)
     })
 
     it('should return propper length', () => {
@@ -50,15 +50,15 @@ describe('Cache', () => {
       cache.insert('b', 'value')
       cache.insert('c', 'value')
       cache.insert('d', 'value')
-      expect(cache.contains('a')).toBeFalse()
-      expect(cache.contains('b')).toBeTrue()
-      expect(cache.contains('c')).toBeTrue()
-      expect(cache.contains('d')).toBeTrue()
+      expect(cache.contains('a')).toBe(false)
+      expect(cache.contains('b')).toBe(true)
+      expect(cache.contains('c')).toBe(true)
+      expect(cache.contains('d')).toBe(true)
       cache.insert('e', 'value')
-      expect(cache.contains('b')).toBeFalse()
-      expect(cache.contains('c')).toBeTrue()
-      expect(cache.contains('d')).toBeTrue()
-      expect(cache.contains('e')).toBeTrue()
+      expect(cache.contains('b')).toBe(false)
+      expect(cache.contains('c')).toBe(true)
+      expect(cache.contains('d')).toBe(true)
+      expect(cache.contains('e')).toBe(true)
     })
 
     it('should keep two insertd keys after repeatedly inserting a third one', () => {
@@ -67,8 +67,8 @@ describe('Cache', () => {
       cache.insert('c', 'value')
       cache.insert('c', 'value')
       cache.insert('c', 'value')
-      expect(cache.contains('a')).toBeTrue()
-      expect(cache.contains('b')).toBeTrue()
+      expect(cache.contains('a')).toBe(true)
+      expect(cache.contains('b')).toBe(true)
     })
 
     it('should return propper length', () => {
@@ -89,7 +89,7 @@ describe('Cache', () => {
     })
 
     it('should contain this key', () => {
-      expect(cache.contains('key')).toBeTrue()
+      expect(cache.contains('key')).toBe(true)
     })
 
     it('should return the inserted value', () => {

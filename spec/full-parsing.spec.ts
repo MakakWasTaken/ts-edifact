@@ -25,7 +25,6 @@ import { Dictionary, SegmentEntry } from '../src/validator'
 describe('Parsing edifact document', () => {
   describe('should complete without any errors', () => {
     let parser: Parser
-    jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000
 
     it('should parse original sample document', () => {
       const segments: Dictionary<SegmentEntry> = new SegmentTableBuilder(

@@ -9,8 +9,10 @@
       "name": "All Tests",
       "type": "node",
       "request": "launch",
-      "program": "${workspaceFolder}/node_modules/jasmine-ts/lib/index",
-      "args": ["--config=./spec/support/jasmine.json"],
+      "program": "${workspaceFolder}/node_modules/jest/bin/jest",
+      "args": [
+        "spec"
+      ],
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen"
     },
@@ -18,8 +20,10 @@
       "name": "Debug Jasmine Test",
       "type": "node",
       "request": "launch",
-      "program": "${workspaceFolder}/node_modules/jasmine-ts/lib/index",
-      "args": ["--config=./spec/support/jasmine.json", "${file}"],
+      "program": "${workspaceFolder}/node_modules/jest/bin/jest",
+      "args": [
+        "${file}"
+      ],
       "console": "internalConsole",
       "internalConsoleOptions": "neverOpen"
     }

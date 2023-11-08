@@ -38,10 +38,6 @@ import {
 } from '../src/validator'
 
 describe('MessageStructureParser', () => {
-  beforeEach(() => {
-    jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000
-  })
-
   describe('Message Structure Definition Parser', () => {
     let sut: UNECEMessageStructureParser
     beforeAll(() => {
@@ -170,13 +166,13 @@ describe('MessageStructureParser', () => {
         section: 'summary',
       }
       ;(sut as any).parseMessagePage(page).then((result: ParsingResultType) => {
-        expect(result.specObj.messageStructureDefinition).toContain(
+        expect(result.specObj.messageStructureDefinition).toContainEqual (
           expectedBGMEntry,
         )
-        expect(result.specObj.messageStructureDefinition).toContain(
+        expect(result.specObj.messageStructureDefinition).toContainEqual (
           expectedSegmentGroup26Entry,
         )
-        expect(result.specObj.messageStructureDefinition).toContain(
+        expect(result.specObj.messageStructureDefinition).toContainEqual (
           expectedUNSEntry,
         )
         expect(result.promises).not.toEqual([])
@@ -274,14 +270,14 @@ describe('MessageStructureParser', () => {
         .then((response: EdifactMessageSpecification) => {
           const segments: Dictionary<SegmentEntry> = response.segmentTable
           expect(segments.get('MEA')!.elements.map((e) => e.id)).toEqual(
-            jasmine.arrayContaining(['6311', 'C502', 'C174', '7383']),
+            expect.arrayContaining(['6311', 'C502', 'C174', '7383']),
           )
           expect(segments.get('MEA')?.requires).toEqual(1)
           expect(
             findElement(segments.get('MEA')?.elements, '6311')?.components.map(
               (c) => c.format,
             ),
-          ).toEqual(jasmine.arrayContaining(['an..3']))
+          ).toEqual(expect.arrayContaining(['an..3']))
           expect(
             findElement(segments.get('MEA')?.elements, '6311')?.requires,
           ).toEqual(1)
@@ -290,7 +286,7 @@ describe('MessageStructureParser', () => {
               (c) => c.format,
             ),
           ).toEqual(
-            jasmine.arrayContaining([
+            expect.arrayContaining([
               'an..3',
               'an..18',
               'n..18',
@@ -327,14 +323,14 @@ describe('MessageStructureParser', () => {
         .then((response: EdifactMessageSpecification) => {
           const segments: Dictionary<SegmentEntry> = response.segmentTable
           expect(segments.get('DTM')!.elements.map((e) => e.id)).toEqual(
-            jasmine.arrayContaining(['C507']),
+            expect.arrayContaining(['C507']),
           )
           expect(segments.get('DTM')?.requires).toEqual(1)
           expect(
             findElement(segments.get('DTM')?.elements, 'C507')?.components.map(
               (c) => c.format,
             ),
-          ).toEqual(jasmine.arrayContaining(['an..3', 'an..35', 'an..3']))
+          ).toEqual(expect.arrayContaining(['an..3', 'an..35', 'an..3']))
           expect(
             findElement(segments.get('DTM')?.elements, 'C507')?.requires,
           ).toEqual(1)
@@ -367,7 +363,7 @@ describe('MessageStructureParser', () => {
           const segments: Dictionary<SegmentEntry> = response.segmentTable
           expect(
             segments.get('DTM')!.elements.map((e: ElementEntry) => e.id),
-          ).toEqual(jasmine.arrayContaining([]))
+          ).toEqual(expect.arrayContaining([]))
           expect(segments.get('DTM')?.requires).toEqual(0)
           // will also skip element assignment as this should already
           // have happened during the definition of the previous segment
@@ -407,14 +403,14 @@ describe('MessageStructureParser', () => {
           const segments: Dictionary<SegmentEntry> = response.segmentTable
           const elements = segments.get('CUX')!.elements
           expect(segments.get('CUX')!.elements.map((e) => e.id)).toEqual(
-            jasmine.arrayContaining(['C504', 'C504', '5402', '6341']),
+            expect.arrayContaining(['C504', 'C504', '5402', '6341']),
           )
           expect(segments.get('CUX')?.requires).toEqual(0)
           expect(findElement(elements, 'C504')?.components.length).toEqual(4)
           expect(
             findElement(elements, 'C504')?.components.map((c) => c.format),
           ).toEqual(
-            jasmine.arrayContaining(['an..3', 'an..3', 'an..3', 'n..4']),
+            expect.arrayContaining(['an..3', 'an..3', 'an..3', 'n..4']),
           )
           done()
         })
@@ -455,7 +451,7 @@ describe('MessageStructureParser', () => {
         .then((response: EdifactMessageSpecification) => {
           const segments: Dictionary<SegmentEntry> = response.segmentTable
           expect(segments.get('TAX')!.elements.map((e) => e.id)).toEqual(
-            jasmine.arrayContaining([
+            expect.arrayContaining([
               '5283',
               'C241',
               'C533',
@@ -471,7 +467,7 @@ describe('MessageStructureParser', () => {
             findElement(segments.get('TAX')?.elements, '5283')?.components?.map(
               (c) => c.format,
             ),
-          ).toEqual(jasmine.arrayContaining(['an..3']))
+          ).toEqual(expect.arrayContaining(['an..3']))
           expect(
             findElement(segments.get('TAX')?.elements, '5283')?.requires,
           ).toEqual(1)
@@ -480,7 +476,7 @@ describe('MessageStructureParser', () => {
               (c) => c.format,
             ),
           ).toEqual(
-            jasmine.arrayContaining(['an..3', 'an..17', 'an..3', 'an..35']),
+            expect.arrayContaining(['an..3', 'an..17', 'an..3', 'an..35']),
           )
           expect(
             findElement(segments.get('TAX')?.elements, 'C241')?.requires,
@@ -522,17 +518,17 @@ describe('MessageStructureParser', () => {
           const segments: Dictionary<SegmentEntry> = response.segmentTable
           const elements = segments.get('PCI')!.elements
           expect(elements.map((e) => e.id)).toEqual(
-            jasmine.arrayContaining(['4233', 'C210', '8275', 'C827']),
+            expect.arrayContaining(['4233', 'C210', '8275', 'C827']),
           )
           expect(segments.get('PCI')?.requires).toEqual(0)
           expect(
             findElement(elements, '4233')?.components.map((c) => c.format),
-          ).toEqual(jasmine.arrayContaining(['an..3']))
+          ).toEqual(expect.arrayContaining(['an..3']))
           expect(findElement(elements, '4233')?.requires).toEqual(0)
           expect(
             findElement(elements, 'C210')?.components.map((c) => c.format),
           ).toEqual(
-            jasmine.arrayContaining([
+            expect.arrayContaining([
               'an..35',
               'an..35',
               'an..35',
@@ -548,11 +544,11 @@ describe('MessageStructureParser', () => {
           expect(findElement(elements, 'C210')?.requires).toEqual(1)
           expect(
             findElement(elements, '8275')?.components.map((c) => c.format),
-          ).toEqual(jasmine.arrayContaining(['an..3']))
+          ).toEqual(expect.arrayContaining(['an..3']))
           expect(findElement(elements, '8275')?.requires).toEqual(0)
           expect(
             findElement(elements, 'C827')?.components.map((c) => c.format),
-          ).toEqual(jasmine.arrayContaining(['an..3', 'an..17', 'an..3']))
+          ).toEqual(expect.arrayContaining(['an..3', 'an..17', 'an..3']))
           expect(findElement(elements, 'C827')?.requires).toEqual(1)
           done()
         })

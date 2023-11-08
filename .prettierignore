@@ -2,5 +2,5 @@ node_modules
 out
 dist
 src/test
-lib
+build
 *.html

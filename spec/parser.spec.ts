@@ -114,43 +114,43 @@ describe('Parser', () => {
     })
 
     it('should call onOpenSegment when starting a new segment', () => {
-      const hook: jasmine.Spy = spyOn(parser, 'onOpenSegment')
+      const hook = jest.spyOn(parser, 'onOpenSegment')
       parser.write('UNH')
-      expect(hook.calls.count()).toEqual(0)
+      expect(hook).toHaveBeenCalledTimes(0)
       parser.write('+')
-      expect(hook.calls.count()).toEqual(1)
+      expect(hook).toHaveBeenCalledTimes(1)
       parser.write("'\nSEG")
-      expect(hook.calls.count()).toEqual(1)
+      expect(hook).toHaveBeenCalledTimes(1)
       parser.write("'")
-      expect(hook.calls.count()).toEqual(2)
+      expect(hook).toHaveBeenCalledTimes(2)
     })
 
     it('should call onCloseSegment when terminating a segment', () => {
-      const hook: jasmine.Spy = spyOn(parser, 'onCloseSegment')
+      const hook = jest.spyOn(parser, 'onCloseSegment')
       parser.write('UNH+')
-      expect(hook.calls.count()).toEqual(0)
+      expect(hook).toHaveBeenCalledTimes(0)
       parser.write("'")
-      expect(hook.calls.count()).toEqual(1)
+      expect(hook).toHaveBeenCalledTimes(1)
     })
 
     it('should call onElement when finishing a new element', () => {
-      const hook: jasmine.Spy = spyOn(parser, 'onElement')
+      const hook = jest.spyOn(parser, 'onElement')
       parser.write('UNH')
-      expect(hook.calls.count()).toEqual(0)
+      expect(hook).toHaveBeenCalledTimes(0)
       parser.write('++')
-      expect(hook.calls.count()).toEqual(1)
+      expect(hook).toHaveBeenCalledTimes(1)
       parser.write("'")
-      expect(hook.calls.count()).toEqual(2)
+      expect(hook).toHaveBeenCalledTimes(2)
     })
 
     it('should call onComponent when finishing a new component', () => {
-      const hook: jasmine.Spy = spyOn(parser, 'onComponent')
+      const hook = jest.spyOn(parser, 'onComponent')
       parser.write('UNH+')
-      expect(hook.calls.count()).toEqual(0)
+      expect(hook).toHaveBeenCalledTimes(0)
       parser.write(':')
-      expect(hook.calls.count()).toEqual(1)
+      expect(hook).toHaveBeenCalledTimes(1)
       parser.write("'")
-      expect(hook.calls.count()).toEqual(2)
+      expect(hook).toHaveBeenCalledTimes(2)
     })
 
     it('should read characters preceded by the release character as data', () => {
@@ -177,17 +177,17 @@ describe('Parser', () => {
     })
 
     it('should handle negative number values correctly', () => {
-      const hook: jasmine.Spy = spyOn(parser, 'onComponent')
+      const hook = jest.spyOn(parser, 'onComponent')
       parser.write('RNG+5+')
-      expect(hook.calls.count()).toEqual(1)
+      expect(hook).toHaveBeenCalledTimes(1)
       parser.write("CEL:-5:5'")
-      expect(hook.calls.count()).toEqual(4)
+      expect(hook).toHaveBeenCalledTimes(4)
     })
 
     it('should throw on invalid minus/hyphen character used', () => {
-      const hook: jasmine.Spy = spyOn(parser, 'onComponent')
+      const hook = jest.spyOn(parser, 'onComponent')
       parser.write('RNG+5+')
-      expect(hook.calls.count()).toEqual(1)
+      expect(hook).toHaveBeenCalledTimes(1)
       expect(() => parser.write("CEL:‐5:5'")).toThrow() // contains invalid - symbol
     })
   })
