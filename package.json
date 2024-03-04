@@ -55,7 +55,7 @@
   "devDependencies": {
     "@commitlint/cli": "^18.2.0",
     "@commitlint/config-conventional": "^18.1.0",
-    "@commitlint/types": "^18.1.0",
+    "@commitlint/types": "^19.0.3",
     "@initics/tsm": "^1.0.2",
     "@swc/jest": "^0.2.29",
     "@types/events": "3.0.3",
