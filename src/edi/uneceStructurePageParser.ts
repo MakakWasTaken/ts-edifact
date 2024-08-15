@@ -179,7 +179,6 @@ export class UNECEStructurePageParser extends UNECEPageParser {
       }
     }
     helper.onOpenTag = (name) => {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-enum-comparison
       if (this.sm.state === State.messageStructureStart && name === 'a') {
         this.sm.transition(State.segmentPosition)
       }

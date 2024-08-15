@@ -195,9 +195,9 @@ export class Reader {
             this.elements,
             'S009',
           )?.components
-          const messageType = messageIdentifier[0]?.value as string
-          const messageVersion = messageIdentifier[1]?.value as string
-          const messageRelease = messageIdentifier[2]?.value as string
+          const messageType = messageIdentifier?.[0]?.value as string
+          const messageVersion = messageIdentifier?.[1]?.value as string
+          const messageRelease = messageIdentifier?.[2]?.value as string
 
           const key: string = `${messageVersion + messageRelease}_${messageType}`
           if (this.definitionCache.contains(key)) {

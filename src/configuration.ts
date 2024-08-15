@@ -111,11 +111,8 @@ export class Configuration {
   public delimiters(): number[] {
     const compareAndSwap = (array: number[], a: number, b: number): void => {
       if (array[a] > array[b]) {
-        // eslint-disable-next-line no-bitwise
         array[a] = array[a] ^ array[b]
-        // eslint-disable-next-line no-bitwise
         array[b] = array[a] ^ array[b]
-        // eslint-disable-next-line no-bitwise
         array[a] = array[a] ^ array[b]
       }
     }

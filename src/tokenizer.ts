@@ -26,7 +26,6 @@ interface RegExType {
   decimal: RegExp
 }
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export abstract class Charset implements RegExType {
   name: string
 
@@ -51,7 +50,7 @@ export abstract class Charset implements RegExType {
     // added and last the decimal part of the value added to the end of that value. So no need to catch the decimal
     // value with a regular expression actually
     if (unicode) {
-      this.numeric = /[-]?[\p{Nd}]*/g
+      this.numeric = /[-]?[\p{Nd}]*/gu
       this.decimal = /[\p{Nd}]*/gu
     } else {
       this.numeric = /[-]?[0-9]*/g

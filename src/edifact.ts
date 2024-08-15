@@ -179,7 +179,6 @@ export function toSegmentObject(
     case 'TAX':
       return formattedComponents as TaxDetails
     case 'TDT': {
-      // eslint-disable-next-line no-case-declarations
       const lversion: string = version.toLowerCase()
       if (
         lversion === 'd18b' ||

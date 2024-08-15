@@ -150,7 +150,6 @@ describe('UNECELegacyMessageStructureParser', () => {
       const expectedSpec: EdifactMessageSpecificationImpl =
         new EdifactMessageSpecificationImpl('INVOIC', 'D', '99A', 'UN')
 
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       const spec: EdifactMessageSpecificationImpl = (
         sut as any
       ).parseMetaDataPage(D99A_INVOIC_METADATA_PAGE)

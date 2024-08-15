@@ -46,7 +46,6 @@ export class HttpClient {
         return ''
       })
       .catch((err) => {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
         console.error(err.message)
         return ''
       })

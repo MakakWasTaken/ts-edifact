@@ -134,28 +134,26 @@ export interface Validator {
 }
 
 export class NullValidator implements Validator {
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
   onOpenSegment(): undefined {
     return undefined
   }
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
+
   onElement(): undefined {
     return undefined
   }
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
+
   onOpenComponent(): void {}
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
+
   onCloseComponent(): undefined {
     return undefined
   }
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
+
   onCloseSegment(): void {}
 
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
   disable(): void {}
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
+
   enable(): void {}
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
+
   define(): void {}
   format(): FormatType | undefined {
     return undefined
@@ -325,7 +323,6 @@ export class ValidatorImpl implements Validator {
         }
       case ValidatorStates.ENTER:
       // Skip component count checks for the first element
-      // eslint-disable-next-line no-fallthrough
       case ValidatorStates.ELEMENTS:
         if (this.segment === undefined) {
           const error: Error | undefined = this.errors.missingSegmentStart(
@@ -379,7 +376,6 @@ export class ValidatorImpl implements Validator {
     switch (this.state) {
       case ValidatorStates.ALL: {
         // Used to display the error message
-        // eslint-disable-next-line no-case-declarations
         const currentElement: ElementEntry =
           this.segment.elements[this.counts.element]
         if (this.element === undefined) {

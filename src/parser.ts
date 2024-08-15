@@ -149,7 +149,6 @@ export class Parser extends EventEmitter {
           this.state = States.SEGMENT
         // Continue to read the first segment, otherwise the index increment add
         // the end of the loop would cause the parser to skip the first character.
-        // eslint-disable-next-line no-fallthrough
         case States.SEGMENT:
           index = this.tokenizer.segment(chunk, index)
 

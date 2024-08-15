@@ -20,16 +20,16 @@
 
 import type { LineItem, MonetaryAmount, PriceDetails, Quantity } from '../src'
 import {
-  UNECEMessageStructureParser,
   type EdifactMessageSpecification,
   type MessageStructureParser,
+  UNECEMessageStructureParser,
 } from '../src/edi/messageStructureParser'
 import type { Separators } from '../src/edi/separators'
 import type { ItemDescription } from '../src/edifact'
 import {
+  type Edifact,
   Group,
   InterchangeBuilder,
-  type Edifact,
 } from '../src/interchangeBuilder'
 import { Reader, type ResultType } from '../src/reader'
 import { persist } from '../src/util'
@@ -95,32 +95,34 @@ parseDocument(document)
   .then((doc: Edifact) => {
     for (const entry of (doc.messages[0].detail[0] as Group).data) {
       if (entry instanceof Group) {
-        let _articleNumber: string | undefined = ''
-        let _name: string | undefined = ''
-        let _qty: number | undefined = 0
-        let _price: number | undefined = 0
-        let _total: number | undefined = 0
+        let articleNumber: string | undefined = ''
+        let name: string | undefined = ''
+        let qty: number | undefined = 0
+        let price: number | undefined = 0
+        let total: number | undefined = 0
         for (const itemData of entry.data) {
           if (!(itemData instanceof Group)) {
             let item: ItemDescription | Quantity | LineItem | undefined
             if ((item = itemData as LineItem)) {
-              _articleNumber = item.itemNumberIdentification?.itemIdentifier
+              articleNumber = item.itemNumberIdentification?.itemIdentifier
             } else if ((item = itemData as ItemDescription)) {
-              _name = item.itemDescription?.itemDescription
+              name = item.itemDescription?.itemDescription
             } else if ((item = itemData as Quantity)) {
-              _qty = item.quantityDetails.quantity
+              qty = item.quantityDetails.quantity
             }
           } else {
             for (const subGroupItem of itemData.data) {
               let item: PriceDetails | MonetaryAmount | undefined
               if ((item = subGroupItem as PriceDetails)) {
-                _price = item.priceInformation?.priceAmount
+                price = item.priceInformation?.priceAmount
               } else if ((item = subGroupItem as MonetaryAmount)) {
-                _total = item.monetaryAmount?.monetaryAmount
+                total = item.monetaryAmount?.monetaryAmount
               }
             }
           }
         }
+
+        console.debug(articleNumber, name, qty, price, total)
       }
     }
   })
