@@ -9,7 +9,11 @@
     "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
-  "keywords": ["edi", "edifact", "parser"],
+  "keywords": [
+    "edi",
+    "edifact",
+    "parser"
+  ],
   "publisher": "Roman Vottner",
   "readme": "README.md",
   "author": {
@@ -32,7 +36,10 @@
     }
   ],
   "lint-staged": {
-    "*.ts": ["biome lint --write", "biome format --write"]
+    "*.ts": [
+      "biome lint --write",
+      "biome format --write"
+    ]
   },
   "scripts": {
     "clean": "rm -rf ./build ./dist",
@@ -75,6 +82,8 @@
     "axios": "^1.7.4",
     "htmlparser2": "^9.1.0"
   },
-  "files": ["build/**/*"],
+  "files": [
+    "build/**/*"
+  ],
   "packageManager": "yarn@4.4.0"
 }
