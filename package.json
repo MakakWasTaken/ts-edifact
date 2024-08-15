@@ -21,7 +21,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/MakakWasTaken/ts-edifact.git"
+    "url": "git+https://github.com/MakakWasTaken/ts-edifact.git"
   },
   "homepage": "https://github.com/MakakWasTaken/ts-edifact/README.md",
   "bugs": {
