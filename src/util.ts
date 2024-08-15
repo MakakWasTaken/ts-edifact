@@ -19,19 +19,19 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 
-import * as fs from 'fs'
+import * as fs from 'node:fs'
 import {
-  EdifactMessageSpecification,
-  MessageStructureParser,
   UNECEMessageStructureParser,
+  type EdifactMessageSpecification,
+  type MessageStructureParser,
 } from './edi/messageStructureParser'
-import { ElementEntry } from './validator'
+import type { ElementEntry } from './validator'
 
 export function isDefined<T>(value: T | undefined | null): value is T {
   return <T>value !== undefined && <T>value !== null
 }
 
-function toString(data: any, pretty?: boolean): string {
+function stringify(data: any, pretty?: boolean): string {
   const ordered = !Array.isArray(data) // Only order if assoc array
     ? Object.keys(data as { [key: string]: any })
         .sort()
@@ -45,9 +45,8 @@ function toString(data: any, pretty?: boolean): string {
     : data
   if (pretty) {
     return JSON.stringify(ordered, null, 2)
-  } else {
-    return JSON.stringify(ordered)
   }
+  return JSON.stringify(ordered)
 }
 
 export function persist(
@@ -56,26 +55,25 @@ export function persist(
   pretty?: boolean,
   defaultVersion = false,
 ): void {
-  const messageStructDef: string = toString(
+  const messageStructDef: string = stringify(
     data.messageStructureDefinition,
     pretty,
   )
-  const messageStructDefFileName: string =
-    (defaultVersion ? '' : data.version + data.release + '_') +
-    data.messageType +
-    '.struct.json'
+  const messageStructDefFileName: string = `${
+    (defaultVersion ? '' : `${data.version + data.release}_`) + data.messageType
+  }.struct.json`
 
-  const segments: string = toString((data.segmentTable as any).entries)
-  const segmentsFileName: string =
-    (defaultVersion ? '' : data.version + data.release + '_') +
-    data.messageType +
-    '.segments.json'
+  const segments: string = stringify((data.segmentTable as any).entries)
+  const segmentsFileName: string = `${
+    (defaultVersion ? '' : `${data.version + data.release}_`) + data.messageType
+  }.segments.json`
 
-  const components: string = toString((data.componentValueTable as any).entries)
-  const componentsFileName: string =
-    (defaultVersion ? '' : data.version + data.release + '_') +
-    data.messageType +
-    '.components.json'
+  const components: string = stringify(
+    (data.componentValueTable as any).entries,
+  )
+  const componentsFileName: string = `${
+    (defaultVersion ? '' : `${data.version + data.release}_`) + data.messageType
+  }.components.json`
 
   let p: string = path
   if (!p.endsWith('/')) {
@@ -93,22 +91,22 @@ export const formatComponents = (
   decimalSeparator?: string,
 ): { [key: string]: any } => {
   const result: { [key: string]: any } = {}
-  result['tag'] = segmentId
-  elements.forEach((element) => {
+  result.tag = segmentId
+  for (const element of elements) {
     if (
       element.name === '__proto__' ||
       element.name === 'constructor' ||
       element.name === 'prototype'
     ) {
-      return
+      continue
     }
-    element.components.forEach((component) => {
+    for (const component of element.components) {
       if (
         component.name === '__proto__' ||
         component.name === 'constructor' ||
         component.name === 'prototype'
       ) {
-        return
+        continue
       }
       if (element.components.length <= 1) {
         result[element.name] = component.value
@@ -131,9 +129,8 @@ export const formatComponents = (
           }
         }
       }
-    })
-  })
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+    }
+  }
   return Object(result)
 }
 
@@ -373,11 +370,7 @@ export function storeAllDefaultSpecs(version: string, location: string): void {
     .then((result: EdifactMessageSpecification) => {
       persist(result, location, false, true)
     })
-    .then(() => {
-      console.log(
-        `Stored definition for type INVOIC of version d07a at location ${location}`,
-      )
-    })
+    .then(() => {})
     .catch((error: Error) => {
       console.warn(
         `Could not load Message structure and segment/element definitions for message type INVOIC of version d07a. Reason: ${error.message}`,
@@ -393,11 +386,7 @@ export function storeAllDefaultSpecs(version: string, location: string): void {
       .then((result: EdifactMessageSpecification) => {
         persist(result, location, false, true)
       })
-      .then(() => {
-        console.log(
-          `Stored definition for type ${typeName} of version ${version} at location ${location}`,
-        )
-      })
+      .then(() => {})
       .catch((error: Error) => {
         console.warn(
           `Could not load Message structure and segment/element definitions for message type ${typeName} of version ${version}. Reason: ${error.message}`,

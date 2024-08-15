@@ -16,10 +16,10 @@
  * limitations under the License.
  */
 
-import { StateMachineDefinition } from '@initics/tsm'
-import { MessageType } from '../tracker'
-import { EdifactMessageSpecification } from './messageStructureParser'
-import { UNECEDomHandler } from './uneceDomHandler'
+import type { StateMachineDefinition } from '@initics/tsm'
+import type { MessageType } from '../tracker'
+import type { EdifactMessageSpecification } from './messageStructureParser'
+import type { UNECEDomHandler } from './uneceDomHandler'
 import { UNECEPageParser } from './unecePageParser'
 
 enum State {

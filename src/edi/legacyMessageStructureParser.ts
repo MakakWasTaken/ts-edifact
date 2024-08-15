@@ -17,8 +17,8 @@
  */
 
 import {
-  EdifactMessageSpecification,
-  ParsingResultType,
+  type EdifactMessageSpecification,
+  type ParsingResultType,
   UNECEMessageStructureParser,
 } from './messageStructureParser'
 import { UNECEMetaDataPageParser } from './uneceMetaDataPageParser'
@@ -41,7 +41,7 @@ export class UNECELegacyMessageStructureParser extends UNECEMessageStructurePars
   }
 
   loadTypeSpec(): Promise<EdifactMessageSpecification> {
-    const url: string = './' + this.type + '_c.htm'
+    const url: string = `./${this.type}_c.htm`
     return this.loadPage(url)
       .then(async (metaDataPage: string) => {
         const spec: EdifactMessageSpecification =

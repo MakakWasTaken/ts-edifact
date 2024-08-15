@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-import { Configuration } from './configuration'
+import type { Configuration } from './configuration'
 import { Separators } from './edi/separators'
 
 interface RegExType {
@@ -88,8 +88,8 @@ export abstract class Charset implements RegExType {
     }
 
     const ret: RegExp[] = []
-    ret.push(new RegExp('[' + output + ']*', flag))
-    ret.push(new RegExp('[0-9' + output + ']*', flag))
+    ret.push(new RegExp(`[${output}]*`, flag))
+    ret.push(new RegExp(`[0-9${output}]*`, flag))
     return ret
   }
 }
@@ -719,10 +719,7 @@ export class Tokenizer {
   }
 
   private errors = {
-    secondDecimalMark: function (): Error {
-      return new Error(
-        'Cannot accept a second decimal mark while parsing a number',
-      )
-    },
+    secondDecimalMark: (): Error =>
+      new Error('Cannot accept a second decimal mark while parsing a number'),
   }
 }

@@ -21,20 +21,20 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 
-import { readFileSync } from 'fs'
-import { join } from 'path'
+import { readFileSync } from 'node:fs'
+import { join } from 'node:path'
 import {
-  EdifactMessageSpecification,
-  ParsingResultType,
   UNECEMessageStructureParser,
+  type EdifactMessageSpecification,
+  type ParsingResultType,
 } from '../src/edi/messageStructureParser'
-import { MessageType } from '../src/tracker'
+import type { MessageType } from '../src/tracker'
 import { findElement } from '../src/util'
 import {
-  ComponentValueEntry,
   Dictionary,
-  ElementEntry,
-  SegmentEntry,
+  type ComponentValueEntry,
+  type ElementEntry,
+  type SegmentEntry,
 } from '../src/validator'
 
 describe('MessageStructureParser', () => {
@@ -192,7 +192,7 @@ describe('MessageStructureParser', () => {
         componentValueTable: new Dictionary<ComponentValueEntry>(),
         messageStructureDefinition: [],
         type(): string {
-          return this.version + this.release + '_' + this.messageType
+          return `${this.version + this.release}_${this.messageType}`
         },
         versionAbbr(): string {
           return this.version + this.release
@@ -215,6 +215,7 @@ describe('MessageStructureParser', () => {
 
           expect(componentValueEntry).toBeDefined()
 
+          // biome-ignore lint/style/noNonNullAssertion: For testing purposes
           expect(Object.keys(componentValueEntry!).length).toEqual(528)
 
           done()
@@ -234,7 +235,7 @@ describe('MessageStructureParser', () => {
         componentValueTable: new Dictionary<ComponentValueEntry>(),
         messageStructureDefinition: [],
         type(): string {
-          return this.version + this.release + '_' + this.messageType
+          return `${this.version + this.release}_${this.messageType}`
         },
         versionAbbr(): string {
           return this.version + this.release
@@ -269,7 +270,7 @@ describe('MessageStructureParser', () => {
         .parseSegmentDefinitionPage('MEA', page, mockDefinition)
         .then((response: EdifactMessageSpecification) => {
           const segments: Dictionary<SegmentEntry> = response.segmentTable
-          expect(segments.get('MEA')!.elements.map((e) => e.id)).toEqual(
+          expect(segments.get('MEA')?.elements.map((e) => e.id)).toEqual(
             expect.arrayContaining(['6311', 'C502', 'C174', '7383']),
           )
           expect(segments.get('MEA')?.requires).toEqual(1)
@@ -322,7 +323,7 @@ describe('MessageStructureParser', () => {
         .parseSegmentDefinitionPage('DTM', page, mockDefinition)
         .then((response: EdifactMessageSpecification) => {
           const segments: Dictionary<SegmentEntry> = response.segmentTable
-          expect(segments.get('DTM')!.elements.map((e) => e.id)).toEqual(
+          expect(segments.get('DTM')?.elements.map((e) => e.id)).toEqual(
             expect.arrayContaining(['C507']),
           )
           expect(segments.get('DTM')?.requires).toEqual(1)
@@ -362,14 +363,14 @@ describe('MessageStructureParser', () => {
         .then((response: EdifactMessageSpecification) => {
           const segments: Dictionary<SegmentEntry> = response.segmentTable
           expect(
-            segments.get('DTM')!.elements.map((e: ElementEntry) => e.id),
+            segments.get('DTM')?.elements.map((e: ElementEntry) => e.id),
           ).toEqual(expect.arrayContaining([]))
           expect(segments.get('DTM')?.requires).toEqual(0)
           // will also skip element assignment as this should already
           // have happened during the definition of the previous segment
           // definition
           expect(
-            findElement(segments.get('DTM')!.elements, 'C507'),
+            findElement(segments.get('DTM')?.elements, 'C507'),
           ).toBeUndefined()
           done()
         })
@@ -401,8 +402,8 @@ describe('MessageStructureParser', () => {
         .parseSegmentDefinitionPage('CUX', page, definitionMock)
         .then((response: EdifactMessageSpecification) => {
           const segments: Dictionary<SegmentEntry> = response.segmentTable
-          const elements = segments.get('CUX')!.elements
-          expect(segments.get('CUX')!.elements.map((e) => e.id)).toEqual(
+          const elements = segments.get('CUX')?.elements
+          expect(segments.get('CUX')?.elements.map((e) => e.id)).toEqual(
             expect.arrayContaining(['C504', 'C504', '5402', '6341']),
           )
           expect(segments.get('CUX')?.requires).toEqual(0)
@@ -448,7 +449,7 @@ describe('MessageStructureParser', () => {
         .parseSegmentDefinitionPage('TAX', page, mockDefinition)
         .then((response: EdifactMessageSpecification) => {
           const segments: Dictionary<SegmentEntry> = response.segmentTable
-          expect(segments.get('TAX')!.elements.map((e) => e.id)).toEqual(
+          expect(segments.get('TAX')?.elements.map((e) => e.id)).toEqual(
             expect.arrayContaining([
               '5283',
               'C241',
@@ -514,8 +515,8 @@ describe('MessageStructureParser', () => {
         .parseSegmentDefinitionPage('PCI', page, mockDefinition)
         .then((response: EdifactMessageSpecification) => {
           const segments: Dictionary<SegmentEntry> = response.segmentTable
-          const elements = segments.get('PCI')!.elements
-          expect(elements.map((e) => e.id)).toEqual(
+          const elements = segments.get('PCI')?.elements
+          expect(elements?.map((e) => e.id)).toEqual(
             expect.arrayContaining(['4233', 'C210', '8275', 'C827']),
           )
           expect(segments.get('PCI')?.requires).toEqual(0)

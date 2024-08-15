@@ -20,17 +20,17 @@
 import { Cache } from './cache'
 import { ComponentValueTableBuilder } from './components'
 import { Configuration } from './configuration'
-import { Separators } from './edi/separators'
+import type { Separators } from './edi/separators'
 import { Parser } from './parser'
 import { SegmentTableBuilder } from './segments'
 import { findElement, isDefined } from './util'
 import {
-  Component,
-  ComponentValueEntry,
+  type Component,
+  type ComponentValueEntry,
   Dictionary,
-  ElementEntry,
-  SegmentEntry,
-  Validator,
+  type ElementEntry,
+  type SegmentEntry,
+  type Validator,
   ValidatorImpl,
 } from './validator'
 
@@ -194,13 +194,12 @@ export class Reader {
           const messageIdentifier = findElement(
             this.elements,
             'S009',
-          )!.components
-          const messageType = messageIdentifier[0]!.value as string
-          const messageVersion = messageIdentifier[1]!.value as string
-          const messageRelease = messageIdentifier[2]!.value as string
+          )?.components
+          const messageType = messageIdentifier[0]?.value as string
+          const messageVersion = messageIdentifier[1]?.value as string
+          const messageRelease = messageIdentifier[2]?.value as string
 
-          const key: string =
-            messageVersion + messageRelease + '_' + messageType
+          const key: string = `${messageVersion + messageRelease}_${messageType}`
           if (this.definitionCache.contains(key)) {
             const { segmentTable, componentValueTable } =
               this.definitionCache.get(key)

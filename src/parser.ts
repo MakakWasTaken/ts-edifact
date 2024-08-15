@@ -16,11 +16,11 @@
  * limitations under the License.
  */
 
-import { EventEmitter } from 'events'
+import { EventEmitter } from 'node:events'
 import { Configuration } from './configuration'
-import { EdifactSeparatorsBuilder, Separators } from './edi/separators'
+import { EdifactSeparatorsBuilder, type Separators } from './edi/separators'
 import { Tokenizer } from './tokenizer'
-import { ElementEntry, SegmentEntry, Validator } from './validator'
+import type { ElementEntry, SegmentEntry, Validator } from './validator'
 
 enum States {
   EMPTY = 0,
@@ -114,9 +114,8 @@ export class Parser extends EventEmitter {
     // data was read so far.
     if (this.state !== States.SEGMENT || this.tokenizer.buffer !== '') {
       throw this.errors.incompleteMessage()
-    } else {
-      this.state = States.EMPTY
     }
+    this.state = States.EMPTY
   }
 
   private una(chunk: string): boolean {
@@ -128,9 +127,8 @@ export class Parser extends EventEmitter {
       this.configuration.config.segmentTerminator = chunk.charCodeAt(8)
 
       return true
-    } else {
-      return false
     }
+    return false
   }
 
   write(chunk: string): void {
@@ -141,6 +139,7 @@ export class Parser extends EventEmitter {
     }
     while (index < chunk.length) {
       switch (this.state) {
+        // biome-ignore lint/suspicious/noFallthroughSwitchClause: <explanation>
         case States.EMPTY:
           index = this.una(chunk) ? 9 : 0
           // If the first segment is interrupted by, for example, a line break, the
@@ -185,15 +184,15 @@ export class Parser extends EventEmitter {
               )
           }
           break
+        // biome-ignore lint/suspicious/noFallthroughSwitchClause: <explanation>
         case States.ELEMENT:
           // Start reading a new element
           this.element = this.validator.onElement()
           this.onElement(this.element)
-        // eslint-disable-next-line no-fallthrough
+        // biome-ignore lint/suspicious/noFallthroughSwitchClause: Fall through to process the available component data
         case States.COMPONENT:
           // Start reading a new component
           this.validator.onOpenComponent(this.tokenizer)
-        // Fall through to process the available component data
         case States.MODESET:
         case States.DATA:
           index = this.tokenizer.data(chunk, index)
@@ -250,25 +249,20 @@ export class Parser extends EventEmitter {
   }
 
   private errors = {
-    incompleteMessage: function (): Error {
-      return new Error('Cannot close an incomplete message')
-    },
-    invalidCharacter: function (
+    incompleteMessage: (): Error =>
+      new Error('Cannot close an incomplete message'),
+    invalidCharacter: (
       character: string,
       charCode: number,
       index: number,
-    ): Error {
-      return new Error(
+    ): Error =>
+      new Error(
         `Invalid character '${character}' at position ${index} (${charCode})`,
-      )
-    },
-    invalidControlAfterSegment: function (
-      segment: string,
-      character: string,
-    ): Error {
+      ),
+    invalidControlAfterSegment: (segment: string, character: string): Error => {
       let message = ''
-      message += "Invalid character '" + character
-      message += "' after reading segment name " + segment
+      message += `Invalid character '${character}`
+      message += `' after reading segment name ${segment}`
       return new Error(message)
     },
   }

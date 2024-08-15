@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-import { Validator, ValidatorImpl } from './validator'
+import { type Validator, ValidatorImpl } from './validator'
 
 type PropConfig = {
   segmentTerminator?: number
@@ -96,7 +96,7 @@ export class Configuration {
 
   constructor(config?: PropConfig) {
     this.config = this.mergeWithDefault(config)
-    if (config && config.charset) {
+    if (config?.charset) {
       this.charset = config.charset
     } else {
       this.charset = 'UNOA'
@@ -109,11 +109,7 @@ export class Configuration {
    * used by this configuration.
    */
   public delimiters(): number[] {
-    const compareAndSwap = function (
-      array: number[],
-      a: number,
-      b: number,
-    ): void {
+    const compareAndSwap = (array: number[], a: number, b: number): void => {
       if (array[a] > array[b]) {
         // eslint-disable-next-line no-bitwise
         array[a] = array[a] ^ array[b]

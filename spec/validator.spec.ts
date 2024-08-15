@@ -23,9 +23,9 @@ import { Configuration } from '../src/configuration'
 import { Tokenizer } from '../src/tokenizer'
 import {
   Dictionary,
-  ElementEntry,
-  SegmentEntry,
-  Validator,
+  type ElementEntry,
+  type SegmentEntry,
+  type Validator,
   ValidatorImpl,
 } from '../src/validator'
 

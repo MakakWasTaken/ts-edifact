@@ -81,7 +81,7 @@ export class Separators {
       separator === '[' ||
       separator === ']'
     ) {
-      sep = '\\' + sep
+      sep = `\\${sep}`
     }
 
     return sep

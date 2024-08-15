@@ -20,7 +20,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 
 import * as axios from 'axios'
-import * as url from 'url'
+import * as url from 'node:url'
 
 export class HttpClient {
   baseUrl: string
@@ -39,11 +39,10 @@ export class HttpClient {
           const response: string = axiosResponse.data
           // console.log(`Response: ${response}`);
           return response
-        } else {
-          console.error(
-            `Unexpected response ${axiosResponse.status}: ${axiosResponse.data}`,
-          )
         }
+        console.error(
+          `Unexpected response ${axiosResponse.status}: ${axiosResponse.data}`,
+        )
         return ''
       })
       .catch((err) => {

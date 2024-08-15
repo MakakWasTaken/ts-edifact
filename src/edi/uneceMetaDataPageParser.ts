@@ -16,9 +16,9 @@
  * limitations under the License.
  */
 
-import { StateMachineDefinition } from '@initics/tsm'
+import type { StateMachineDefinition } from '@initics/tsm'
 import { EdifactMessageSpecificationImpl } from './messageStructureParser'
-import { UNECEDomHandler } from './uneceDomHandler'
+import type { UNECEDomHandler } from './uneceDomHandler'
 import { UNECEPageParser } from './unecePageParser'
 
 enum State {

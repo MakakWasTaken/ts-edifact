@@ -1,12 +1,8 @@
-import * as fs from 'fs'
+import * as fs from 'node:fs'
 import { TableBuilder } from './tableBuilder'
-import { ComponentValueEntry, Dictionary } from './validator'
+import { type ComponentValueEntry, Dictionary } from './validator'
 
 export class ComponentValueTableBuilder extends TableBuilder<ComponentValueEntry> {
-  constructor(type: string) {
-    super(type)
-  }
-
   build(): Dictionary<ComponentValueEntry> {
     const fileLoc: string | undefined = this.getDefinitionFileLoc('components')
     let dict: Dictionary<ComponentValueEntry>

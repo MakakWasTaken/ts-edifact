@@ -125,14 +125,13 @@ export class Tracker {
             throw new Error(
               `A mandatory segment ${current?.content() as string} is missing`,
             )
-          } else {
-            // If we are omitting mandatory content inside a conditional group,
-            // we just skip the entire group
-            probe = probe - this.stack.length
-            this.stack.length = optionals.pop() as number
-            current = this.stack[this.stack.length - 1]
-            probe = probe + this.stack.length
           }
+          // If we are omitting mandatory content inside a conditional group,
+          // we just skip the entire group
+          probe = probe - this.stack.length
+          this.stack.length = optionals.pop() as number
+          current = this.stack[this.stack.length - 1]
+          probe = probe + this.stack.length
         }
 
         current.position++

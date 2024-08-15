@@ -16,11 +16,7 @@
  * limitations under the License.
  */
 
-import { Element, Node } from 'domhandler'
-import { DomHandler, DomHandlerOptions } from 'htmlparser2'
-
-type Callback = (error: Error | null, dom: Node[]) => void
-type ElementCallback = (element: Element) => void
+import { DomHandler } from 'htmlparser2'
 
 /**
  * Customization of the `DomHandler` class to allow for extending the behavior
@@ -39,14 +35,6 @@ type ElementCallback = (element: Element) => void
  * after the parent methods got called.
  */
 export abstract class UNECEDomHandler extends DomHandler {
-  constructor(
-    callback?: Callback | null,
-    options?: DomHandlerOptions | null,
-    elementCB?: ElementCallback,
-  ) {
-    super(callback, options, elementCB)
-  }
-
   /**
    * Do not use this method. Please use {@link onText} instead.
    *

@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-import { Reader, ResultType } from '../src/reader'
+import { Reader, type ResultType } from '../src/reader'
 
 describe('Edifact Reader', () => {
   it('should read document with custom decimal separator', () => {

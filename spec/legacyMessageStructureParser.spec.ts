@@ -21,16 +21,16 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 
-import { readFileSync } from 'fs'
-import { join } from 'path'
+import { readFileSync } from 'node:fs'
+import { join } from 'node:path'
 import { UNECELegacyMessageStructureParser } from '../src/edi/legacyMessageStructureParser'
 import {
-  EdifactMessageSpecification,
+  type EdifactMessageSpecification,
   EdifactMessageSpecificationImpl,
 } from '../src/edi/messageStructureParser'
-import { MessageType } from '../src/tracker'
+import type { MessageType } from '../src/tracker'
 import { findElement } from '../src/util'
-import { Dictionary, SegmentEntry } from '../src/validator'
+import type { Dictionary, SegmentEntry } from '../src/validator'
 
 const D99A_INVOIC_METADATA_PAGE = `
 <HTML><PRE><body bgcolor=ffffff><TITLE>UNTDID - D.99A - Message INVOIC</title>
@@ -346,7 +346,7 @@ describe('UNECELegacyMessageStructureParser', () => {
         const segments: Dictionary<SegmentEntry> = spec.segmentTable
 
         expect(
-          segments.get('MEA')!.elements.map((element) => element.id),
+          segments.get('MEA')?.elements.map((element) => element.id),
         ).toEqual(expect.arrayContaining(['6311', 'C502', 'C174', '7383']))
         expect(segments.get('MEA')?.requires).toEqual(1)
 
@@ -417,11 +417,10 @@ describe('UNECELegacyMessageStructureParser', () => {
 
       const spec: EdifactMessageSpecification =
         new EdifactMessageSpecificationImpl('INVOIC', 'D', '99A', 'UN')
-
       ;(sut as any).parseSegmentDefinitionPage('CUX', page, spec).then(() => {
         const segments: Dictionary<SegmentEntry> = spec.segmentTable
 
-        expect(segments.get('CUX')!.elements.map((e) => e.id)).toEqual(
+        expect(segments.get('CUX')?.elements.map((e) => e.id)).toEqual(
           expect.arrayContaining(['C504', 'C504', '5402', '6341']),
         )
         expect(segments.get('CUX')?.requires).toEqual(0)
@@ -473,11 +472,11 @@ describe('UNECELegacyMessageStructureParser', () => {
       expect(spec.messageType).toBe('INVOIC')
 
       // check segments
-      expect(segments.get('MEA')!.elements.map((e) => e.id)).toEqual(
+      expect(segments.get('MEA')?.elements.map((e) => e.id)).toEqual(
         expect.arrayContaining(['6311', 'C502', 'C174', '7383']),
       )
       expect(segments.get('MEA')?.requires).toEqual(1)
-      expect(segments.get('CUX')!.elements.map((e) => e.id)).toEqual(
+      expect(segments.get('CUX')?.elements.map((e) => e.id)).toEqual(
         expect.arrayContaining(['C504', 'C504', '5402', '6341']),
       )
       expect(segments.get('CUX')?.requires).toEqual(0)

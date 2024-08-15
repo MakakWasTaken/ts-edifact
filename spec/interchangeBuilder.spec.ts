@@ -21,9 +21,12 @@
  */
 
 // import { ResultType } from '../src/reader';
-import { Group, Reader, ResultType } from '../src'
-import { EdifactSeparatorsBuilder, Separators } from '../src/edi/separators'
-import { NameAndAddress } from '../src/edifact'
+import { type Group, Reader, type ResultType } from '../src'
+import {
+  EdifactSeparatorsBuilder,
+  type Separators,
+} from '../src/edi/separators'
+import type { NameAndAddress } from '../src/edifact'
 import { InterchangeBuilder } from '../src/interchangeBuilder'
 
 describe('InterchangeBuilder', () => {

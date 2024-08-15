@@ -16,10 +16,10 @@
  * limitations under the License.
  */
 
-import { StateMachine, StateMachineDefinition } from '@initics/tsm'
+import { StateMachine, type StateMachineDefinition } from '@initics/tsm'
 import { Parser } from 'htmlparser2'
 import { isDefined } from '../util'
-import { EdifactMessageSpecification } from './messageStructureParser'
+import type { EdifactMessageSpecification } from './messageStructureParser'
 import { UNECEDomHandler } from './uneceDomHandler'
 
 export abstract class UNECEPageParser {
@@ -32,7 +32,7 @@ export abstract class UNECEPageParser {
 
   get spec(): EdifactMessageSpecification {
     if (!this._spec) {
-      throw new Error(`EdifactMessageSpecification not defined`)
+      throw new Error('EdifactMessageSpecification not defined')
     }
     return this._spec
   }

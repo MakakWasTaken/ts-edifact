@@ -1,7 +1,7 @@
 {
   "name": "@makakwastaken/ts-edifact",
   "description": "Edifact parser library",
-  "version": "0.2.9",
+  "version": "0.2.10",
   "private": false,
   "main": "build/index.js",
   "types": "build/index.d.ts",
@@ -36,9 +36,15 @@
       "url": "https://unknown-studios.com"
     }
   ],
+  "lint-staged": {
+    "*.ts": [
+      "biome lint",
+      "biome format"
+    ]
+  },
   "scripts": {
     "clean": "rm -rf ./build ./dist",
-    "lint": "eslint --fix . && prettier --write .",
+    "lint": "biome format --write --no-errors-on-unmatched . && biome lint --write .",
     "build": "tsc -b",
     "check": "npm run check:tsc",
     "check:tsc": "tsc -p . --noEmit",
@@ -48,11 +54,8 @@
     "prepack": "yarn lint && yarn build",
     "prepare": "husky install"
   },
-  "lint-staged": {
-    "*.{js,jsx,ts,tsx}": "eslint --fix .",
-    "*.{js,jsx,ts,tsx|json}": "prettier --write ."
-  },
   "devDependencies": {
+    "@biomejs/biome": "1.8.2",
     "@commitlint/cli": "^19.0.3",
     "@commitlint/config-conventional": "^19.0.3",
     "@commitlint/types": "^19.0.3",

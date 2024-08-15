@@ -18,10 +18,10 @@
 
 // Run this sample with: npx ts-node examples/definitions.ts
 
-import * as fs from 'fs'
-import * as path from 'path'
-import { Reader, ResultType } from '../src/reader'
-import { MessageType, Tracker } from '../src/tracker'
+import * as fs from 'node:fs'
+import * as path from 'node:path'
+import { Reader, type ResultType } from '../src/reader'
+import { type MessageType, Tracker } from '../src/tracker'
 
 let document = ''
 document += "UNB+UNOA:1+005435656:1+006415160:1+060515:1434+00000000000778'"
@@ -68,7 +68,6 @@ function _validateDocument(
 
   for (const obj of result) {
     if (obj.name !== 'UNA' && obj.name !== 'UNB' && obj.name !== 'UNZ') {
-      console.log('Checking ' + obj.name)
       tracker.accept(obj.name)
       checked++
     }
@@ -81,9 +80,7 @@ function _validateDocument(
 }
 
 function validateDocumentSync(doc: string): void {
-  _validateDocument(doc, (checked: number) => {
-    console.log(`Finished validation of ${checked} segments`)
-  })
+  _validateDocument(doc, (_checked: number) => {})
 }
 
 validateDocumentSync(document)
@@ -93,7 +90,6 @@ async function validateDocumentAsync(doc: string): Promise<number> {
     _validateDocument(doc, resolve)
   })
   const result: number = await promise
-  console.log(`Finished validation of ${result} segments`)
   return result
 }
 
@@ -101,7 +97,6 @@ void validateDocumentAsync(document)
 
 function validateDocumentAsync2(doc: string): number | undefined {
   const result: number | undefined = _validateDocument(doc)
-  console.log(`Finished validation of ${result as number} segments`)
   return result
 }
 

@@ -20,9 +20,9 @@
  * limitations under the License.
  */
 
-import * as fs from 'fs'
-import { Separators } from './edi/separators'
-import { MessageHeader, Segment, toSegmentObject } from './edifact'
+import * as fs from 'node:fs'
+import type { Separators } from './edi/separators'
+import { type MessageHeader, type Segment, toSegmentObject } from './edifact'
 import {
   APERAK,
   AUTHOR,
@@ -39,10 +39,10 @@ import {
   TAXCON,
   VATDEC,
 } from './index'
-import { ResultType } from './reader'
-import { MessageType, Pointer } from './tracker'
+import type { ResultType } from './reader'
+import { type MessageType, Pointer } from './tracker'
 import { formatComponents } from './util'
-import { ElementEntry } from './validator'
+import type { ElementEntry } from './validator'
 
 export class Group {
   name: string
@@ -117,13 +117,14 @@ export class Message {
   private section(name?: string): (Group | Segment)[] {
     if (name === 'header') {
       return this.header
-    } else if (name === 'detail') {
-      return this.detail
-    } else if (name === 'summary') {
-      return this.summary
-    } else {
-      return this.header.concat(this.detail).concat(this.summary)
     }
+    if (name === 'detail') {
+      return this.detail
+    }
+    if (name === 'summary') {
+      return this.summary
+    }
+    return this.header.concat(this.detail).concat(this.summary)
   }
 
   groupCount(sectionName?: string): number {
@@ -215,7 +216,7 @@ export class Edifact {
         formattedElements.processingPriorityCode as string
     }
     if (elements.length >= 9) {
-      this.ackRequest = parseInt(
+      this.ackRequest = Number.parseInt(
         (formattedElements.acknowledgementRequest as string) || '',
       )
     }
@@ -224,7 +225,7 @@ export class Edifact {
         formattedElements.interchangeAgreementIdentifier as string
     }
     if (elements.length === 11) {
-      this.testIndicator = parseInt(
+      this.testIndicator = Number.parseInt(
         (formattedElements.testIndicator as string) || '',
       )
     } else {
@@ -372,21 +373,19 @@ export class InterchangeBuilder {
                   current.content() as string
                 } defined in segment group '${segName}' is missing`,
               )
-            } else {
-              // We will never encounter groups here, so we can safely use the
-              // name of the segment stored in it's content property
-              throw new Error(
-                `A mandatory segment ${current.content() as string} is missing`,
-              )
             }
-          } else {
-            // If we are omitting mandatory content inside a conditional group,
-            // we just skip the entire group
-            probe = probe - this.stack.length
-            this.stack.length = optionals.pop() as number
-            current = this.stack[this.stack.length - 1]
-            probe = probe + this.stack.length
+            // We will never encounter groups here, so we can safely use the
+            // name of the segment stored in it's content property
+            throw new Error(
+              `A mandatory segment ${current.content() as string} is missing`,
+            )
           }
+          // If we are omitting mandatory content inside a conditional group,
+          // we just skip the entire group
+          probe = probe - this.stack.length
+          this.stack.length = optionals.pop() as number
+          current = this.stack[this.stack.length - 1]
+          probe = probe + this.stack.length
         }
 
         current.position++
@@ -506,51 +505,48 @@ export class InterchangeBuilder {
     messageVersion: string,
     messageType: string,
   ): MessageType[] {
-    let path: string =
-      basePath + messageVersion + '_' + messageType + '.struct.json'
+    let path = `${basePath + messageVersion}_${messageType}.struct.json`
     if (fs.existsSync(path)) {
       return this.readFileAsMessageStructure(path)
-    } else {
-      path = basePath + messageType + 'struct.json'
-      if (fs.existsSync(path)) {
-        return this.readFileAsMessageStructure(path)
-      } else {
-        switch (messageType) {
-          // default back to D01B messages
-          case 'APERAK':
-            return APERAK
-          case 'AUTHOR':
-            return AUTHOR
-          case 'BALANC':
-            return BALANC
-          case 'DESADV':
-            return DESADV
-          case 'GENRAL':
-            return GENRAL
-          case 'IFTMIN':
-            return IFTMIN
-          case 'INVOIC':
-            return INVOIC
-          case 'INVRPT':
-            return INVRPT
-          case 'ORDERS':
-            return ORDERS
-          case 'OSTENQ':
-            return OSTENQ
-          case 'OSTRPT':
-            return OSTRPT
-          case 'PARTIN':
-            return PARTIN
-          case 'TAXCON':
-            return TAXCON
-          case 'VATDEC':
-            return VATDEC
-          default:
-            throw new Error(
-              `Could not find message definiton for message type '${messageType}' of version '${messageVersion}'`,
-            )
-        }
-      }
+    }
+    path = `${basePath + messageType}struct.json`
+    if (fs.existsSync(path)) {
+      return this.readFileAsMessageStructure(path)
+    }
+    switch (messageType) {
+      // default back to D01B messages
+      case 'APERAK':
+        return APERAK
+      case 'AUTHOR':
+        return AUTHOR
+      case 'BALANC':
+        return BALANC
+      case 'DESADV':
+        return DESADV
+      case 'GENRAL':
+        return GENRAL
+      case 'IFTMIN':
+        return IFTMIN
+      case 'INVOIC':
+        return INVOIC
+      case 'INVRPT':
+        return INVRPT
+      case 'ORDERS':
+        return ORDERS
+      case 'OSTENQ':
+        return OSTENQ
+      case 'OSTRPT':
+        return OSTRPT
+      case 'PARTIN':
+        return PARTIN
+      case 'TAXCON':
+        return TAXCON
+      case 'VATDEC':
+        return VATDEC
+      default:
+        throw new Error(
+          `Could not find message definiton for message type '${messageType}' of version '${messageVersion}'`,
+        )
     }
   }
 

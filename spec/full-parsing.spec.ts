@@ -19,7 +19,7 @@
 import { Configuration } from '../src/configuration'
 import { Parser } from '../src/parser'
 import { SegmentTableBuilder } from '../src/segments'
-import { Dictionary, SegmentEntry } from '../src/validator'
+import type { Dictionary, SegmentEntry } from '../src/validator'
 
 // issue #1 - Differences between ts-edifact and edifact libraries
 describe('Parsing edifact document', () => {

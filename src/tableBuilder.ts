@@ -16,9 +16,9 @@
  * limitations under the License.
  */
 
-import * as fs from 'fs'
-import * as path from 'path'
-import { Dictionary } from './validator'
+import * as fs from 'node:fs'
+import * as path from 'node:path'
+import type { Dictionary } from './validator'
 
 export abstract class TableBuilder<T> {
   private type: string
@@ -61,7 +61,8 @@ export abstract class TableBuilder<T> {
 
       if (fs.existsSync(versionedFileName)) {
         return versionedFileName
-      } else if (fs.existsSync(baseFileName)) {
+      }
+      if (fs.existsSync(baseFileName)) {
         console.warn(
           `No segments definition file found for message type ${this.type} of version ${this.version}. Falling back to default version`,
         )

@@ -18,13 +18,13 @@
  * limitations under the License.
  */
 
-import { ResultType } from './reader'
+import type { ResultType } from './reader'
 import { formatComponents } from './util'
-import { ComponentValue } from './validator'
+import type { ComponentValue } from './validator'
 
 export function sanitizeFloat(str: string, decimalSymbol: string): number {
   const updatedStr: string = str.replace(decimalSymbol, '.')
-  return parseFloat(updatedStr)
+  return Number.parseFloat(updatedStr)
 }
 
 export interface Segment {
@@ -178,7 +178,7 @@ export function toSegmentObject(
       return formattedComponents as Status
     case 'TAX':
       return formattedComponents as TaxDetails
-    case 'TDT':
+    case 'TDT': {
       // eslint-disable-next-line no-case-declarations
       const lversion: string = version.toLowerCase()
       if (
@@ -200,7 +200,8 @@ export function toSegmentObject(
         lversion === 'd11a'
       ) {
         return formattedComponents as TransportInformationD11a
-      } else if (
+      }
+      if (
         version === 'd10b' ||
         version === 'd10a' ||
         lversion === 'd09b' ||
@@ -221,9 +222,9 @@ export function toSegmentObject(
         lversion === 'd02a'
       ) {
         return formattedComponents as TransportInformationD02b
-      } else {
-        return formattedComponents as DetailsOfTransport
       }
+      return formattedComponents as DetailsOfTransport
+    }
     case 'TMD':
       return formattedComponents as TransportMovementDetails
     case 'TOD':

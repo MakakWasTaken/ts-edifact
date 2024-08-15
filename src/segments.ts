@@ -16,15 +16,11 @@
  * limitations under the License.
  */
 
-import * as fs from 'fs'
+import * as fs from 'node:fs'
 import { TableBuilder } from './tableBuilder'
-import { Dictionary, SegmentEntry } from './validator'
+import { Dictionary, type SegmentEntry } from './validator'
 
 export class SegmentTableBuilder extends TableBuilder<SegmentEntry> {
-  constructor(type: string) {
-    super(type)
-  }
-
   static enrichWithDefaultSegments(
     data: Dictionary<SegmentEntry>,
   ): Dictionary<SegmentEntry> {

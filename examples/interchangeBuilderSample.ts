@@ -18,16 +18,20 @@
 
 // Run this sample with: npx ts-node examples/interchangeBuilderSample.ts
 
-import { LineItem, MonetaryAmount, PriceDetails, Quantity } from '../src'
+import type { LineItem, MonetaryAmount, PriceDetails, Quantity } from '../src'
 import {
-  EdifactMessageSpecification,
-  MessageStructureParser,
   UNECEMessageStructureParser,
+  type EdifactMessageSpecification,
+  type MessageStructureParser,
 } from '../src/edi/messageStructureParser'
-import { Separators } from '../src/edi/separators'
-import { ItemDescription } from '../src/edifact'
-import { Edifact, Group, InterchangeBuilder } from '../src/interchangeBuilder'
-import { Reader, ResultType } from '../src/reader'
+import type { Separators } from '../src/edi/separators'
+import type { ItemDescription } from '../src/edifact'
+import {
+  Group,
+  InterchangeBuilder,
+  type Edifact,
+} from '../src/interchangeBuilder'
+import { Reader, type ResultType } from '../src/reader'
 import { persist } from '../src/util'
 
 let document = ''
@@ -89,55 +93,38 @@ async function parseDocument(doc: string): Promise<Edifact> {
 
 parseDocument(document)
   .then((doc: Edifact) => {
-    console.log(`Sender: ${doc.sender.id}`)
-    console.log(`Receiver: ${doc.receiver.id}`)
-    console.log(`Interchange Number: ${doc.interchangeNumber}`)
-    console.log(`Number of messages: ${doc.messages.length}`)
-    console.log(
-      `Number of items in first message: ${
-        (doc.messages[0].detail[0] as Group).data.length
-      }`,
-    )
     for (const entry of (doc.messages[0].detail[0] as Group).data) {
       if (entry instanceof Group) {
-        console.log(`Info on item #${entry.name}:`)
-
-        let articleNumber: string | undefined = ''
-        let name: string | undefined = ''
-        let qty: number | undefined = 0
-        let price: number | undefined = 0
-        let total: number | undefined = 0
+        let _articleNumber: string | undefined = ''
+        let _name: string | undefined = ''
+        let _qty: number | undefined = 0
+        let _price: number | undefined = 0
+        let _total: number | undefined = 0
         for (const itemData of entry.data) {
           if (!(itemData instanceof Group)) {
             let item: ItemDescription | Quantity | LineItem | undefined
             if ((item = itemData as LineItem)) {
-              articleNumber = item.itemNumberIdentification?.itemIdentifier
+              _articleNumber = item.itemNumberIdentification?.itemIdentifier
             } else if ((item = itemData as ItemDescription)) {
-              name = item.itemDescription?.itemDescription
+              _name = item.itemDescription?.itemDescription
             } else if ((item = itemData as Quantity)) {
-              qty = item.quantityDetails.quantity
+              _qty = item.quantityDetails.quantity
             }
           } else {
             for (const subGroupItem of itemData.data) {
               let item: PriceDetails | MonetaryAmount | undefined
               if ((item = subGroupItem as PriceDetails)) {
-                price = item.priceInformation?.priceAmount
+                _price = item.priceInformation?.priceAmount
               } else if ((item = subGroupItem as MonetaryAmount)) {
-                total = item.monetaryAmount?.monetaryAmount
+                _total = item.monetaryAmount?.monetaryAmount
               }
             }
           }
         }
-        console.log(
-          `\t${articleNumber ? articleNumber : ''} ${name ? name : ''}   x ${
-            qty?.toString() || ''
-          } à ${price ? price : 0} = ${total ? total : 0}`,
-        )
       }
     }
   })
   .catch((error: Error) => {
-    console.log(error.stack)
     console.trace(
       `Caught exception while attempting to parse Edifact document. Reason: ${error.message}`,
     )

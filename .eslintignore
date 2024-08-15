@@ -1,9 +1,0 @@
-node_modules
-out
-dist
-src/test
-build
-coverage
-
-commitlint.config.js
-jest.config.js

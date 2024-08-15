@@ -18,14 +18,14 @@
 
 import { DomHandler, Parser } from 'htmlparser2'
 import { HttpClient } from '../httpClient'
-import { MessageType } from '../tracker'
+import type { MessageType } from '../tracker'
 import { isDefined } from '../util'
 import {
-  Component,
-  ComponentValueEntry,
+  type Component,
+  type ComponentValueEntry,
   Dictionary,
-  ElementEntry,
-  SegmentEntry,
+  type ElementEntry,
+  type SegmentEntry,
 } from '../validator'
 
 export interface EdifactMessageSpecification {
@@ -77,7 +77,7 @@ export class EdifactMessageSpecificationImpl
   }
 
   public type(): string {
-    return this.version + this.release + '_' + this.messageType
+    return `${this.version + this.release}_${this.messageType}`
   }
 
   public versionAbbr(): string {
@@ -86,19 +86,19 @@ export class EdifactMessageSpecificationImpl
 }
 
 enum Part {
-  BeforeStructureDef,
-  RefLink,
-  Pos,
-  Tag,
-  Deprecated,
-  Name,
-  AfterStructureDef,
+  BeforeStructureDef = 0,
+  RefLink = 1,
+  Pos = 2,
+  Tag = 3,
+  Deprecated = 4,
+  Name = 5,
+  AfterStructureDef = 6,
 }
 
 enum SegmentPart {
-  BeforeStructureDef,
-  Data,
-  AfterStructureDef,
+  BeforeStructureDef = 0,
+  Data = 1,
+  AfterStructureDef = 2,
 }
 
 export type ParsingResultType = {
@@ -119,12 +119,7 @@ export class UNECEMessageStructureParser implements MessageStructureParser {
     this.version = version.toLowerCase()
     this.type = type.toLowerCase()
 
-    const baseUrl: string =
-      'https://service.unece.org/trade/untdid/' +
-      this.version +
-      '/trmd/' +
-      this.type +
-      '_c.htm'
+    const baseUrl: string = `https://service.unece.org/trade/untdid/${this.version}/trmd/${this.type}_c.htm`
     this.httpClient = new HttpClient(baseUrl)
   }
 
@@ -176,7 +171,7 @@ export class UNECEMessageStructureParser implements MessageStructureParser {
       if (isDefined(arr)) {
         const referencedComponent = arr[1]
         const referencedComponentPage: string = await this.loadPage(
-          '../tred/tred' + referencedComponent + '.htm',
+          `../tred/tred${referencedComponent}.htm`,
         )
         return this.parseComponentDefinitionPage(
           component,
@@ -265,7 +260,7 @@ export class UNECEMessageStructureParser implements MessageStructureParser {
     for (let line of page.split('\n')) {
       line = line.trimEnd()
       if (overflowLine !== null) {
-        line = overflowLine.trimStart() + ' ' + line.trim()
+        line = `${overflowLine.trimStart()} ${line.trim()}`
         overflowLine = null
       }
 
@@ -288,7 +283,7 @@ export class UNECEMessageStructureParser implements MessageStructureParser {
           // const deprecated: boolean = arr[2] === "X" ? true : false;
           const href: string | undefined = arr[3]
           const id: string = arr[4]
-          const mandatory: boolean = arr[6] === 'M' ? true : false
+          const mandatory: boolean = arr[6] === 'M'
           // const repetition: number | undefined = isDefined(arr[7]) ? parseInt(arr[7]) : undefined;
           const elementDef: string | undefined =
             arr[8] === '' ? undefined : arr[8]
@@ -498,8 +493,8 @@ export class UNECEMessageStructureParser implements MessageStructureParser {
               const groupArray: MessageType[] = []
               const group: MessageType = {
                 content: groupArray,
-                mandatory: arr[2] === 'M' ? true : false,
-                repetition: parseInt(arr[3]),
+                mandatory: arr[2] === 'M',
+                repetition: Number.parseInt(arr[3]),
                 name: arr[1],
                 section: isDefined(section) ? section : undefined,
               }
@@ -551,8 +546,8 @@ export class UNECEMessageStructureParser implements MessageStructureParser {
             // update the last element on the top-most stack with the respective data
             const segArr: MessageType[] = segStack[segStack.length - 1]
             const segData: MessageType = segArr[segArr.length - 1]
-            segData.mandatory = sMandatory === 'M' ? true : false
-            segData.repetition = parseInt(sRepetition)
+            segData.mandatory = sMandatory === 'M'
+            segData.repetition = Number.parseInt(sRepetition)
 
             // check whether the remainder contains a closing hint for a subgroup: -...-++
             if (remainder.includes('-') && remainder.includes('+')) {
@@ -621,7 +616,7 @@ export class UNECEMessageStructureParser implements MessageStructureParser {
   }
 
   loadTypeSpec(): Promise<EdifactMessageSpecification> {
-    const url: string = './' + this.type + '_c.htm'
+    const url: string = `./${this.type}_c.htm`
     return this.loadPage(url)
       .then((page: string) => this.parseMessagePage(page))
       .then((result: ParsingResultType) =>
