@@ -34,8 +34,8 @@ export {
   MonetaryAmount,
   PriceDetails,
   Quantity,
-  sanitizeFloat,
   Segment,
+  sanitizeFloat,
 } from './edifact'
 export {
   Edifact,
@@ -59,36 +59,33 @@ export {
   ValidatorImpl,
   ValidatorStates,
 } from './validator'
-export {
-  APERAK,
-  AUTHOR,
-  BALANC,
-  DESADV,
-  GENRAL,
-  IFTMIN,
-  INVOIC,
-  INVRPT,
-  ORDERS,
-  OSTENQ,
-  OSTRPT,
-  PARTIN,
-  TAXCON,
-  VATDEC,
-}
 
-// default D01B message specifications
+import APERAK_JSON from './messageSpec/APERAK.struct.json'
+import AUTHOR_JSON from './messageSpec/AUTHOR.struct.json'
+import BALANC_JSON from './messageSpec/BALANC.struct.json'
+import DESADV_JSON from './messageSpec/DESADV.struct.json'
+import GENRAL_JSON from './messageSpec/GENRAL.struct.json'
+import IFTMIN_JSON from './messageSpec/IFTMIN.struct.json'
+import INVOIC_JSON from './messageSpec/INVOIC.struct.json'
+import INVRPT_JSON from './messageSpec/INVRPT.struct.json'
+import ORDERS_JSON from './messageSpec/ORDERS.struct.json'
+import OSTENQ_JSON from './messageSpec/OSTENQ.struct.json'
+import OSTRPT_JSON from './messageSpec/OSTRPT.struct.json'
+import PARTIN_JSON from './messageSpec/PARTIN.struct.json'
+import TAXCON_JSON from './messageSpec/TAXCON.struct.json'
+import VATDEC_JSON from './messageSpec/VATDEC.struct.json'
 
-import * as APERAK from './messageSpec/APERAK.struct.json'
-import * as AUTHOR from './messageSpec/AUTHOR.struct.json'
-import * as BALANC from './messageSpec/BALANC.struct.json'
-import * as DESADV from './messageSpec/DESADV.struct.json'
-import * as GENRAL from './messageSpec/GENRAL.struct.json'
-import * as IFTMIN from './messageSpec/IFTMIN.struct.json'
-import * as INVOIC from './messageSpec/INVOIC.struct.json'
-import * as INVRPT from './messageSpec/INVRPT.struct.json'
-import * as ORDERS from './messageSpec/ORDERS.struct.json'
-import * as OSTENQ from './messageSpec/OSTENQ.struct.json'
-import * as OSTRPT from './messageSpec/OSTRPT.struct.json'
-import * as PARTIN from './messageSpec/PARTIN.struct.json'
-import * as TAXCON from './messageSpec/TAXCON.struct.json'
-import * as VATDEC from './messageSpec/VATDEC.struct.json'
+export const APERAK = APERAK_JSON
+export const AUTHOR = AUTHOR_JSON
+export const BALANC = BALANC_JSON
+export const DESADV = DESADV_JSON
+export const GENRAL = GENRAL_JSON
+export const IFTMIN = IFTMIN_JSON
+export const INVOIC = INVOIC_JSON
+export const INVRPT = INVRPT_JSON
+export const ORDERS = ORDERS_JSON
+export const OSTENQ = OSTENQ_JSON
+export const OSTRPT = OSTRPT_JSON
+export const PARTIN = PARTIN_JSON
+export const TAXCON = TAXCON_JSON
+export const VATDEC = VATDEC_JSON
