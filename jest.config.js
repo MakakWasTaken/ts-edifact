@@ -1,5 +1,5 @@
 /** @type {import('jest').Config} */
-module.exports = {
+const config = {
   transform: {
     '^.+\\.(t|j)sx?$': ['@swc/jest'],
   },
@@ -21,3 +21,5 @@ module.exports = {
   testTimeout: 30000,
   // detectOpenHandles: true,
 }
+
+export default config
