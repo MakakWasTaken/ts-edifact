@@ -3,9 +3,7 @@
     "module": "ESNext",
     "target": "esnext",
     "moduleResolution": "node",
-    "lib": [
-      "esnext"
-    ],
+    "lib": ["esnext"],
     "rootDir": ".",
     "sourceRoot": "./build",
     "outDir": "./build",
@@ -15,24 +13,12 @@
     "sourceMap": true,
     "strict": true,
     "esModuleInterop": true,
-    /* Advanced Options */
     "forceConsistentCasingInFileNames": true,
     "noUnusedLocals": true,
     "strictNullChecks": true,
     "skipLibCheck": true,
     "resolveJsonModule": true
   },
-  "include": [
-    "examples",
-    "spec",
-    "src"
-  ],
-  "exclude": [
-    // don't include these files in the final artifact
-    "node_modules",
-    ".vscode",
-    "build",
-    ".github",
-    "coverage"
-  ]
+  "include": ["examples", "spec", "src"],
+  "exclude": ["node_modules", ".vscode", "build", ".github", "coverage"]
 }
