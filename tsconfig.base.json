@@ -3,7 +3,9 @@
     "module": "ESNext",
     "target": "esnext",
     "moduleResolution": "node",
-    "lib": ["esnext"],
+    "lib": [
+      "esnext"
+    ],
     "rootDir": ".",
     "sourceRoot": "./build",
     "outDir": "./build",
@@ -20,7 +22,11 @@
     "skipLibCheck": true,
     "resolveJsonModule": true
   },
-  "include": ["examples", "spec", "src"],
+  "include": [
+    "examples",
+    "spec",
+    "src"
+  ],
   "exclude": [
     // don't include these files in the final artifact
     "node_modules",

@@ -1,9 +1,11 @@
 {
   "name": "@makakwastaken/ts-edifact",
   "description": "Edifact parser library",
-  "version": "0.2.11",
-  "main": "build/src/index.js",
-  "types": "build/src/index.d.ts",
+  "version": "0.2.12",
+  "type": "module",
+  "main": "build/cjs/src/index.js",
+  "module": "build/esm/src/index.js",
+  "types": "build/esm/src/index.d.ts",
   "license": "MIT",
   "publishConfig": {
     "access": "public",
@@ -14,7 +16,6 @@
     "edifact",
     "parser"
   ],
-  "publisher": "Roman Vottner",
   "readme": "README.md",
   "author": {
     "name": "Roman Vottner"
@@ -44,14 +45,16 @@
   "scripts": {
     "clean": "rm -rf ./build ./dist",
     "lint": "biome format --write --no-errors-on-unmatched . && biome lint --write .",
-    "build": "tsc -b",
     "check": "npm run check:tsc",
     "check:tsc": "tsc -p . --noEmit",
     "test": "jest spec",
     "coverage": "yarn test --coverage",
     "lint:staged": "lint-staged",
     "prepack": "yarn lint && yarn build",
-    "prepare": "husky || true"
+    "prepare": "husky || true",
+    "build:cjs": "tsc -p tsconfig.cjs.json",
+    "build:esm": "tsc -p tsconfig.esm.json",
+    "build": "yarn build:cjs && yarn build:esm"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
