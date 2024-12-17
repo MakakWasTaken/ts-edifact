@@ -4,6 +4,10 @@ All notable changes to the "ts-edifact" library will be documented in this file.
 
 ## Releases
 
+### 0.2.12
+
+- Added support for CommonJS
+
 ### 0.2.0
 
 - Added support for getting the component values from predefined values.
