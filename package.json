@@ -1,7 +1,7 @@
 {
   "name": "@makakwastaken/ts-edifact",
   "description": "Edifact parser library",
-  "version": "0.2.13",
+  "version": "0.2.14",
   "type": "module",
   "main": "build/cjs/src/index.js",
   "module": "build/esm/src/index.js",
@@ -11,7 +11,11 @@
     "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
-  "keywords": ["edi", "edifact", "parser"],
+  "keywords": [
+    "edi",
+    "edifact",
+    "parser"
+  ],
   "readme": "README.md",
   "author": {
     "name": "Roman Vottner"
@@ -33,7 +37,10 @@
     }
   ],
   "lint-staged": {
-    "*.ts": ["biome lint --write", "biome format --write"]
+    "*.ts": [
+      "biome lint --write",
+      "biome format --write"
+    ]
   },
   "scripts": {
     "clean": "rm -rf ./build ./dist",
@@ -78,6 +85,8 @@
     "axios": "^1.11.0",
     "htmlparser2": "^10.0.0"
   },
-  "files": ["build/**/*"],
+  "files": [
+    "build/**/*"
+  ],
   "packageManager": "yarn@4.9.2"
 }
