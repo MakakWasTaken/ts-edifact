@@ -1,7 +1,7 @@
 {
   "name": "@makakwastaken/ts-edifact",
   "description": "Edifact parser library",
-  "version": "0.2.12",
+  "version": "0.2.13",
   "type": "module",
   "main": "build/cjs/src/index.js",
   "module": "build/esm/src/index.js",
@@ -51,33 +51,33 @@
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
-    "@commitlint/cli": "^19.4.0",
-    "@commitlint/config-conventional": "^19.2.2",
-    "@commitlint/types": "^19.0.3",
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1",
+    "@commitlint/types": "^19.8.1",
     "@initics/tsm": "^1.0.2",
-    "@swc/jest": "^0.2.36",
+    "@swc/jest": "^0.2.39",
     "@types/events": "3.0.3",
-    "@types/htmlparser2": "^3.10.7",
-    "@types/jest": "^29.5.12",
-    "@types/node": "^22.4.1",
+    "@types/htmlparser2": "^4.1.0",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^22.17.2",
     "domhandler": "^5.0.3",
     "events": "^3.3.0",
     "husky": "^9.1.4",
-    "jest": "^29.7.0",
+    "jest": "^30.0.5",
     "jest-junit": "^16.0.0",
-    "lint-staged": "^15.2.9",
-    "ts-jest": "^29.2.4",
-    "ts-loader": "^9.5.1",
+    "lint-staged": "^16.1.5",
+    "ts-jest": "^29.4.1",
+    "ts-loader": "^9.5.2",
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
-    "typescript": "^5.5.4",
-    "webpack": "^5.93.0"
+    "typescript": "^5.9.2",
+    "webpack": "^5.101.3"
   },
   "dependencies": {
-    "@swc/core": "^1.7.11",
-    "axios": "^1.7.4",
-    "htmlparser2": "^9.1.0"
+    "@swc/core": "^1.13.3",
+    "axios": "^1.11.0",
+    "htmlparser2": "^10.0.0"
   },
   "files": ["build/**/*"],
-  "packageManager": "yarn@4.4.0"
+  "packageManager": "yarn@4.9.2"
 }
