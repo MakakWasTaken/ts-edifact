@@ -34,7 +34,7 @@ export class Dictionary<T> {
   }
 
   contains(key: string): boolean {
-    if (Object.prototype.hasOwnProperty.call(this.entries, key)) {
+    if (Object.hasOwn(this.entries, key)) {
       return true
     }
     return false
@@ -229,7 +229,7 @@ export class ValidatorImpl implements Validator {
     }
     let parts: RegExpExecArray | null
     if ((parts = /^(a|an|n)(\.\.)?([1-9][0-9]*)?$/.exec(formatString))) {
-      const max: number = Number.parseInt(parts[3])
+      const max: number = Number.parseInt(parts[3], 10)
       const min: number = parts[2] === '..' ? 0 : max
       let alpha = false
       let numeric = false

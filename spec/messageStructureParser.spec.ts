@@ -24,15 +24,15 @@
 import { readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import {
-  UNECEMessageStructureParser,
   type EdifactMessageSpecification,
   type ParsingResultType,
+  UNECEMessageStructureParser,
 } from '../src/edi/messageStructureParser'
 import type { MessageType } from '../src/tracker'
 import { findElement } from '../src/util'
 import {
-  Dictionary,
   type ComponentValueEntry,
+  Dictionary,
   type ElementEntry,
   type SegmentEntry,
 } from '../src/validator'

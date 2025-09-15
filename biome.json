@@ -1,48 +1,54 @@
 {
   "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
-  "organizeImports": {
+  "files": {
+    "experimentalScannerIgnores": [".yarn", ".vscode", ".swc", ".github"],
+    "ignoreUnknown": true,
+    "includes": [
+      "**",
+      "!**/coverage",
+      "!**/node_modules",
+      "!**/build",
+      "!**/public",
+      "!**/src/messageSpec",
+      "!**/.vscode"
+    ]
+  },
+  "assist": {
     "enabled": true
   },
-  "files": {
-    "ignoreUnknown": true
-  },
   "formatter": {
-    "ignore": [
-      "coverage/**",
-      "node_modules/**",
-      "build/**",
-      "public/**",
-      "src/messageSpec/**",
-      ".vscode/**"
-    ],
     "enabled": true,
     "formatWithErrors": true,
     "indentStyle": "space",
     "indentWidth": 2
   },
   "linter": {
-    "ignore": [
-      "coverage/**",
-      "node_modules/**",
-      "build/**",
-      "public/**",
-      "src/messageSpec/**",
-      ".vscode/**"
-    ],
+    "domains": {
+      "next": "recommended"
+    },
     "enabled": true,
     "rules": {
       "recommended": true,
-      "style": {
-        "noParameterAssign": "off"
-      },
       "suspicious": {
+        "noAssignInExpressions": "off",
         "noExplicitAny": "off",
         "noAsyncPromiseExecutor": "off",
-        "noConsoleLog": "warn",
-        "noAssignInExpressions": "off"
+        "useAwait": {
+          "level": "error"
+        },
+        "noConsole": {
+          "level": "warn",
+          "options": { "allow": ["info", "debug", "warn", "error", "trace"] }
+        }
       },
       "correctness": {
-        "noUnusedVariables": "error"
+        "useUniqueElementIds": "off",
+        "noUnusedImports": "error",
+        "noUnusedLabels": "error",
+        "noUnusedVariables": {
+          "level": "error",
+          "options": { "ignoreRestSiblings": true }
+        }
       },
       "performance": {
         "noAccumulatingSpread": "off"

@@ -215,7 +215,7 @@ export class UNECEStructurePageParser extends UNECEPageParser {
       name,
       content: [],
       mandatory: mandatoryString === 'M',
-      repetition: Number.parseInt(repetitionString),
+      repetition: Number.parseInt(repetitionString, 10),
       data: undefined,
       section: section || undefined,
     }
@@ -233,7 +233,7 @@ export class UNECEStructurePageParser extends UNECEPageParser {
     section: string | undefined,
     descriptionString: string,
   ): MessageType {
-    const regex = /^([a-zA-Z /\\-]*)\s*?([M|C])\s*?([0-9]*?)([^0-9]*)$/g
+    const regex = /^([a-zA-Z /-]*)\s*?([M|C])\s*?([0-9]*?)([^0-9]*)$/g
     const matches: RegExpExecArray | null = regex.exec(descriptionString)
     if (!matches) {
       throw new Error(
@@ -247,7 +247,7 @@ export class UNECEStructurePageParser extends UNECEPageParser {
     return {
       content: name,
       mandatory: mandatoryString === 'M',
-      repetition: Number.parseInt(repetitionString),
+      repetition: Number.parseInt(repetitionString, 10),
       data: undefined,
       section: section || undefined,
     }

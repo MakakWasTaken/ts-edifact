@@ -417,7 +417,7 @@ export class UNECEMessageStructureParser implements MessageStructureParser {
     return Promise.resolve(definition)
   }
 
-  private async parseMessagePage(page: string): Promise<ParsingResultType> {
+  private parseMessagePage(page: string): Promise<ParsingResultType> {
     let definition: EdifactMessageSpecification | undefined
     const handler: DomHandler = new DomHandler()
 
@@ -494,7 +494,7 @@ export class UNECEMessageStructureParser implements MessageStructureParser {
               const group: MessageType = {
                 content: groupArray,
                 mandatory: arr[2] === 'M',
-                repetition: Number.parseInt(arr[3]),
+                repetition: Number.parseInt(arr[3], 10),
                 name: arr[1],
                 section: isDefined(section) ? section : undefined,
               }
@@ -534,7 +534,7 @@ export class UNECEMessageStructureParser implements MessageStructureParser {
           section = null
         } else if (state === Part.Name) {
           // console.debug(`Name: ${text}`);
-          const regex = /^([a-zA-Z /\\-]*)\s*?([M|C])\s*?([0-9]*?)([^0-9]*)$/g
+          const regex = /^([a-zA-Z /-]*)\s*?([M|C])\s*?([0-9]*?)([^0-9]*)$/g
           const arr: RegExpExecArray | null = regex.exec(text)
           if (isDefined(arr)) {
             // const name: string = arr[1].trim();
@@ -547,7 +547,7 @@ export class UNECEMessageStructureParser implements MessageStructureParser {
             const segArr: MessageType[] = segStack[segStack.length - 1]
             const segData: MessageType = segArr[segArr.length - 1]
             segData.mandatory = sMandatory === 'M'
-            segData.repetition = Number.parseInt(sRepetition)
+            segData.repetition = Number.parseInt(sRepetition, 10)
 
             // check whether the remainder contains a closing hint for a subgroup: -...-++
             if (remainder.includes('-') && remainder.includes('+')) {

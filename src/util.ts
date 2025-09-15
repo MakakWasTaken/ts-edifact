@@ -21,9 +21,9 @@
 
 import * as fs from 'node:fs'
 import {
-  UNECEMessageStructureParser,
   type EdifactMessageSpecification,
   type MessageStructureParser,
+  UNECEMessageStructureParser,
 } from './edi/messageStructureParser'
 import type { ElementEntry } from './validator'
 

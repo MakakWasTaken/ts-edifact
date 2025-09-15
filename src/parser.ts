@@ -139,7 +139,7 @@ export class Parser extends EventEmitter {
     }
     while (index < chunk.length) {
       switch (this.state) {
-        // biome-ignore lint/suspicious/noFallthroughSwitchClause: <explanation>
+        // biome-ignore lint/suspicious/noFallthroughSwitchClause: Fall through to process the available element data
         case States.EMPTY:
           index = this.una(chunk) ? 9 : 0
           // If the first segment is interrupted by, for example, a line break, the
@@ -183,7 +183,7 @@ export class Parser extends EventEmitter {
               )
           }
           break
-        // biome-ignore lint/suspicious/noFallthroughSwitchClause: <explanation>
+        // biome-ignore lint/suspicious/noFallthroughSwitchClause: Fall through to process the available element data
         case States.ELEMENT:
           // Start reading a new element
           this.element = this.validator.onElement()

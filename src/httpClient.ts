@@ -19,8 +19,8 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 
-import * as axios from 'axios'
 import * as url from 'node:url'
+import * as axios from 'axios'
 
 export class HttpClient {
   baseUrl: string
