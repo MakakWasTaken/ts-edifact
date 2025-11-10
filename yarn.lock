@@ -924,16 +924,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@commitlint/types@npm:^19.8.0":
-  version: 19.8.0
-  resolution: "@commitlint/types@npm:19.8.0"
-  dependencies:
-    "@types/conventional-commits-parser": "npm:^5.0.0"
-    chalk: "npm:^5.3.0"
-  checksum: 10c0/634a5db20110675da8ddf226f200c33f262c6e99d06853fd4a2f6d543e6cc7dfe48b045f7ae76bcce2e39595099bfebe6a5dd6da37ff2968733c1263b8d46644
-  languageName: node
-  linkType: hard
-
 "@commitlint/types@npm:^20.0.0":
   version: 20.0.0
   resolution: "@commitlint/types@npm:20.0.0"
@@ -1431,7 +1421,7 @@ __metadata:
     "@biomejs/biome": "npm:2.3.4"
     "@commitlint/cli": "npm:^20.1.0"
     "@commitlint/config-conventional": "npm:^20.0.0"
-    "@commitlint/types": "npm:^19.8.0"
+    "@commitlint/types": "npm:^20.0.0"
     "@initics/tsm": "npm:^1.0.2"
     "@swc/core": "npm:^1.11.16"
     "@swc/jest": "npm:^0.2.37"
