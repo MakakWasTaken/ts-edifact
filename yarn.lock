@@ -925,12 +925,12 @@ __metadata:
   linkType: hard
 
 "@commitlint/types@npm:^20.0.0, @commitlint/types@npm:^20.2.0":
-  version: 20.2.0
-  resolution: "@commitlint/types@npm:20.2.0"
+  version: 20.3.1
+  resolution: "@commitlint/types@npm:20.3.1"
   dependencies:
     "@types/conventional-commits-parser": "npm:^5.0.0"
     chalk: "npm:^5.3.0"
-  checksum: 10c0/95f51b805b6d5b120eff1ec57c502563525dfc4d10302a188b229bd446e4f1c3f1882f899d014701cc33bead3853e3d4865635f7e12dd4c7605db20b407bf4d1
+  checksum: 10c0/b25fc5ba667416fc1b35987bd34a85ff4b484534492c53bf23eb7024686b1468bae8ab29988efef14e33c88bdd8b35b7a57d1a4a9db629f95efb827e56ba3c2a
   languageName: node
   linkType: hard
 
