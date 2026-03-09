@@ -923,17 +923,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@commitlint/types@npm:^20.0.0, @commitlint/types@npm:^20.4.0":
-  version: 20.4.0
-  resolution: "@commitlint/types@npm:20.4.0"
-  dependencies:
-    conventional-commits-parser: "npm:^6.2.1"
-    picocolors: "npm:^1.1.1"
-  checksum: 10c0/d469c74317d279c0e5adeeb2b0ef7cc9a5fd80cea77ab4e92fc60cf2e23a8b56ee1345c82e7f3725c329d5c87b80dcf39608dff6b356e8aa51f62f657529348c
-  languageName: node
-  linkType: hard
-
-"@commitlint/types@npm:^20.4.3":
+"@commitlint/types@npm:^20.0.0, @commitlint/types@npm:^20.4.0, @commitlint/types@npm:^20.4.3":
   version: 20.4.3
   resolution: "@commitlint/types@npm:20.4.3"
   dependencies:
@@ -2868,17 +2858,6 @@ __metadata:
   dependencies:
     compare-func: "npm:^2.0.0"
   checksum: 10c0/b1dfbb8ce5983bb80837c35f089fb0f9603a1b067f34be680f88fde20871792e461e29d119d468bc293f38a1ca916c1c40a841f8c049a0a1efaa40582f4fecc9
-  languageName: node
-  linkType: hard
-
-"conventional-commits-parser@npm:^6.2.1":
-  version: 6.2.1
-  resolution: "conventional-commits-parser@npm:6.2.1"
-  dependencies:
-    meow: "npm:^13.0.0"
-  bin:
-    conventional-commits-parser: dist/cli/index.js
-  checksum: 10c0/217b3fff627802f7fd7cb09bdfe897aa76986865543dfaa99b7957e4717d039e1e12c4a9b72706f098a5716bbbbdae540ef0b2429f7219d5fc5be0f190f1bc1e
   languageName: node
   linkType: hard
 
