@@ -60,7 +60,7 @@
     "@biomejs/biome": "2.4.14",
     "@commitlint/cli": "^20.1.0",
     "@commitlint/config-conventional": "^21.0.0",
-    "@commitlint/types": "^20.0.0",
+    "@commitlint/types": "^21.0.0",
     "@initics/tsm": "^1.0.2",
     "@swc/jest": "^0.2.37",
     "@types/events": "3.0.3",
