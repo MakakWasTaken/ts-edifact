@@ -919,7 +919,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@commitlint/types@npm:^20.0.0, @commitlint/types@npm:^20.5.0":
+"@commitlint/types@npm:^20.5.0":
   version: 20.5.0
   resolution: "@commitlint/types@npm:20.5.0"
   dependencies:
@@ -1474,7 +1474,7 @@ __metadata:
     "@biomejs/biome": "npm:2.4.14"
     "@commitlint/cli": "npm:^20.1.0"
     "@commitlint/config-conventional": "npm:^21.0.0"
-    "@commitlint/types": "npm:^20.0.0"
+    "@commitlint/types": "npm:^21.0.0"
     "@initics/tsm": "npm:^1.0.2"
     "@swc/core": "npm:^1.11.16"
     "@swc/jest": "npm:^0.2.37"
