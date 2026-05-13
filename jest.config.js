@@ -1,7 +1,8 @@
 /** @type {import('jest').Config} */
 const config = {
+  extensionsToTreatAsEsm: ['.ts'],
   transform: {
-    '^.+\\.(t|j)sx?$': ['@swc/jest'],
+    '^.+\\.(t|j)sx?$': ['@swc/jest', { module: { type: 'es6' } }],
   },
   coverageReporters: ['cobertura', 'html'],
   reporters: [

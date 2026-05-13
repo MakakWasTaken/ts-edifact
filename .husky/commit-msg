@@ -1,53 +1,31 @@
-# This file should be located in .husky/commit-msg 
-# Create using `npx husky add .husky/commit-msg`
+#!/bin/sh
+# This file should be located in .husky/commit-msg
 
-# Specify the map
-declare -A emoji_map=(
-  ["feat"]=":sparkles:"
-  ["fix"]=":bug:"
-  ["docs"]=":memo:"
-  ["style"]=":lipstick:"
-  ["refactor"]=":recycle:"
-  ["perf"]=":zap:"
-  ["test"]=":white_check_mark:"
-  ["chore"]=":truck:"
-  ["revert"]=":rewind:"
-  ["wip"]=":construction:"
-  ["build"]=":construction_worker:"
-  ["ci"]=":green_heart:"
-  ["upgrade"]=":arrow_up:"
-  ["downgrade"]=":arrow_down:"
-)
-
-# Get the file path
 file_path="$1"
-
-# Read the contents of the file
-content=$(<"$file_path")
-
-# Extract the first word from the content
+content=$(cat "$file_path")
 first_word=$(echo "$content" | awk '{print $1}' | sed 's/:$//')
 
-# Check if the first word is in the map
-if [ -n "${emoji_map[$first_word]}" ]; then
-  prefix="${emoji_map[$first_word]}"
-else
-  array_string=""
-  for key in "${!emoji_map[@]}"; do
-    if [[ "$array_string" == "" ]]; then
-      array_string="$key:"
-    else
-      array_string="$array_string, $key:"
-    fi
-  done
-  echo "Extension $first_word not found in the map. Valid prefixes are: $array_string"
-  exit 1
-fi
+case "$first_word" in
+  feat)      prefix=":sparkles:" ;;
+  fix)       prefix=":bug:" ;;
+  docs)      prefix=":memo:" ;;
+  style)     prefix=":lipstick:" ;;
+  refactor)  prefix=":recycle:" ;;
+  perf)      prefix=":zap:" ;;
+  test)      prefix=":white_check_mark:" ;;
+  chore)     prefix=":truck:" ;;
+  revert)    prefix=":rewind:" ;;
+  wip)       prefix=":construction:" ;;
+  build)     prefix=":construction_worker:" ;;
+  ci)        prefix=":green_heart:" ;;
+  upgrade)   prefix=":arrow_up:" ;;
+  downgrade) prefix=":arrow_down:" ;;
+  *)
+    echo "Commit type '$first_word' not recognized. Valid types: feat, fix, docs, style, refactor, perf, test, chore, revert, wip, build, ci, upgrade, downgrade"
+    exit 1
+    ;;
+esac
 
-# Prepend the prefix to the content
-updated_content="${prefix} $content"
+echo "${prefix} ${content}" > "$file_path"
 
-# Write the updated content back to the file
-echo "$updated_content" > "$file_path"
-
-npx commitlint --edit $1
+npx commitlint --edit "$1"

@@ -1,13 +1,12 @@
 {
   "compilerOptions": {
     "module": "ESNext",
-    "target": "esnext",
-    "moduleResolution": "node",
-    "lib": ["esnext"],
+    "target": "ESNext",
+    "moduleResolution": "bundler",
+    "lib": ["ESNext"],
+    "types": ["node", "jest"],
     "rootDir": ".",
-    "sourceRoot": "./build",
-    "outDir": "./build",
-    "pretty": true,
+    "outDir": "./build/esm",
     "declaration": true,
     "declarationMap": true,
     "sourceMap": true,

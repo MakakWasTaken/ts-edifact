@@ -16,6 +16,7 @@
  * limitations under the License.
  */
 
+import { jest } from '@jest/globals'
 import { Configuration } from '../src/configuration'
 import { Parser } from '../src/parser'
 import { NullValidator } from '../src/validator'

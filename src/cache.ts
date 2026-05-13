@@ -46,7 +46,7 @@ export class Cache<T> {
   }
 
   public contains(key: string): boolean {
-    if (Object.prototype.hasOwnProperty.call(this.data, key)) {
+    if (Object.hasOwn(this.data, key)) {
       return true
     }
     return false

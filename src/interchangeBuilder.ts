@@ -216,6 +216,7 @@ export class Edifact {
     if (elements.length >= 9) {
       this.ackRequest = Number.parseInt(
         (formattedElements.acknowledgementRequest as string) || '',
+        10,
       )
     }
     if (elements.length >= 10) {
@@ -225,6 +226,7 @@ export class Edifact {
     if (elements.length === 11) {
       this.testIndicator = Number.parseInt(
         (formattedElements.testIndicator as string) || '',
+        10,
       )
     } else {
       this.testIndicator = 0

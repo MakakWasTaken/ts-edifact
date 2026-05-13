@@ -18,62 +18,63 @@
 
 export { Cache } from './cache'
 export { Configuration } from './configuration'
-export {
-  EdifactMessageSpecification,
-  UNECEMessageStructureParser,
-} from './edi/messageStructureParser'
+export type { EdifactMessageSpecification } from './edi/messageStructureParser'
+export { UNECEMessageStructureParser } from './edi/messageStructureParser'
 export {
   AnsiX12SeparatorsBuilder,
   EdifactSeparatorsBuilder,
   Separators,
   TradacomsSeparatorsBuilder,
 } from './edi/separators'
-export {
+export type {
   BeginOfMessage,
   LineItem,
   MonetaryAmount,
   PriceDetails,
   Quantity,
   Segment,
-  sanitizeFloat,
 } from './edifact'
+export { sanitizeFloat } from './edifact'
 export {
   Edifact,
   Group,
   InterchangeBuilder,
   Message,
-  RecipientsRef,
-  SyntaxIdentifier,
 } from './interchangeBuilder'
+export type { RecipientsRef, SyntaxIdentifier } from './interchangeBuilder'
 export { Parser } from './parser'
-export { Reader, ResultType } from './reader'
+export { Reader } from './reader'
+export type { ResultType } from './reader'
 export { SegmentTableBuilder } from './segments'
 export { Tokenizer } from './tokenizer'
-export { MessageType, Pointer, Tracker } from './tracker'
+export type { MessageType } from './tracker'
+export { Pointer, Tracker } from './tracker'
 export {
   Dictionary,
-  ElementEntry,
   NullValidator,
-  SegmentEntry,
-  Validator,
   ValidatorImpl,
   ValidatorStates,
 } from './validator'
+export type {
+  ElementEntry,
+  SegmentEntry,
+  Validator,
+} from './validator'
 
-import APERAK_JSON from './messageSpec/APERAK.struct.json'
-import AUTHOR_JSON from './messageSpec/AUTHOR.struct.json'
-import BALANC_JSON from './messageSpec/BALANC.struct.json'
-import DESADV_JSON from './messageSpec/DESADV.struct.json'
-import GENRAL_JSON from './messageSpec/GENRAL.struct.json'
-import IFTMIN_JSON from './messageSpec/IFTMIN.struct.json'
-import INVOIC_JSON from './messageSpec/INVOIC.struct.json'
-import INVRPT_JSON from './messageSpec/INVRPT.struct.json'
-import ORDERS_JSON from './messageSpec/ORDERS.struct.json'
-import OSTENQ_JSON from './messageSpec/OSTENQ.struct.json'
-import OSTRPT_JSON from './messageSpec/OSTRPT.struct.json'
-import PARTIN_JSON from './messageSpec/PARTIN.struct.json'
-import TAXCON_JSON from './messageSpec/TAXCON.struct.json'
-import VATDEC_JSON from './messageSpec/VATDEC.struct.json'
+import APERAK_JSON from './messageSpec/APERAK.struct.json' with { type: 'json' }
+import AUTHOR_JSON from './messageSpec/AUTHOR.struct.json' with { type: 'json' }
+import BALANC_JSON from './messageSpec/BALANC.struct.json' with { type: 'json' }
+import DESADV_JSON from './messageSpec/DESADV.struct.json' with { type: 'json' }
+import GENRAL_JSON from './messageSpec/GENRAL.struct.json' with { type: 'json' }
+import IFTMIN_JSON from './messageSpec/IFTMIN.struct.json' with { type: 'json' }
+import INVOIC_JSON from './messageSpec/INVOIC.struct.json' with { type: 'json' }
+import INVRPT_JSON from './messageSpec/INVRPT.struct.json' with { type: 'json' }
+import ORDERS_JSON from './messageSpec/ORDERS.struct.json' with { type: 'json' }
+import OSTENQ_JSON from './messageSpec/OSTENQ.struct.json' with { type: 'json' }
+import OSTRPT_JSON from './messageSpec/OSTRPT.struct.json' with { type: 'json' }
+import PARTIN_JSON from './messageSpec/PARTIN.struct.json' with { type: 'json' }
+import TAXCON_JSON from './messageSpec/TAXCON.struct.json' with { type: 'json' }
+import VATDEC_JSON from './messageSpec/VATDEC.struct.json' with { type: 'json' }
 
 export const APERAK = APERAK_JSON
 export const AUTHOR = AUTHOR_JSON

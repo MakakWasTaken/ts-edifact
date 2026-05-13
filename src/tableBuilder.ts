@@ -63,9 +63,6 @@ export abstract class TableBuilder<T> {
         return versionedFileName
       }
       if (fs.existsSync(baseFileName)) {
-        console.warn(
-          `No segments definition file found for message type ${this.type} of version ${this.version}. Falling back to default version`,
-        )
         return baseFileName
       }
     } else {
@@ -73,10 +70,6 @@ export abstract class TableBuilder<T> {
         return baseFileName
       }
     }
-
-    console.error(
-      `No segments definition file found for message type ${this.type}`,
-    )
     return undefined
   }
 

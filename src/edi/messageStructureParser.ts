@@ -334,9 +334,6 @@ export class UNECEMessageStructureParser implements MessageStructureParser {
           }
           if (segGroupId) {
             if (id === '') {
-              console.warn(
-                `Could not determine element ID based on line ${line}`,
-              )
               continue
             }
             skipAddingElement = false
@@ -480,8 +477,6 @@ export class UNECEMessageStructureParser implements MessageStructureParser {
         state !== Part.AfterStructureDef
       ) {
         if (state === Part.RefLink) {
-          // ignored
-          console.debug(`RefLink: ${text}`)
         } else if (state === Part.Pos) {
           // console.debug(`Pos: ${text}`);
         } else if (state === Part.Deprecated) {
@@ -494,7 +489,7 @@ export class UNECEMessageStructureParser implements MessageStructureParser {
               const group: MessageType = {
                 content: groupArray,
                 mandatory: arr[2] === 'M',
-                repetition: Number.parseInt(arr[3]),
+                repetition: Number.parseInt(arr[3], 10),
                 name: arr[1],
                 section: isDefined(section) ? section : undefined,
               }
@@ -547,7 +542,7 @@ export class UNECEMessageStructureParser implements MessageStructureParser {
             const segArr: MessageType[] = segStack[segStack.length - 1]
             const segData: MessageType = segArr[segArr.length - 1]
             segData.mandatory = sMandatory === 'M'
-            segData.repetition = Number.parseInt(sRepetition)
+            segData.repetition = Number.parseInt(sRepetition, 10)
 
             // check whether the remainder contains a closing hint for a subgroup: -...-++
             if (remainder.includes('-') && remainder.includes('+')) {
@@ -564,7 +559,6 @@ export class UNECEMessageStructureParser implements MessageStructureParser {
             section = 'summary'
           }
         } else {
-          console.warn(`Unknown part: ${text}`)
         }
       }
     }
@@ -622,10 +616,7 @@ export class UNECEMessageStructureParser implements MessageStructureParser {
       .then((result: ParsingResultType) =>
         Promise.all(result.promises)
           .then(() => result.specObj)
-          .catch((error: Error) => {
-            console.warn(
-              `Error while processing segment definition promises: Reason ${error.message}`,
-            )
+          .catch((_error: Error) => {
             return result.specObj
           }),
       )

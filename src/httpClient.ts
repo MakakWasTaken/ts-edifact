@@ -40,13 +40,9 @@ export class HttpClient {
           // console.log(`Response: ${response}`);
           return response
         }
-        console.error(
-          `Unexpected response ${axiosResponse.status}: ${axiosResponse.data}`,
-        )
         return ''
       })
-      .catch((err) => {
-        console.error(err.message)
+      .catch((_err) => {
         return ''
       })
 
@@ -54,7 +50,6 @@ export class HttpClient {
       const data: string = await request
       return Promise.resolve(data)
     } catch (error) {
-      console.error(error)
       return Promise.reject(error)
     }
   }

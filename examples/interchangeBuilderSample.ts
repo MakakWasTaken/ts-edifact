@@ -95,39 +95,33 @@ parseDocument(document)
   .then((doc: Edifact) => {
     for (const entry of (doc.messages[0].detail[0] as Group).data) {
       if (entry instanceof Group) {
-        let articleNumber: string | undefined = ''
-        let name: string | undefined = ''
-        let qty: number | undefined = 0
-        let price: number | undefined = 0
-        let total: number | undefined = 0
+        let _articleNumber: string | undefined = ''
+        let _name: string | undefined = ''
+        let _qty: number | undefined = 0
+        let _price: number | undefined = 0
+        let _total: number | undefined = 0
         for (const itemData of entry.data) {
           if (!(itemData instanceof Group)) {
             let item: ItemDescription | Quantity | LineItem | undefined
             if ((item = itemData as LineItem)) {
-              articleNumber = item.itemNumberIdentification?.itemIdentifier
+              _articleNumber = item.itemNumberIdentification?.itemIdentifier
             } else if ((item = itemData as ItemDescription)) {
-              name = item.itemDescription?.itemDescription
+              _name = item.itemDescription?.itemDescription
             } else if ((item = itemData as Quantity)) {
-              qty = item.quantityDetails.quantity
+              _qty = item.quantityDetails.quantity
             }
           } else {
             for (const subGroupItem of itemData.data) {
               let item: PriceDetails | MonetaryAmount | undefined
               if ((item = subGroupItem as PriceDetails)) {
-                price = item.priceInformation?.priceAmount
+                _price = item.priceInformation?.priceAmount
               } else if ((item = subGroupItem as MonetaryAmount)) {
-                total = item.monetaryAmount?.monetaryAmount
+                _total = item.monetaryAmount?.monetaryAmount
               }
             }
           }
         }
-
-        console.debug(articleNumber, name, qty, price, total)
       }
     }
   })
-  .catch((error: Error) => {
-    console.trace(
-      `Caught exception while attempting to parse Edifact document. Reason: ${error.message}`,
-    )
-  })
+  .catch((_error: Error) => {})

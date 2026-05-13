@@ -1,19 +1,18 @@
 {
   "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
-  "organizeImports": {
-    "enabled": true
-  },
+  "assist": { "actions": { "source": { "organizeImports": "on" } } },
   "files": {
     "ignoreUnknown": true
   },
   "formatter": {
-    "ignore": [
-      "coverage/**",
-      "node_modules/**",
-      "build/**",
-      "public/**",
-      "src/messageSpec/**",
-      ".vscode/**"
+    "includes": [
+      "**",
+      "!**/coverage/**",
+      "!**/node_modules/**",
+      "!**/build/**",
+      "!**/public/**",
+      "!**/src/messageSpec/**",
+      "!**/.vscode/**"
     ],
     "enabled": true,
     "formatWithErrors": true,
@@ -21,13 +20,14 @@
     "indentWidth": 2
   },
   "linter": {
-    "ignore": [
-      "coverage/**",
-      "node_modules/**",
-      "build/**",
-      "public/**",
-      "src/messageSpec/**",
-      ".vscode/**"
+    "includes": [
+      "**",
+      "!**/coverage/**",
+      "!**/node_modules/**",
+      "!**/build/**",
+      "!**/public/**",
+      "!**/src/messageSpec/**",
+      "!**/.vscode/**"
     ],
     "enabled": true,
     "rules": {
@@ -38,8 +38,8 @@
       "suspicious": {
         "noExplicitAny": "off",
         "noAsyncPromiseExecutor": "off",
-        "noConsoleLog": "warn",
-        "noAssignInExpressions": "off"
+        "noAssignInExpressions": "off",
+        "noConsole": { "level": "warn", "options": { "allow": ["log"] } }
       },
       "correctness": {
         "noUnusedVariables": "error"

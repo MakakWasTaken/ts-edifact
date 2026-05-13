@@ -215,7 +215,7 @@ export class UNECEStructurePageParser extends UNECEPageParser {
       name,
       content: [],
       mandatory: mandatoryString === 'M',
-      repetition: Number.parseInt(repetitionString),
+      repetition: Number.parseInt(repetitionString, 10),
       data: undefined,
       section: section || undefined,
     }
@@ -247,7 +247,7 @@ export class UNECEStructurePageParser extends UNECEPageParser {
     return {
       content: name,
       mandatory: mandatoryString === 'M',
-      repetition: Number.parseInt(repetitionString),
+      repetition: Number.parseInt(repetitionString, 10),
       data: undefined,
       section: section || undefined,
     }
@@ -268,11 +268,6 @@ export class UNECEStructurePageParser extends UNECEPageParser {
     // ends with LF and sometimes with CRLF.
     // Make sure both cases are covered:
     if (levelString.charCodeAt(0) !== 10) {
-      console.warn(
-        `Unrecognized character in level string: ${
-          levelString[0]
-        } (${levelString.charCodeAt(0)})`,
-      )
     } else if (levelString.charCodeAt(1) === 13) {
       normalization = 1
     }

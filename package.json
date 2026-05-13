@@ -1,9 +1,8 @@
 {
   "name": "@makakwastaken/ts-edifact",
   "description": "Edifact parser library",
-  "version": "0.2.13",
+  "version": "0.2.16",
   "type": "module",
-  "main": "build/cjs/src/index.js",
   "module": "build/esm/src/index.js",
   "types": "build/esm/src/index.d.ts",
   "license": "MIT",
@@ -46,47 +45,53 @@
     "clean": "rm -rf ./build ./dist",
     "lint": "biome format --write --no-errors-on-unmatched . && biome lint --write .",
     "check": "npm run check:tsc",
-    "check:tsc": "tsc -p . --noEmit",
-    "test": "jest spec",
+    "check:tsc": "tsc --noEmit",
+    "test": "NODE_OPTIONS='--experimental-vm-modules' jest spec",
     "coverage": "yarn test --coverage",
     "lint:staged": "lint-staged",
     "prepack": "yarn lint && yarn build",
     "prepare": "husky || true",
-    "build:cjs": "tsc -p tsconfig.cjs.json",
-    "build:esm": "tsc -p tsconfig.esm.json",
-    "build": "yarn build:cjs && yarn build:esm"
+    "build": "yarn build:esm",
+    "build:esm": "swc src -d build/esm --config-file swc.esm.json --copy-files && tsc -p tsconfig.build.json"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.4.14",
-    "@commitlint/cli": "^20.1.0",
-    "@commitlint/config-conventional": "^21.0.0",
-    "@commitlint/types": "^21.0.0",
+    "@biomejs/biome": "2.4.15",
+    "@commitlint/cli": "^21.0.1",
+    "@commitlint/config-conventional": "^21.0.1",
+    "@commitlint/types": "^21.0.1",
     "@initics/tsm": "^1.0.2",
-    "@swc/jest": "^0.2.37",
+    "@swc/cli": "^0.8.1",
+    "@swc/jest": "^0.2.39",
     "@types/events": "3.0.3",
     "@types/htmlparser2": "^4.1.0",
     "@types/jest": "^30.0.0",
-    "@types/node": "^25.0.2",
+    "@types/node": "^25.7.0",
     "domhandler": "^6.0.1",
     "events": "^3.3.0",
     "husky": "^9.1.7",
-    "jest": "^30.2.0",
+    "jest": "^30.4.2",
     "jest-junit": "^17.0.0",
     "lint-staged": "^17.0.4",
-    "ts-jest": "^29.3.1",
-    "ts-loader": "^9.5.2",
+    "ts-jest": "^29.4.9",
+    "ts-loader": "^9.5.7",
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
-    "typescript": "^6.0.2",
-    "webpack": "^5.98.0"
+    "typescript": "^6.0.3",
+    "webpack": "^5.106.2"
   },
   "dependencies": {
-    "@swc/core": "^1.11.16",
-    "axios": "^1.8.4",
-    "htmlparser2": "^10.0.0"
+    "@swc/core": "^1.15.33",
+    "axios": "^1.16.1",
+    "htmlparser2": "^12.0.0"
   },
   "files": [
     "build/**/*"
   ],
-  "packageManager": "yarn@4.8.1"
+  "packageManager": "yarn@4.8.1",
+  "exports": {
+    ".": {
+      "import": "./build/esm/src/index.js",
+      "types": "./build/esm/src/index.d.ts"
+    }
+  }
 }

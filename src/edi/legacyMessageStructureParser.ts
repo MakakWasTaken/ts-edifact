@@ -68,10 +68,7 @@ export class UNECELegacyMessageStructureParser extends UNECEMessageStructurePars
       .then((result: ParsingResultType) =>
         Promise.all(result.promises)
           .then(() => result.specObj)
-          .catch((error: Error) => {
-            console.warn(
-              `Error while processing segment definition promises: Reason ${error.message}`,
-            )
+          .catch((_error: Error) => {
             return result.specObj
           }),
       )

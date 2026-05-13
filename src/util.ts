@@ -371,11 +371,7 @@ export function storeAllDefaultSpecs(version: string, location: string): void {
       persist(result, location, false, true)
     })
     .then(() => {})
-    .catch((error: Error) => {
-      console.warn(
-        `Could not load Message structure and segment/element definitions for message type INVOIC of version d07a. Reason: ${error.message}`,
-      )
-    })
+    .catch((_error: Error) => {})
 
   // Update all other types
   for (const typeName of types) {
@@ -387,11 +383,7 @@ export function storeAllDefaultSpecs(version: string, location: string): void {
         persist(result, location, false, true)
       })
       .then(() => {})
-      .catch((error: Error) => {
-        console.warn(
-          `Could not load Message structure and segment/element definitions for message type ${typeName} of version ${version}. Reason: ${error.message}`,
-        )
-      })
+      .catch((_error: Error) => {})
   }
 }
 
