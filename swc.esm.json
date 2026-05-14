@@ -5,7 +5,8 @@
       "syntax": "typescript",
       "tsx": false,
       "decorators": false,
-      "dynamicImport": true
+      "dynamicImport": true,
+      "importAttributes": true
     },
     "target": "esnext",
     "keepClassNames": true,

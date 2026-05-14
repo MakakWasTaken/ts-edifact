@@ -1,7 +1,7 @@
 {
   "name": "@makakwastaken/ts-edifact",
   "description": "Edifact parser library",
-  "version": "0.2.16",
+  "version": "0.2.17",
   "type": "module",
   "module": "build/esm/src/index.js",
   "types": "build/esm/src/index.d.ts",
@@ -52,7 +52,7 @@
     "prepack": "yarn lint && yarn build",
     "prepare": "husky || true",
     "build": "yarn build:esm",
-    "build:esm": "swc src -d build/esm --config-file swc.esm.json --copy-files && tsc -p tsconfig.build.json"
+    "build:esm": "swc src -d build/esm --config-file swc.esm.json --copy-files && node scripts/fix-json-imports.mjs && tsc -p tsconfig.build.json"
   },
   "devDependencies": {
     "@biomejs/biome": "2.4.15",
