@@ -65,7 +65,7 @@
     "@types/events": "3.0.3",
     "@types/htmlparser2": "^4.1.0",
     "@types/jest": "^30.0.0",
-    "@types/node": "^25.7.0",
+    "@types/node": "^26.0.0",
     "domhandler": "^6.0.1",
     "events": "^3.3.0",
     "husky": "^9.1.7",
